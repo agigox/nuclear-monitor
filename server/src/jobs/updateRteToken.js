@@ -1,4 +1,4 @@
-const { fetchToken } = require('../rteApi');
+import { fetchToken } from '../rteApi';
 
 async function updateRteToken(environment) {
   const { logger } = environment;
@@ -12,7 +12,8 @@ async function updateRteToken(environment) {
   environment.rteToken = newToken;
 }
 
-module.exports = {
+const updates = {
   f: updateRteToken,
-  interval: 10 * 60 * 1000, // 10 min
+  interval: 10 * 60 * 1000, // update token every 10 min
 };
+export default updates;

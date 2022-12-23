@@ -1,16 +1,16 @@
-const fetch = require('node-fetch');
-const qs = require('qs');
-const config = require('config');
+import fetch from 'node-fetch';
+import qs from 'qs';
+import config from 'config';
 
-const { retryWrapper } = require('./utils/helpers');
-const { DefaultError } = require('./utils/errors');
+import { retryWrapper } from './utils/helpers';
+import { DefaultError } from './utils/errors';
 
 const RTE_API_KEY = config.get('RTE_API_KEY');
-const RTE_HOST = 'https://digital.iservices.rte-france.com';
+const RTE_HOST = config.get('RTE_API');
 
-const DATE_FORMAT = 'YYYY-MM-DDTHH:mm:ssZ';
+export const DATE_FORMAT = 'YYYY-MM-DDTHH:mm:ssZ';
 
-class RTEServiceError extends DefaultError {
+export class RTEServiceError extends DefaultError {
   constructor(message, payload) {
     super(message, RTEServiceError.ERROR_CODE, payload);
   }
@@ -26,7 +26,7 @@ const retryFetch = retryWrapper(fetch, {
   name: 'fetch',
 });
 
-async function fetchToken() {
+export const fetchToken = async () => {
   const res = await retryFetch(`${RTE_HOST}/token/oauth/`, {
     method: 'post',
     headers: {
@@ -59,15 +59,8 @@ async function getRessourceFn({ ressource, params = {}, token }) {
   return data;
 }
 
-const getRessource = retryWrapper(getRessourceFn, {
+export const getRessource = retryWrapper(getRessourceFn, {
   retryCount: 3,
   retryInterval: 1000,
   name: 'rte.getRessource',
 });
-
-module.exports = {
-  fetchToken,
-  getRessource,
-  DATE_FORMAT,
-  RTEServiceError,
-};

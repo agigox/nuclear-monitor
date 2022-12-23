@@ -1,18 +1,18 @@
-const uuid = require('uuid');
-const onFinished = require('on-finished');
-const onHeaders = require('on-headers');
-const { omit } = require('ramda');
+import { v4 as uuidv4 } from 'uuid';
+import onFinished from 'on-finished';
+import onHeaders from 'on-headers';
+import { omit } from 'ramda';
 
-const { DomainError, ValidationError } = require('./errors');
+import { DomainError, ValidationError } from './errors';
 
-function addRequestIdMiddleware() {
+export const addRequestIdMiddleware = () => {
   return function addRequestId(req, res, next) {
-    req.requestId = uuid();
+    req.requestId = uuidv4();
     next();
   };
 }
 
-function errorHandlerMiddleware(logger) {
+export const errorHandlerMiddleware = (logger) => {
   const BAD_JSON = 'BAD_JSON';
   return function errorHandler(err, req, res, next) {
     if (res.headersSent) {
@@ -41,7 +41,7 @@ function errorHandlerMiddleware(logger) {
   };
 }
 
-function logRequestMiddleware(logger) {
+export const logRequestMiddleware = (logger) => {
   return function logRequest(req, res, next) {
     const startTime = Date.now();
     let responseTime;
@@ -68,7 +68,7 @@ function logRequestMiddleware(logger) {
   };
 }
 
-function notFoundMiddleware() {
+export const notFoundMiddleware = () => {
   return function notFound(req, res) {
     if (!res.headersSent) {
       res.status(404).json({
@@ -77,10 +77,3 @@ function notFoundMiddleware() {
     }
   };
 }
-
-module.exports = {
-  addRequestIdMiddleware,
-  errorHandlerMiddleware,
-  logRequestMiddleware,
-  notFoundMiddleware,
-};

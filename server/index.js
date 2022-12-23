@@ -1,29 +1,23 @@
-const enableDestroy = require('server-destroy');
-const config = require('config');
-const { MongoClient } = require('mongodb');
+import enableDestroy from 'server-destroy';
+import config from 'config';
 
-const logger = require('./src/utils/logger');
-const MemoryCache = require('./src/utils/MemoryCache');
+import logger from './src/utils/logger.js';
 
-const { normalizePort } = require('./src/utils/helpers');
-const { buildApi } = require('./src/api');
-const { fetchToken } = require('./src/rteApi');
-
-const uri = config.get('mongoDb.uri');
-const dbName = config.get('mongoDb.dbName');
+import { normalizePort } from './src/utils/helpers';
+import buildApi from './src/api';
+import { fetchToken } from './src/rteApi';
+import { initJobs, killJobs } from './src/jobs';
+import esMain from 'es-main';
 
 async function launchApp() {
+  // When lunching the APP we get rte token
   const rteToken = await fetchToken();
-  const mongoClient = await MongoClient.connect(uri, {
-    useUnifiedTopology: true,
-  });
 
   const environment = {
     logger,
     rteToken,
-    cache: new MemoryCache(logger),
-    db: mongoClient.db(dbName),
   };
+  initJobs(environment);
   const app = buildApi(environment);
 
   const port = normalizePort(config.get('server.port'));
@@ -33,7 +27,7 @@ async function launchApp() {
   enableDestroy(server);
 
   server.on('close', () => {
-    mongoClient.close();
+    killJobs(environment);
     logger.info('Server closed');
   });
 
@@ -49,8 +43,6 @@ async function launchApp() {
   return server;
 }
 
-if (require.main === module) {
+if (esMain(import.meta)) {
   launchApp();
 }
-
-module.exports = launchApp;

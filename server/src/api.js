@@ -1,23 +1,23 @@
-const config = require('config');
-const express = require('express');
+import config from 'config';
+import express from 'express';
 
 // middlewares
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const compression = require('compression');
-const helmet = require('helmet');
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import compression from 'compression';
+import helmet from 'helmet';
 
-const { plants: PLANTS, reactors: REACTORS } = require('./data');
-const { RTEServiceError } = require('./rteApi');
+// import { plants: PLANTS } from './data';
+import { RTEServiceError } from './rteApi';
 
-const {
+import {
   errorHandlerMiddleware,
   logRequestMiddleware,
   addRequestIdMiddleware,
   notFoundMiddleware,
-} = require('./utils/middlewares');
+} from './utils/middlewares';
 
-const { getProductions, getUnavailabilities } = require('./services');
+import { getUnavailabilities } from './services';
 
 function serviceWrapper(service, environment) {
   return async function wrappedService(req, res, next) {
@@ -36,7 +36,7 @@ function serviceWrapper(service, environment) {
   };
 }
 
-function buildApi(environment) {
+const buildApi = (environment) => {
   const app = express();
   const { logger } = environment;
 
@@ -48,15 +48,11 @@ function buildApi(environment) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
+  /*
   app.get('/plants', (req, res) => {
     res.json(PLANTS);
   });
-
-  app.get('/reactors', (req, res) => {
-    res.json(REACTORS);
-  });
-
-  app.get('/productions', serviceWrapper(getProductions, environment));
+  */
   app.get(
     '/unavailabilities',
     serviceWrapper(getUnavailabilities, environment),
@@ -78,6 +74,4 @@ function buildApi(environment) {
   return app;
 }
 
-module.exports = {
-  buildApi,
-};
+export default buildApi;

@@ -1,7 +1,7 @@
-const { assocPath, splitEvery } = require('ramda');
-const { ValidationError } = require('./errors');
+import { assocPath } from 'ramda';
+import { ValidationError } from './errors';
 
-function normalizePort(port) {
+export const normalizePort = (port) => {
   const normalizedPort = Number(port);
   if (Number.isNaN(port)) {
     throw new Error('Bad port for server');
@@ -9,7 +9,7 @@ function normalizePort(port) {
   return normalizedPort;
 }
 
-function readCSV(string) {
+export const readCSV = (string) => {
   const lines = string.split('\n').map(l => l.split(','));
   lines.pop();
   const headers = lines.shift();
@@ -25,7 +25,7 @@ function readCSV(string) {
   });
 }
 
-function setTimeoutPromise(f, ms) {
+export const setTimeoutPromise = (f, ms) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       f()
@@ -35,7 +35,7 @@ function setTimeoutPromise(f, ms) {
   });
 }
 
-function retryWrapper(f, { retryInterval, retryCount, name = '' }) {
+export const retryWrapper = (f, { retryInterval, retryCount, name = '' }) => {
   let index = 0;
   return function retryWrapped(...args) {
     if (index > 0) {
@@ -56,28 +56,18 @@ function retryWrapper(f, { retryInterval, retryCount, name = '' }) {
   };
 }
 
-function chunkAndChainPromises(data, dataToPromiseFn, chunkSize) {
-  return splitEvery(chunkSize, data).reduce((last, items) => {
-    return last.then(array => {
-      return Promise.all(items.map(dataToPromiseFn)).then(values => {
-        return array.concat(values);
-      });
-    });
-  }, Promise.resolve([]));
-}
-
 /*
  * Encapsulate Joi https://github.com/hapijs/joi/blob/v13.0.2/API.md
  */
 
-function transformJoiError(joiError) {
+export const transformJoiError = (joiError) => {
   return joiError.details.reduce(
     (acc, detail) => assocPath(detail.path, detail.message, acc),
     {},
   );
 }
 
-function assertInput(schema, inputValue) {
+export const assertInput = (schema, inputValue) => {
   const { error, value } = schema.validate(inputValue, { abortEarly: false });
   if (error) {
     const errors = transformJoiError(error);
@@ -86,19 +76,3 @@ function assertInput(schema, inputValue) {
   return value;
 }
 
-function formatMongoObject(object) {
-  return {
-    ...object,
-    _id: object._id.toString(), // eslint-disable-line no-underscore-dangle
-  };
-}
-
-module.exports = {
-  normalizePort,
-  readCSV,
-  setTimeoutPromise,
-  retryWrapper,
-  assertInput,
-  chunkAndChainPromises,
-  formatMongoObject,
-};

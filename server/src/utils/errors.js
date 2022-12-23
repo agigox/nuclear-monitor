@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
-const ExtendableError = require('es6-error');
+import ExtendableError from 'es6-error';
 
-class DefaultError extends ExtendableError {
+export class DefaultError extends ExtendableError {
   constructor(
     message = '',
     errorCode = DefaultError.ERROR_CODE,
@@ -25,7 +25,7 @@ class DefaultError extends ExtendableError {
   }
 }
 
-class DomainError extends DefaultError {
+export class DomainError extends DefaultError {
   constructor(message, errorCode = DomainError.ERROR_CODE, payload = null) {
     super(message, errorCode, payload);
   }
@@ -35,7 +35,7 @@ class DomainError extends DefaultError {
   }
 }
 
-class ValidationError extends DefaultError {
+export class ValidationError extends DefaultError {
   constructor(errors, object) {
     super('Validation error', ValidationError.ERROR_CODE, {
       errors,
@@ -48,7 +48,7 @@ class ValidationError extends DefaultError {
   }
 }
 
-class InternalError extends DefaultError {
+export class InternalError extends DefaultError {
   constructor(message, payload) {
     super(message, InternalError.ERROR_CODE, payload);
   }
@@ -58,7 +58,7 @@ class InternalError extends DefaultError {
   }
 }
 
-function only(SpecificError, handler) {
+export function only(SpecificError, handler) {
   return function onlyHandler(error) {
     if (error instanceof SpecificError) {
       return handler(error);
@@ -66,11 +66,3 @@ function only(SpecificError, handler) {
     throw error;
   };
 }
-
-module.exports = {
-  DefaultError,
-  DomainError,
-  ValidationError,
-  InternalError,
-  only,
-};

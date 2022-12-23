@@ -1,12 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const { readCSV } = require('../utils/helpers');
+import fs from 'fs';
+import path from 'path';
+import { readCSV } from '../utils/helpers';
 
-const plantPictures = readCSV(
-  fs.readFileSync(path.join(__dirname, './plantPictures.csv'), 'utf8'),
-);
-
-const plants = readCSV(
+export const plants = readCSV(
   fs.readFileSync(path.join(__dirname, './plants.csv'), 'utf8'),
 ).map(plantData => ({
   id: plantData.id,
@@ -15,15 +11,9 @@ const plants = readCSV(
   coolingType: plantData.coolingType,
   coolingPlace: plantData.coolingPlace,
   hasCoolingTower: plantData.hasCoolingTower === 'TRUE',
-  wikiLink: plantData.wikiLink,
-  asnLink: plantData.asnLink,
-  edfLink: plantData.edfLink,
-  pictures: plantPictures
-    .filter(p => p.plantId === plantData.id)
-    .map(p => p.url),
 }));
 
-const reactors = readCSV(
+export const reactors = readCSV(
   fs.readFileSync(path.join(__dirname, './reactors.csv'), 'utf8'),
 ).map(reactorData =>
   Object.assign(reactorData, {
@@ -35,8 +25,3 @@ const reactors = readCSV(
     moxAuthorizationDate: reactorData.moxAuthorizationDate || null,
   }),
 );
-
-module.exports = {
-  plants,
-  reactors,
-};
