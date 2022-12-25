@@ -5,12 +5,11 @@ import { omit } from 'ramda';
 
 import { DomainError, ValidationError } from './errors';
 
-export const addRequestIdMiddleware = () => {
-  return function addRequestId(req, res, next) {
+export const addRequestIdMiddleware = () =>
+  function addRequestId(req, res, next) {
     req.requestId = uuidv4();
     next();
   };
-}
 
 export const errorHandlerMiddleware = (logger) => {
   const BAD_JSON = 'BAD_JSON';
@@ -39,10 +38,10 @@ export const errorHandlerMiddleware = (logger) => {
 
     return next();
   };
-}
+};
 
-export const logRequestMiddleware = (logger) => {
-  return function logRequest(req, res, next) {
+export const logRequestMiddleware = (logger) =>
+  function logRequest(req, res, next) {
     const startTime = Date.now();
     let responseTime;
     onHeaders(res, () => {
@@ -66,14 +65,12 @@ export const logRequestMiddleware = (logger) => {
     });
     next();
   };
-}
 
-export const notFoundMiddleware = () => {
-  return function notFound(req, res) {
+export const notFoundMiddleware = () =>
+  function notFound(req, res) {
     if (!res.headersSent) {
       res.status(404).json({
         error: `${req.method} ${req.originalUrl}: Not found`,
       });
     }
   };
-}

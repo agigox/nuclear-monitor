@@ -9,6 +9,7 @@ import { fetchToken } from './src/rteApi';
 import { initJobs, killJobs } from './src/jobs';
 import esMain from 'es-main';
 
+import _ from "lodash";
 async function launchApp() {
   // When lunching the APP we get rte token
   const rteToken = await fetchToken();

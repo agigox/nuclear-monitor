@@ -37,7 +37,7 @@ export const fetchToken = async () => {
   const data = await res.json();
 
   return data.access_token;
-}
+};
 
 async function getRessourceFn({ ressource, params = {}, token }) {
   const url = `${RTE_HOST}/open_api/${ressource}?${qs.stringify(params)}`;

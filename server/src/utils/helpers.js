@@ -7,33 +7,30 @@ export const normalizePort = (port) => {
     throw new Error('Bad port for server');
   }
   return normalizedPort;
-}
+};
 
 export const readCSV = (string) => {
-  const lines = string.split('\n').map(l => l.split(','));
+  const lines = string.split('\n').map((l) => l.split(','));
   lines.pop();
   const headers = lines.shift();
 
-  return lines.map(line => {
-    return line.reduce(
+  return lines.map((line) =>
+    line.reduce(
       (object, cell, i) =>
         Object.assign(object, {
           [headers[i]]: cell,
         }),
       {},
-    );
-  });
-}
+    ),
+  );
+};
 
-export const setTimeoutPromise = (f, ms) => {
-  return new Promise((resolve, reject) => {
+export const setTimeoutPromise = (f, ms) =>
+  new Promise((resolve, reject) => {
     setTimeout(() => {
-      f()
-        .then(resolve)
-        .catch(reject);
+      f().then(resolve).catch(reject);
     }, ms);
   });
-}
 
 export const retryWrapper = (f, { retryInterval, retryCount, name = '' }) => {
   let index = 0;
@@ -43,7 +40,7 @@ export const retryWrapper = (f, { retryInterval, retryCount, name = '' }) => {
       console.log(`Retry ${name}`);
     }
 
-    return f(...args).catch(err => {
+    return f(...args).catch((err) => {
       if (index >= retryCount) {
         throw err;
       }
@@ -54,18 +51,17 @@ export const retryWrapper = (f, { retryInterval, retryCount, name = '' }) => {
       }, retryInterval);
     });
   };
-}
+};
 
 /*
  * Encapsulate Joi https://github.com/hapijs/joi/blob/v13.0.2/API.md
  */
 
-export const transformJoiError = (joiError) => {
-  return joiError.details.reduce(
+export const transformJoiError = (joiError) =>
+  joiError.details.reduce(
     (acc, detail) => assocPath(detail.path, detail.message, acc),
     {},
   );
-}
 
 export const assertInput = (schema, inputValue) => {
   const { error, value } = schema.validate(inputValue, { abortEarly: false });
@@ -74,5 +70,13 @@ export const assertInput = (schema, inputValue) => {
     throw new ValidationError(errors, inputValue);
   }
   return value;
-}
+};
 
+export const groupByKey = (array, key) =>
+  array.reduce((result, currentValue) => {
+    // eslint-disable-next-line no-param-reassign
+    (result[currentValue[key]] = result[currentValue[key]] || []).push(
+      currentValue,
+    );
+    return result;
+  }, {});

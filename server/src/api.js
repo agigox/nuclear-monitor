@@ -7,7 +7,7 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 
-// import { plants: PLANTS } from './data';
+import { plants } from './data';
 import { RTEServiceError } from './rteApi';
 
 import {
@@ -48,11 +48,9 @@ const buildApi = (environment) => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  /*
   app.get('/plants', (req, res) => {
-    res.json(PLANTS);
+    res.json(plants);
   });
-  */
   app.get(
     '/unavailabilities',
     serviceWrapper(getUnavailabilities, environment),
@@ -72,6 +70,6 @@ const buildApi = (environment) => {
   app.use(errorHandlerMiddleware(logger));
 
   return app;
-}
+};
 
 export default buildApi;

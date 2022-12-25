@@ -5,11 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx mocha './src/test/helpers.test.js'",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
-    "watch": "nodemon index.js",
-    "start": "node --experimental-modules --es-module-specifier-resolution=node index.js"
+    "watch": "nodemon  --inspect --experimental-modules --es-module-specifier-resolution=node index.js",
+    "start": "node  --inspect --experimental-modules --es-module-specifier-resolution=node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.2",
     "lint-staged": "^13.1.0",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.1"
   },
@@ -47,6 +48,7 @@
     "express": "^4.18.2",
     "helmet": "^6.0.1",
     "joi": "^17.7.0",
+    "lodash": "^4.17.21",
     "moment-timezone": "^0.5.40",
     "node-fetch": "^3.3.0",
     "on-finished": "^2.4.1",

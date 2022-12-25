@@ -4,7 +4,7 @@ async function updateRteToken(environment) {
   const { logger } = environment;
 
   logger.info('Renew token');
-  const newToken = await fetchToken().catch(err => {
+  const newToken = await fetchToken().catch((err) => {
     logger.error('Error in renewing token', err);
   });
 
