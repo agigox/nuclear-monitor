@@ -4,7 +4,7 @@ import moment from 'moment-timezone';
 import _ from 'lodash';
 import { getRessource } from '../rteApi';
 
-import { plants } from '../data';
+import { plants, reactors } from '../data';
 
 // import DateInput from './types';
 
@@ -31,14 +31,12 @@ const handleData = (data) => {
   keys.forEach((elt) => {
     result = [...result, ...groupedData[elt]];
   });
-
   const a = result.map((e) => ({
     ...e,
     name: e.name.slice(0, -2).replace(' ', '_'),
   }));
 
   const groupedSecond = _.groupBy(a, 'name');
-
   Object.keys(groupedSecond).forEach((elt) => {
     const reactor = groupedSecond[elt];
     const plant = plants.find((plantElt) => plantElt.id === elt).name;
@@ -52,6 +50,11 @@ const handleData = (data) => {
     const planned = reactor.filter(
       (r) => r.type === 'PLANNED_MAINTENANCE',
     ).length;
+    const power = reactor.reduce(
+      (accumulator, currentValue) =>
+        accumulator + currentValue.installedCapacity,
+      0,
+    );
     const toPush = {
       plant,
       total,
@@ -59,6 +62,7 @@ const handleData = (data) => {
       unavailabilities: {
         forced,
         planned,
+        power,
       },
     };
     const productionUnit = reactor.find(
@@ -91,7 +95,7 @@ export const getUnavailabilities = async (input, { rteToken }) => {
     params,
     token: rteToken,
   });
-  const unavailabilities = data.generation_unavailabilities
+  const unavailabilitiesToApi = data.generation_unavailabilities
     .filter((unavailability) => {
       const {
         start_date: startDate,
@@ -110,10 +114,40 @@ export const getUnavailabilities = async (input, { rteToken }) => {
       unitType: reactor.unit.type,
       name: reactor.unit.name,
       updatedDate: reactor.updated_date,
+      installedCapacity: reactor.unit.installed_capacity,
     }));
-
+  const unavailabilities = handleData(unavailabilitiesToApi);
+  const forced = unavailabilities.reduce(
+    (accumulator, currentValue) =>
+      accumulator + currentValue.unavailabilities.forced,
+    0,
+  );
+  const planned = unavailabilities.reduce(
+    (accumulator, currentValue) =>
+      accumulator + currentValue.unavailabilities.planned,
+    0,
+  );
+  const totalPower = reactors.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.netPower_MW,
+    0,
+  );
+  const unavailablePower = unavailabilities.reduce(
+    (accumulator, currentValue) =>
+      accumulator + currentValue.unavailabilities.power,
+    0,
+  );
   const res = {
-    unavailabilities: handleData(unavailabilities),
+    overview: {
+      available: reactors.length - forced - planned,
+      unavailable: {
+        forced,
+        planned,
+      },
+      totalNumber: reactors.length,
+      totalPower,
+      unavailablePower,
+    },
+    unavailabilities,
   };
 
   return res;
