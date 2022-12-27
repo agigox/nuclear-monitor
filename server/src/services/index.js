@@ -91,7 +91,7 @@ export const getUnavailabilities = async (input, { rteToken }) => {
     params,
     token: rteToken,
   });
-  const unavailibilities = data.generation_unavailabilities
+  const unavailabilities = data.generation_unavailabilities
     .filter((unavailability) => {
       const {
         start_date: startDate,
@@ -113,7 +113,7 @@ export const getUnavailabilities = async (input, { rteToken }) => {
     }));
 
   const res = {
-    unavailibilities: handleData(unavailibilities),
+    unavailabilities: handleData(unavailabilities),
   };
 
   return res;

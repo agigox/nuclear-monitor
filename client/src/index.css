@@ -5,7 +5,8 @@ body {
 }
 
 .App {
-  height: 100%;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .AppLayout__header {
@@ -160,79 +161,103 @@ body {
 }
 .map-holder {
   padding: 20px;
+  margin: 20px;
   position: relative;
+  width: 876px;
+  height: 880px;
 }
 .map-holder > img {
   width: 100%;
   height: "auto";
 }
+
+
+.mark-city {
+  position: absolute;
+}
 .fessenheim {
-  position: absolute!important;
-  bottom: 800px!important;
-  left: 503px!important;
+  bottom: 800px;
+  left: 503px;
 }
 .flamanville {
-  position: absolute!important;
-  bottom: 701px!important;
-  left: 209px!important;
+  bottom: 701px;
+  left: 209px;
 }
 .civaux {
-  position: absolute!important;
-  bottom: 492px!important;
-  left: 46px!important;
+  top: 360px;
+  left: 46px;
 }
 .penly {
-  position: absolute!important;
-  bottom: 947px!important;
-  left: 422px!important;
+  top: 107px;
+  left: 651px;
 }
 .dampierre {
-  position: absolute!important;
-  bottom: 610px!important;
-  left: 324px!important;
+  top: 231px;
+  left: 307px;
 }
 .golfech {
-  position: absolute!important;
-  bottom: 158px!important;
-  left: 303px!important;
+  top: 158px;
+  left: 405px;
 }
 .blayais {
-  position: absolute!important;
-  bottom: 200px!important;
-  left: 514px!important;
+  top: 690px;
+  left: 210px;
 }
 .cattenom {
-  position: absolute!important;
-  bottom: 558px!important;
-  left: 513px!important;
-}
-.stalban {
-  position: absolute!important;
-  bottom: -285px!important;
-  left: 307px!important;
+  bottom: 145px;
+  left: 513px;
 }
 .gravelines {
-  position: absolute!important;
-  bottom: 400px!important;
-  left: 472px!important;
+  bottom: 73px;
+  left: 364px;
 }
-.chooz {
-  position: absolute!important;
-  bottom: 551px!important;
-  left: 725px!important;
+.choozb {
+  bottom: 551px;
+  left: 725px;
 }
 .cruas {
-  position: absolute!important;
-  bottom: -200px!important;
-  left: 570px!important;
+  position: absolute;
+  bottom: 625px;
+  left: 541px;
 }
-.stlaurent {
-  position: absolute!important;
-  bottom: 409px!important;
-  left: 229px!important;
+.saintalban {
+  top: 598px;
+  left: 268px;
+}
+.belleville {
+  bottom: 426px;
+  left: 240px;
+}
+.nogent {
+  bottom: 344px;
+  left: 240px;
+}
+.paluel {
+  bottom: 493px;
+  left: 240px;
+}
+.saintlaurent {
+  top: 351px;
+  left: 508px
+}
+.tricastin {
+  top: 610px;
+  left: 524px;
+}
+.chinonb {
+  top: 531px;
+  left: 540px;
+}
+.bugey {
+  top: 446px;
+  left: 492px;
 }
 .box-1 {
   width: 1000px;
   height: 1000px;
-  border: 1px solid red;
+}
+.toggleBts {
+  text-align: right;
+  margin-right: 40px;
+  width: 880px;
 }

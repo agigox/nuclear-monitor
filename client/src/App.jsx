@@ -4,7 +4,7 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import 'moment-timezone';
 import store from './redux/store';
-import AppLayout1 from './components/AppLayout1';
+import AppLayout from './components/AppLayout';
 
 // moment.locale('fr');
 moment.tz.setDefault('Europe/Paris');
@@ -13,14 +13,7 @@ function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <AppLayout1 />
-        {/* <Router>
-          <Route path="/">
-            <AnalyticsComponent>
-              <AppLayout />
-            </AnalyticsComponent>
-          </Route>
-        </Router> */}
+        <AppLayout />
       </Provider>
     </div>
   );

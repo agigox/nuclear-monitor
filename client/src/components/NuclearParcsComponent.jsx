@@ -1,27 +1,27 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
-import PlantMap1 from './PlantMap1';
+// import PlantMap1 from './PlantMap1';
 
-function NuclearParcsComponent({reactors}) {
-  return(
+// eslint-disable-next-line react/prop-types
+function NuclearParcsComponent({ unavailabilities }) {
+  return (
     <Row>
-      {reactors.map((reactor) => {
-        return (<Col className='box nuclear-name' span={3} key={reactor.eicCode}>{reactor.name}</Col>)
+      {unavailabilities.map(reactor => {
+        return (
+          <Col className="box nuclear-name" span={3} key={reactor.eicCode}>
+            {reactor.name}
+          </Col>
+        );
       })}
-      
     </Row>
-  )
+  );
 }
 
-
-
-
-const mapStateToProps = (state) => {
-  console.log(state)
+const mapStateToProps = state => {
   return {
-      reactors: state.reactors
-  }
-}
+    unavailabilities: state.unavailabilities,
+  };
+};
 
 export default connect(mapStateToProps)(NuclearParcsComponent);

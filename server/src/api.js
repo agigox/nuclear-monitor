@@ -8,6 +8,7 @@ import compression from 'compression';
 import helmet from 'helmet';
 
 import { plants } from './data';
+import unavailabilitiesDump from './data/unavailabilitiesDump';
 import { RTEServiceError } from './rteApi';
 
 import {
@@ -54,6 +55,9 @@ const buildApi = (environment) => {
   app.get(
     '/unavailabilities',
     serviceWrapper(getUnavailabilities, environment),
+  );
+  app.get('/unavailabilitiesDump', (req, res) =>
+    res.json(unavailabilitiesDump),
   );
 
   if (process.env.NODE_ENV !== 'production') {

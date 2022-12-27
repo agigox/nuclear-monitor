@@ -1,28 +1,32 @@
 import React from 'react';
-import { Row, Col, Button } from 'antd';
+import { Button } from 'antd';
 import { connect } from 'react-redux';
-import PlantMap1 from './PlantMap1';
 import { changeDisplayToMap } from '../redux/actionCreators';
 
-function ToggleDisplayComponent({changeDisplayToMap}) {
-  const toggleDisplay = (e) => {
-    const mode = e.target.name === 'map' ? true : false;
+
+
+function ToggleDisplayComponent({ changeDisplayToMap }) {
+  const toggleDisplay = e => {
+    const mode = e.target.name === 'map';
     changeDisplayToMap(mode);
-  }
-  return(
-    <>
-      <Button name="map" onClick={toggleDisplay}>Carte</Button>
+  };
+  return (
+    <div className="toggleBts">
+      <Button name="map" onClick={toggleDisplay}>
+        Carte
+      </Button>
       <Button onClick={toggleDisplay}>Tranches</Button>
-    </>
-  )
+    </div>
+  );
 }
 
-
-const mapDispatchToProps = (dispatch) => ({
-  changeDisplayToMap: (data) => {
+const mapDispatchToProps = dispatch => ({
+  changeDisplayToMap: data => {
     dispatch(changeDisplayToMap(data));
   },
 });
 
-
-export default connect(null, mapDispatchToProps)(ToggleDisplayComponent);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(ToggleDisplayComponent);

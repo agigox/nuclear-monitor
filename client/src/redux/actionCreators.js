@@ -1,7 +1,7 @@
 import { actionTypes } from './actionTypes';
 
-export const loadRectors = data => ({
-  type: actionTypes.LOAD_REACTORS_REQUEST,
+export const loadUnavailabilities = data => ({
+  type: actionTypes.LOAD_UNAVAILABILITIES_REQUEST,
   playload: data,
 });
 export const changeDisplayToMap = data => ({

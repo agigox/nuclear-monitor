@@ -2,27 +2,26 @@ import { actionTypes } from './actionTypes';
 
 const initialState = {
   loadings: {
-    unavailibilities: true,
+    unavailabilities: true,
   },
-  reactors: [],
+  unavailabilities: [],
   displayMap: true,
 };
-// Reducer the change the currently displayed actions
-// eslint-disable-next-line import/prefer-default-export, default-param-last
-export const addToCart = (state = initialState, action) => {
+// eslint-disable-next-line default-param-last
+const getNuclearData = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.LOAD_REACTORS_REQUEST: {
+    case actionTypes.LOAD_UNAVAILABILITIES_REQUEST: {
       return {
         ...state,
       };
     }
-    case actionTypes.REACTORS_RECEIVED: {
+    case actionTypes.UNAVAILABILITIES_RECEIVED: {
       return {
         ...state,
-        reactors: [...action.reactors.unavailibilities],
+        unavailabilities: [...action.data.unavailabilities],
         loadings: {
           ...state.loadings,
-          unavailibilities: false,
+          unavailabilities: false,
         },
       };
     }
@@ -38,3 +37,4 @@ export const addToCart = (state = initialState, action) => {
     }
   }
 };
+export default getNuclearData;

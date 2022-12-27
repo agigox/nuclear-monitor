@@ -10,18 +10,21 @@ to write action “NEWS_RECEIVED” in actions/index.js file because it’s full
 */
 
 import { put, takeLatest, all } from 'redux-saga/effects';
-import { getReactors } from '../../api';
+import { getUnavailabilities } from '../../api';
 import { actionTypes } from '../actionTypes';
 
-function* fetchReactors() {
-  const reactors = yield getReactors().then(response => {
+function* fetchUnavailabilities() {
+  const data = yield getUnavailabilities().then(response => {
     return response;
   });
-  yield put({ type: actionTypes.REACTORS_RECEIVED, reactors });
+  yield put({ type: actionTypes.UNAVAILABILITIES_RECEIVED, data });
 }
 
 function* actionWatcher() {
-  yield takeLatest(actionTypes.LOAD_REACTORS_REQUEST, fetchReactors);
+  yield takeLatest(
+    actionTypes.LOAD_UNAVAILABILITIES_REQUEST,
+    fetchUnavailabilities,
+  );
 }
 
 export default function* rootSaga() {

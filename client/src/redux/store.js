@@ -1,12 +1,15 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 
 import createSagaMiddleware from 'redux-saga';
-import { addToCart } from './reducers';
+import getNuclearData from './reducers';
 
 import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
-
-export default createStore(addToCart, applyMiddleware(sagaMiddleware));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export default createStore(
+  getNuclearData,
+  composeEnhancers(applyMiddleware(sagaMiddleware)),
+);
 
 sagaMiddleware.run(rootSaga);
