@@ -16,6 +16,7 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     'prettier/prettier': ['error', prettierOptions],
+    'react/prop-types': 'off',
   },
   env: {
     jest: true,

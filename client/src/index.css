@@ -1,12 +1,8 @@
+
 body {
   padding: 20px;
   margin: 10px;
   height: 100%;
-}
-
-.App {
-  width: 80%;
-  margin: 0 auto;
 }
 
 .AppLayout__header {
@@ -142,34 +138,6 @@ body {
 }
 
 /*My code*/
-.box {
-  border: 1px solid;
-  word-break: break-word;
-}
-.spinner {
-  text-align: center;
-}
-.nuclear-name {
-  height: 80px;
-  line-height: 22px;
-  text-align: center;
-  padding: 3px;
-}
-.leaflet-container {
-  height: 220px;
-  width: 100%;
-}
-.map-holder {
-  padding: 20px;
-  margin: 20px;
-  position: relative;
-  width: 876px;
-  height: 880px;
-}
-.map-holder > img {
-  width: 100%;
-  height: "auto";
-}
 
 
 .mark-city {
@@ -251,13 +219,4 @@ body {
 .bugey {
   top: 446px;
   left: 492px;
-}
-.box-1 {
-  width: 1000px;
-  height: 1000px;
-}
-.toggleBts {
-  text-align: right;
-  margin-right: 40px;
-  width: 880px;
 }

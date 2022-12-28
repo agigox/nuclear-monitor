@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import React from 'react';
-import Indicator from '../images/location_on.png';
-import PlannedDown from '../images/planned_down.png';
-import Up from '../images/up.png';
-import ForcedDown from '../images/forced_down.png';
+import Indicator from '../../images/location_on.png';
+import PlannedDown from '../../images/planned_down.png';
+import Up from '../../images/up.png';
+import ForcedDown from '../../images/forced_down.png';
 /*
 const Wrapper = styled.div`
   position: relative;
@@ -56,7 +56,7 @@ const CityName = styled.div`
   line-height: 17px;
   font-size: 11px;
 `;
-function ReactorIndicatorComponent(props) {
+function Unavailability(props) {
   const { className, plant, availabilities, forced, planned } = props;
   return (
     <Wrapper className={className}>
@@ -84,4 +84,4 @@ function ReactorIndicatorComponent(props) {
   );
 }
 
-export default ReactorIndicatorComponent;
+export default Unavailability;

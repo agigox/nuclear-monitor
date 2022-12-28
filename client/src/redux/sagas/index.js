@@ -14,10 +14,12 @@ import { getUnavailabilities } from '../../api';
 import { actionTypes } from '../actionTypes';
 
 function* fetchUnavailabilities() {
-  const data = yield getUnavailabilities().then(response => {
-    return response;
-  });
-  yield put({ type: actionTypes.UNAVAILABILITIES_RECEIVED, data });
+  try {
+    const data = yield getUnavailabilities().then((response) => response);
+    yield put({ type: actionTypes.UNAVAILABILITIES_RECEIVED_SUCCESS, data });
+  } catch (e) {
+    yield put({ type: actionTypes.UNAVAILABILITIES_RECEIVED_FAIL, message: e });
+  }
 }
 
 function* actionWatcher() {

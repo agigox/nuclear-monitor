@@ -1,21 +1,21 @@
-import { actionTypes } from './actionTypes';
+import { actionTypes } from '../actionTypes';
 
 const initialState = {
   loadings: {
     unavailabilities: true,
   },
   unavailabilities: [],
-  displayMap: true,
+  overview: {},
 };
 // eslint-disable-next-line default-param-last
-const getNuclearData = (state = initialState, action) => {
+const unavailabilitiesReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOAD_UNAVAILABILITIES_REQUEST: {
       return {
         ...state,
       };
     }
-    case actionTypes.UNAVAILABILITIES_RECEIVED: {
+    case actionTypes.UNAVAILABILITIES_RECEIVED_SUCCESS: {
       return {
         ...state,
         unavailabilities: [...action.data.unavailabilities],
@@ -23,12 +23,17 @@ const getNuclearData = (state = initialState, action) => {
           ...state.loadings,
           unavailabilities: false,
         },
+        overview: { ...action.data.overview },
       };
     }
-    case actionTypes.CHANGE_DISPLAY_TO_MAP: {
+    case actionTypes.UNAVAILABILITIES_RECEIVED_FAIL: {
+      console.log(action);
       return {
         ...state,
-        displayMap: action.payload,
+        loadings: {
+          ...state.loadings,
+          unavailabilities: false,
+        },
       };
     }
 
@@ -37,4 +42,4 @@ const getNuclearData = (state = initialState, action) => {
     }
   }
 };
-export default getNuclearData;
+export default unavailabilitiesReducer;

@@ -14,6 +14,5 @@ export async function getUnavailabilities() {
     `${REACT_APP_NUCLEAR_MONITOR_API}/unavailabilities`,
   );
   const data = await res.json();
-
   return data;
 }

@@ -1,33 +1,21 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { loadUnavailabilities } from '../redux/actionCreators';
-import LoadingComponent from './LoadingComponent';
-import HomeComponent from './HomeComponent';
+import { useSelector, useDispatch } from 'react-redux';
+import { Layout } from 'antd';
+import appActions from '../redux/actions';
+import Loading from './Loading';
+import Home from './Home';
 
-function AppLayout1(props) {
-  // eslint-disable-next-line no-shadow
-  const { loadUnavailabilities, loadings } = props;
-  useEffect(() => loadUnavailabilities(), []);
-  return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>{loadings.unavailabilities ? <LoadingComponent /> : <HomeComponent />}</>
-  );
+function AppLayout() {
+  const loadings = useSelector((state) => state.unavailabilities.loadings);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const loadData = async () => {
+      dispatch(appActions.unavailabilitiesActions.loadUnavailabilities());
+    };
+
+    loadData();
+  }, []);
+  return <Layout>{loadings.unavailabilities ? <Loading /> : <Home />}</Layout>;
 }
 
-const mapStateToProps = state => {
-  return {
-    loadings: state.loadings,
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  loadUnavailabilities: () => {
-    dispatch(loadUnavailabilities());
-  },
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AppLayout1);
+export default AppLayout;
