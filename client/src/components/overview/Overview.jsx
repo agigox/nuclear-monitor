@@ -7,8 +7,8 @@ const { Sider } = Layout;
 function Overview() {
   return (
     <Sider width={400} theme="light">
-      <Infos title="Etat du parc nucléaire français" />
-      <Infos title="Informations relatives au volume d’électricité produit" />
+      <Infos type="reactor" />
+      <Infos type="power" />
     </Sider>
   );
 }

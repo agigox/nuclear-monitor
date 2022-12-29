@@ -5,6 +5,7 @@ const initialState = {
     unavailabilities: true,
   },
   unavailabilities: [],
+  error: '',
   overview: {},
 };
 // eslint-disable-next-line default-param-last
@@ -27,13 +28,13 @@ const unavailabilitiesReducer = (state = initialState, action) => {
       };
     }
     case actionTypes.UNAVAILABILITIES_RECEIVED_FAIL: {
-      console.log(action);
       return {
         ...state,
         loadings: {
           ...state.loadings,
           unavailabilities: false,
         },
+        error: action.message,
       };
     }
 

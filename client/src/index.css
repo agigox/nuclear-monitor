@@ -3,8 +3,12 @@ body {
   padding: 20px;
   margin: 10px;
   height: 100%;
+  
 }
-
+.App {
+  width: 1400px;
+  margin: 0 auto;
+}
 .AppLayout__header {
   display: flex;
 }
@@ -83,6 +87,9 @@ body {
   width: 100%;
   padding: 0 0px;
 }
+.ant-layout {
+  background: #ffffff!important;
+}
 
 .AppLayout__header__date {
   height: 100%;
@@ -152,12 +159,12 @@ body {
   left: 209px;
 }
 .civaux {
-  top: 360px;
+  top: 270px;
   left: 46px;
 }
 .penly {
-  top: 107px;
-  left: 651px;
+  top: 123px;
+    left: 611px;
 }
 .dampierre {
   top: 231px;

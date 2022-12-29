@@ -7,8 +7,8 @@ import Map from './map/Map';
 const { Content } = Layout;
 
 function Details() {
-  const displayMap = useSelector((state) => state.others.displayMap);
-  return <Content>{displayMap ? <Map /> : <Slices />}</Content>;
+  const mode = useSelector((state) => state.cross.mode);
+  return <Content>{mode ? <Map /> : <Slices />}</Content>;
 }
 
 export default Details;

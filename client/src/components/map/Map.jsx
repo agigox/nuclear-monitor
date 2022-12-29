@@ -10,7 +10,7 @@ import SVGMap from '../../images/map.svg';
 
 const Wrapper = styled.div`
   padding: 20px;
-  margin: 20px;
+  margin: 20px auto;
   position: relative;
   width: 876px;
   height: 880px;

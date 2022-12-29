@@ -2,10 +2,10 @@
 /* eslint-disable react/destructuring-assignment */
 import styled from '@emotion/styled';
 import React from 'react';
-import Indicator from '../../images/location_on.png';
-import PlannedDown from '../../images/planned_down.png';
-import Up from '../../images/up.png';
-import ForcedDown from '../../images/forced_down.png';
+import Indicator from '../../images/location_on.svg';
+import PlannedDown from '../../images/planned_down.svg';
+import Up from '../../images/up.svg';
+import ForcedDown from '../../images/forced_down.svg';
 /*
 const Wrapper = styled.div`
   position: relative;

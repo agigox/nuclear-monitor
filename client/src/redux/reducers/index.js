@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import unavailabilitiesReducer from './unavailabilitiesReducer';
-import othersReducer from './othersReducer';
+import crossReducer from './crossReducer';
 
 const rootReducer = combineReducers({
   unavailabilities: unavailabilitiesReducer,
-  others: othersReducer,
+  cross: crossReducer,
 });
 
 export default rootReducer;
