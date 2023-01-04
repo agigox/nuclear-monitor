@@ -28,7 +28,7 @@ const unavailabilitiesReducer = (state = initialState, action) => {
           unavailabilities: false,
         },
         overview: { ...action.data.overview },
-        lastRefreshDate: moment().format('DD-MM-YYYY à HH:mm:ss'),
+        lastRefreshDate: moment().format('DD/MM/YYYY HH:mm:ss'),
       };
     }
     case actionTypes.UNAVAILABILITIES_RECEIVED_FAIL: {
@@ -59,7 +59,7 @@ const unavailabilitiesReducer = (state = initialState, action) => {
           unavailabilitiesRefresh: false,
         },
         overview: { ...action.data.overview },
-        lastRefreshDate: moment().format('DD-MM-YYYY à HH:mm:ss'),
+        lastRefreshDate: moment().format('DD/MM/YYYY HH:mm:ss'),
       };
     }
     case actionTypes.UNAVAILABILITIES_REFRESHED_FAIL: {

@@ -6,7 +6,8 @@ body {
   
 }
 .App {
-  width: 1400px;
+  width: 100%;
+  max-width: 1500px;
   margin: 0 auto;
 }
 .AppLayout__header {

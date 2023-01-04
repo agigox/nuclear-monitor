@@ -87,7 +87,7 @@ function Indicator({ icon, text, indicator, type }) {
         <div className={text === 'Indisponible' ? 'text' : 'text textBold'}>
           {text}
           <br />
-          <span className="numberBold">{indicator} GW</span>
+          <span className="numberBold">{indicator.replace('.', ',')} GW</span>
         </div>
       </StyledIndicatorPower>
     );

@@ -6,17 +6,7 @@ import Indicator from '../../images/location_on.svg';
 import PlannedDown from '../../images/planned_down.svg';
 import Up from '../../images/up.svg';
 import ForcedDown from '../../images/forced_down.svg';
-/*
-const Wrapper = styled.div`
-  position: relative;
-  top: ${props => (props.top ? props.top : 0)}px;
-  left: ${props => (props.left ? props.left : 0)}px;
-  right: ${props => (props.right ? props.right : 0)}px;
-  bottom: ${props => (props.bottom ? props.bottom : 0)}px;
-  display: flex;
-  align-items: center;
-`;
-*/
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;

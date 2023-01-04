@@ -10,6 +10,7 @@ const StyledLayout = styled(Layout)`
   border-radius: 10px;
   margin-left: 20px;
   margin-bottom: 20px;
+  width: 100%;
 `;
 function Main() {
   return (

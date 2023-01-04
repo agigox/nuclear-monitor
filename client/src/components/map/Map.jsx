@@ -12,11 +12,11 @@ const Wrapper = styled.div`
   padding: 20px;
   margin: 20px auto;
   position: relative;
-  width: 876px;
+  width: 882px;
+  overflow-x: auto;
   height: 880px;
   & > img {
-    width: 100%;
-    height: 'auto';
+    width: 876px;
   }
 `;
 // eslint-disable-next-line react/prop-types

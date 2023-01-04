@@ -9,9 +9,10 @@ const StyledDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  &.date {
+  & > .date {
     font-size: 16px;
     color: #3e25a3;
+    font-weight: 700;
   }
 `;
 function Refresh() {
