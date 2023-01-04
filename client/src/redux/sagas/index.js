@@ -21,12 +21,23 @@ function* fetchUnavailabilities() {
     yield put({ type: actionTypes.UNAVAILABILITIES_RECEIVED_FAIL, message: e });
   }
 }
+function* refreshUnavailabilities() {
+  try {
+    const data = yield getUnavailabilities().then((response) => response);
+    yield put({ type: actionTypes.UNAVAILABILITIES_REFRESHED_SUCCESS, data });
+  } catch (e) {
+    yield put({
+      type: actionTypes.UNAVAILABILITIES_REFRESHED_FAIL,
+      message: e,
+    });
+  }
+}
 
 function* actionWatcher() {
-  yield takeLatest(
-    actionTypes.LOAD_UNAVAILABILITIES_REQUEST,
-    fetchUnavailabilities,
-  );
+  const { LOAD_UNAVAILABILITIES_REQUEST, REFRESH_UNAVAILABILITIES_REQUEST } =
+    actionTypes;
+  yield takeLatest(LOAD_UNAVAILABILITIES_REQUEST, fetchUnavailabilities);
+  yield takeLatest(REFRESH_UNAVAILABILITIES_REQUEST, refreshUnavailabilities);
 }
 
 export default function* rootSaga() {

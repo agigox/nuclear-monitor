@@ -227,3 +227,9 @@ body {
   top: 446px;
   left: 492px;
 }
+.iconIndispo {
+  background: linear-gradient(206.04deg, #FC1C1C 21.73%, #BC372E 83.59%);
+}
+.iconDispo {
+  background: linear-gradient(182.12deg, #1CFC4D 7.61%, #25C448 94.18%);
+}

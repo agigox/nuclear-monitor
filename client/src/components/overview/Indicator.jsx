@@ -33,8 +33,65 @@ const StyledIndicator = styled.div`
     padding-left: 7px;
   }
 `;
+const StyledIndicatorPower = styled.div`
+  height: ${(props) => props.indicator * 6}px;
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 5px;
+  padding-left: 10px;
+  align-items: center;
+  min-height: 60px;
+  & > div.icon {
+    flex-basis: 32px;
+    align-self: stretch;
+    border-radius: 5px;
+  }
+  & > div.text {
+    flex-basis: 250px;
+    font-style: normal;
+    font-weight: 300;
+    &.textBold {
+      font-weight: 400;
+      font-size: 19px;
+      &.numberBold {
+        display: inline-block;
+        margin-top: 19px;
+        font-weight: 700;
+        font-size: 25px;
+      }
+    }
+    font-size: 16px;
+    line-height: 19px;
+    color: #3e25a3;
+    margin-left: 15px;
+  }
+  & > div.indicator {
+    flex-basis: 60px;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
+    color: #3e25a3;
+    padding-left: 7px;
+  }
+`;
 
-function Indicator({ icon, text, indicator }) {
+function Indicator({ icon, text, indicator, type }) {
+  if (type === 'power') {
+    return (
+      <StyledIndicatorPower indicator={indicator}>
+        <div
+          className={
+            text === 'Indisponible' ? 'icon iconIndispo' : 'icon iconDispo'
+          }
+        />
+        <div className={text === 'Indisponible' ? 'text' : 'text textBold'}>
+          {text}
+          <br />
+          <span className="numberBold">{indicator} GW</span>
+        </div>
+      </StyledIndicatorPower>
+    );
+  }
   return (
     <StyledIndicator>
       <div className="icon">

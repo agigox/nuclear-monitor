@@ -7,6 +7,7 @@ const { Sider } = Layout;
 function Overview() {
   return (
     <Sider width={400} theme="light">
+      <Infos type="refresh" />
       <Infos type="reactor" />
       <Infos type="power" />
     </Sider>

@@ -3,14 +3,12 @@ import styled from '@emotion/styled';
 import { Col } from 'antd';
 import { useSelector } from 'react-redux';
 import Indicator from './Indicator';
+import Refresh from './Refresh';
 import Total from './Total';
 import Title from './Title';
 import PlannedDown from '../../images/planned_down.svg';
 import Up from '../../images/up.svg';
 import ForcedDown from '../../images/forced_down.svg';
-import Rectangle1 from '../../images/Rectangle1.svg';
-import Rectangle2 from '../../images/Rectangle2.svg';
-import Rectangle3 from '../../images/Rectangle3.svg';
 
 const StyledCol = styled(Col)`
   background: #ffffff;
@@ -29,6 +27,14 @@ export default function Infos({ type }) {
     totalPower,
     unavailablePower,
   } = useSelector((state) => state.unavailabilities.overview);
+  if (type === 'refresh') {
+    return (
+      <StyledCol span={24}>
+        <Title title="Dernière mise à jour" />
+        <Refresh />
+      </StyledCol>
+    );
+  }
   if (type === 'reactor') {
     return (
       <StyledCol span={24}>
@@ -56,25 +62,21 @@ export default function Infos({ type }) {
     <StyledCol span={24}>
       <Title title="Informations relatives au volume d’électricité produit en GW" />
       <Indicator
-        icon={Rectangle1}
         text="Production nucléaire totale"
-        indicator={(totalPower / 1000).toFixed(1)}
-      />
-      <Indicator
-        icon={Rectangle2}
-        text="Activable"
         indicator={((totalPower - unavailablePower) / 1000).toFixed(1)}
+        type="power"
       />
       <Indicator
-        icon={Rectangle3}
         text="Indisponible"
         indicator={(unavailablePower / 1000).toFixed(1)}
+        type="power"
       />
       <Total
         total={`${Math.round(
           (100 * (totalPower - unavailablePower)) / totalPower,
         )}%`}
         text="Puissance total"
+        type="power"
       />
     </StyledCol>
   );

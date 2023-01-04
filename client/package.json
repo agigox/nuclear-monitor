@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://nuclear-monitor.fr",
   "dependencies": {
+    "@ant-design/icons": "^4.8.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "antd": "^4.24.6",
