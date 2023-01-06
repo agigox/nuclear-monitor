@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   margin: 20px auto;
   position: relative;
   width: 882px;
-  overflow-x: auto;
+  overflow-x: scroll;
   height: 880px;
   & > img {
     width: 876px;

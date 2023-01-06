@@ -15,8 +15,19 @@ const StyledCol = styled(Col)`
   border: 1px solid #cfcfcf;
   box-shadow: 0px 4px 20px rgba(44, 22, 132, 0.2);
   border-radius: 10px;
-  padding: 26px;
+  padding: 20px;
   margin-bottom: 20px;
+  @media only screen and (max-width: 767px) {
+    padding: 10px;
+    border-radius: 5px;
+    &.dateCol {
+      box-shadow: none;
+      border: 0;
+      margin-bottom: 0px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 `;
 
 export default function Infos({ type }) {
@@ -29,7 +40,7 @@ export default function Infos({ type }) {
   } = useSelector((state) => state.unavailabilities.overview);
   if (type === 'refresh') {
     return (
-      <StyledCol span={24}>
+      <StyledCol className="dateCol" span={24}>
         <Title title="Dernière mise à jour" />
         <Refresh />
       </StyledCol>
@@ -46,21 +57,21 @@ export default function Infos({ type }) {
         />
         <Indicator
           icon={PlannedDown}
-          text="Réacteurs en arrêt pour maintenance"
+          text="Réacteurs en arrêt partiel"
           indicator={planned}
         />
         <Indicator
           icon={ForcedDown}
-          text="Réacteurs en arrêt imprévu"
+          text="Réacteurs en arrêt total"
           indicator={forced}
         />
-        <Total total={totalNumber} text="Réacteurs total" />
+        <Total total={totalNumber} text="Nombre total de réacteurs français" />
       </StyledCol>
     );
   }
   return (
     <StyledCol span={24}>
-      <Title title="Informations relatives au volume d’électricité produit en GW" />
+      <Title title="Informations relatives au volume d’électricité produit" />
       <Indicator
         text="Production nucléaire totale"
         indicator={((totalPower - unavailablePower) / 1000).toFixed(1)}
@@ -75,7 +86,7 @@ export default function Infos({ type }) {
         total={`${Math.round(
           (100 * (totalPower - unavailablePower)) / totalPower,
         )}%`}
-        text="Puissance total"
+        text="Part de production du parc nucléaire"
         type="power"
       />
     </StyledCol>

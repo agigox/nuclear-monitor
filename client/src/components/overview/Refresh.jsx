@@ -14,6 +14,13 @@ const StyledDiv = styled.div`
     color: #3e25a3;
     font-weight: 700;
   }
+  @media only screen and (max-width: 767px) {
+    align-items: flex-end;
+    & > .date {
+      position: relative;
+      top: 5px;
+    }
+  }
 `;
 function Refresh() {
   const lastRefreshDate = useSelector(

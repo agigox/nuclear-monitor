@@ -5,7 +5,7 @@ import React from 'react';
 import Indicator from '../../images/location_on.svg';
 import PlannedDown from '../../images/planned_down.svg';
 import Up from '../../images/up.svg';
-import ForcedDown from '../../images/forced_down.svg';
+import ForcedDown from '../../images/forced_down1.svg';
 
 const Wrapper = styled.div`
   display: flex;

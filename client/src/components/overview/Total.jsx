@@ -18,6 +18,14 @@ const StyledTotal = styled.div`
     font-size: 16px;
     padding-right: 15px;
   }
+  @media only screen and (max-width: 767px) {
+    height: 60px;
+    justify-content: center;
+    .sum {
+      font-size: 30px;
+      line-height: 34px;
+    }
+  }
 `;
 
 function Total({ total, text }) {

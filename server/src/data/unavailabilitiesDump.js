@@ -1,4 +1,14 @@
 const unavailabilitiesDump = {
+  overview: {
+    available: 39,
+    unavailable: {
+      forced: 1,
+      planned: 18,
+    },
+    totalNumber: 58,
+    totalPower: 63010,
+    unavailablePower: 22415,
+  },
   unavailabilities: [
     {
       plant: 'Fessenheim',

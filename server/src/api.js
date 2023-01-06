@@ -18,7 +18,7 @@ import {
   notFoundMiddleware,
 } from './utils/middlewares';
 
-import { getUnavailabilities } from './services';
+import { getUnavailabilities, getUnavailabilitiesV2 } from './services';
 
 function serviceWrapper(service, environment) {
   return async function wrappedService(req, res, next) {
@@ -58,6 +58,10 @@ const buildApi = (environment) => {
   );
   app.get('/unavailabilitiesDump', (req, res) =>
     res.json(unavailabilitiesDump),
+  );
+  app.get(
+    '/unavailabilitiesv2',
+    serviceWrapper(getUnavailabilitiesV2, environment),
   );
 
   if (process.env.NODE_ENV !== 'production') {

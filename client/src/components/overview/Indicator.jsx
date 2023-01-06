@@ -32,6 +32,22 @@ const StyledIndicator = styled.div`
     color: #3e25a3;
     padding-left: 7px;
   }
+  @media only screen and (max-width: 767px) {
+    align-items: flex-end;
+    justify-content: space-around;
+    min-height: 35px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    & > div.text {
+      font-size: 14px;
+      position: relative;
+      top: 3px;
+    }
+    & > div.indicator {
+      font-size: 30px;
+      line-height: 24px;
+    }
+  }
 `;
 const StyledIndicatorPower = styled.div`
   height: ${(props) => props.indicator * 6}px;
@@ -72,6 +88,9 @@ const StyledIndicatorPower = styled.div`
     line-height: 55px;
     color: #3e25a3;
     padding-left: 7px;
+  }
+  @media only screen and (max-width: 767px) {
+    justify-content: space-around;
   }
 `;
 

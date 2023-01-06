@@ -1,17 +1,23 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Layout } from 'antd';
+import { Button } from 'antd';
 import styled from '@emotion/styled';
 import appActions from '../redux/actions';
 // import Map1 from './Map1';
 
 // eslint-disable-next-line react/prop-types
 
-const StyledHeader = styled(Layout.Header)`
+const StyledDiv = styled.div`
   text-align: right;
   background: unset;
-  padding: 8px 26px;
+  padding: 0 0 8px;
+  @media only screen and (max-width: 767px) {
+    padding: 0 0 20px;
+    button {
+      width: 50%;
+    }
+  }
 `;
 
 function ModeSwitcher() {
@@ -21,7 +27,7 @@ function ModeSwitcher() {
     dispatch(appActions.crossActions.changeMode(mode));
   };
   return (
-    <StyledHeader theme="light">
+    <StyledDiv>
       <Button
         name="map"
         onClick={switchMode}
@@ -35,7 +41,7 @@ function ModeSwitcher() {
       >
         Tranches
       </Button>
-    </StyledHeader>
+    </StyledDiv>
   );
 }
 

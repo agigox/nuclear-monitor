@@ -1,6 +1,6 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Layout } from 'antd';
 import appActions from '../redux/actions';
 import Loading from './Loading';
 import Home from './Home';
@@ -15,7 +15,7 @@ function AppLayout() {
 
     loadData();
   }, []);
-  return <Layout>{loadings.unavailabilities ? <Loading /> : <Home />}</Layout>;
+  return <>{loadings.unavailabilities ? <Loading /> : <Home />}</>;
 }
 
 export default AppLayout;

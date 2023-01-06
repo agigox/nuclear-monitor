@@ -17,6 +17,9 @@ const handleData = (data) => {
   const groupedData = _.groupBy(data, 'name');
   const keys = Object.keys(groupedData);
 
+  // si dans un même réacteur, on a deux indisponibilité ou plus
+  // on prend un seul en considération est dont updated_date
+  // est plus recente
   keys.forEach((key) => {
     if (groupedData[key].length >= 2) {
       const sorted = groupedData[key].sort(
@@ -33,10 +36,12 @@ const handleData = (data) => {
   });
   const a = result.map((e) => ({
     ...e,
-    name: e.name.slice(0, -2).replace(' ', '_'),
+    uniqName: e.name.slice(0, -2).replace(' ', '_'),
   }));
 
-  const groupedSecond = _.groupBy(a, 'name');
+  const groupedSecond = _.groupBy(a, 'uniqName');
+  // return groupedSecond;
+
   Object.keys(groupedSecond).forEach((elt) => {
     const reactor = groupedSecond[elt];
     const plant = plants.find((plantElt) => plantElt.id === elt).name;
@@ -50,6 +55,7 @@ const handleData = (data) => {
     const planned = reactor.filter(
       (r) => r.type === 'PLANNED_MAINTENANCE',
     ).length;
+
     const power = reactor.reduce(
       (accumulator, currentValue) =>
         accumulator + currentValue.installedCapacity,
@@ -62,6 +68,87 @@ const handleData = (data) => {
       unavailabilities: {
         forced,
         planned,
+        power,
+      },
+    };
+    const productionUnit = reactor.find(
+      (r) => r.unitType === 'PRODUCTION_UNIT',
+    );
+    if (!_.isUndefined(productionUnit)) {
+      toPush.availabilities = 0;
+      toPush.unavailabilities.forced = total;
+      toPush.unavailabilities.planned = 0;
+    }
+    resultApi.push(toPush);
+  });
+
+  return resultApi;
+};
+const handleDatav2 = (data) => {
+  const resultApi = [];
+  const groupedData = _.groupBy(data, 'name');
+  const keys = Object.keys(groupedData);
+
+  // si dans un même réacteur, on a deux indisponibilité ou plus
+  // on prend un seul en considération est dont updated_date
+  // est plus recente
+  keys.forEach((key) => {
+    if (groupedData[key].length >= 2) {
+      const sorted = groupedData[key].sort(
+        (a, b) => new Date(b.updatedDate) - new Date(a.updatedDate),
+      );
+      const uniqData = _.uniqBy(sorted, 'name');
+      groupedData[key] = [...uniqData];
+    }
+  });
+
+  let result = [];
+  keys.forEach((elt) => {
+    result = [...result, ...groupedData[elt]];
+  });
+  const a = result.map((e) => ({
+    ...e,
+    uniqName: e.name.slice(0, -2).replace(' ', '_'),
+  }));
+
+  const groupedSecond = _.groupBy(a, 'uniqName');
+  // return groupedSecond;
+
+  Object.keys(groupedSecond).forEach((elt) => {
+    const reactor = groupedSecond[elt];
+    const plant = plants.find((plantElt) => plantElt.id === elt).name;
+    const total = parseInt(
+      plants.find((plantElt) => plantElt.id === elt).reactorsNumber,
+      10,
+    );
+
+    const fullyDown = reactor.filter((r) => {
+      const availableCapacity = r.values.reduce(
+        (sum, current) => current.available_capacity + sum,
+        0,
+      );
+      return availableCapacity === 0;
+    }).length;
+    const partiallyDown = reactor.filter((r) => {
+      const availableCapacity = r.values.reduce(
+        (sum, current) => current.available_capacity + sum,
+        0,
+      );
+      return availableCapacity !== 0;
+    }).length;
+
+    const power = reactor.reduce(
+      (accumulator, currentValue) =>
+        accumulator + currentValue.installedCapacity,
+      0,
+    );
+    const toPush = {
+      plant,
+      total,
+      availabilities: total - fullyDown - partiallyDown,
+      unavailabilities: {
+        fullyDown,
+        partiallyDown,
         power,
       },
     };
@@ -116,7 +203,7 @@ export const getUnavailabilities = async (input, { rteToken }) => {
       updatedDate: reactor.updated_date,
       installedCapacity: reactor.unit.installed_capacity,
     }));
-  const unavailabilities = handleData(unavailabilitiesToApi);
+  const unavailabilities = handleData(unavailabilitiesToApi, 'type');
   const forced = unavailabilities.reduce(
     (accumulator, currentValue) =>
       accumulator + currentValue.unavailabilities.forced,
@@ -148,6 +235,50 @@ export const getUnavailabilities = async (input, { rteToken }) => {
       unavailablePower,
     },
     unavailabilities,
+  };
+
+  return res;
+};
+
+export const getUnavailabilitiesV2 = async (input, { rteToken }) => {
+  const now = moment().tz('Europe/Paris');
+  const params = {
+    start_date: moment(now).startOf('day').format(),
+    end_date: moment(now).startOf('day').add(1, 'day').format(),
+    status: 'ACTIVE',
+    last_version: true,
+  };
+
+  const data = await getRessource({
+    ressource: UNAVAILABILITIES_RESSOURCE,
+    params,
+    token: rteToken,
+  });
+  const unavailabilitiesToApi = data.generation_unavailabilities
+    .filter((unavailability) => {
+      const {
+        start_date: startDate,
+        end_date: endDate,
+        production_type: productionType,
+      } = unavailability;
+      const isValiderData =
+        (productionType === 'NUCLEAR' && now.isBetween(startDate, endDate)) ||
+        now.isSame(startDate) ||
+        now.isSame(endDate);
+      return isValiderData;
+    })
+    .map((reactor) => ({
+      type: reactor.type,
+      eicCodeProducer: reactor.eic_code_producer,
+      unitType: reactor.unit.type,
+      name: reactor.unit.name,
+      updatedDate: reactor.updated_date,
+      installedCapacity: reactor.unit.installed_capacity,
+      values: reactor.values,
+    }));
+
+  const res = {
+    unavailabilities: handleData(unavailabilitiesToApi, 'capacity'),
   };
 
   return res;

@@ -2,7 +2,6 @@ const { REACT_APP_NUCLEAR_MONITOR_API } = process.env;
 
 async function doFetch(...args) {
   const res = await fetch(...args);
-  console.log(res);
   if (!res.ok) {
     throw new Error('Fetch error');
   }
@@ -11,7 +10,7 @@ async function doFetch(...args) {
 // eslint-disable-next-line import/prefer-default-export
 export async function getUnavailabilities() {
   const res = await doFetch(
-    `${REACT_APP_NUCLEAR_MONITOR_API}/unavailabilities`,
+    `${REACT_APP_NUCLEAR_MONITOR_API}/unavailabilitiesDump`,
   );
   const data = await res.json();
   return data;

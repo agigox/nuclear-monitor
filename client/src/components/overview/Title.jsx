@@ -9,6 +9,11 @@ const StyledTitle = styled.div`
   line-height: 21px;
   margin-bottom: 15px;
   color: grey;
+  @media only screen and (max-width: 767px) {
+    font-size: 16px;
+    margin-bottom: 15px;
+    line-height: 15px;
+  }
 `;
 function Title({ title }) {
   return <StyledTitle>{title}</StyledTitle>;
