@@ -8,6 +8,9 @@ const StyledDiv = styled.div`
   border-radius: 10px;
   margin-bottom: 20px;
   width: 100%;
+  @media only screen and (max-width: 767px) {
+    box-shadow: none;
+  }
 `;
 function Main() {
   return (

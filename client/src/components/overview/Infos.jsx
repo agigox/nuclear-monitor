@@ -19,7 +19,9 @@ const StyledCol = styled(Col)`
   margin-bottom: 20px;
   @media only screen and (max-width: 767px) {
     padding: 10px;
+    padding-bottom: 20px;
     border-radius: 5px;
+    box-shadow: none;
     &.dateCol {
       box-shadow: none;
       border: 0;
