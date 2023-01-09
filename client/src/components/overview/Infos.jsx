@@ -6,9 +6,9 @@ import Indicator from './Indicator';
 import Refresh from './Refresh';
 import Total from './Total';
 import Title from './Title';
-import PlannedDown from '../../images/planned_down.svg';
+import FullyDown from '../../images/fully_down.svg';
 import Up from '../../images/up.svg';
-import ForcedDown from '../../images/forced_down.svg';
+import PariallyDown from '../../images/partially_down.svg';
 
 const StyledCol = styled(Col)`
   background: #ffffff;
@@ -35,10 +35,10 @@ const StyledCol = styled(Col)`
 export default function Infos({ type }) {
   const {
     available,
-    unavailable: { planned, forced },
+    unavailable: { partiallyDown, fullyDown },
     totalNumber,
     totalPower,
-    unavailablePower,
+    totalUnavailablePower,
   } = useSelector((state) => state.unavailabilities.overview);
   if (type === 'refresh') {
     return (
@@ -58,14 +58,14 @@ export default function Infos({ type }) {
           indicator={available}
         />
         <Indicator
-          icon={PlannedDown}
+          icon={PariallyDown}
           text="Réacteurs en arrêt partiel"
-          indicator={planned}
+          indicator={partiallyDown}
         />
         <Indicator
-          icon={ForcedDown}
+          icon={FullyDown}
           text="Réacteurs en arrêt total"
-          indicator={forced}
+          indicator={fullyDown}
         />
         <Total total={totalNumber} text="Nombre total de réacteurs français" />
       </StyledCol>
@@ -76,17 +76,17 @@ export default function Infos({ type }) {
       <Title title="Informations relatives au volume d’électricité produit" />
       <Indicator
         text="Production nucléaire totale"
-        indicator={((totalPower - unavailablePower) / 1000).toFixed(1)}
+        indicator={((totalPower - totalUnavailablePower) / 1000).toFixed(1)}
         type="power"
       />
       <Indicator
         text="Indisponible"
-        indicator={(unavailablePower / 1000).toFixed(1)}
+        indicator={(totalUnavailablePower / 1000).toFixed(1)}
         type="power"
       />
       <Total
         total={`${Math.round(
-          (100 * (totalPower - unavailablePower)) / totalPower,
+          (100 * (totalPower - totalUnavailablePower)) / totalPower,
         )}%`}
         text="Part de production du parc nucléaire"
         type="power"

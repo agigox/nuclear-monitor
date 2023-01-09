@@ -18,81 +18,84 @@ body {
   position: absolute;
 }
 .fessenheim {
-  bottom: 800px;
-  left: 503px;
+  bottom: 579px;
+  left: 665px;
+  flex-direction: row-reverse;
 }
 .flamanville {
-  bottom: 701px;
-  left: 209px;
+  bottom: 712px;
+  left: 197px;
 }
 .civaux {
-  top: 270px;
-  left: 46px;
+  top: 365px;
+  left: 358px;
 }
 .penly {
-  top: 123px;
-    left: 611px;
+  top: 63px;
+  left: 373px;
 }
 .dampierre {
-  top: 231px;
-  left: 307px;
+  top: 255px;
+    left: 489px;
 }
 .golfech {
-  top: 158px;
-  left: 405px;
+  top: 710px;
+  left: 308px;
 }
 .blayais {
-  top: 690px;
-  left: 210px;
+  top: 500px;
+  left: 237px;
 }
 .cattenom {
-  bottom: 145px;
-  left: 513px;
+  bottom: 714px;
+    left: 739px;
 }
 .gravelines {
-  bottom: 73px;
-  left: 364px;
+  bottom: 854px;
+  left: 445px;
 }
 .choozb {
-  bottom: 551px;
-  left: 725px;
+  bottom: 755px;
+  left: 608px;
 }
 .cruas {
-  position: absolute;
-  bottom: 625px;
-  left: 541px;
+  bottom: 183px;
+  left: 669px;
 }
 .saintalban {
-  top: 598px;
-  left: 268px;
+  top: 593px;
+  left: 692px;
 }
 .belleville {
-  bottom: 426px;
-  left: 240px;
+  bottom: 527px;
+  left: 534px;
 }
 .nogent {
-  bottom: 344px;
-  left: 240px;
+  bottom: 646px;
+  left: 613px;
 }
 .paluel {
-  bottom: 493px;
-  left: 240px;
+  bottom: 732px;
+  left: 341px;
 }
 .saintlaurent {
-  top: 351px;
-  left: 508px
+  top: 270px;
+  left: 214px;
+  flex-direction: row-reverse
 }
 .tricastin {
-  top: 610px;
-  left: 524px;
+  top: 711px;
+  left: 706px;
 }
 .chinonb {
-  top: 531px;
-  left: 540px;
+  top: 331px;
+  left: 185px;
+  flex-direction: row-reverse;
 }
 .bugey {
-  top: 446px;
-  left: 492px;
+  top: 537px;
+  left: 593px;
+  flex-direction: row-reverse;
 }
 .iconIndispo {
   background: linear-gradient(206.04deg, #FC1C1C 21.73%, #BC372E 83.59%);

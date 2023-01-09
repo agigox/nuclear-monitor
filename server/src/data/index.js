@@ -31,3 +31,12 @@ export const reactors = readCSV(
     moxAuthorizationDate: reactorData.moxAuthorizationDate || null,
   }),
 );
+
+export const plantsUp = readCSV(
+  fs.readFileSync(path.join(__dirname, './plants.csv'), 'utf8'),
+).map((plantData) => ({
+  plant: plantData.name,
+  total: plantData.reactorsNumber,
+  availabilities: plantData.reactorsNumber,
+  unavailabilities: { fullyDown: 0, partiallyDown: 0, unavailablePower: 0 }
+}));

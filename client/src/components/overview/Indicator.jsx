@@ -53,7 +53,7 @@ const StyledIndicatorPower = styled.div`
   height: ${(props) => props.indicator * 6}px;
   display: flex;
   flex-flow: row nowrap;
-  padding: 5px;
+  padding: 1px;
   padding-left: 10px;
   align-items: center;
   min-height: 60px;

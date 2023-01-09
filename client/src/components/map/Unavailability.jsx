@@ -3,9 +3,9 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import Indicator from '../../images/location_on.svg';
-import PlannedDown from '../../images/planned_down.svg';
+import FullyDown from '../../images/fully_down.svg';
 import Up from '../../images/up.svg';
-import ForcedDown from '../../images/forced_down1.svg';
+import PartiallyDown from '../../images/partially_down.svg';
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,7 +18,10 @@ const Icon = styled.img`
 `;
 const IconIndicator = styled.div`
   padding-left: 5px;
-  padding-right: 5px;
+  padding-right: 2px;
+  & > img {
+    background: white;
+  }
 `;
 const Infos = styled.div`
   display: flex;
@@ -47,7 +50,7 @@ const CityName = styled.div`
   font-size: 11px;
 `;
 function Unavailability(props) {
-  const { className, plant, availabilities, forced, planned } = props;
+  const { className, plant, availabilities, fullyDown, partiallyDown } = props;
   return (
     <Wrapper className={className}>
       <IconIndicator>
@@ -61,12 +64,12 @@ function Unavailability(props) {
             <Icon src={Up} alt="up" />
           </InfosBloc>
           <InfosBloc>
-            <InfosNumber>{planned}</InfosNumber>
-            <Icon src={PlannedDown} alt="planned_down" />
+            <InfosNumber>{partiallyDown}</InfosNumber>
+            <Icon src={PartiallyDown} alt="planned_down" />
           </InfosBloc>
           <InfosBloc>
-            <InfosNumber>{forced}</InfosNumber>
-            <Icon src={ForcedDown} alt="forced_down" />
+            <InfosNumber>{fullyDown}</InfosNumber>
+            <Icon src={FullyDown} alt="forced_down" />
           </InfosBloc>
         </Infos>
       </InfosReactor>

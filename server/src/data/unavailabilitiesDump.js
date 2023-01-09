@@ -2,12 +2,12 @@ const unavailabilitiesDump = {
   overview: {
     available: 39,
     unavailable: {
-      forced: 1,
-      planned: 18,
+      fullyDown: 1,
+      partiallyDown: 18,
     },
     totalNumber: 58,
     totalPower: 63010,
-    unavailablePower: 22415,
+    totalUnavailablePower: 22415,
   },
   unavailabilities: [
     {
@@ -15,8 +15,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 0,
       unavailabilities: {
-        forced: 0,
-        planned: 2,
+        fullyDown: 0,
+        partiallyDown: 2,
       },
     },
     {
@@ -24,8 +24,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 0,
       unavailabilities: {
-        forced: 1,
-        planned: 1,
+        fullyDown: 1,
+        partiallyDown: 1,
       },
     },
     {
@@ -33,8 +33,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 0,
       unavailabilities: {
-        forced: 0,
-        planned: 2,
+        fullyDown: 0,
+        partiallyDown: 2,
       },
     },
     {
@@ -42,8 +42,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 0,
       unavailabilities: {
-        forced: 0,
-        planned: 2,
+        fullyDown: 0,
+        partiallyDown: 2,
       },
     },
     {
@@ -51,8 +51,8 @@ const unavailabilitiesDump = {
       total: 4,
       availabilities: 3,
       unavailabilities: {
-        forced: 0,
-        planned: 1,
+        fullyDown: 0,
+        partiallyDown: 1,
       },
     },
     {
@@ -60,8 +60,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 1,
       unavailabilities: {
-        forced: 0,
-        planned: 1,
+        fullyDown: 0,
+        partiallyDown: 1,
       },
     },
     {
@@ -69,8 +69,8 @@ const unavailabilitiesDump = {
       total: 4,
       availabilities: 1,
       unavailabilities: {
-        forced: 0,
-        planned: 3,
+        fullyDown: 0,
+        partiallyDown: 3,
       },
     },
     {
@@ -78,8 +78,8 @@ const unavailabilitiesDump = {
       total: 4,
       availabilities: 3,
       unavailabilities: {
-        forced: 0,
-        planned: 1,
+        fullyDown: 0,
+        partiallyDown: 1,
       },
     },
     {
@@ -87,8 +87,8 @@ const unavailabilitiesDump = {
       total: 6,
       availabilities: 4,
       unavailabilities: {
-        forced: 1,
-        planned: 1,
+        fullyDown: 1,
+        partiallyDown: 1,
       },
     },
     {
@@ -96,8 +96,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 0,
       unavailabilities: {
-        forced: 0,
-        planned: 2,
+        fullyDown: 0,
+        partiallyDown: 2,
       },
     },
     {
@@ -105,8 +105,8 @@ const unavailabilitiesDump = {
       total: 4,
       availabilities: 3,
       unavailabilities: {
-        forced: 1,
-        planned: 0,
+        fullyDown: 1,
+        partiallyDown: 0,
       },
     },
     {
@@ -114,8 +114,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 1,
       unavailabilities: {
-        forced: 0,
-        planned: 1,
+        fullyDown: 0,
+        partiallyDown: 1,
       },
     },
     {
@@ -123,8 +123,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 1,
       unavailabilities: {
-        forced: 0,
-        planned: 1,
+        fullyDown: 0,
+        partiallyDown: 1,
       },
     },
     {
@@ -132,8 +132,8 @@ const unavailabilitiesDump = {
       total: 4,
       availabilities: 3,
       unavailabilities: {
-        forced: 0,
-        planned: 1,
+        fullyDown: 0,
+        partiallyDown: 1,
       },
     },
     {
@@ -141,8 +141,8 @@ const unavailabilitiesDump = {
       total: 4,
       availabilities: 3,
       unavailabilities: {
-        forced: 0,
-        planned: 1,
+        fullyDown: 0,
+        partiallyDown: 1,
       },
     },
     {
@@ -150,8 +150,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 1,
       unavailabilities: {
-        forced: 0,
-        planned: 1,
+        fullyDown: 0,
+        partiallyDown: 1,
       },
     },
     {
@@ -159,8 +159,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 1,
       unavailabilities: {
-        forced: 0,
-        planned: 1,
+        fullyDown: 0,
+        partiallyDown: 1,
       },
     },
     {
@@ -168,8 +168,8 @@ const unavailabilitiesDump = {
       total: 4,
       availabilities: 1,
       unavailabilities: {
-        forced: 2,
-        planned: 1,
+        fullyDown: 2,
+        partiallyDown: 1,
       },
     },
     {
@@ -177,8 +177,8 @@ const unavailabilitiesDump = {
       total: 2,
       availabilities: 1,
       unavailabilities: {
-        forced: 0,
-        planned: 1,
+        fullyDown: 0,
+        partiallyDown: 1,
       },
     },
   ],

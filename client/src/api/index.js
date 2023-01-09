@@ -10,7 +10,7 @@ async function doFetch(...args) {
 // eslint-disable-next-line import/prefer-default-export
 export async function getUnavailabilities() {
   const res = await doFetch(
-    `${REACT_APP_NUCLEAR_MONITOR_API}/unavailabilitiesDump`,
+    `${REACT_APP_NUCLEAR_MONITOR_API}/unavailabilitiesv2`,
   );
   const data = await res.json();
   return data;

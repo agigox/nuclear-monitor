@@ -6,6 +6,7 @@ import React from 'react';
 // import styled from 'styled-components';
 import styled from '@emotion/styled';
 import Unavailability from './Unavailability';
+// import SVGMap from '../../images/france.svg';
 import SVGMap from '../../images/map.svg';
 
 const Wrapper = styled.div`

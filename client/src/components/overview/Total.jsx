@@ -9,14 +9,17 @@ const StyledTotal = styled.div`
   font-style: italic;
   flex-direction: row-reverse;
   .sum {
-    font-size: 45px;
+    position: relative;
+    top: 6px;
+    font-size: 42px;
     font-weight: 100;
     line-height: 48px;
   }
   .total {
-    line-height: 28px;
-    font-size: 16px;
+    line-height: 18px;
+    font-size: 14px;
     padding-right: 15px;
+    color: grey;
   }
   @media only screen and (max-width: 767px) {
     height: 60px;
