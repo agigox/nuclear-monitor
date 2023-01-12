@@ -48,6 +48,7 @@ const Wrapper = styled.div`
     position: relative;
     top: 5px;
     font-style: italic;
+    color
   }
   .div4 {
     display: flex;
@@ -58,9 +59,14 @@ const Wrapper = styled.div`
 `;
 function Slice(props) {
   const {
-    type,
     availability: { name, installedCapacity, availableCapacity },
   } = props;
+  let type = 'Up';
+  if (availableCapacity === 0) {
+    type = 'FullyDown';
+  } else if (availableCapacity < installedCapacity) {
+    type = 'PartiallyDown';
+  }
   return (
     <Wrapper>
       <div className="pmax">Pmax {installedCapacity} MW</div>

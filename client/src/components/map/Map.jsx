@@ -10,17 +10,18 @@ import UnavailabilitySlices from './UnavailabilitySlices';
 import SVGMap from '../../images/map.svg';
 
 const Wrapper = styled.div`
-  padding: 20px;
   margin: 20px auto;
   position: relative;
   width: 975px;
   &.map {
+    padding: 20px;
     height: 880px;
   }
   &.slices {
+    padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 7px;
+    gap: 5px;
     justify-content: flex-start;
   }
   & > img {

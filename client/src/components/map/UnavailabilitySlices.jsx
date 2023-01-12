@@ -2,13 +2,14 @@
 /* eslint-disable react/destructuring-assignment */
 import styled from '@emotion/styled';
 import React from 'react';
+import _ from 'lodash';
 import Slice from './Slice';
 
 const Wrapper = styled.div`
   background: #f4f4f4;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
-  width: 110px;
+  width: 100px;
   height: max-content;
   .plantName {
     text-align: center;
@@ -26,31 +27,16 @@ const Wrapper = styled.div`
 `;
 function UnavailabilitySlices(props) {
   const { plant, availabilities, fullyDown, partiallyDown } = props;
+
   return (
     <Wrapper>
       <div className="plantName">{plant.replace('Saint', 'St')}</div>
       <div className="central">
-        {availabilities.map((availability) => (
-          <Slice
-            key={availability.name}
-            availability={availability}
-            type="Up"
-          />
-        ))}
-
-        {fullyDown.map((availability) => (
-          <Slice
-            key={availability.name}
-            availability={availability}
-            type="FullyDown"
-          />
-        ))}
-        {partiallyDown.map((availability) => (
-          <Slice
-            key={availability.name}
-            availability={availability}
-            type="PartiallyDown"
-          />
+        {_.sortBy(
+          [...availabilities, ...fullyDown, ...partiallyDown],
+          'name',
+        ).map((availability) => (
+          <Slice key={availability.name} availability={availability} />
         ))}
       </div>
     </Wrapper>
