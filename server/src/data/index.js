@@ -29,14 +29,23 @@ export const reactors = readCSV(
     netPower_MW: Number(reactorData.netPower_MW),
     coolingTowerCount: Number(reactorData.coolingTowerCount),
     moxAuthorizationDate: reactorData.moxAuthorizationDate || null,
+    plantId: reactorData.plantId
   }),
 );
 
 export const plantsUp = readCSV(
   fs.readFileSync(path.join(__dirname, './plants.csv'), 'utf8'),
-).map((plantData) => ({
-  plant: plantData.name,
-  total: plantData.reactorsNumber,
-  availabilities: plantData.reactorsNumber,
-  unavailabilities: { fullyDown: 0, partiallyDown: 0, unavailablePower: 0 }
-}));
+).map((plantData) => {
+  const available = reactors.filter(reactor => reactor.plantId === plantData.id).map((fa => ({
+    name: fa.name,
+    installedCapacity: Number(fa.netPower_MW),
+    availableCapacity: Number(fa.netPower_MW),
+    unavailableCapacity: 0
+  })))
+  return ({
+    plant: plantData.name,
+    total: available,
+    availabilities: available,
+    unavailabilities: { fullyDown: [], partiallyDown: [], unavailablePower: [] }
+  })
+});

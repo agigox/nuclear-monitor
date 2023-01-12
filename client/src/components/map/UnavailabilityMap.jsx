@@ -49,7 +49,7 @@ const CityName = styled.div`
   line-height: 17px;
   font-size: 11px;
 `;
-function Unavailability(props) {
+function UnavailabilityMap(props) {
   const { className, plant, availabilities, fullyDown, partiallyDown } = props;
   return (
     <Wrapper className={className}>
@@ -60,15 +60,15 @@ function Unavailability(props) {
         <CityName>{plant}</CityName>
         <Infos>
           <InfosBloc>
-            <InfosNumber>{availabilities}</InfosNumber>
+            <InfosNumber>{availabilities.length}</InfosNumber>
             <Icon src={Up} alt="up" />
           </InfosBloc>
           <InfosBloc>
-            <InfosNumber>{partiallyDown}</InfosNumber>
+            <InfosNumber>{partiallyDown.length}</InfosNumber>
             <Icon src={PartiallyDown} alt="planned_down" />
           </InfosBloc>
           <InfosBloc>
-            <InfosNumber>{fullyDown}</InfosNumber>
+            <InfosNumber>{fullyDown.length}</InfosNumber>
             <Icon src={FullyDown} alt="forced_down" />
           </InfosBloc>
         </Infos>
@@ -77,4 +77,4 @@ function Unavailability(props) {
   );
 }
 
-export default Unavailability;
+export default UnavailabilityMap;

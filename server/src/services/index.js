@@ -118,43 +118,79 @@ const handleDatav2 = (data) => {
     .forEach((elt) => {
       const central = groupedSecond[elt];
       const plant = plants.find((plantElt) => plantElt.id === elt).name;
-      const total = parseInt(
-        plants.find((plantElt) => plantElt.id === elt).reactorsNumber,
-        10,
-      );
+      const totalArray = reactors
+        .filter((reactor) => reactor.plantId === elt)
+        .map((reactorData) => ({
+          name: reactorData.name,
+          installedCapacity: reactorData.netPower_MW,
+          availableCapacity: reactorData.netPower_MW,
+          unavailableCapacity: 0,
+        }));
 
-      const fullyDown = central.filter((r) => {
-        const availableCapacity = r.values.reduce(
-          (sum, current) => current.available_capacity + sum,
-          0,
-        );
-        return availableCapacity === 0;
-      }).length;
-      const partiallyDown = central.filter((r) => {
-        const availableCapacity = r.values.reduce(
-          (sum, current) => current.available_capacity + sum,
-          0,
-        );
-        return availableCapacity !== 0;
-      }).length;
+      const fullyDown = central
+        .filter((r) => {
+          const availableCapacity = r.values.reduce(
+            (sum, current) => current.available_capacity + sum,
+            0,
+          );
+          return availableCapacity === 0;
+        })
+        .map((fd) => ({
+          name: fd.name,
+          startDate: fd.startDate,
+          endDate: fd.endDate,
+          reason: fd.reason,
+          updatedDate: fd.updatedDate,
+          installedCapacity: fd.installedCapacity,
+          availableCapacity: 0,
+          unavailableCapacity: fd.installedCapacity,
+        }));
+      const partiallyDown = central
+        .filter((r) => {
+          const availableCapacity = r.values.reduce(
+            (sum, current) => current.available_capacity + sum,
+            0,
+          );
+          return availableCapacity !== 0;
+        })
+        .map((pd) => {
+          const availableCapacity = pd.values.reduce(
+            (sum, current) => current.available_capacity + sum,
+            0,
+          );
+          return {
+            name: pd.name,
+            startDate: pd.startDate,
+            endDate: pd.endDate,
+            reason: pd.reason,
+            updatedDate: pd.updatedDate,
+            installedCapacity: pd.installedCapacity,
+            availableCapacity,
+            unavailableCapacity: pd.installedCapacity - availableCapacity,
+          };
+        });
+      const downArray = [...fullyDown, ...partiallyDown];
 
       const unavailablePower = central.reduce((accumulator, currentValue) => {
         const rsl = currentValue.values.reduce(
-          (accum, curreVal) => accum + curreVal.unavailable_capacity,
+          (accum, curreVal) => accum + Number(curreVal.unavailable_capacity),
           0,
         );
         return accumulator + rsl;
       }, 0);
       const toPush = {
         plant,
-        total,
-        availabilities: total - fullyDown - partiallyDown,
+        total: totalArray,
+        availabilities: totalArray.filter(
+          (val) => !downArray.some((e) => e.name === val.name),
+        ),
         unavailabilities: {
           fullyDown,
           partiallyDown,
           unavailablePower,
         },
       };
+      /*
       const productionUnit = central.find(
         (r) => r.unitType === 'PRODUCTION_UNIT',
       );
@@ -163,10 +199,11 @@ const handleDatav2 = (data) => {
         toPush.unavailabilities.forced = total;
         toPush.unavailabilities.planned = 0;
       }
+      */
 
       resultApi.push(toPush);
     });
-
+  // console.log(plantsUp);
   plantsUp.forEach((plantUp) => {
     const isPlantUp = resultApi.find(
       (plantApi) => plantApi.plant === plantUp.plant,
@@ -176,7 +213,7 @@ const handleDatav2 = (data) => {
     }
   });
 
-  return resultApi;
+  return _.sortBy(resultApi, 'plant');
 };
 // eslint-disable-next-line import/prefer-default-export
 export const getUnavailabilities = async (input, { rteToken }) => {
@@ -195,8 +232,8 @@ export const getUnavailabilities = async (input, { rteToken }) => {
     params,
     token: rteToken,
   });
-  const unavailabilitiesToApi = data.generation_unavailabilities
-    .filter((unavailability) => {
+  const unavailabilitiesToApi = data.generation_unavailabilities.filter(
+    (unavailability) => {
       const {
         start_date: startDate,
         end_date: endDate,
@@ -207,7 +244,9 @@ export const getUnavailabilities = async (input, { rteToken }) => {
         now.isSame(startDate) ||
         now.isSame(endDate);
       return isValiderData;
-    })
+    },
+  );
+  /*
     .map((reactor) => ({
       type: reactor.type,
       eicCodeProducer: reactor.eic_code_producer,
@@ -217,6 +256,7 @@ export const getUnavailabilities = async (input, { rteToken }) => {
       installedCapacity: reactor.unit.installed_capacity,
       values: reactor.values,
     }));
+    
   const unavailabilities = handleData(unavailabilitiesToApi, 'type');
   const forced = unavailabilities.reduce(
     (accumulator, currentValue) =>
@@ -237,7 +277,9 @@ export const getUnavailabilities = async (input, { rteToken }) => {
       accumulator + currentValue.unavailabilities.power,
     0,
   );
+  */
   const res = {
+    /*
     overview: {
       available: reactors.length - forced - planned,
       unavailable: {
@@ -248,7 +290,8 @@ export const getUnavailabilities = async (input, { rteToken }) => {
       totalPower,
       unavailablePower,
     },
-    unavailabilities,
+    */
+    unavailabilities: unavailabilitiesToApi,
   };
 
   return res;
@@ -282,9 +325,9 @@ export const getUnavailabilitiesV2 = async (input, { rteToken }) => {
       return isValiderData;
     })
     .map((reactor) => ({
-      type: reactor.type,
-      eicCodeProducer: reactor.eic_code_producer,
-      unitType: reactor.unit.type,
+      startDate: reactor.start_date,
+      endDate: reactor.end_date,
+      reason: reactor.reason,
       name: reactor.unit.name,
       updatedDate: reactor.updated_date,
       installedCapacity: reactor.unit.installed_capacity,
@@ -293,12 +336,12 @@ export const getUnavailabilitiesV2 = async (input, { rteToken }) => {
   const unavailabilities = handleDatav2(unavailabilitiesToApi);
   const fullyDown = unavailabilities.reduce(
     (accumulator, currentValue) =>
-      accumulator + currentValue.unavailabilities.fullyDown,
+      accumulator + currentValue.unavailabilities.fullyDown.length,
     0,
   );
   const partiallyDown = unavailabilities.reduce(
     (accumulator, currentValue) =>
-      accumulator + currentValue.unavailabilities.partiallyDown,
+      accumulator + currentValue.unavailabilities.partiallyDown.length,
     0,
   );
   const totalPower = reactors.reduce(
@@ -307,7 +350,7 @@ export const getUnavailabilitiesV2 = async (input, { rteToken }) => {
   );
   const totalUnavailablePower = unavailabilities.reduce(
     (accumulator, currentValue) =>
-      accumulator + currentValue.unavailabilities.unavailablePower,
+      accumulator + Number(currentValue.unavailabilities.unavailablePower),
     0,
   );
   const res = {

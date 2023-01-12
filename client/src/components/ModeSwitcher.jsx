@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import styled from '@emotion/styled';
 import appActions from '../redux/actions';
-// import Map1 from './Map1';
 
 // eslint-disable-next-line react/prop-types
 
