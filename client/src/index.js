@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './index.css';
+import './index.scss';
 import './utils/svg-icons';
 import * as ReactDOMClient from 'react-dom/client';
 import App from './App';
