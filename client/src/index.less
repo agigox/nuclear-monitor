@@ -1,19 +1,39 @@
-@import '~antd/es/style/themes/default.less';
+
+@font-face {
+  font-family: "InterThin";   /*Can be any text*/
+  src: local("Inter-Thin"),
+    url("./fonts/Inter-Thin.ttf") format("truetype");
+}
+@font-face {
+  font-family: "InterRegular";   /*Can be any text*/
+  src: local("Inter-Regular"),
+    url("./fonts/Inter-Regular.ttf") format("truetype");
+}
+@divider-border-color: #CBCBCB;
+@modal-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+@modal-shadow-card: 0px 4px 20px rgba(44, 22, 132, 0.2);
+@font-family-nunito: 'Nunito Sans';
+@font-family-inter-thin: 'InterThin';
+@font-family-inter-regular: 'InterRegular';
+@background-card: #ffffff;
+@border-color-card: #cfcfcf;
+@border-radius-card: 10px;
+@card-title-color: #000000;
 body {
+  font-family: @font-family-inter-regular;
   padding: 20px;
   margin: 10px;
   height: 100%;
   
+}
+.ant-col {
+  font-family: @font-family-inter-regular;
 }
 .App {
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
 }
-
-/*My code*/
-$divider-border-color: #CBCBCB;
-
 .mark-city {
   position: absolute;
 }
@@ -97,20 +117,35 @@ $divider-border-color: #CBCBCB;
   left: 593px;
   flex-direction: row-reverse;
 }
+
+/*My code*/
+
 .iconIndispo {
   background: linear-gradient(206.04deg, #FC1C1C 21.73%, #BC372E 83.59%);
 }
 .iconDispo {
   background: linear-gradient(182.12deg, #1CFC4D 7.61%, #25C448 94.18%);
 }
-.modal .ant-row {
-  border: 1px solid
+.card-row {
+  background: @background-card;
+  border: 1px solid @border-color-card;
+  box-shadow: @modal-shadow-card;
+  border-radius: @border-radius-card;
+  padding: 28px;
+  flex-direction: column;
 }
-.modal .ant-col {
-  border: 1px solid red;
+.card-title {
+  font-family: @font-family-inter-thin;
+  font-style: italic;
+  font-size: 12px;
+  line-height: 15px;
+  color: @card-title-color;
 }
-.ant-divider-vertical {
-  border-color: $divider-border-color;
-  height: calc(100% - 10px);
-  margin-top: 5px;
+.card-childrens {
+  width: 274px;
+}
+.card-child {
+  height: 58px;
+  width: 274px;
+  border: 1px solid;
 }

@@ -12,7 +12,8 @@ import DetailsItem from './DetailsItem';
 const CustomRow = styled(Row)`
   padding: 20px;
   background: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   border-radius: 8px;
   position: fixed;
   right: 21px;
@@ -25,7 +26,7 @@ const CustomRow = styled(Row)`
     color: #000000;
   }
   .date {
-    ont-family: 'Nunito Sans';
+    font-family: @font-family-nunito;
     font-style: italic;
     font-weight: 400;
     font-size: 14px;
@@ -35,6 +36,11 @@ const CustomRow = styled(Row)`
   }
   .close {
     text-align: right;
+  }
+  .divider {
+    border-color: @divider-border-color;
+    height: calc(100% - 10px);
+    margin-top: 5px;
   }
   @media only screen and (min-width: 992px) {
     width: calc(75% - 42px);
@@ -64,17 +70,17 @@ function Details() {
     dispatch(appActions.crossActions.resetCurrent());
   };
   return (
-    <CustomRow className="modal">
+    <CustomRow className="modal" gutter={[0, 25]}>
       <Col span={24}>
         <Row align="top">
-          <Col className="title" flex="170px">
+          <Col className="title" flex="210px">
             {name}
           </Col>
           <Col className="date" flex="auto">
             Mise à jour le{' '}
             {`${moment(updatedDate).format('MM/DD/YYYY HH:mm:ss')} (CET)`}
           </Col>
-          <Col className="close" flex="30px">
+          <Col className="close" flex="45px">
             <img src={Close} alt="close" onClick={resetCurrent} />
           </Col>
         </Row>
@@ -84,7 +90,7 @@ function Details() {
           <Col flex="1 1 25%">
             <Row wrap={false}>
               <Col>
-                <Row gutter={[0, 48]}>
+                <Row gutter={[0, 32]}>
                   <Col span={24}>
                     <DetailsItem
                       text="Début de l’indisponibilité"
@@ -107,23 +113,23 @@ function Details() {
           <Col flex="1 1 25%">
             <Row wrap={false}>
               <Col>
-                <Row gutter={[0, 48]}>
+                <Row gutter={[0, 32]}>
                   <Col span={24}>
                     <DetailsItem
                       text="Capacité restant disponible"
-                      value={availableCapacity}
+                      value={`${availableCapacity} MW`}
                     />
                   </Col>
                   <Col span={24}>
                     <DetailsItem
                       text="Capacité non disponible"
-                      value={unavailableCapacity}
+                      value={`${unavailableCapacity} MW`}
                     />
                   </Col>
                 </Row>
               </Col>
               <Col>
-                <Divider type="vertical" />
+                <Divider className="divider" type="vertical" />
               </Col>
             </Row>
           </Col>
