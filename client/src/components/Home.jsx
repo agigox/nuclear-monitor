@@ -2,23 +2,40 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
-import Main from './Main';
+import styled from '@emotion/styled';
 import Error from './Error';
-import Overview from './overview/Overview';
 import ModeSwitcher from './ModeSwitcher';
+import Infos from './overview/Infos';
+import Details from './Details';
 
+const StyledRow = styled(Row)`
+  column-gap: 27px;
+  & > .overview-col {
+    flex-basis: 353px;
+  }
+  @media only screen and (max-width: 767px) {
+    flex-wrap: wrap;
+    flex-direction: column;
+    row-gap: 10px;
+    & > .overview-col {
+      flex-basis: 100%;
+    }
+  }
+`;
 function Home() {
   const error = useSelector((state) => state.unavailabilities.error);
   const success = (
-    <Row gutter={{ xs: 0, sm: 0, md: 20, lg: 20 }}>
-      <Col lg={6} md={12} sm={24} xs={24}>
-        <Overview />
+    <StyledRow>
+      <Col className="overview-col">
+        <Infos type="refresh" />
+        <Infos type="reactor" />
+        <Infos type="power" />
       </Col>
-      <Col lg={18} md={12} sm={24} xs={24}>
+      <Col>
         <ModeSwitcher />
-        <Main />
+        <Details />
       </Col>
-    </Row>
+    </StyledRow>
   );
   return <>{error ? <Error error={error} /> : success}</>;
 }
