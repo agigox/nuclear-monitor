@@ -25,7 +25,7 @@ const Wrapper = styled.div`
     margin-bottom: 10px;
   }
 `;
-function UnavailabilitySlices(props) {
+function UnavailabilitySlice(props) {
   const { plant, availabilities, fullyDown, partiallyDown } = props;
 
   return (
@@ -43,4 +43,4 @@ function UnavailabilitySlices(props) {
   );
 }
 
-export default UnavailabilitySlices;
+export default UnavailabilitySlice;

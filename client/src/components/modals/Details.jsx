@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Close from '../../images/close.svg';
 import appActions from '../../redux/actions';
 import DetailsItem from './DetailsItem';
+// eslint-disable-next-line no-unused-vars
 import ReactorSlider from './ReactorSlider';
 
 const CustomRow = styled(Row)`
@@ -18,7 +19,7 @@ const CustomRow = styled(Row)`
   border-radius: 8px;
   position: fixed;
   right: 62px;
-  bottom: 53px;
+  bottom: 10px;
   z-index: 999;
   .title {
     font-size: 24px;
@@ -80,9 +81,6 @@ function Details() {
             {name}
           </Col>
           <Col />
-          <Col flex="auto">
-            <ReactorSlider name={name} />
-          </Col>
           <Col className="date" flex="auto">
             Mise à jour le{' '}
             {`${moment(updatedDate).format('MM/DD/YYYY HH:mm:ss')} (CET)`}

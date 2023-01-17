@@ -3,11 +3,11 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { Col, Row } from 'antd';
-import Marker from '../../images/location_on.svg';
+import Location from '../../images/location_on.svg';
 import FullyDown from '../../images/fully_down.svg';
 import Up from '../../images/up.svg';
 import PartiallyDown from '../../images/partially_down.svg';
-import UnavailabilityMarker1 from './UnavailabilityMarker1';
+import Marker from './Marker';
 
 const StyledRow = styled(Row)`
   flex-direction: column;
@@ -39,12 +39,12 @@ const StyledRow = styled(Row)`
     width: 121px;
   }
 `;
-function UnavailabilityMarkers(props) {
+function UnavailabilityMarker(props) {
   const { className, plant, availabilities, fullyDown, partiallyDown } = props;
   return (
     <StyledRow className={`${className}`}>
       <Col className="marker-col" flex="1 1 42px">
-        <img src={Marker} alt="indicator" />
+        <img src={Location} alt="indicator" />
       </Col>
       <Col>
         <Row className="reactor-data">
@@ -56,22 +56,13 @@ function UnavailabilityMarkers(props) {
               gap={[0, 7]}
             >
               <Col>
-                <UnavailabilityMarker1
-                  number={availabilities.length}
-                  icon={Up}
-                />
+                <Marker number={availabilities.length} icon={Up} />
               </Col>
               <Col>
-                <UnavailabilityMarker1
-                  number={partiallyDown.length}
-                  icon={PartiallyDown}
-                />
+                <Marker number={partiallyDown.length} icon={PartiallyDown} />
               </Col>
               <Col>
-                <UnavailabilityMarker1
-                  number={fullyDown.length}
-                  icon={FullyDown}
-                />
+                <Marker number={fullyDown.length} icon={FullyDown} />
               </Col>
             </Row>
           </Col>
@@ -81,4 +72,4 @@ function UnavailabilityMarkers(props) {
   );
 }
 
-export default UnavailabilityMarkers;
+export default UnavailabilityMarker;

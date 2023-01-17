@@ -16,7 +16,7 @@ const CustomRow = styled(Row)`
   }
 `;
 
-function UnavailabilityMarker1({ number, icon }) {
+function Marker({ number, icon }) {
   return (
     <CustomRow align="bottom" justify="space-around">
       <Col className="marker-number">{number}</Col>
@@ -27,4 +27,4 @@ function UnavailabilityMarker1({ number, icon }) {
   );
 }
 
-export default UnavailabilityMarker1;
+export default Marker;

@@ -6,8 +6,8 @@ import React from 'react';
 // import styled from 'styled-components';
 import styled from '@emotion/styled';
 import { Row } from 'antd';
-import UnavailabilityMarkers from './UnavailabilityMarkers';
-import UnavailabilitySlices from './UnavailabilitySlices';
+import UnavailabilityMarker from './UnavailabilityMarker';
+import UnavailabilitySlice from './UnavailabilitySlice';
 import SVGMap from '../../images/map.svg';
 
 const StyledRow = styled(Row)`
@@ -54,7 +54,7 @@ function Unavailabilities() {
             unavailabilities: { fullyDown, partiallyDown },
           } = unavailability;
           return mode ? (
-            <UnavailabilityMarkers
+            <UnavailabilityMarker
               key={plant}
               className={`${plant.toLowerCase().replace(/ |-/g, '')} mark-city`}
               plant={plant}
@@ -63,7 +63,7 @@ function Unavailabilities() {
               partiallyDown={partiallyDown}
             />
           ) : (
-            <UnavailabilitySlices
+            <UnavailabilitySlice
               key={plant}
               plant={plant}
               availabilities={availabilities}
