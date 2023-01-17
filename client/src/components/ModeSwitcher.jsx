@@ -1,46 +1,57 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'antd';
+import { Button, Col, Row } from 'antd';
 import styled from '@emotion/styled';
 import appActions from '../redux/actions';
 
 // eslint-disable-next-line react/prop-types
 
-const StyledDiv = styled.div`
-  text-align: right;
-  background: unset;
-  padding: 0 0 8px;
+const StyledRow = styled(Row)`
   @media only screen and (max-width: 767px) {
-    padding: 0 0 20px;
+    flex-directipon: column;
+    row-gap: 10px;
     button {
       width: 50%;
+    }
+    .switcher-button-col {
+      flex-basis: 50%;
     }
   }
 `;
 
 function ModeSwitcher() {
   const dispatch = useDispatch();
+  const mode = useSelector((state) => state.cross.mode);
   const switchMode = (e) => {
-    const mode = e.target.name === 'map';
-    dispatch(appActions.crossActions.changeMode(mode));
+    const map = e.target.name === 'map';
+    dispatch(appActions.crossActions.changeMode(map));
   };
   return (
-    <StyledDiv>
-      <Button
-        name="map"
-        onClick={switchMode}
-        type={useSelector((state) => state.cross.mode) ? 'primary' : 'default'}
-      >
-        Carte
-      </Button>
-      <Button
-        onClick={switchMode}
-        type={useSelector((state) => state.cross.mode) ? 'default' : 'primary'}
-      >
-        Tranches
-      </Button>
-    </StyledDiv>
+    <StyledRow align="middle" justify="space-between">
+      <Col className="title-main-col">
+        {`${mode ? 'Représentation du parc nucléaire classé par site' : ''}`}
+      </Col>
+
+      <Col>
+        <Row>
+          <Col className="switcher-button-col">
+            <Button
+              name="map"
+              onClick={switchMode}
+              type={mode ? 'primary' : 'default'}
+            >
+              Carte
+            </Button>
+          </Col>
+          <Col className="switcher-button-col">
+            <Button onClick={switchMode} type={mode ? 'default' : 'primary'}>
+              Tranches
+            </Button>
+          </Col>
+        </Row>
+      </Col>
+    </StyledRow>
   );
 }
 

@@ -33,19 +33,6 @@ export function PartiallyDown({ fill, width, height }) {
     </svg>
   );
 }
-export function Up({ fill, width, height }) {
-  return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect width="32" height="32" rx="5" fill={fill} />
-    </svg>
-  );
-}
 export function Warning({ fill, width, height }) {
   return (
     <svg
@@ -57,6 +44,22 @@ export function Warning({ fill, width, height }) {
     >
       <path
         d="M0.0615234 21.1546L11.735 0.991211L23.4086 21.1546H0.0615234ZM3.72276 19.0321H19.7473L11.735 5.23613L3.72276 19.0321ZM11.735 17.9709C12.0357 17.9709 12.2879 17.869 12.4917 17.6652C12.6947 17.4622 12.7963 17.2103 12.7963 16.9096C12.7963 16.609 12.6947 16.3571 12.4917 16.154C12.2879 15.9503 12.0357 15.8484 11.735 15.8484C11.4344 15.8484 11.1825 15.9503 10.9794 16.154C10.7757 16.3571 10.6738 16.609 10.6738 16.9096C10.6738 17.2103 10.7757 17.4622 10.9794 17.6652C11.1825 17.869 11.4344 17.9709 11.735 17.9709ZM10.6738 14.7872H12.7963V9.48104H10.6738V14.7872Z"
+        fill={fill}
+      />
+    </svg>
+  );
+}
+export function Up({ fill, width, height }) {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 10 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M3.33343 15.5L4.16676 9.66667H1.2501C1.04176 9.66667 0.913151 9.61111 0.864263 9.5C0.815929 9.38889 0.847318 9.23611 0.958429 9.04167L5.83343 0.5H6.66676L5.83343 6.33333H8.7501C8.95843 6.33333 9.08676 6.38889 9.1351 6.5C9.18398 6.61111 9.15287 6.76389 9.04176 6.95833L4.16676 15.5H3.33343Z"
         fill={fill}
       />
     </svg>

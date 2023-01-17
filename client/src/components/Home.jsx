@@ -6,12 +6,16 @@ import styled from '@emotion/styled';
 import Error from './Error';
 import ModeSwitcher from './ModeSwitcher';
 import Infos from './overview/Infos';
-import Details from './Details';
+import Unavailabilities from './unavailabilities/Unavailabilities';
 
 const StyledRow = styled(Row)`
   column-gap: 27px;
+  flex-wrap: nowrap;
   & > .overview-col {
     flex-basis: 353px;
+  }
+  .main-row {
+    flex-direction: column;
   }
   @media only screen and (max-width: 767px) {
     flex-wrap: wrap;
@@ -32,8 +36,14 @@ function Home() {
         <Infos type="power" />
       </Col>
       <Col>
-        <ModeSwitcher />
-        <Details />
+        <Row className="main-row">
+          <Col span={24}>
+            <ModeSwitcher />
+          </Col>
+          <Col span={24}>
+            <Unavailabilities />
+          </Col>
+        </Row>
       </Col>
     </StyledRow>
   );

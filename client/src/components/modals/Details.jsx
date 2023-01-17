@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Close from '../../images/close.svg';
 import appActions from '../../redux/actions';
 import DetailsItem from './DetailsItem';
+import ReactorSlider from './ReactorSlider';
 
 const CustomRow = styled(Row)`
   padding: 20px;
@@ -16,10 +17,9 @@ const CustomRow = styled(Row)`
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   border-radius: 8px;
   position: fixed;
-  right: 21px;
-  bottom: 0;
+  right: 62px;
+  bottom: 53px;
   z-index: 999;
-  width: calc(50% - 42px);
   .title {
     font-size: 24px;
     line-height: 32px;
@@ -36,6 +36,9 @@ const CustomRow = styled(Row)`
   }
   .close {
     text-align: right;
+    img {
+      cursor: pointer;
+    }
   }
   .divider {
     border-color: @divider-border-color;
@@ -43,10 +46,10 @@ const CustomRow = styled(Row)`
     margin-top: 5px;
   }
   @media only screen and (min-width: 992px) {
-    width: calc(75% - 42px);
+    width: 958px;
   }
   @media only screen and (max-width: 767px) {
-    width: calc(100% - 42px);
+    width: calc(100% - 129px);
   }
 `;
 
@@ -75,6 +78,10 @@ function Details() {
         <Row align="top">
           <Col className="title" flex="210px">
             {name}
+          </Col>
+          <Col />
+          <Col flex="auto">
+            <ReactorSlider name={name} />
           </Col>
           <Col className="date" flex="auto">
             Mise à jour le{' '}

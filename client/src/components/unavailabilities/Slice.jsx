@@ -5,7 +5,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import appActions from '../../redux/actions';
 import Details from '../modals/Details';
-import { FullyDown, Warning } from '../SVGs';
+import { FullyDown, Warning, Up } from '../SVGs';
 
 const Wrapper = styled.div`
   .plant {
@@ -71,9 +71,7 @@ function Slice(props) {
   } = props;
   const dispatch = useDispatch();
   const changeCurrent = () => {
-    if (availableCapacity === 0 || availableCapacity < installedCapacity) {
-      dispatch(appActions.crossActions.changeCurrent(props.availability));
-    }
+    dispatch(appActions.crossActions.changeCurrent(props.availability));
   };
   const open = useSelector((state) => state.cross.current);
   let type = 'Up';
@@ -88,9 +86,9 @@ function Slice(props) {
       <div className="div4">
         <div className="div3">{name.split(' ').pop()}</div>
         <div
-          className={`plant ${type} ${
-            type === 'FullyDown' || type === 'PartiallyDown' ? 'cursor' : ''
-          } ${open && open.name === name ? 'active' : ''}`}
+          className={`plant ${type} cursor ${
+            open && open.name === name ? 'active' : ''
+          }`}
           onClick={() => changeCurrent()}
           onKeyPress={() => changeCurrent()}
           role="button"
@@ -99,6 +97,7 @@ function Slice(props) {
           <div className="div1">{availableCapacity} MW</div>
 
           <div className="div2">
+            {type === 'Up' && <Up fill="#206B30" width={10} height={16} />}
             {type === 'FullyDown' && (
               <FullyDown fill="#810909" width={19} height={19} />
             )}
