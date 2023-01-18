@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "npx mocha './src/test/helpers.test.js'",
+    "test": "npx mocha --es-module-specifier-resolution=node './src/test/helpers.test.js'",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
     "watch": "nodemon  --inspect --experimental-modules --es-module-specifier-resolution=node index.js",
@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "body-parser": "^1.20.1",
+    "chai": "^4.3.7",
     "compression": "^1.7.4",
     "config": "^3.3.8",
     "cors": "^2.8.5",

@@ -19,6 +19,7 @@ import {
 } from './utils/middlewares';
 
 import { getUnavailabilities, getUnavailabilitiesV2 } from './services';
+import { groupByKey } from './utils/helpers';
 
 function serviceWrapper(service, environment) {
   return async function wrappedService(req, res, next) {
@@ -74,7 +75,11 @@ const buildApi = (environment) => {
     res.json({ status: 'OK' });
   });
   app.get('/referentiel', (req, res) => {
-    res.json(referentiel);
+    const groupedData = groupByKey(referentiel, 'filiere');
+    res.json({
+      length: groupedData.length,
+      items: groupedData,
+    });
   });
 
   app.use(notFoundMiddleware());

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { assocPath } from 'ramda';
 import { ValidationError } from './errors';
 
@@ -71,12 +72,10 @@ export const assertInput = (schema, inputValue) => {
   }
   return value;
 };
-
 export const groupByKey = (array, key) =>
-  array.reduce((result, currentValue) => {
-    // eslint-disable-next-line no-param-reassign
-    (result[currentValue[key]] = result[currentValue[key]] || []).push(
-      currentValue,
-    );
-    return result;
-  }, {});
+  _.chain(array)
+    // Group the elements of Array based on `key` property
+    .groupBy(key)
+    // `key` is group's name (color), `value` is the array of objects
+    .map((value, mapKey) => ({ key: mapKey, values: value }))
+    .value();
