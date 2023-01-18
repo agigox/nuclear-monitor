@@ -6,9 +6,9 @@ import moment from 'moment';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Close from '../../images/close.svg';
+import Up from '../../images/up.svg';
 import appActions from '../../redux/actions';
 import DetailsItem from './DetailsItem';
-// eslint-disable-next-line no-unused-vars
 import ReactorSlider from './ReactorSlider';
 
 const CustomRow = styled(Row)`
@@ -27,7 +27,6 @@ const CustomRow = styled(Row)`
     color: #000000;
   }
   .date {
-    font-family: @font-family-nunito;
     font-style: italic;
     font-weight: 400;
     font-size: 14px;
@@ -42,9 +41,26 @@ const CustomRow = styled(Row)`
     }
   }
   .divider {
-    border-color: @divider-border-color;
     height: calc(100% - 10px);
     margin-top: 5px;
+  }
+  .text-1 {
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    color: #cdcdcd;
+    text-transform: uppercase;
+  }
+  .text-2-1 {
+    margin-left: 16px;
+    position: relative;
+    top: 7px;
+  }
+
+  .row-tr {
+    height: 36px;
   }
   @media only screen and (min-width: 992px) {
     width: 958px;
@@ -80,7 +96,9 @@ function Details() {
           <Col className="title" flex="210px">
             {name}
           </Col>
-          <Col />
+          <Col>
+            <ReactorSlider name={name} />
+          </Col>
           <Col className="date" flex="auto">
             Mise à jour le{' '}
             {`${moment(updatedDate).format('MM/DD/YYYY HH:mm:ss')} (CET)`}
@@ -91,57 +109,74 @@ function Details() {
         </Row>
       </Col>
       <Col span={24}>
-        <Row wrap={false}>
-          <Col flex="1 1 25%">
-            <Row wrap={false}>
-              <Col>
-                <Row gutter={[0, 32]}>
-                  <Col span={24}>
-                    <DetailsItem
-                      text="Début de l’indisponibilité"
-                      value={moment(startDate).format('MM/DD/YYYY')}
-                    />
-                  </Col>
-                  <Col span={24}>
-                    <DetailsItem
-                      text="Fin de l’indisponibilité"
-                      value={moment(endDate).format('MM/DD/YYYY')}
-                    />
-                  </Col>
-                </Row>
-              </Col>
-              <Col>
-                <Divider className="divider" type="vertical" />
-              </Col>
-            </Row>
-          </Col>
-          <Col flex="1 1 25%">
-            <Row wrap={false}>
-              <Col>
-                <Row gutter={[0, 32]}>
-                  <Col span={24}>
-                    <DetailsItem
-                      text="Capacité restant disponible"
-                      value={`${availableCapacity} MW`}
-                    />
-                  </Col>
-                  <Col span={24}>
-                    <DetailsItem
-                      text="Capacité non disponible"
-                      value={`${unavailableCapacity} MW`}
-                    />
-                  </Col>
-                </Row>
-              </Col>
-              <Col>
-                <Divider className="divider" type="vertical" />
-              </Col>
-            </Row>
-          </Col>
-          <Col flex="1 1 50%">
-            <DetailsItem text="Informations complémentaires" value={reason} />
-          </Col>
-        </Row>
+        {unavailableCapacity !== 0 && (
+          <Row wrap={false}>
+            <Col flex="1 1 25%">
+              <Row wrap={false}>
+                <Col>
+                  <Row gutter={[0, 32]}>
+                    <Col span={24}>
+                      <DetailsItem
+                        text="Début de l’indisponibilité"
+                        value={moment(startDate).format('MM/DD/YYYY')}
+                      />
+                    </Col>
+                    <Col span={24}>
+                      <DetailsItem
+                        text="Fin de l’indisponibilité"
+                        value={moment(endDate).format('MM/DD/YYYY')}
+                      />
+                    </Col>
+                  </Row>
+                </Col>
+                <Col>
+                  <Divider className="divider" type="vertical" />
+                </Col>
+              </Row>
+            </Col>
+            <Col flex="1 1 25%">
+              <Row wrap={false}>
+                <Col>
+                  <Row gutter={[0, 32]}>
+                    <Col span={24}>
+                      <DetailsItem
+                        text="Capacité restant disponible"
+                        value={`${availableCapacity} MW`}
+                      />
+                    </Col>
+                    <Col span={24}>
+                      <DetailsItem
+                        text="Capacité non disponible"
+                        value={`${unavailableCapacity} MW`}
+                      />
+                    </Col>
+                  </Row>
+                </Col>
+                <Col>
+                  <Divider className="divider" type="vertical" />
+                </Col>
+              </Row>
+            </Col>
+            <Col flex="1 1 50%">
+              <DetailsItem text="Informations complémentaires" value={reason} />
+            </Col>
+          </Row>
+        )}
+        {unavailableCapacity === 0 && (
+          <Row gap={[15, 0]}>
+            <Col span={24} className="text-1">
+              PAS D’INDISPONIBILIté
+            </Col>
+            <Col span={24} className="text-2">
+              <Row className="row-tr">
+                <Col>
+                  <img src={Up} alt="up" />
+                </Col>
+                <Col className="text-2-1">Réacteurs en fonctionnement</Col>
+              </Row>
+            </Col>
+          </Row>
+        )}
       </Col>
     </CustomRow>
   );

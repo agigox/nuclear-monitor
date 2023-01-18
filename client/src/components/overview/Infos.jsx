@@ -25,7 +25,7 @@ const StyledCol = styled(Col)`
     &.dateCol {
       box-shadow: none;
       border: 0;
-      margin-bottom: 0px;
+      margin-bottom: 0;
       padding-left: 0;
       padding-right: 0;
     }
