@@ -4,26 +4,32 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import 'moment-timezone';
 import { ConfigProvider } from 'antd';
+import styled from '@emotion/styled';
 import store from './redux/store';
-import AppLayout from './components/AppLayout';
+import AppLayout from './components/layout/AppLayout';
 // moment.locale('fr');
 moment.tz.setDefault('Europe/Paris');
 
+const Wrapper = styled.div`
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+`;
 function App() {
   return (
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: '#009CDF',
+          colorPrimary1: '#009CDF',
         },
         hashed: false,
       }}
     >
-      <div className="App">
+      <Wrapper>
         <Provider store={store}>
           <AppLayout />
         </Provider>
-      </div>
+      </Wrapper>
     </ConfigProvider>
   );
 }

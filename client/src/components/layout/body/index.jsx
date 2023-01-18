@@ -1,12 +1,14 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import appActions from '../redux/actions';
+import appActions from '../../../redux/actions';
 import Loading from './Loading';
-import Home from './Home';
+import Dashboard from './dashboard';
+import Error from './Error';
 
-function AppLayout() {
+function Body() {
   const loadings = useSelector((state) => state.unavailabilities.loadings);
+  const error = useSelector((state) => state.unavailabilities.error);
   const dispatch = useDispatch();
   useEffect(() => {
     const loadData = async () => {
@@ -15,7 +17,13 @@ function AppLayout() {
 
     loadData();
   }, []);
-  return <>{loadings.unavailabilities ? <Loading /> : <Home />}</>;
+  if (loadings.unavailabilities) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error error={error} />;
+  }
+  return <Dashboard />;
 }
 
-export default AppLayout;
+export default Body;

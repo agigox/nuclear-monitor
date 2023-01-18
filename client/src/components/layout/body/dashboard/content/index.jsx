@@ -1,16 +1,13 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
 import styled from '@emotion/styled';
-import Error from './Error';
-import ModeSwitcher from './ModeSwitcher';
-import Infos from './overview/Infos';
-import Unavailabilities from './unavailabilities/Unavailabilities';
+import Infos from '../../../../overview/Infos';
+import Unavailabilities from '../../../../unavailabilities/Unavailabilities';
+import Filters from './filters';
 
 const StyledRow = styled(Row)`
+  padding: 64px 95px;
   column-gap: 27px;
-  flex-wrap: nowrap;
   & > .overview-col {
     flex-basis: 353px;
   }
@@ -26,20 +23,18 @@ const StyledRow = styled(Row)`
     }
   }
 `;
-function Home() {
-  const error = useSelector((state) => state.unavailabilities.error);
-  const success = (
-    <StyledRow>
+function Content() {
+  return (
+    <StyledRow className="dashboard">
+      <Col span={24}>
+        <Filters />
+      </Col>
       <Col className="overview-col">
-        <Infos type="refresh" />
         <Infos type="reactor" />
         <Infos type="power" />
       </Col>
       <Col>
         <Row className="main-row">
-          <Col span={24}>
-            <ModeSwitcher />
-          </Col>
           <Col span={24}>
             <Unavailabilities />
           </Col>
@@ -47,7 +42,6 @@ function Home() {
       </Col>
     </StyledRow>
   );
-  return <>{error ? <Error error={error} /> : success}</>;
 }
 
-export default Home;
+export default Content;

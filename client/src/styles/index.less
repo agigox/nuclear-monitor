@@ -1,0 +1,114 @@
+@import "./fonts.less";
+@import "./variables.less";
+@import "./mixins.less";
+@import "./positions.less";
+
+@background-dashboard: #19252a;
+body {
+  font-family: @font-family-inter-regular;
+  color: @global-color;
+  margin: 0;
+  height: 100%;
+  
+}
+.ant-col {
+  font-family: @font-family-inter-regular;
+}
+
+/*My code*/
+
+.iconIndispo {
+  background: linear-gradient(206.04deg, #FC1C1C 21.73%, #BC372E 83.59%);
+}
+.iconDispo {
+  background: linear-gradient(182.12deg, #1CFC4D 7.61%, #25C448 94.18%);
+}
+.card-row {
+  background: @color-white;
+  border: 1px solid @border-color-card;
+  box-shadow: @modal-shadow-card;
+  border-radius: @border-radius-card;
+  padding: 28px;
+  flex-direction: column;
+}
+.card-title {
+  font-family: @font-family-inter-thin;
+  font-style: italic;
+  font-size: 12px;
+  line-height: 15px;
+  color: @global-color;
+}
+.card-childrens {
+  width: 274px;
+}
+.card-child {
+  height: 58px;
+  width: 274px;
+  border: 1px solid;
+}
+.handle {
+  border: 1px solid red;
+}
+.ant-btn {
+  border-radius: 2px;
+  height: 40px;
+  text-transform: uppercase;
+}
+.title-main-col {
+  font-family: 'InterLight';
+  font-size: 16px;
+  line-height: 19px;
+  font-style: italic;
+}
+.reactor-data {
+  padding-left: 10px;
+  padding-bottom: 2px;
+  background: @color-white;
+  border: 1px solid @border-color-card;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+.divider {
+  border-color: @divider-border-color;
+}
+@media only screen and (max-width: 767px) {
+  .title-main-col {
+    text-align: center;
+  }
+}
+.footer {
+  height: 74px;
+  background-color: @background-header-footer;
+}
+.header {
+  height: 84px;
+  background-color: @background-header-footer;
+}
+.dashboard {
+  background-color: @background-dashboard;
+  .page-title {
+    background-color: @background-page-title;
+    .text {
+      padding: 32px 130px 32px 126px;
+      .format-text(@font-family-nunito-extra-bold, 48px, 64px, @color-white)
+    }
+  }
+}
+.text-1 {
+  font-family: @font-family-inter-regular;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #cdcdcd;
+  text-transform: uppercase;
+}
+.text-2-1 {
+  font-family: @font-family-inter-regular;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #757575;
+}

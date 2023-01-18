@@ -1,6 +1,7 @@
 import React from 'react';
 
-import './index.less';
+import './styles/index.less';
+import 'antd/dist/reset.css';
 import './utils/svg-icons';
 import * as ReactDOMClient from 'react-dom/client';
 import App from './App';

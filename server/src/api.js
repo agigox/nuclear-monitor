@@ -7,7 +7,7 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 
-import { plants } from './data';
+import { plants, referentiel } from './data';
 import unavailabilitiesDump from './data/unavailabilitiesDump';
 import { RTEServiceError } from './rteApi';
 
@@ -72,6 +72,9 @@ const buildApi = (environment) => {
 
   app.get('/_status', (req, res) => {
     res.json({ status: 'OK' });
+  });
+  app.get('/referentiel', (req, res) => {
+    res.json(referentiel);
   });
 
   app.use(notFoundMiddleware());

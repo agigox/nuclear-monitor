@@ -4,7 +4,7 @@ import moment from 'moment-timezone';
 import _ from 'lodash';
 import { getRessource } from '../rteApi';
 
-import { plants, reactors, plantsUp } from '../data';
+import { plants, reactors, plantsUp, referentiel } from '../data';
 
 // import DateInput from './types';
 

@@ -49,3 +49,7 @@ export const plantsUp = readCSV(
     unavailabilities: { fullyDown: [], partiallyDown: [], unavailablePower: [] }
   })
 });
+
+export const referentiel = readCSV(
+  fs.readFileSync(path.join(__dirname, './referentiel.csv'), 'utf8'),
+);
