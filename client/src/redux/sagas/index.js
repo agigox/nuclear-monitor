@@ -10,7 +10,11 @@ to write action “NEWS_RECEIVED” in actions/index.js file because it’s full
 */
 
 import { put, takeLatest, all } from 'redux-saga/effects';
-import { getUnavailabilities } from '../../api';
+import {
+  getUnavailabilities,
+  getReferentiel,
+  getProductionTypes,
+} from '../../api';
 import { actionTypes } from '../actionTypes';
 
 function* fetchUnavailabilities() {
@@ -19,6 +23,22 @@ function* fetchUnavailabilities() {
     yield put({ type: actionTypes.UNAVAILABILITIES_RECEIVED_SUCCESS, data });
   } catch (e) {
     yield put({ type: actionTypes.UNAVAILABILITIES_RECEIVED_FAIL, message: e });
+  }
+}
+function* fetchReferentiel() {
+  try {
+    const data = yield getReferentiel().then((response) => response);
+    yield put({ type: actionTypes.REFERENTIEL_RECEIVED_SUCCESS, data });
+  } catch (e) {
+    yield put({ type: actionTypes.REFERENTIEL_RECEIVED_FAIL, message: e });
+  }
+}
+function* fetchProductionTypes() {
+  try {
+    const data = yield getProductionTypes().then((response) => response);
+    yield put({ type: actionTypes.PRODUCTION_TYPES_RECEIVED_SUCCESS, data });
+  } catch (e) {
+    yield put({ type: actionTypes.PRODUCTION_TYPES_RECEIVED_FAIL, message: e });
   }
 }
 function* refreshUnavailabilities() {
@@ -34,10 +54,16 @@ function* refreshUnavailabilities() {
 }
 
 function* actionWatcher() {
-  const { LOAD_UNAVAILABILITIES_REQUEST, REFRESH_UNAVAILABILITIES_REQUEST } =
-    actionTypes;
+  const {
+    LOAD_UNAVAILABILITIES_REQUEST,
+    REFRESH_UNAVAILABILITIES_REQUEST,
+    LOAD_REFERENTIEL_REQUEST,
+    LOAD_PRODUCTION_TYPES_REQUEST,
+  } = actionTypes;
   yield takeLatest(LOAD_UNAVAILABILITIES_REQUEST, fetchUnavailabilities);
   yield takeLatest(REFRESH_UNAVAILABILITIES_REQUEST, refreshUnavailabilities);
+  yield takeLatest(LOAD_REFERENTIEL_REQUEST, fetchReferentiel);
+  yield takeLatest(LOAD_PRODUCTION_TYPES_REQUEST, fetchProductionTypes);
 }
 
 export default function* rootSaga() {

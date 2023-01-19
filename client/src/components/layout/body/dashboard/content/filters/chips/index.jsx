@@ -8,6 +8,8 @@ function FilterChips() {
     <Row>
       <Col>
         <TypeButtons />
+      </Col>
+      <Col>
         <ModeButtons />
       </Col>
     </Row>

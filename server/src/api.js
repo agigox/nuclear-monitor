@@ -20,6 +20,7 @@ import {
 
 import { getUnavailabilities, getUnavailabilitiesV2 } from './services';
 import { groupByKey } from './utils/helpers';
+import { getUnavailabilitiesV3 } from './services/unavailabilities';
 
 function serviceWrapper(service, environment) {
   return async function wrappedService(req, res, next) {
@@ -64,6 +65,10 @@ const buildApi = (environment) => {
     '/unavailabilitiesv2',
     serviceWrapper(getUnavailabilitiesV2, environment),
   );
+  app.get(
+    '/unavailabilitiesv3',
+    serviceWrapper(getUnavailabilitiesV3, environment),
+  );
 
   if (process.env.NODE_ENV !== 'production') {
     app.get('/token', (req, res) => {
@@ -78,7 +83,7 @@ const buildApi = (environment) => {
     const groupedData = groupByKey(referentiel, 'filiere');
     res.json({
       length: groupedData.length,
-      items: groupedData,
+      types: groupedData,
     });
   });
 

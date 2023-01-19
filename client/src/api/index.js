@@ -15,3 +15,15 @@ export async function getUnavailabilities() {
   const data = await res.json();
   return data;
 }
+export async function getReferentiel() {
+  const res = await doFetch(`${REACT_APP_NUCLEAR_MONITOR_API}/referentiel`);
+  const data = await res.json();
+  return data;
+}
+export async function getProductionTypes() {
+  const res = await doFetch(
+    `${REACT_APP_NUCLEAR_MONITOR_API}/unavailabilitiesv3`,
+  );
+  const data = await res.json();
+  return data;
+}

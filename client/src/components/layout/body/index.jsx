@@ -13,6 +13,8 @@ function Body() {
   useEffect(() => {
     const loadData = async () => {
       dispatch(appActions.unavailabilitiesActions.loadUnavailabilities());
+      dispatch(appActions.referentielActions.loadReferentiel());
+      dispatch(appActions.productionTypesActions.loadProductionTypes());
     };
 
     loadData();

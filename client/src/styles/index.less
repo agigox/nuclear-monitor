@@ -3,16 +3,18 @@
 @import "./mixins.less";
 @import "./positions.less";
 
-@background-dashboard: #19252a;
 body {
-  font-family: @font-family-inter-regular;
+  font-family: @font-family-nunito-regular;
   color: @global-color;
   margin: 0;
   height: 100%;
   
 }
-.ant-col {
-  font-family: @font-family-inter-regular;
+[class^="ant-col"], [class*=" ant-col"] {
+  font-family: @font-family-nunito-regular;
+}
+.ant-btn {
+  border-color: @color-white;
 }
 
 /*My code*/
@@ -48,11 +50,6 @@ body {
 }
 .handle {
   border: 1px solid red;
-}
-.ant-btn {
-  border-radius: 2px;
-  height: 40px;
-  text-transform: uppercase;
 }
 .title-main-col {
   font-family: 'InterLight';
@@ -90,7 +87,15 @@ body {
     background-color: @background-page-title;
     .text {
       padding: 32px 130px 32px 126px;
-      .format-text(@font-family-nunito-extra-bold, 48px, 64px, @color-white)
+      .format-text(@font-family-nunito-extra-bold, 48px, 64px, @color-white);
+    }
+  }
+  .refresh-text {
+    .text-1 {
+      .format-text(@font-family-nunito-regular, 14px, 18px, @color-white);
+    }
+    .text-2 {
+      .format-text(@font-family-nunito-bold, 16px, 22px, @color-white);
     }
   }
 }

@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { Col } from 'antd';
 import { useSelector } from 'react-redux';
 import Indicator from './Indicator';
-import Refresh from './Refresh';
 import Total from './Total';
 import Title from './Title';
 import FullyDown from '../../images/fully_down.svg';
@@ -40,14 +39,6 @@ export default function Infos({ type }) {
     totalPower,
     totalUnavailablePower,
   } = useSelector((state) => state.unavailabilities.overview);
-  if (type === 'refresh') {
-    return (
-      <StyledCol className="dateCol" span={24}>
-        <Title title="Dernière mise à jour" />
-        <Refresh />
-      </StyledCol>
-    );
-  }
   if (type === 'reactor') {
     return (
       <StyledCol span={24}>

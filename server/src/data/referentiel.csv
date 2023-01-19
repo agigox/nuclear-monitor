@@ -1,5 +1,5 @@
 name,filiere,eicCode,plantId,reactorIndex,stage,thermalPower_MW,rawPower_MW,netPower_MW,buildStartDate,firstReactionDate,gridLinkDate,exploitationStartDate,moxAuthorizationDate,coolingTowerCount
-AIGLE,Hydraulique lacs,,AIGLE,1 à 5,,,,360,,,,,,
+AIGLE,Hydraulique lacs,,AIGLE,1 à 5,,,,360,,,,,,,
 AIGLE 6,Hydraulique lacs,,AIGLE,6,,,,146,,,,,,
 ARRIGHI 1,Fioul,,ARRIGHI,1,,,,125,,,,,,
 ARRIGHI 2,Fioul,,ARRIGHI,2,,,,129,,,,,,
