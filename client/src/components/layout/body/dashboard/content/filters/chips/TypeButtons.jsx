@@ -2,11 +2,10 @@
 import { Button, Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ProductionTypes } from '../../../../../../../enums/types';
+import { ProductionTypes } from '../../../../../../../enums/productionTypes';
 
 function TypeButtons() {
   const types = useSelector((state) => state.productionTypes.items);
-  console.log(types);
   return (
     <Row>
       {types.map((type) => (

@@ -19,17 +19,7 @@ function App() {
   return (
     <ConfigProvider
       theme={{
-        token: {
-          colorPrimary: '#19252a',
-        },
-        components: {
-          Button: {
-            colorPrimary: 'transparent',
-            borderRadius: 4,
-          },
-        },
-        hashed: false,
-        algorithm: theme.darkAlgorithm,
+        algorithm: theme.lightAlgorithm,
       }}
     >
       <Wrapper>

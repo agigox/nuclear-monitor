@@ -90,7 +90,7 @@ const handleDatav2 = (data) => {
   const keys = Object.keys(groupedData);
 
   // si dans un même réacteur, on a deux indisponibilité ou plus
-  // on prend un seul en considération est dont updated_date
+  // on prend une seule en considération est dont updated_date
   // est plus recente
   keys.forEach((key) => {
     if (groupedData[key].length >= 2) {

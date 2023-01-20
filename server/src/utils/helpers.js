@@ -79,3 +79,35 @@ export const groupByKey = (array, key) =>
     // `key` is group's name (color), `value` is the array of objects
     .map((value, mapKey) => ({ key: mapKey, values: value }))
     .value();
+
+export function partitionArray(array, isValid) {
+  return array.reduce(
+    ([fullyDown, partiallyDown], elem) =>
+      isValid(elem)
+        ? [[...fullyDown, elem], partiallyDown]
+        : [fullyDown, [...partiallyDown, elem]],
+    [[], []],
+  );
+}
+
+export const fullPartialSplit = (array) => {
+  const valuesSumed = array.map((item) => {
+    const unavailableCapacitySum = item.values.reduce(
+      (a, b) => a + b.unavailable_capacity,
+      0,
+    );
+    const availableCapacitySum = item.values.reduce(
+      (a, b) => a + b.available_capacity,
+      0,
+    );
+    return { ...item, availableCapacitySum, unavailableCapacitySum };
+  });
+  const [fullyDown, partiallyDown] = partitionArray(
+    valuesSumed,
+    (e) => e.availableCapacitySum === 0,
+  );
+  return {
+    partiallyDown,
+    fullyDown,
+  };
+};
