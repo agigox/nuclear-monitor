@@ -1,5 +1,10 @@
 import { expect } from 'chai';
-import { fullPartialSplit, groupByKey, partitionArray } from '../utils/helpers';
+import {
+  fullPartialSplit,
+  groupByKey,
+  partitionArray,
+  getProductionCategory,
+} from '../utils/helpers';
 
 describe('Testing Helpers', () => {
   it('should group by key (value as string)', () => {
@@ -177,5 +182,13 @@ describe('Testing Helpers', () => {
     const functionResult = fullPartialSplit(startValues);
     expect(functionResult).to.deep.equal(expectedResult);
     // expect('foo').to.be.a('string');
+  });
+  it('should test production categories', () => {
+    const expectedResult = getProductionCategory('FOSSIL_BROWN_COAL_LIGNITE');
+    const expectedResult1 = getProductionCategory('GEOTHERMAL');
+    const expectedResult2 = getProductionCategory('OTHER');
+    expect(expectedResult).to.equal('FOSSIL');
+    expect(expectedResult1).to.equal('GEOTHERMAL');
+    expect(expectedResult2).to.equal('OTHER');
   });
 });

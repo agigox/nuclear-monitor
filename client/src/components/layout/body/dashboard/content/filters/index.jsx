@@ -5,7 +5,7 @@ import RefreshDate from './refresh';
 
 function Filters() {
   return (
-    <Row className="handle" wrap={false}>
+    <Row className="handle" wrap={false} justify="space-around">
       <Col flex="315px">
         <RefreshDate />
       </Col>

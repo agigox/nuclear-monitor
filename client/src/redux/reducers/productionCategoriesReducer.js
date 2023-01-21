@@ -7,22 +7,21 @@ const initialState = {
   error: '',
 };
 // eslint-disable-next-line default-param-last
-const productionTypesReducer = (state = initialState, action) => {
+const productionCategoriesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.LOAD_PRODUCTION_TYPES_REQUEST: {
+    case actionTypes.LOAD_PRODUCTION_CATEGORIES_REQUEST: {
       return {
         ...state,
       };
     }
-    case actionTypes.PRODUCTION_TYPES_RECEIVED_SUCCESS: {
-      console.log(action.data);
+    case actionTypes.PRODUCTION_CATEGORIES_RECEIVED_SUCCESS: {
       return {
         ...state,
         items: [...action.data.items],
         loading: false,
       };
     }
-    case actionTypes.PRODUCTION_TYPES_RECEIVED_FAIL: {
+    case actionTypes.PRODUCTION_CATEGORIES_RECEIVED_FAIL: {
       return {
         ...state,
         loading: false,
@@ -35,4 +34,4 @@ const productionTypesReducer = (state = initialState, action) => {
     }
   }
 };
-export default productionTypesReducer;
+export default productionCategoriesReducer;

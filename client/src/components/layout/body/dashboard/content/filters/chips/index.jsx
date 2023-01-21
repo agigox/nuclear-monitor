@@ -5,7 +5,7 @@ import TypeButtons from './TypeButtons';
 
 function FilterChips() {
   return (
-    <Row>
+    <Row justify="space-between">
       <Col>
         <TypeButtons />
       </Col>

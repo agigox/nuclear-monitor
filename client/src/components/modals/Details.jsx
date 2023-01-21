@@ -71,9 +71,9 @@ const CustomRow = styled(Row)`
 `;
 
 function Details() {
-  const current = useSelector((state) => state.cross.current);
+  const currentAvailability = useSelector((state) => state.cross.currentAvailability);
 
-  if (!current) {
+  if (!currentAvailability) {
     return null;
   }
   const {
@@ -84,10 +84,10 @@ function Details() {
     endDate,
     availableCapacity,
     unavailableCapacity,
-  } = current;
+  } = currentAvailability;
   const dispatch = useDispatch();
-  const resetCurrent = () => {
-    dispatch(appActions.crossActions.resetCurrent());
+  const resetCurrentAvailability = () => {
+    dispatch(appActions.crossActions.resetCurrentAvailability());
   };
   return (
     <CustomRow className="modal" gutter={[0, 25]}>
@@ -104,7 +104,7 @@ function Details() {
             {`${moment(updatedDate).format('MM/DD/YYYY HH:mm:ss')} (CET)`}
           </Col>
           <Col className="close" flex="45px">
-            <img src={Close} alt="close" onClick={resetCurrent} />
+            <img src={Close} alt="close" onClick={resetCurrentAvailability} />
           </Col>
         </Row>
       </Col>

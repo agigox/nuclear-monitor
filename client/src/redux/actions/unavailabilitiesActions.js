@@ -4,7 +4,7 @@ const loadUnavailabilities = (data) => ({
   type: actionTypes.LOAD_UNAVAILABILITIES_REQUEST,
   playload: data,
 });
-const changeMode = (data) => ({
+const changeDisplayMode = (data) => ({
   type: actionTypes.CHANGE_DISPLAY_MODE,
   payload: data,
 });
@@ -14,6 +14,6 @@ const refreshUnavailabilities = (data) => ({
 });
 export default {
   loadUnavailabilities,
-  changeMode,
+  changeDisplayMode,
   refreshUnavailabilities,
 };

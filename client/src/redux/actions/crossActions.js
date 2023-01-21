@@ -1,19 +1,28 @@
 import { actionTypes } from '../actionTypes';
 
-const changeMode = (data) => ({
+const changeDisplayMode = (data) => ({
   type: actionTypes.CHANGE_DISPLAY_MODE,
   payload: data,
 });
-const changeCurrent = (data) => ({
+const changeCurrentAvailability = (data) => ({
   type: actionTypes.CHANGE_CURRENT_AVAILABILITY,
   payload: data,
 });
-const resetCurrent = () => ({
+const resetCurrentAvailability = () => ({
   type: actionTypes.RESET_CURRENT_AVAILABILITY,
+});
+const changeCurrentCategory = (data) => ({
+  type: actionTypes.CHANGE_CURRENT_CATEGORY,
+  payload: data,
+});
+const resetCurrentCategory = () => ({
+  type: actionTypes.RESET_CURRENT_CATEGORY,
 });
 
 export default {
-  changeMode,
-  changeCurrent,
-  resetCurrent,
+  changeDisplayMode,
+  changeCurrentAvailability,
+  resetCurrentAvailability,
+  changeCurrentCategory,
+  resetCurrentCategory,
 };

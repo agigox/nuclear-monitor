@@ -13,7 +13,7 @@ import { put, takeLatest, all } from 'redux-saga/effects';
 import {
   getUnavailabilities,
   getReferentiel,
-  getProductionTypes,
+  getProductionCategories,
 } from '../../api';
 import { actionTypes } from '../actionTypes';
 
@@ -33,12 +33,18 @@ function* fetchReferentiel() {
     yield put({ type: actionTypes.REFERENTIEL_RECEIVED_FAIL, message: e });
   }
 }
-function* fetchProductionTypes() {
+function* fetchProductionCategories() {
   try {
-    const data = yield getProductionTypes().then((response) => response);
-    yield put({ type: actionTypes.PRODUCTION_TYPES_RECEIVED_SUCCESS, data });
+    const data = yield getProductionCategories().then((response) => response);
+    yield put({
+      type: actionTypes.PRODUCTION_CATEGORIES_RECEIVED_SUCCESS,
+      data,
+    });
   } catch (e) {
-    yield put({ type: actionTypes.PRODUCTION_TYPES_RECEIVED_FAIL, message: e });
+    yield put({
+      type: actionTypes.PRODUCTION_CATEGORIES_RECEIVED_FAIL,
+      message: e,
+    });
   }
 }
 function* refreshUnavailabilities() {
@@ -58,12 +64,15 @@ function* actionWatcher() {
     LOAD_UNAVAILABILITIES_REQUEST,
     REFRESH_UNAVAILABILITIES_REQUEST,
     LOAD_REFERENTIEL_REQUEST,
-    LOAD_PRODUCTION_TYPES_REQUEST,
+    LOAD_PRODUCTION_CATEGORIES_REQUEST,
   } = actionTypes;
   yield takeLatest(LOAD_UNAVAILABILITIES_REQUEST, fetchUnavailabilities);
   yield takeLatest(REFRESH_UNAVAILABILITIES_REQUEST, refreshUnavailabilities);
   yield takeLatest(LOAD_REFERENTIEL_REQUEST, fetchReferentiel);
-  yield takeLatest(LOAD_PRODUCTION_TYPES_REQUEST, fetchProductionTypes);
+  yield takeLatest(
+    LOAD_PRODUCTION_CATEGORIES_REQUEST,
+    fetchProductionCategories,
+  );
 }
 
 export default function* rootSaga() {

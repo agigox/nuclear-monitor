@@ -2,7 +2,8 @@ import { actionTypes } from '../actionTypes';
 
 const initialState = {
   mode: 'map',
-  current: null,
+  currentAvailability: null,
+  currentCategory: 'HYDRAULICS',
 };
 // eslint-disable-next-line default-param-last
 const crossReducer = (state = initialState, action) => {
@@ -16,13 +17,25 @@ const crossReducer = (state = initialState, action) => {
     case actionTypes.CHANGE_CURRENT_AVAILABILITY: {
       return {
         ...state,
-        current: action.payload,
+        currentAvailability: action.payload,
       };
     }
     case actionTypes.RESET_CURRENT_AVAILABILITY: {
       return {
         ...state,
-        current: null,
+        currentAvailability: null,
+      };
+    }
+    case actionTypes.CHANGE_CURRENT_CATEGORY: {
+      return {
+        ...state,
+        currentCategory: action.payload,
+      };
+    }
+    case actionTypes.RESET_CURRENT_CATEGORY: {
+      return {
+        ...state,
+        currentCategory: null,
       };
     }
 

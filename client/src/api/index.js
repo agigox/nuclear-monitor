@@ -20,7 +20,7 @@ export async function getReferentiel() {
   const data = await res.json();
   return data;
 }
-export async function getProductionTypes() {
+export async function getProductionCategories() {
   const res = await doFetch(
     `${REACT_APP_NUCLEAR_MONITOR_API}/unavailabilitiesv3`,
   );

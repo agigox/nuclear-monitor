@@ -20,13 +20,22 @@ const StyledButton = styled(Button)`
       color: #004d66;
     }
   }
+  &.refresh {
+    width: 54px;
+    height: 48px;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    background-color: transparent;
+  }
 `;
-function Buttons({ children, styling, active, clickHandler }) {
+function Buttons({ children, styling, active, clickHandler, icon, loading }) {
   return (
     <StyledButton
       className={`${styling} ${active ? 'active' : ''} `}
       type="primary"
       onClick={clickHandler}
+      icon={icon}
+      loading={loading}
     >
       {children}
     </StyledButton>

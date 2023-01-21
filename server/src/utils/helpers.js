@@ -1,5 +1,9 @@
 import _ from 'lodash';
 import { assocPath } from 'ramda';
+import {
+  ProductionTypes,
+  ProductionCategories,
+} from '../enums/productionTypes';
 import { ValidationError } from './errors';
 
 export const normalizePort = (port) => {
@@ -110,4 +114,38 @@ export const fullPartialSplit = (array) => {
     partiallyDown,
     fullyDown,
   };
+};
+
+// eslint-disable-next-line consistent-return
+export const getProductionCategory = (productionCategory) => {
+  if (
+    [
+      ProductionTypes.FOSSIL_BROWN_COAL_LIGNITE,
+      ProductionTypes.FOSSIL_COAL_DERIVED_GAS,
+      ProductionTypes.FOSSIL_GAS,
+      ProductionTypes.FOSSIL_HARD_COAL,
+      ProductionTypes.FOSSIL_OIL,
+      ProductionTypes.FOSSIL_OIL_SHALE,
+      ProductionTypes.FOSSIL_PEAT,
+    ].includes(productionCategory)
+  ) {
+    return ProductionCategories.FOSSIL;
+  }
+  if (
+    [
+      ProductionTypes.HYDRO_PUMPED_STORAGE,
+      ProductionTypes.HYDRO_RUN_OF_RIVER_AND_POUNDAGE,
+      ProductionTypes.HYDRO_WATER_RESERVOIR,
+    ].includes(productionCategory)
+  ) {
+    return ProductionCategories.HYDRAULICS;
+  }
+  if (
+    [ProductionTypes.WIND_OFFSHORE, ProductionTypes.WIND_ONSHORE].includes(
+      productionCategory,
+    )
+  ) {
+    return ProductionCategories.WIND;
+  }
+  return productionCategory;
 };

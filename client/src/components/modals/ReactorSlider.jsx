@@ -14,10 +14,10 @@ function ReactorSlider({ name }) {
       name.split(' ').slice(0, 1).join(' '),
   );
   const dispatch = useDispatch();
-  const changeCurrent = (el) => {
-    dispatch(appActions.crossActions.changeCurrent(el));
+  const changeCurrentAvailability = (el) => {
+    dispatch(appActions.crossActions.changeCurrentAvailability(el));
   };
-  const open = useSelector((state) => state.cross.current);
+  const open = useSelector((state) => state.cross.currentAvailability);
   return (
     <Row gutter={[5, 0]}>
       {filterByName &&
@@ -33,7 +33,7 @@ function ReactorSlider({ name }) {
             <Button
               type={`${open.name === el.name ? 'primary' : 'default'}`}
               shape="round"
-              onClick={() => changeCurrent(el)}
+              onClick={() => changeCurrentAvailability(el)}
             >
               {index + 1}
             </Button>

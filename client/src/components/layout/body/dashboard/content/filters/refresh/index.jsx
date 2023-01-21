@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReloadOutlined } from '@ant-design/icons';
-import { Button, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
 import appActions from '../../../../../../../redux/actions';
 import RefreshText from './RefreshText';
+import Buttons from '../../../../../../utils/Buttons';
 
 function RefreshDate() {
   const unavailabilitiesRefresh = useSelector(
@@ -11,17 +12,18 @@ function RefreshDate() {
   );
   const dispatch = useDispatch();
   const refreshUnavailabilities = async () => {
+    console.log('hello');
     dispatch(appActions.unavailabilitiesActions.refreshUnavailabilities());
   };
 
   return (
     <Row wrap={false}>
       <Col>
-        <Button
-          type="primary"
+        <Buttons
+          styling="refresh"
           icon={<ReloadOutlined />}
           loading={unavailabilitiesRefresh}
-          onClick={() => refreshUnavailabilities()}
+          clickHandler={() => refreshUnavailabilities()}
         />
       </Col>
       <Col>

@@ -70,10 +70,12 @@ function SubSlice(props) {
     availability: { name, installedCapacity, availableCapacity },
   } = props;
   const dispatch = useDispatch();
-  const changeCurrent = () => {
-    dispatch(appActions.crossActions.changeCurrent(props.availability));
+  const changeCurrentAvailability = () => {
+    dispatch(
+      appActions.crossActions.changeCurrentAvailability(props.availability),
+    );
   };
-  const open = useSelector((state) => state.cross.current);
+  const open = useSelector((state) => state.cross.currentAvailability);
   let type = 'Up';
   if (availableCapacity === 0) {
     type = 'FullyDown';
@@ -89,8 +91,8 @@ function SubSlice(props) {
           className={`plant ${type} cursor ${
             open && open.name === name ? 'active' : ''
           }`}
-          onClick={() => changeCurrent()}
-          onKeyPress={() => changeCurrent()}
+          onClick={() => changeCurrentAvailability()}
+          onKeyPress={() => changeCurrentAvailability()}
           role="button"
           tabIndex="0"
         >

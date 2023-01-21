@@ -22,7 +22,7 @@ function ModeButtons() {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.cross.mode);
   const switchMode = (displayMode) => {
-    dispatch(appActions.crossActions.changeMode(displayMode));
+    dispatch(appActions.crossActions.changeDisplayMode(displayMode));
   };
 
   return (
