@@ -2,7 +2,6 @@ import React from 'react';
 import { Row, Col, Card } from 'antd';
 import styled from '@emotion/styled';
 import Infos from '../../../../overview/Infos';
-import Unavailabilities from '../../../../unavailabilities/Unavailabilities';
 import Filters from './filters';
 import Siders from './siders';
 import Main from './main';
@@ -52,13 +51,6 @@ function Content() {
       <Col className="overview-col">
         <Infos type="reactor" />
         <Infos type="power" />
-      </Col>
-      <Col>
-        <Row className="main-row">
-          <Col span={24}>
-            <Unavailabilities />
-          </Col>
-        </Row>
       </Col>
     </>
   );

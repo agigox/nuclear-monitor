@@ -1,16 +1,16 @@
 import { actionTypes } from '../actionTypes';
 
 const initialState = {
-  mode: true,
+  mode: 'map',
   current: null,
 };
 // eslint-disable-next-line default-param-last
 const crossReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.CHANGE_DISPLAY_TO_MAP: {
+    case actionTypes.CHANGE_DISPLAY_MODE: {
       return {
         ...state,
-        mode: !state.mode,
+        mode: action.payload,
       };
     }
     case actionTypes.CHANGE_CURRENT_AVAILABILITY: {

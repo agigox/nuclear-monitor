@@ -10,7 +10,7 @@ function BottomSider() {
         <BottomSiderBody />
       </Col>
       <Col>
-        <Buttons type="summary">Part de capacité disponible : 68 %</Buttons>
+        <Buttons styling="summary">Part de capacité disponible : 68 %</Buttons>
       </Col>
     </Row>
   );

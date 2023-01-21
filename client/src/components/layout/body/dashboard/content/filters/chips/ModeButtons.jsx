@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
 import styled from '@emotion/styled';
 import appActions from '../../../../../../../redux/actions';
+import Buttons from '../../../../../../utils/Buttons';
 
 const StyledRow = styled(Row)`
   @media only screen and (max-width: 767px) {
@@ -20,25 +21,29 @@ const StyledRow = styled(Row)`
 function ModeButtons() {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.cross.mode);
-  const switchMode = (e) => {
-    const map = e.target.name === 'map';
-    dispatch(appActions.crossActions.changeMode(map));
+  const switchMode = (displayMode) => {
+    dispatch(appActions.crossActions.changeMode(displayMode));
   };
+
   return (
     <StyledRow align="middle" justify="space-between">
-      <Col className="switcher-button-col">
-        <Button
-          name="map"
-          onClick={switchMode}
-          type={mode ? 'primary' : 'default'}
+      <Col>
+        <Buttons
+          styling="chips"
+          clickHandler={() => switchMode('map')}
+          active={mode === 'map'}
         >
           Carte
-        </Button>
+        </Buttons>
       </Col>
-      <Col className="switcher-button-col">
-        <Button onClick={switchMode} type={mode ? 'default' : 'primary'}>
+      <Col>
+        <Buttons
+          styling="chips"
+          clickHandler={() => switchMode('slices')}
+          active={mode === 'slices'}
+        >
           Tranches
-        </Button>
+        </Buttons>
       </Col>
     </StyledRow>
   );

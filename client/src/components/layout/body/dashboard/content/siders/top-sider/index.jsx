@@ -1,5 +1,6 @@
-import { Button, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
 import React from 'react';
+import Buttons from '../../../../../../utils/Buttons';
 import TopSiderBody from './TopSiderBody';
 
 function TopSider() {
@@ -9,7 +10,7 @@ function TopSider() {
         <TopSiderBody />
       </Col>
       <Col>
-        <Button>Total : 65</Button>
+        <Buttons styling="summary">Total : 65</Buttons>
       </Col>
     </Row>
   );

@@ -7,17 +7,27 @@ const StyledButton = styled(Button)`
     background-color: #a3ddf0;
     padding: 4px 8px;
     height: 36px;
-    border-radius: 4px;
     color: #004d66;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 13px;
-    line-height: 28px;
+  }
+  &.chips {
+    line-height: 16px;
+    padding: 8px;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    &.active {
+      background: #e9f7fc;
+      border: 1px solid #009dd1;
+      color: #004d66;
+    }
   }
 `;
-function Buttons({ children, type }) {
+function Buttons({ children, styling, active, clickHandler }) {
   return (
-    <StyledButton className={type} type="primary">
+    <StyledButton
+      className={`${styling} ${active ? 'active' : ''} `}
+      type="primary"
+      onClick={clickHandler}
+    >
       {children}
     </StyledButton>
   );

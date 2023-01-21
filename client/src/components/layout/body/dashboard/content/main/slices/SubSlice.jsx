@@ -3,9 +3,9 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import appActions from '../../redux/actions';
-import Details from '../modals/Details';
-import { FullyDown, Warning, Up } from '../SVGs';
+import appActions from '../../../../../../../redux/actions';
+import Details from '../../../../../../modals/Details';
+import { FullyDown, Warning, Up } from '../../../../../../SVGs';
 
 const Wrapper = styled.div`
   .plant {
@@ -65,7 +65,7 @@ const Wrapper = styled.div`
     cursor: pointer;
   }
 `;
-function Slice(props) {
+function SubSlice(props) {
   const {
     availability: { name, installedCapacity, availableCapacity },
   } = props;
@@ -112,4 +112,4 @@ function Slice(props) {
   );
 }
 
-export default Slice;
+export default SubSlice;

@@ -3,11 +3,11 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { Col, Row } from 'antd';
-import Location from '../../images/location_on.svg';
-import FullyDown from '../../images/fully_down.svg';
-import Up from '../../images/up.svg';
-import PartiallyDown from '../../images/partially_down.svg';
-import Marker from './Marker';
+import Location from '../../../../../../../images/location_on.svg';
+import FullyDown from '../../../../../../../images/fully_down.svg';
+import Up from '../../../../../../../images/up.svg';
+import PartiallyDown from '../../../../../../../images/partially_down.svg';
+import NumberMarker from './NumberMarker';
 
 const StyledRow = styled(Row)`
   flex-direction: column;
@@ -39,7 +39,7 @@ const StyledRow = styled(Row)`
     width: 121px;
   }
 `;
-function UnavailabilityMarker(props) {
+function Marker(props) {
   const { className, plant, availabilities, fullyDown, partiallyDown } = props;
   return (
     <StyledRow className={`${className}`}>
@@ -56,13 +56,16 @@ function UnavailabilityMarker(props) {
               gap={[0, 7]}
             >
               <Col>
-                <Marker number={availabilities.length} icon={Up} />
+                <NumberMarker number={availabilities.length} icon={Up} />
               </Col>
               <Col>
-                <Marker number={partiallyDown.length} icon={PartiallyDown} />
+                <NumberMarker
+                  number={partiallyDown.length}
+                  icon={PartiallyDown}
+                />
               </Col>
               <Col>
-                <Marker number={fullyDown.length} icon={FullyDown} />
+                <NumberMarker number={fullyDown.length} icon={FullyDown} />
               </Col>
             </Row>
           </Col>
@@ -72,4 +75,4 @@ function UnavailabilityMarker(props) {
   );
 }
 
-export default UnavailabilityMarker;
+export default Marker;

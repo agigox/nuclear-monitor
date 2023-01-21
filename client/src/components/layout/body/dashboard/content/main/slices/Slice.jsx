@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import _ from 'lodash';
-import Slice from './Slice';
+import SubSlice from './SubSlice';
 
 const Wrapper = styled.div`
   background: #f4f4f4;
@@ -36,7 +36,7 @@ function UnavailabilitySlice(props) {
           [...availabilities, ...fullyDown, ...partiallyDown],
           'name',
         ).map((availability) => (
-          <Slice key={availability.name} availability={availability} />
+          <SubSlice key={availability.name} availability={availability} />
         ))}
       </div>
     </Wrapper>

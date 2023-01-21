@@ -16,7 +16,7 @@ const CustomRow = styled(Row)`
   }
 `;
 
-function Marker({ number, icon }) {
+function MarkerNumber({ number, icon }) {
   return (
     <CustomRow align="bottom" justify="space-around">
       <Col className="marker-number">{number}</Col>
@@ -27,4 +27,4 @@ function Marker({ number, icon }) {
   );
 }
 
-export default Marker;
+export default MarkerNumber;

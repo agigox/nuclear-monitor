@@ -1,13 +1,15 @@
 import { Col, Row } from 'antd';
 import React from 'react';
-import Map from '../../../../../../images/map.svg';
+import { useSelector } from 'react-redux';
+import Map from './map';
+import Slices from './slices';
 
 function Main() {
+  const mode = useSelector((state) => state.cross.mode);
   return (
     <Row className="main">
-      <Col span={24} className="map-container">
-        <img src={Map} alt="map" />
-      </Col>
+      <Col span={24}>{mode === 'map' && <Map />}</Col>
+      <Col span={24}>{mode === 'slices' && <Slices />}</Col>
     </Row>
   );
 }

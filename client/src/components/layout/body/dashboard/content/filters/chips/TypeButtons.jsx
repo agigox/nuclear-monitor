@@ -1,8 +1,9 @@
 /* eslint-disable no-prototype-builtins */
-import { Button, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ProductionTypes } from '../../../../../../../enums/productionTypes';
+import Buttons from '../../../../../../utils/Buttons';
 
 function TypeButtons() {
   const types = useSelector((state) => state.productionTypes.items);
@@ -10,11 +11,11 @@ function TypeButtons() {
     <Row>
       {types.map((type) => (
         <Col key={type.key}>
-          <Button type="primary">
+          <Buttons styling="chips" type="primary">
             {ProductionTypes.hasOwnProperty(type.key)
               ? ProductionTypes[type.key]
               : type.key}
-          </Button>
+          </Buttons>
         </Col>
       ))}
     </Row>
