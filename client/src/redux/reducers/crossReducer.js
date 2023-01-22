@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   displayMode: 'MAP',
   currentAvailability: null,
-  currentCategory: 'HYDRAULICS',
+  currentCategory: 'NUCLEAR',
 };
 
 export const crossSlice = createSlice({

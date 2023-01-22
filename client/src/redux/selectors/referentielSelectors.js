@@ -1,0 +1,21 @@
+import { createSelector } from '@reduxjs/toolkit';
+import _ from 'lodash';
+
+// eslint-disable-next-line import/prefer-default-export
+export const selectReferentielPending = (state) =>
+  state.referentiel.referentielPending;
+export const selectReferentiel = (state) => state.referentiel.referentiel;
+export const selectCurrentCategory = (state) => state.cross.currentCategory;
+export const selectCurrentReferentiel = createSelector(
+  [
+    (state) => state.cross.currentCategory,
+    (state) => state.referentiel.referentiel,
+  ],
+  (category, items) => {
+    let result = items.find((item) => item.key === category);
+    if (_.isUndefined(result)) {
+      result = { key: '', values: [] };
+    }
+    return result;
+  },
+);

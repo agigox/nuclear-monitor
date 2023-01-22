@@ -2,31 +2,36 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import SVGMap from '../../../../../../../images/map.svg';
-import { selectCurrentUnavailabilities } from '../../../../../../../redux/selectors/crossSelectors';
-import Marker from './Marker';
+import { selectCurrentReferentiel } from '../../../../../../../redux/selectors/referentielSelectors';
+import Position from './Position';
+import Location from '../../../../../../../images/location_on.svg';
 
 function Map() {
-  const currentUnavailabilities = useSelector(selectCurrentUnavailabilities);
-  console.log(currentUnavailabilities);
+  const currentReferentiel = useSelector(selectCurrentReferentiel);
+  const { values } = currentReferentiel;
   return (
     <Row>
       <Col className="map-container" span={24}>
         <img src={SVGMap} alt="map" />
-        {[].map((unavailability) => {
-          const {
-            plant,
-            availabilities,
-            unavailabilities: { fullyDown, partiallyDown },
-          } = unavailability;
+        {values.map((unavailability) => {
+          const { key } = unavailability;
           return (
-            <Marker
-              key={plant}
-              className={`${plant.toLowerCase().replace(/ |-/g, '')} mark-city`}
-              plant={plant}
-              availabilities={availabilities}
-              fullyDown={fullyDown}
-              partiallyDown={partiallyDown}
-            />
+            <Row
+              className={`${key.toLowerCase().replace(/ |-/g, '')} mark-city`}
+            >
+              <Col>
+                <img src={Location} alt="indicator" />
+              </Col>
+              <Col>
+                <Position
+                  key={key}
+                  plant={key}
+                  availabilities={2}
+                  fullyDown={2}
+                  partiallyDown={2}
+                />
+              </Col>
+            </Row>
           );
         })}
       </Col>

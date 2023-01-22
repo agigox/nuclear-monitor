@@ -80,10 +80,19 @@ const buildApi = (environment) => {
     res.json({ status: 'OK' });
   });
   app.get('/referentiel', (req, res) => {
-    const groupedData = groupByKey(referentiel, 'filiere');
+    const dataGroupedByCategory = groupByKey(referentiel, 'category');
+    const dataGroupedByCategoryAndPlantId = dataGroupedByCategory.map(
+      (item) => {
+        const dataGroupedByPlantId = groupByKey(item.values, 'plantId');
+        return {
+          key: item.key,
+          values: dataGroupedByPlantId,
+        };
+      },
+    );
     res.json({
-      length: groupedData.length,
-      types: groupedData,
+      length: dataGroupedByCategory.length,
+      items: dataGroupedByCategoryAndPlantId,
     });
   });
 

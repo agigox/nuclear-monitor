@@ -8,6 +8,7 @@ import {
   selectCategoriesPending,
   selectError,
 } from '../../../redux/selectors/productionCategoriesSelectors';
+import { loadReferentiel } from '../../../redux/reducers/referentielReducer';
 
 function Body() {
   const pendingCategories = useSelector(selectCategoriesPending);
@@ -17,7 +18,7 @@ function Body() {
   const dispatch = useDispatch();
   useEffect(() => {
     const loadData = async () => {
-      // dispatch(appActions.referentielActions.loadReferentiel());
+      dispatch(loadReferentiel());
       dispatch(loadProductionCategories());
     };
 

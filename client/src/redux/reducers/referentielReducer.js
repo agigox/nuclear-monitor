@@ -1,36 +1,36 @@
-import { actionTypes } from '../actionTypes';
+/* eslint-disable no-param-reassign */
+import { createSlice } from '@reduxjs/toolkit';
+import { getReferentiel } from '../../api';
 
 const initialState = {
-  loading: true,
+  referentielPending: true,
   referentiel: [],
   error: '',
 };
-// eslint-disable-next-line default-param-last
-const referentielReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.LOAD_REFERENTIEL_REQUEST: {
-      return {
+export const referentielSlice = createSlice({
+  name: 'referentiel',
+  initialState,
+  reducers: {
+    loadReferentielSuccess: (state, action) => {
+      console.log(action);
+      state.referentiel = [...action.payload.items];
+      state.referentielPending = false;
+    },
+    loadReferentielFail: (state, action) => {
+      state = {
         ...state,
-      };
-    }
-    case actionTypes.REFERENTIEL_RECEIVED_SUCCESS: {
-      return {
-        ...state,
-        referentiel: [...action.data.types],
-        loading: false,
-      };
-    }
-    case actionTypes.REFERENTIEL_RECEIVED_FAIL: {
-      return {
-        ...state,
-        loading: false,
+        categoriesPending: false,
         error: action.message.message,
       };
-    }
+    },
+  },
+});
+export const { loadReferentielSuccess, loadReferentielFail } =
+  referentielSlice.actions;
 
-    default: {
-      return state;
-    }
-  }
+export const loadReferentiel = () => async (dispatch) => {
+  const response = await getReferentiel();
+  dispatch(loadReferentielSuccess(response));
 };
-export default referentielReducer;
+
+export default referentielSlice.reducer;

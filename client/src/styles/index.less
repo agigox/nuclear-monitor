@@ -120,6 +120,34 @@ body {
 }
 .main {
   .map-container {
+    position: relative;
     text-align: center;
+    .position {
+      .format-text(@font-family-nunito-regular, 14px, 18px, @global-color);
+      background-color: @color-white;
+      border-radius: 8px;
+      width: 126px;
+      height: 44px;
+      padding: 4px 12px;
+      div {
+        text-align: left;
+      }
+    }
   }
+}
+.up, .partiallyDown, .fullyDown {
+  height: 12px;
+  width: 12px;
+  border-radius: 2px;
+  position: relative;
+  bottom: 4px;
+}
+.up {
+  background-color: @up-color;
+}
+.partiallyDown {
+  background-color: @partiallyDown-color;
+}
+.fullyDown {
+  background-color: @fullyDown-color;
 }
