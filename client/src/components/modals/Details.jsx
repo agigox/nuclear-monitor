@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Close from '../../images/close.svg';
 import Up from '../../images/up.svg';
 import appActions from '../../redux/actions';
+import { selectCurrentAvailability } from '../../redux/selectors/crossSelectors';
 import DetailsItem from './DetailsItem';
 import ReactorSlider from './ReactorSlider';
 
@@ -71,7 +72,7 @@ const CustomRow = styled(Row)`
 `;
 
 function Details() {
-  const currentAvailability = useSelector((state) => state.cross.currentAvailability);
+  const currentAvailability = useSelector(selectCurrentAvailability());
 
   if (!currentAvailability) {
     return null;

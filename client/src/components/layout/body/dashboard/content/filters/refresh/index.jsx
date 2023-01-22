@@ -2,18 +2,16 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReloadOutlined } from '@ant-design/icons';
 import { Col, Row } from 'antd';
-import appActions from '../../../../../../../redux/actions';
 import RefreshText from './RefreshText';
 import Buttons from '../../../../../../utils/Buttons';
+import { selectCategoriesPending } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
+import { refreshProductionCategories } from '../../../../../../../redux/reducers/productionCategoriesReducer';
 
 function RefreshDate() {
-  const unavailabilitiesRefresh = useSelector(
-    (state) => state.unavailabilities.loadings.unavailabilitiesRefresh,
-  );
+  const categoriesPending = useSelector(selectCategoriesPending);
   const dispatch = useDispatch();
-  const refreshUnavailabilities = async () => {
-    console.log('hello');
-    dispatch(appActions.unavailabilitiesActions.refreshUnavailabilities());
+  const handleClick = async () => {
+    dispatch(refreshProductionCategories());
   };
 
   return (
@@ -22,8 +20,8 @@ function RefreshDate() {
         <Buttons
           styling="refresh"
           icon={<ReloadOutlined />}
-          loading={unavailabilitiesRefresh}
-          clickHandler={() => refreshUnavailabilities()}
+          loading={categoriesPending}
+          clickHandler={() => handleClick()}
         />
       </Col>
       <Col>

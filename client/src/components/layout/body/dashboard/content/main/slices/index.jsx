@@ -1,15 +1,15 @@
 import { Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { selectCurrentUnavailabilities } from '../../../../../../../redux/selectors/crossSelectors';
 import UnavailabilitySlice from './Slice';
 
 function Slices() {
-  const unavailabilities = useSelector(
-    (state) => state.unavailabilities.unavailabilities,
-  );
+  const currentUnavailabilities = useSelector(selectCurrentUnavailabilities);
+  console.log(currentUnavailabilities);
   return (
     <Row>
-      {unavailabilities.map((unavailability) => {
+      {[].map((unavailability) => {
         const {
           plant,
           availabilities,

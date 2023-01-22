@@ -16,6 +16,7 @@ import {
   getProductionCategories,
 } from '../../api';
 import { actionTypes } from '../actionTypes';
+import { loadProductionCategoriesSuccess } from '../reducers/productionCategoriesReducer';
 
 function* fetchUnavailabilities() {
   try {
@@ -34,12 +35,10 @@ function* fetchReferentiel() {
   }
 }
 function* fetchProductionCategories() {
+  console.log('fetchProductionCategories');
   try {
     const data = yield getProductionCategories().then((response) => response);
-    yield put({
-      type: actionTypes.PRODUCTION_CATEGORIES_RECEIVED_SUCCESS,
-      data,
-    });
+    yield put(loadProductionCategoriesSuccess(data));
   } catch (e) {
     yield put({
       type: actionTypes.PRODUCTION_CATEGORIES_RECEIVED_FAIL,

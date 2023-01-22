@@ -2,17 +2,17 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import SVGMap from '../../../../../../../images/map.svg';
+import { selectCurrentUnavailabilities } from '../../../../../../../redux/selectors/crossSelectors';
 import Marker from './Marker';
 
 function Map() {
-  const unavailabilities = useSelector(
-    (state) => state.unavailabilities.unavailabilities,
-  );
+  const currentUnavailabilities = useSelector(selectCurrentUnavailabilities);
+  console.log(currentUnavailabilities);
   return (
     <Row>
       <Col className="map-container" span={24}>
         <img src={SVGMap} alt="map" />
-        {unavailabilities.map((unavailability) => {
+        {[].map((unavailability) => {
           const {
             plant,
             availabilities,

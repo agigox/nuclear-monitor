@@ -1,37 +1,49 @@
-import { actionTypes } from '../actionTypes';
+/* eslint-disable no-param-reassign */
+import { createSlice } from '@reduxjs/toolkit';
+import moment from 'moment';
+import { getProductionCategories } from '../../api';
 
 const initialState = {
-  loading: true,
+  categoriesPending: true,
   length: 0,
-  items: [],
+  categories: [],
   error: '',
+  lastRefreshDate: '',
 };
-// eslint-disable-next-line default-param-last
-const productionCategoriesReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.LOAD_PRODUCTION_CATEGORIES_REQUEST: {
-      return {
+
+export const productionCategoriesSlice = createSlice({
+  name: 'productionCategories',
+  initialState,
+  reducers: {
+    loadProductionCategoriesSuccess: (state, action) => {
+      state.categories = [...action.payload.items];
+      state.categoriesPending = false;
+      state.lastRefreshDate = moment().format('DD/MM/YYYY - HH[h]mm');
+    },
+    loadProductionCategoriesFail: (state, action) => {
+      state = {
         ...state,
-      };
-    }
-    case actionTypes.PRODUCTION_CATEGORIES_RECEIVED_SUCCESS: {
-      return {
-        ...state,
-        items: [...action.data.items],
-        loading: false,
-      };
-    }
-    case actionTypes.PRODUCTION_CATEGORIES_RECEIVED_FAIL: {
-      return {
-        ...state,
-        loading: false,
+        categoriesPending: false,
         error: action.message.message,
       };
-    }
+    },
+    refreshProductionCategories: (state) => {
+      state.categoriesPending = true;
+    },
+  },
+});
 
-    default: {
-      return state;
-    }
-  }
+export const { loadProductionCategoriesSuccess, loadProductionCategoriesFail } =
+  productionCategoriesSlice.actions;
+
+export const loadProductionCategories = () => async (dispatch) => {
+  const response = await getProductionCategories();
+  dispatch(loadProductionCategoriesSuccess(response));
 };
-export default productionCategoriesReducer;
+export const refreshProductionCategories = () => async (dispatch) => {
+  dispatch(refreshProductionCategories());
+  const response = await getProductionCategories();
+  dispatch(loadProductionCategoriesSuccess(response));
+};
+
+export default productionCategoriesSlice.reducer;

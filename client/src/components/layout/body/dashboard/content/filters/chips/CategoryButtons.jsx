@@ -3,15 +3,17 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductionCategories } from '../../../../../../../enums/ProductionCategories';
-import appActions from '../../../../../../../redux/actions';
+import { changeCurrentCategory } from '../../../../../../../redux/reducers/crossReducer';
+import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
+import { selectCategories } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 import Buttons from '../../../../../../utils/Buttons';
 
-function TypeButtons() {
+function CategoryButtons() {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.productionCategories.items);
-  const currentCategory = useSelector((state) => state.cross.currentCategory);
-  const changeCurrentCategory = (category) => {
-    dispatch(appActions.crossActions.changeCurrentCategory(category));
+  const categories = useSelector(selectCategories);
+  const currentCategory = useSelector(selectCurrentCategory);
+  const handleClick = (category) => {
+    dispatch(changeCurrentCategory(category));
   };
   return (
     <Row>
@@ -19,7 +21,7 @@ function TypeButtons() {
         <Col key={category.key}>
           <Buttons
             styling="chips"
-            clickHandler={() => changeCurrentCategory(category.key)}
+            clickHandler={() => handleClick(category.key)}
             active={currentCategory === category.key}
           >
             {ProductionCategories.hasOwnProperty(category.key)
@@ -32,4 +34,4 @@ function TypeButtons() {
   );
 }
 
-export default TypeButtons;
+export default CategoryButtons;

@@ -1,47 +1,32 @@
-import { actionTypes } from '../actionTypes';
+/* eslint-disable no-param-reassign */
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  mode: 'map',
+  displayMode: 'MAP',
   currentAvailability: null,
   currentCategory: 'HYDRAULICS',
 };
-// eslint-disable-next-line default-param-last
-const crossReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.CHANGE_DISPLAY_MODE: {
-      return {
-        ...state,
-        mode: action.payload,
-      };
-    }
-    case actionTypes.CHANGE_CURRENT_AVAILABILITY: {
-      return {
-        ...state,
-        currentAvailability: action.payload,
-      };
-    }
-    case actionTypes.RESET_CURRENT_AVAILABILITY: {
-      return {
-        ...state,
-        currentAvailability: null,
-      };
-    }
-    case actionTypes.CHANGE_CURRENT_CATEGORY: {
-      return {
-        ...state,
-        currentCategory: action.payload,
-      };
-    }
-    case actionTypes.RESET_CURRENT_CATEGORY: {
-      return {
-        ...state,
-        currentCategory: null,
-      };
-    }
 
-    default: {
-      return state;
-    }
-  }
-};
-export default crossReducer;
+export const crossSlice = createSlice({
+  name: 'cross',
+  initialState,
+  reducers: {
+    changeDisplayMode: (state, action) => {
+      state.displayMode = action.payload;
+    },
+    changeCurrentAvailability: (state, action) => {
+      state.currentAvailability = action.payload;
+    },
+    changeCurrentCategory: (state, action) => {
+      state.currentCategory = action.payload;
+    },
+  },
+});
+
+export const {
+  changeDisplayMode,
+  changeCurrentAvailability,
+  changeCurrentCategory,
+} = crossSlice.actions;
+
+export default crossSlice.reducer;

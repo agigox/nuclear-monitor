@@ -56,12 +56,14 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
     const valuesOfDataGroupedByProductionType = item.values;
     const a = groupByKey(valuesOfDataGroupedByProductionType, 'productionType');
     const newValues = [...a];
-    console.log(item.key);
-
+    const valuesGroupedByUnitNamePartitioned = newValues.map((val) => ({
+      ...val,
+      partition: fullPartialSplit(val.values),
+    }));
     // const a = valuesOfDataGroupedByProductionType.map
     return {
       key: item.key,
-      values: newValues,
+      values: valuesGroupedByUnitNamePartitioned,
     };
   });
 

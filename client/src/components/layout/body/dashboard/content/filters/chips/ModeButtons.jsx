@@ -2,8 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'antd';
 import styled from '@emotion/styled';
-import appActions from '../../../../../../../redux/actions';
 import Buttons from '../../../../../../utils/Buttons';
+import { changeDisplayMode } from '../../../../../../../redux/reducers/crossReducer';
+import { DisplayModes } from '../../../../../../../enums/DisplayModes';
+import { selectDisplayMode } from '../../../../../../../redux/selectors/crossSelectors';
 
 const StyledRow = styled(Row)`
   @media only screen and (max-width: 767px) {
@@ -20,9 +22,9 @@ const StyledRow = styled(Row)`
 
 function ModeButtons() {
   const dispatch = useDispatch();
-  const mode = useSelector((state) => state.cross.mode);
-  const switchMode = (displayMode) => {
-    dispatch(appActions.crossActions.changeDisplayMode(displayMode));
+  const displayMode = useSelector(selectDisplayMode);
+  const handleClick = (mode) => {
+    dispatch(changeDisplayMode(mode));
   };
 
   return (
@@ -30,8 +32,8 @@ function ModeButtons() {
       <Col>
         <Buttons
           styling="chips"
-          clickHandler={() => switchMode('map')}
-          active={mode === 'map'}
+          clickHandler={() => handleClick(DisplayModes.MAP)}
+          active={displayMode === DisplayModes.MAP}
         >
           Carte
         </Buttons>
@@ -39,8 +41,8 @@ function ModeButtons() {
       <Col>
         <Buttons
           styling="chips"
-          clickHandler={() => switchMode('slices')}
-          active={mode === 'slices'}
+          clickHandler={() => handleClick(DisplayModes.SLICES)}
+          active={displayMode === DisplayModes.SLICES}
         >
           Tranches
         </Buttons>
