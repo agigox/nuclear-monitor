@@ -12,7 +12,6 @@ export const referentielSlice = createSlice({
   initialState,
   reducers: {
     loadReferentielSuccess: (state, action) => {
-      console.log(action);
       state.referentiel = [...action.payload.items];
       state.referentielPending = false;
     },

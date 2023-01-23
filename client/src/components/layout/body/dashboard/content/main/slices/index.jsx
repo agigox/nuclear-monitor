@@ -1,30 +1,19 @@
-import { Row } from 'antd';
+import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectCurrentUnavailabilities } from '../../../../../../../redux/selectors/crossSelectors';
-import UnavailabilitySlice from './Slice';
+import { ProductionCategories } from '../../../../../../../enums/ProductionCategories';
+import { selectCurrentCategory } from '../../../../../../../redux/selectors/referentielSelectors';
+import SlicesContent from './SlicesContent';
 
 function Slices() {
-  const currentUnavailabilities = useSelector(selectCurrentUnavailabilities);
-  console.log(currentUnavailabilities);
+  const currentCategory = useSelector(selectCurrentCategory);
+
   return (
     <Row>
-      {[].map((unavailability) => {
-        const {
-          plant,
-          availabilities,
-          unavailabilities: { fullyDown, partiallyDown },
-        } = unavailability;
-        return (
-          <UnavailabilitySlice
-            key={plant}
-            plant={plant}
-            availabilities={availabilities}
-            fullyDown={fullyDown}
-            partiallyDown={partiallyDown}
-          />
-        );
-      })}
+      <Col span={24}>{`Filière ${ProductionCategories[currentCategory]}`}</Col>
+      <Col psan={24}>
+        <SlicesContent />
+      </Col>
     </Row>
   );
 }

@@ -10,7 +10,7 @@ function TopSider() {
         <TopSiderBody />
       </Col>
       <Col>
-        <Buttons styling="summary">Total : 65</Buttons>
+        <Buttons styling="summary">Part de capacité disponible : 68 %</Buttons>
       </Col>
     </Row>
   );

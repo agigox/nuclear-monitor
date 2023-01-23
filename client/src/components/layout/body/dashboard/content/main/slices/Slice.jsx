@@ -1,46 +1,32 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
-import styled from '@emotion/styled';
+import { Col, Row } from 'antd';
 import React from 'react';
-import _ from 'lodash';
-import SubSlice from './SubSlice';
+import { useSelector } from 'react-redux';
+import {
+  selectFullyDownByPlant,
+  selectPartiallyDownByPlant,
+} from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 
-const Wrapper = styled.div`
-  background: #f4f4f4;
-  border: 1px solid #d9d9d9;
-  border-radius: 10px;
-  width: 100px;
-  height: max-content;
-  .plantName {
-    text-align: center;
-    text-transform: uppercase;
-    padding: 6px;
-    height: 25px;
-    font-size: 12px;
-    font-weight: bold;
-  }
-  .central {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-`;
-function UnavailabilitySlice(props) {
-  const { plant, availabilities, fullyDown, partiallyDown } = props;
-
+function Slice({ name }) {
+  const fullyDownByPlant = useSelector((state) =>
+    selectFullyDownByPlant(state, name),
+  );
+  const partiallyDownByPlant = useSelector((state) =>
+    selectPartiallyDownByPlant(state, name),
+  );
   return (
-    <Wrapper>
-      <div className="plantName">{plant.replace('Saint', 'St')}</div>
-      <div className="central">
-        {_.sortBy(
-          [...availabilities, ...fullyDown, ...partiallyDown],
-          'name',
-        ).map((availability) => (
-          <SubSlice key={availability.name} availability={availability} />
+    <Row className="handle">
+      <Col>{name}</Col>
+      <hr />
+      <Col>
+        {fullyDownByPlant.map((item) => (
+          <div>{item.unit.name}</div>
         ))}
-      </div>
-    </Wrapper>
+        {partiallyDownByPlant.map((item) => (
+          <div>{item.unit.name}</div>
+        ))}
+      </Col>
+    </Row>
   );
 }
 
-export default UnavailabilitySlice;
+export default Slice;

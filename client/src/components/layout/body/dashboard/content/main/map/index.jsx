@@ -8,15 +8,18 @@ import Location from '../../../../../../../images/location_on.svg';
 
 function Map() {
   const currentReferentiel = useSelector(selectCurrentReferentiel);
+
   const { values } = currentReferentiel;
+
   return (
     <Row>
       <Col className="map-container" span={24}>
         <img src={SVGMap} alt="map" />
-        {values.map((unavailability) => {
-          const { key } = unavailability;
+        {values.map((referentielIntem) => {
+          const { values: valuesRefrentielItem, key } = referentielIntem;
           return (
             <Row
+              key={key}
               className={`${key.toLowerCase().replace(/ |-/g, '')} mark-city`}
             >
               <Col>
@@ -24,10 +27,8 @@ function Map() {
               </Col>
               <Col>
                 <Position
-                  key={key}
                   plant={key}
-                  availabilities={2}
-                  fullyDown={2}
+                  availabilities={valuesRefrentielItem.length}
                   partiallyDown={2}
                 />
               </Col>

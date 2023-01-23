@@ -35,7 +35,6 @@ function* fetchReferentiel() {
   }
 }
 function* fetchProductionCategories() {
-  console.log('fetchProductionCategories');
   try {
     const data = yield getProductionCategories().then((response) => response);
     yield put(loadProductionCategoriesSuccess(data));

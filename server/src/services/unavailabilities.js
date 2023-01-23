@@ -36,6 +36,7 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
     const values = _.cloneDeep(item.values);
     const productionType = production_type.split('-').join('_');
     const productionCategory = getProductionCategory(productionType);
+
     return {
       creationDate: item.creation_date,
       updatedDate: item.updated_date,
@@ -53,9 +54,17 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
     'productionCategory',
   ).filter((item) => item.key !== ProductionCategories.OTHER);
   const tmp = dataGroupedByProductionCategory.map((item) => {
-    const valuesOfDataGroupedByProductionType = item.values;
+    let valuesOfDataGroupedByProductionType = item.values;
+    const sorted = valuesOfDataGroupedByProductionType.sort(
+      (a, b) => new Date(b.updatedDate) - new Date(a.updatedDate),
+    );
+    const uniqData = _.uniqBy(sorted, 'unit.name').filter(
+      (gs) => gs.unit.name.indexOf('FESSENHEIM') === -1,
+    );
+    valuesOfDataGroupedByProductionType = [...uniqData];
     const a = groupByKey(valuesOfDataGroupedByProductionType, 'productionType');
     const newValues = [...a];
+
     const valuesGroupedByUnitNamePartitioned = newValues.map((val) => ({
       ...val,
       partition: fullPartialSplit(val.values),
@@ -72,6 +81,7 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
     dataWithUnderscore,
     'productionType',
   );
+
   // group the values property of the result by unit name
   // eslint-disable-next-line no-unused-vars
   const dataGroupedByProductionTypeAndUnitName =

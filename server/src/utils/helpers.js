@@ -85,13 +85,19 @@ export const groupByKey = (array, key) =>
     .value();
 
 export function partitionArray(array, isValid) {
-  return array.reduce(
+  // eslint-disable-next-line no-shadow
+  const result = array.reduce(
     ([fullyDown, partiallyDown], elem) =>
       isValid(elem)
         ? [[...fullyDown, elem], partiallyDown]
         : [fullyDown, [...partiallyDown, elem]],
     [[], []],
   );
+  console.log('-------------------');
+  console.log(result);
+  console.log('-------------------');
+  // result.push(['Amine TABOU']);
+  return result;
 }
 
 export const fullPartialSplit = (array) => {
@@ -106,13 +112,14 @@ export const fullPartialSplit = (array) => {
     );
     return { ...item, availableCapacitySum, unavailableCapacitySum };
   });
-  const [fullyDown, partiallyDown] = partitionArray(
+  const [fullyDown, partiallyDown, name] = partitionArray(
     valuesSumed,
     (e) => e.availableCapacitySum === 0,
   );
   return {
     partiallyDown,
     fullyDown,
+    name,
   };
 };
 
