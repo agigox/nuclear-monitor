@@ -124,7 +124,8 @@ export const fullPartialSplit = (array) => {
 };
 
 // eslint-disable-next-line consistent-return
-export const getProductionCategory = (productionCategory) => {
+export const getProductionCategory = (productionCategory) =>
+  /*
   if (
     [
       ProductionTypes.FOSSIL_BROWN_COAL_LIGNITE,
@@ -154,5 +155,5 @@ export const getProductionCategory = (productionCategory) => {
   ) {
     return ProductionCategories.WIND;
   }
-  return productionCategory;
-};
+  */
+  productionCategory;

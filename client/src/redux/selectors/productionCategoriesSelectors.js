@@ -5,6 +5,8 @@ import { selectCurrentCategory } from './referentielSelectors';
 // eslint-disable-next-line import/prefer-default-export
 export const selectCategoriesPending = (state) =>
   state.productionCategories.categoriesPending;
+export const selectCategoriesRefreshPending = (state) =>
+  state.productionCategories.categoriesRefreshPending;
 export const selectLength = (state) => state.productionCategories.length;
 export const selectCategories = (state) =>
   state.productionCategories.categories;
@@ -103,7 +105,7 @@ export const selectFullyDownByPlant = createSelector(
   [selectCurrentFullyDown, (state, plant) => plant],
   (fullyDowns, plant) => {
     const newFullyDowns = fullyDowns.filter(
-      (fd) => fd.unit.name.indexOf(plant) >= 0,
+      (fd) => fd.name.indexOf(plant) >= 0,
     );
     return newFullyDowns;
   },
@@ -112,7 +114,7 @@ export const selectPartiallyDownByPlant = createSelector(
   [selectCurrentPartiallyDown, (state, plant) => plant],
   (partiallyDowns, plant) => {
     const newPartiallyDownsDowns = partiallyDowns.filter(
-      (fd) => fd.unit.name.indexOf(plant) >= 0,
+      (fd) => fd.name.indexOf(plant) >= 0,
     );
     return newPartiallyDownsDowns;
   },

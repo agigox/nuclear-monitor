@@ -9,6 +9,7 @@ const initialState = {
   categories: [],
   error: '',
   lastRefreshDate: '',
+  categoriesRefreshPending: false,
 };
 
 export const productionCategoriesSlice = createSlice({
@@ -27,23 +28,32 @@ export const productionCategoriesSlice = createSlice({
         error: action.message.message,
       };
     },
-    refreshProductionCategories: (state) => {
-      state.categoriesPending = true;
+    refreshProductionCategoriesRequest: (state) => {
+      state.categoriesRefreshPending = true;
+    },
+    refreshProductionCategoriesSuccess: (state, action) => {
+      state.categories = [...action.payload.items];
+      state.lastRefreshDate = moment().format('DD/MM/YYYY - HH[h]mm');
+      state.categoriesRefreshPending = false;
     },
   },
 });
 
-export const { loadProductionCategoriesSuccess, loadProductionCategoriesFail } =
-  productionCategoriesSlice.actions;
+export const {
+  loadProductionCategoriesSuccess,
+  loadProductionCategoriesFail,
+  refreshProductionCategoriesSuccess,
+  refreshProductionCategoriesRequest,
+} = productionCategoriesSlice.actions;
 
 export const loadProductionCategories = () => async (dispatch) => {
   const response = await getProductionCategories();
   dispatch(loadProductionCategoriesSuccess(response));
 };
 export const refreshProductionCategories = () => async (dispatch) => {
-  dispatch(refreshProductionCategories());
+  dispatch(refreshProductionCategoriesRequest());
   const response = await getProductionCategories();
-  dispatch(loadProductionCategoriesSuccess(response));
+  dispatch(refreshProductionCategoriesSuccess(response));
 };
 
 export default productionCategoriesSlice.reducer;

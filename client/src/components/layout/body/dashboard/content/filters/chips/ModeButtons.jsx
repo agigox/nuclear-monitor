@@ -31,7 +31,7 @@ function ModeButtons() {
     <StyledRow align="middle" justify="space-between">
       <Col>
         <Buttons
-          styling="chips"
+          styling="chips carte"
           clickHandler={() => handleClick(DisplayModes.MAP)}
           active={displayMode === DisplayModes.MAP}
         >
@@ -40,7 +40,7 @@ function ModeButtons() {
       </Col>
       <Col>
         <Buttons
-          styling="chips"
+          styling="chips tranches"
           clickHandler={() => handleClick(DisplayModes.SLICES)}
           active={displayMode === DisplayModes.SLICES}
         >

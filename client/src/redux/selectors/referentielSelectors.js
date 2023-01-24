@@ -55,3 +55,15 @@ export const selectCurrentPower = createSelector(
     }, 0);
   },
 );
+
+export const selectReactorsByPlant = createSelector(
+  [selectCurrentReferentiel, (state, plant) => plant],
+  (referentiel, plant) => {
+    let result = referentiel.values.find((item) => item.key === plant);
+    if (_.isUndefined(result)) {
+      result = { key: '', values: [] };
+    }
+
+    return result;
+  },
+);

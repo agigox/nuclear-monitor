@@ -36,13 +36,12 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
     const values = _.cloneDeep(item.values);
     const productionType = production_type.split('-').join('_');
     const productionCategory = getProductionCategory(productionType);
-
     return {
       creationDate: item.creation_date,
       updatedDate: item.updated_date,
       startDate: item.start_date,
       endDate: item.end_date,
-      unit,
+      name: unit.name,
       values,
       reason: item.reason,
       productionType,
@@ -58,8 +57,8 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
     const sorted = valuesOfDataGroupedByProductionType.sort(
       (a, b) => new Date(b.updatedDate) - new Date(a.updatedDate),
     );
-    const uniqData = _.uniqBy(sorted, 'unit.name').filter(
-      (gs) => gs.unit.name.indexOf('FESSENHEIM') === -1,
+    const uniqData = _.uniqBy(sorted, 'name').filter(
+      (gs) => gs.name.indexOf('FESSENHEIM') === -1,
     );
     valuesOfDataGroupedByProductionType = [...uniqData];
     const a = groupByKey(valuesOfDataGroupedByProductionType, 'productionType');

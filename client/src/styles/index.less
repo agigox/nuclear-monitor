@@ -17,6 +17,14 @@ body {
   .format-text(@font-family-nunito-bold, 13px, 28px);
   border-radius: 4px;
 }
+.ant-card {
+  .ant-card-body {
+    background: @color-white;
+    box-shadow: 0px 4px 25px rgba(0, 2, 44, 0.08);
+    border-radius: 8px;
+    padding: 33.5px;
+  }
+}
 
 /*My code*/
 
@@ -91,15 +99,9 @@ body {
       .format-text(@font-family-nunito-extra-bold, 48px, 64px, @color-white);
     }
   }
-  .refresh-text {
-    .text-1 {
-      .format-text(@font-family-nunito-regular, 14px, 18px, @color-white);
-    }
-    .text-2 {
-      .format-text(@font-family-nunito-bold, 16px, 22px, @color-white);
-    }
-  }
+  
 }
+/*
 .text-1 {
   font-family: @font-family-inter-regular;
   font-style: normal;
@@ -118,6 +120,7 @@ body {
 
   color: #757575;
 }
+*/
 .main {
   .map-container {
     position: relative;
@@ -132,6 +135,16 @@ body {
       div {
         text-align: left;
       }
+    }
+  }
+}
+.refresh {
+  .refresh-text {
+    .text-1 {
+      .format-text(@font-family-nunito-regular, 14px, 18px, @color-white);
+    }
+    .text-2 {
+      .format-text(@font-family-nunito-bold, 16px, 22px, @color-white);
     }
   }
 }

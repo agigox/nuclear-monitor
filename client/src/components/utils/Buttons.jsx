@@ -19,10 +19,19 @@ const StyledButton = styled(Button)`
       border: 1px solid #009dd1;
       color: #004d66;
     }
+    &.carte {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+    }
+    &.tranches {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
   }
   &.refresh {
     width: 54px;
     height: 48px;
+    padding: 12px 15px;
     border: 2px solid #ffffff;
     border-radius: 8px;
     background-color: transparent;

@@ -16,7 +16,7 @@ function CategoryButtons() {
     dispatch(changeCurrentCategory(category));
   };
   return (
-    <Row>
+    <Row gutter={[13, 0]}>
       {categories.map((category) => (
         <Col key={category.key}>
           <Buttons

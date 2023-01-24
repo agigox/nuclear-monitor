@@ -5,13 +5,13 @@ import TopSider from './top-sider';
 
 function Siders() {
   return (
-    <Row>
-      <Col span={24} className="handle">
+    <Row style={{ rowGap: '16px' }}>
+      <Col span={24}>
         <Card>
           <TopSider />
         </Card>
       </Col>
-      <Col span={24} className="handle">
+      <Col span={24}>
         <Card>
           <BottomSider />
         </Card>

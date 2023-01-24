@@ -8,11 +8,8 @@ import Main from './main';
 const StyledRow = styled(Row)`
   padding: 64px 95px;
   column-gap: 27px;
-  & > .overview-col {
-    flex-basis: 353px;
-  }
-  .main-row {
-    flex-direction: column;
+  .content-filters {
+    height: 48px;
   }
   @media only screen and (max-width: 767px) {
     flex-wrap: wrap;
@@ -25,8 +22,8 @@ const StyledRow = styled(Row)`
 `;
 function Content() {
   return (
-    <StyledRow>
-      <Col span={24}>
+    <StyledRow gutter={[0, 32]}>
+      <Col span={24} className="content-filters">
         <Row>
           <Col span={24}>
             <Filters />
@@ -34,11 +31,11 @@ function Content() {
         </Row>
       </Col>
       <Col span={24}>
-        <Row wrap={false}>
-          <Col flex="315px" className="handle">
+        <Row wrap={false} style={{ columnGap: '16px' }}>
+          <Col flex="315px">
             <Siders />
           </Col>
-          <Col flex="auto" className="handle">
+          <Col flex="auto">
             <Card>
               <Main />
             </Card>
