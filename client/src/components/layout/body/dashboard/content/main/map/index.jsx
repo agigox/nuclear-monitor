@@ -21,8 +21,9 @@ function Map() {
             <Row
               key={key}
               className={`${key.toLowerCase().replace(/ |-/g, '')} mark-city`}
+              style={{ columnGap: '5px' }}
             >
-              <Col>
+              <Col style={{ alignSelf: 'center' }}>
                 <img src={Location} alt="indicator" />
               </Col>
               <Col>

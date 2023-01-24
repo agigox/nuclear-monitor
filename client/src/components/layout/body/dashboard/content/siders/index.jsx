@@ -7,12 +7,12 @@ function Siders() {
   return (
     <Row style={{ rowGap: '16px' }}>
       <Col span={24}>
-        <Card>
+        <Card bordered={false}>
           <TopSider />
         </Card>
       </Col>
       <Col span={24}>
-        <Card>
+        <Card bordered={false}>
           <BottomSider />
         </Card>
       </Col>

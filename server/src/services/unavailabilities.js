@@ -44,6 +44,7 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
       name: unit.name,
       values,
       reason: item.reason,
+      installedCapacity: unit.installed_capacity,
       productionType,
       productionCategory,
     };

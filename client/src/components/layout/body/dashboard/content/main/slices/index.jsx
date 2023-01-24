@@ -9,9 +9,12 @@ function Slices() {
   const currentCategory = useSelector(selectCurrentCategory);
 
   return (
-    <Row>
-      <Col span={24}>{`Filière ${ProductionCategories[currentCategory]}`}</Col>
-      <Col psan={24}>
+    <Row className="slices" style={{ rowGap: '17px' }}>
+      <Col
+        span={24}
+        className="slices-title-page"
+      >{`Filière ${ProductionCategories[currentCategory]}`}</Col>
+      <Col span={24}>
         <SlicesContent />
       </Col>
     </Row>

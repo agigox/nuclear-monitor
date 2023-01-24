@@ -93,9 +93,6 @@ export function partitionArray(array, isValid) {
         : [fullyDown, [...partiallyDown, elem]],
     [[], []],
   );
-  console.log('-------------------');
-  console.log(result);
-  console.log('-------------------');
   // result.push(['Amine TABOU']);
   return result;
 }

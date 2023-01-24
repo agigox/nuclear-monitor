@@ -203,7 +203,6 @@ const handleDatav2 = (data) => {
 
       resultApi.push(toPush);
     });
-  // console.log(plantsUp);
   plantsUp.forEach((plantUp) => {
     const isPlantUp = resultApi.find(
       (plantApi) => plantApi.plant === plantUp.plant,

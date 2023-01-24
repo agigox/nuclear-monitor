@@ -53,8 +53,9 @@ export const plantsUp = readCSV(
 export const referentiel = readCSV(
   fs.readFileSync(path.join(__dirname, './referentielv1.csv'), 'utf8'),
 ).map((item) => {
-  console.log(item)
   return ({
   ...item,
-  netPowerMW: Number(item.netPower_MW)
+  installedCapacity: Number(item.netPower_MW),
+  unavailableCapacitySum: 0,
+  availableCapacitySum: 0
 })})

@@ -7,6 +7,7 @@ import {
   selectPartiallyDownByPlant,
 } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 import { selectReactorsByPlant } from '../../../../../../../redux/selectors/referentielSelectors';
+import SliceContent from './SliceContent';
 
 function Slice({ name }) {
   const fullyDownByPlant = useSelector((state) =>
@@ -18,6 +19,7 @@ function Slice({ name }) {
   const reactorsPlant = useSelector((state) =>
     selectReactorsByPlant(state, name),
   );
+  console.log(partiallyDownByPlant);
 
   const result1 = _.chain([
     ...fullyDownByPlant,
@@ -26,8 +28,9 @@ function Slice({ name }) {
   ])
     .map((item) => ({
       name: item.name,
-      unavailableCapacitySum:
-        'netPowerMW' in item ? 0 : Number(item.unavailableCapacitySum),
+      unavailableCapacitySum: item.unavailableCapacitySum,
+      availableCapacitySum: item.availableCapacitySum,
+      installedCapacity: item.installedCapacity,
     }))
     .sortBy('name')
     .uniq('name')
@@ -35,15 +38,21 @@ function Slice({ name }) {
   // .sortBy('name');
 
   return (
-    <Row className="handle">
-      <Col>{name}</Col>
-      <hr />
-      <Col>
-        {result1.map((item) => (
-          <div>
-            {item.name} ({item.unavailableCapacitySum})
-          </div>
-        ))}
+    <Row className="slice">
+      <Col className="slice-title" span={24}>
+        {name}
+      </Col>
+      <Col span={24}>
+        <Row className="slice-content-row">
+          {result1.map((item) => (
+            <SliceContent
+              name={item.name}
+              unavailableCapacitySum={item.unavailableCapacitySum}
+              availableCapacitySum={item.availableCapacitySum}
+              installedCapacity={item.installedCapacity}
+            />
+          ))}
+        </Row>
       </Col>
     </Row>
   );
