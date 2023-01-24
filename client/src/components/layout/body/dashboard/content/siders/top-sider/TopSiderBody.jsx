@@ -8,21 +8,48 @@ import {
 } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 import { selectCurrentPower } from '../../../../../../../redux/selectors/referentielSelectors';
 
+/*
+291px --> currentPower
+x --> unavailable
+x = Math.round((unavailable * 291) / currentPower)
+y = 291 - Math.round((unavailable * 291) / currentPower)
+*/
 const StyledRow = styled(Row)`
   height: 291px;
-  .up-percent {
-    width: 70px;
-    height: ${(props) =>
-      291 - Math.round((props.unavailable * 291) / props.currentPower)}px;
-    background: linear-gradient(180deg, #34c601 0%, #46eb57 100%);
-    border-radius: 10px 10px 0px 0px;
+  .percents {
+    flex-direction: column;
+    .up-percent {
+      flex-basis: ${(props) =>
+        291 - Math.round((props.unavailable * 291) / props.currentPower)}px;
+      background: linear-gradient(180deg, #34c601 0%, #46eb57 100%);
+      border-radius: 10px 10px 0px 0px;
+      width: 100%;
+    }
+    .down-percent {
+      flex-basis: ${(props) =>
+        Math.round((props.unavailable * 291) / props.currentPower)}px;
+      width: 100%;
+      background: #d0574f;
+      border-radius: 0px 0px 10px 10px;
+    }
   }
-  .down-percent {
-    width: 70px;
-    height: ${(props) =>
-      Math.round((props.unavailable * 291) / props.currentPower)}px;
-    background: #d0574f;
-    border-radius: 0px 0px 10px 10px;
+  .percents-text {
+    flex-direction: column;
+    .up-percent-text {
+      flex-basis: ${(props) =>
+        Math.round((props.unavailable * 291) / props.currentPower)}px;
+      width: 100%;
+    }
+    .down-percent-text {
+      flex-basis: ${(props) =>
+        291 - Math.round((props.unavailable * 291) / props.currentPower)}px;
+      border-radius: 0px 0px 10px 10px;
+      width: 100%;
+      .down-percent-text-row {
+        height: 100%;
+        align-content: flex-end;
+      }
+    }
   }
 `;
 function TopSiderBody() {
@@ -35,34 +62,58 @@ function TopSiderBody() {
 
   return (
     <StyledRow
+      className="top-sider-body"
       currentPower={currentPower}
       unavailable={currentFullyDownPower + currentPartiallyDownPower}
+      wrap={false}
     >
-      <Col>
-        <Row align="middle" gutter={13} wrap={false} style={{ margin: 0 }}>
-          <Col className="up-percent" flex="1 1 70px" />
-          <Col flex="1 1 auto">
+      <Col flex="70px">
+        <Row
+          align="middle"
+          gutter={13}
+          wrap={false}
+          style={{ margin: 0 }}
+          className="percents"
+        >
+          <Col className="up-percent" span={24} />
+          <Col className="down-percent" span={24} />
+        </Row>
+      </Col>
+      <Col flex="auto">
+        <Row
+          align="middle"
+          gutter={13}
+          wrap={false}
+          style={{ margin: 0 }}
+          className="percents-text"
+        >
+          <Col className="up-percent-text" span={24}>
             <Row>
-              <Col className="text-1" span={24}>
+              <Col span={24} className="text-1">
                 Capacité disponible
               </Col>
-              <Col className="text-2" span={24}>
-                {currentPower}
+              <Col span={24} className="text-2">
+                {(
+                  (currentPower -
+                    currentFullyDownPower -
+                    currentPartiallyDownPower) /
+                  1000
+                ).toFixed(1)}{' '}
+                GW
               </Col>
             </Row>
           </Col>
-        </Row>
-      </Col>
-      <Col>
-        <Row align="middle" gutter={13} wrap={false} style={{ margin: 0 }}>
-          <Col className="down-percent" flex="1 1 70px" />
-          <Col flex="1 1 auto">
-            <Row>
-              <Col className="text-1" span={24}>
+          <Col className="down-percent-text" span={24}>
+            <Row className="down-percent-text-row">
+              <Col span={24} className="text-1">
                 Indisponible
-              </Col>{' '}
-              <Col className="text-2" span={24}>
-                {currentFullyDownPower + currentPartiallyDownPower}
+              </Col>
+              <Col span={24} className="text-2">
+                {(
+                  (currentFullyDownPower + currentPartiallyDownPower) /
+                  1000
+                ).toFixed(1)}{' '}
+                GW
               </Col>
             </Row>
           </Col>

@@ -48,7 +48,7 @@ export const selectCurrentPower = createSelector(
     return result.values.reduce((accumulator, currentValue) => {
       const innerTotal = currentValue.values.reduce(
         (innerAccumulator, innerCurrentValue) =>
-          innerAccumulator + innerCurrentValue.netPowerMW,
+          innerAccumulator + innerCurrentValue.installedCapacity,
         0,
       );
       return accumulator + innerTotal;

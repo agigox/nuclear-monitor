@@ -12,7 +12,7 @@ function Siders() {
         </Card>
       </Col>
       <Col span={24}>
-        <Card bordered={false}>
+        <Card title="Moyens de production" bordered={false}>
           <BottomSider />
         </Card>
       </Col>

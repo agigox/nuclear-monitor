@@ -18,6 +18,14 @@ body {
   border-radius: 4px;
 }
 .ant-card {
+  .ant-card-head {
+    padding: 30px 24px 0;
+    .ant-card-head-title {
+      .format-text(@font-family-nunito-bold, 20px, 28px, @background-page-title);
+      font-weight: 700;
+    }
+  }
+  
   .ant-card-body {
     background: @color-white;
     box-shadow: 0px 4px 25px rgba(0, 2, 44, 0.08);
@@ -212,6 +220,7 @@ body {
     }
   }
 }
+
 .up, .partiallyDown, .fullyDown {
   height: 12px;
   width: 12px;
@@ -227,4 +236,35 @@ body {
 }
 .fullyDown {
   background-color: @fullyDown-color;
+}
+.percents-text {
+  .up-percent-text {
+    .text-1 {
+      .format-text(@font-family-nunito-bold, 20px, 28px, @background-page-title);
+    }
+    .text-2 {
+      .format-text(@font-family-nunito-bold, 36px, 48px, @background-page-title);
+      font-weight: 800;
+    }
+  }
+  .down-percent-text {
+    .text-1 {
+      .format-text(@font-family-nunito-regular, 16px, 22px, @background-page-title);
+      font-weight: 800;
+    }
+    .text-2 {
+      .format-text(@font-family-nunito-regular, 20px, 28px, @background-page-title);
+      font-weight: 700;
+    }
+  }
+}
+.bottom-sider-body {
+  .text-1 {
+    .format-text(@font-family-nunito-regular, 16px, 22px, @background-page-title);
+    font-weight: 800;
+  }
+  .text-2 {
+    .format-text(@font-family-nunito-regular, 36px, 48px, @background-page-title);
+    font-weight: 800;
+  }
 }
