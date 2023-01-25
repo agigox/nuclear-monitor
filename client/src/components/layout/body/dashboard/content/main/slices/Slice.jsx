@@ -20,6 +20,7 @@ function Slice({ name }) {
     selectReactorsByPlant(state, name),
   );
 
+  // eslint-disable-next-line no-unused-vars
   const result1 = _.chain([
     ...fullyDownByPlant,
     ...partiallyDownByPlant,
@@ -34,6 +35,18 @@ function Slice({ name }) {
     .sortBy('name')
     .uniq('name')
     .value();
+  const mapped = [
+    ...fullyDownByPlant,
+    ...partiallyDownByPlant,
+    ...reactorsPlant.values,
+  ].map((item) => ({
+    name: item.name,
+    unavailableCapacitySum: item.unavailableCapacitySum,
+    availableCapacitySum: item.availableCapacitySum,
+    installedCapacity: item.installedCapacity,
+  }));
+  const sorted = _.sortBy(mapped, 'name');
+  const uniqed = _.uniqBy(sorted, 'name');
   // .sortBy('name');
 
   return (
@@ -43,7 +56,7 @@ function Slice({ name }) {
       </Col>
       <Col span={24}>
         <Row className="slice-content-row">
-          {result1.map((item) => (
+          {uniqed.map((item) => (
             <SliceContent
               name={item.name}
               unavailableCapacitySum={item.unavailableCapacitySum}
