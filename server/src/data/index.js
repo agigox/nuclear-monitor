@@ -51,7 +51,7 @@ export const plantsUp = readCSV(
 });
 
 export const referentiel = readCSV(
-  fs.readFileSync(path.join(__dirname, './referentielv1.csv'), 'utf8'),
+  fs.readFileSync(path.join(__dirname, './referentielv4.csv'), 'utf8'),
 ).map((item) => {
   return ({
   ...item,

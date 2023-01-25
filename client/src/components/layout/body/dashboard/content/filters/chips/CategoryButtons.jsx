@@ -15,16 +15,9 @@ function CategoryButtons() {
   const handleClick = (category) => {
     dispatch(changeCurrentCategory(category));
   };
-  // eslint-disable-next-line no-unused-vars
-  const newCategories = categories.filter(
-    (c) =>
-      c.key === 'FOSSIL_GAS' ||
-      c.key === 'HYDRO_WATER_RESERVOIR' ||
-      c.key === 'NUCLEAR',
-  );
   return (
     <Row gutter={[13, 0]}>
-      {newCategories.map((category) => (
+      {categories.map((category) => (
         <Col key={category.key}>
           <Buttons
             styling="chips"

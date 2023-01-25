@@ -121,8 +121,19 @@ export const fullPartialSplit = (array) => {
 };
 
 // eslint-disable-next-line consistent-return
-export const getProductionCategory = (productionCategory) =>
-  /*
+export const getProductionCategory = (productionCategory) => {
+  if (
+    [
+      ProductionTypes.HYDRO_PUMPED_STORAGE,
+      ProductionTypes.HYDRO_RUN_OF_RIVER_AND_POUNDAGE,
+      ProductionTypes.HYDRO_WATER_RESERVOIR,
+    ].includes(productionCategory)
+  ) {
+    return ProductionCategories.HYDRAULICS;
+  }
+  return productionCategory;
+};
+/*
   if (
     [
       ProductionTypes.FOSSIL_BROWN_COAL_LIGNITE,
@@ -136,15 +147,7 @@ export const getProductionCategory = (productionCategory) =>
   ) {
     return ProductionCategories.FOSSIL;
   }
-  if (
-    [
-      ProductionTypes.HYDRO_PUMPED_STORAGE,
-      ProductionTypes.HYDRO_RUN_OF_RIVER_AND_POUNDAGE,
-      ProductionTypes.HYDRO_WATER_RESERVOIR,
-    ].includes(productionCategory)
-  ) {
-    return ProductionCategories.HYDRAULICS;
-  }
+  
   if (
     [ProductionTypes.WIND_OFFSHORE, ProductionTypes.WIND_ONSHORE].includes(
       productionCategory,
@@ -153,4 +156,3 @@ export const getProductionCategory = (productionCategory) =>
     return ProductionCategories.WIND;
   }
   */
-  productionCategory;

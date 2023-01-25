@@ -16,6 +16,7 @@ export const ProductionCategories = {
   HYDRO_PUMPED_STORAGE: 'Hydraulique STEP',
   HYDRO_RUN_OF_RIVER_AND_POUNDAGE: `Hydraulique fil de l'eau`,
   HYDRO_WATER_RESERVOIR: 'Hydraulique lacs',
+  HYDRAULICS: 'Hydraulique',
 
   MARINE: 'Marin',
   NUCLEAR: 'Nucléaire',

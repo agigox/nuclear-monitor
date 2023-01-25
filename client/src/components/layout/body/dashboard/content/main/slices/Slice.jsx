@@ -19,7 +19,6 @@ function Slice({ name }) {
   const reactorsPlant = useSelector((state) =>
     selectReactorsByPlant(state, name),
   );
-  console.log(partiallyDownByPlant);
 
   const result1 = _.chain([
     ...fullyDownByPlant,

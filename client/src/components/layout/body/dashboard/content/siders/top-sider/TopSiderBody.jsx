@@ -52,6 +52,15 @@ const StyledRow = styled(Row)`
     }
   }
 `;
+/*
+unavailable = currentFullyDownPower + currentPartiallyDownPower
+currentPower --> 100%
+unavailable --> x
+x = 100 - Math.round(((currentFullyDownPower + currentPartiallyDownPower) * 100) / currentPower)
+x --> unavailable
+x = Math.round((unavailable * 291) / currentPower)
+y = 291 - Math.round((unavailable * 291) / currentPower)
+*/
 function TopSiderBody() {
   const currentFullyDownPower = useSelector(selectCurrentFullyDownPower);
   const currentPartiallyDownPower = useSelector(
