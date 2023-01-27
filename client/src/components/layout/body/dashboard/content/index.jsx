@@ -19,6 +19,7 @@ const StyledRow = styled(Row)`
       background: #19252a;
       box-shadow: none;
       padding-top: 0;
+      border-radius: 0;
     }
   }
 

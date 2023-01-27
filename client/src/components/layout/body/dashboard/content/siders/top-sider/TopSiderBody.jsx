@@ -7,6 +7,7 @@ import {
   selectCurrentPartiallyDownPower,
 } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 import { selectCurrentPower } from '../../../../../../../redux/selectors/referentielSelectors';
+import { formatNumberToFr } from '../../../../../../../utils';
 
 /*
 291px --> currentPower
@@ -102,12 +103,12 @@ function TopSiderBody() {
                 Capacité disponible
               </Col>
               <Col span={24} className="text-2">
-                {(
+                {formatNumberToFr(
                   (currentPower -
                     currentFullyDownPower -
                     currentPartiallyDownPower) /
-                  1000
-                ).toFixed(1)}{' '}
+                    1000,
+                )}{' '}
                 GW
               </Col>
             </Row>
@@ -118,10 +119,9 @@ function TopSiderBody() {
                 Indisponible
               </Col>
               <Col span={24} className="text-2">
-                {(
-                  (currentFullyDownPower + currentPartiallyDownPower) /
-                  1000
-                ).toFixed(1)}{' '}
+                {formatNumberToFr(
+                  (currentFullyDownPower + currentPartiallyDownPower) / 1000,
+                )}{' '}
                 GW
               </Col>
             </Row>

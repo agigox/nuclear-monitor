@@ -12,8 +12,8 @@ function SlicesContent() {
   return (
     <Row className="slices-content">
       {valuesRefrentiel.map((ref) => (
-        <Col span={24} flex="94px" className="slices-content-col">
-          <Slice key={ref.key} name={ref.key} />
+        <Col span={24} flex="94px" className="slices-content-col" key={ref.key}>
+          <Slice name={ref.key} />
         </Col>
       ))}
     </Row>

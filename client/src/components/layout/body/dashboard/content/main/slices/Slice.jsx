@@ -7,6 +7,7 @@ import {
   selectPartiallyDownByPlant,
 } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 import { selectReactorsByPlant } from '../../../../../../../redux/selectors/referentielSelectors';
+import { orderByTwoFields } from '../../../../../../../utils';
 import SliceContent from './SliceContent';
 
 function Slice({ name }) {
@@ -20,22 +21,7 @@ function Slice({ name }) {
     selectReactorsByPlant(state, name),
   );
 
-  // eslint-disable-next-line no-unused-vars
-  const result1 = _.chain([
-    ...fullyDownByPlant,
-    ...partiallyDownByPlant,
-    ...reactorsPlant.values,
-  ])
-    .map((item) => ({
-      name: item.name,
-      unavailableCapacitySum: item.unavailableCapacitySum,
-      availableCapacitySum: item.availableCapacitySum,
-      installedCapacity: item.installedCapacity,
-    }))
-    .sortBy('name')
-    .uniq('name')
-    .value();
-  const mapped = [
+  const mappedItems = [
     ...fullyDownByPlant,
     ...partiallyDownByPlant,
     ...reactorsPlant.values,
@@ -45,9 +31,12 @@ function Slice({ name }) {
     availableCapacitySum: item.availableCapacitySum,
     installedCapacity: item.installedCapacity,
   }));
-  const sorted = _.sortBy(mapped, 'name');
-  const uniqed = _.uniqBy(sorted, 'name');
-  // .sortBy('name');
+  const orderedItems = orderByTwoFields(
+    mappedItems,
+    ['name', 'unavailableCapacitySum'],
+    ['asc', 'desc'],
+  );
+  const uniqItems = _.uniqBy(orderedItems, 'name');
 
   return (
     <Row className="slice">
@@ -56,11 +45,11 @@ function Slice({ name }) {
       </Col>
       <Col span={24}>
         <Row className="slice-content-row">
-          {uniqed.map((item) => (
+          {uniqItems.map((item) => (
             <SliceContent
+              key={item.name}
               name={item.name}
               unavailableCapacitySum={item.unavailableCapacitySum}
-              availableCapacitySum={item.availableCapacitySum}
               installedCapacity={item.installedCapacity}
             />
           ))}

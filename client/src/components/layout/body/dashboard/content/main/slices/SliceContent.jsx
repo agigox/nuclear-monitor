@@ -8,13 +8,7 @@ const StyledRow = styled(Row)`
     color: white;
   }
 `;
-function SliceContent({
-  name,
-  unavailableCapacitySum,
-  availableCapacitySum,
-  installedCapacity,
-}) {
-  console.log(availableCapacitySum);
+function SliceContent({ name, unavailableCapacitySum, installedCapacity }) {
   return (
     <StyledRow
       className="slice-content"

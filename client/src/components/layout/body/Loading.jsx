@@ -24,7 +24,7 @@ const StyledRow = styled(Row)`
 function Loading() {
   return (
     <StyledRow justify="space-around" align="middle">
-      <Spin size="large" tip="Push Nuke load data..." />
+      <Spin size="large" tip="Charge des données Push_Nuke..." />
     </StyledRow>
   );
 }

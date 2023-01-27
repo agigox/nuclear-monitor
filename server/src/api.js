@@ -21,6 +21,7 @@ import {
 import { getUnavailabilities, getUnavailabilitiesV2 } from './services';
 import { groupByKey } from './utils/helpers';
 import { getUnavailabilitiesV3 } from './services/unavailabilities';
+import { getProductions } from './services/productions';
 
 function serviceWrapper(service, environment) {
   return async function wrappedService(req, res, next) {
@@ -69,6 +70,7 @@ const buildApi = (environment) => {
     '/unavailabilitiesv3',
     serviceWrapper(getUnavailabilitiesV3, environment),
   );
+  app.get('/productions', serviceWrapper(getProductions, environment));
 
   if (process.env.NODE_ENV !== 'production') {
     app.get('/token', (req, res) => {

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 // eslint-disable-next-line import/prefer-default-export
 export function testScreenType(size) {
   const windowWidth = window.innerWidth;
@@ -56,3 +58,13 @@ export function format(v) {
 
 export const HEADER_HEIGHT = 64;
 export const DRAWER_WIDTH = 400;
+
+export function sortByTwoFields(data, fields) {
+  return _.sortBy(data, fields);
+}
+export function orderByTwoFields(data, fields, direction) {
+  return _.orderBy(data, fields, direction);
+}
+export function formatNumberToFr(number) {
+  return parseFloat(number.toFixed(1)).toLocaleString('fr-FR');
+}

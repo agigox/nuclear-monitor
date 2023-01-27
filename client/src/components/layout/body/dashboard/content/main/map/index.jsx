@@ -15,8 +15,8 @@ function Map() {
     <Row>
       <Col className="map-container" span={24}>
         <img src={SVGMap} alt="map" />
-        {values.map((referentielIntem) => {
-          const { values: valuesRefrentielItem, key } = referentielIntem;
+        {values.map((referentielItem) => {
+          const { values: valuesRefrentielItem, key } = referentielItem;
           return (
             <Row
               key={key}
@@ -30,7 +30,6 @@ function Map() {
                 <Position
                   plant={key}
                   availabilities={valuesRefrentielItem.length}
-                  partiallyDown={2}
                 />
               </Col>
             </Row>

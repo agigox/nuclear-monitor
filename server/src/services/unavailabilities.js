@@ -60,6 +60,7 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
     token: rteToken,
   });
   const data = response.generation_unavailabilities;
+
   // replace production_type with - by _
   // for example, we get from the API HYDRO_RUN-OF-RIVER_AND_POUNDAGE instead of HYDRO_RUN_OF_RIVER_AND_POUNDAGE
   // and get only necessary data from api
@@ -76,6 +77,7 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
       startDate: item.start_date,
       endDate: item.end_date,
       name: unit.name,
+      eicCode: unit.eic_code,
       values,
       reason: item.reason,
       installedCapacity: unit.installed_capacity,
@@ -87,17 +89,6 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
     dataWithUnderscore,
     'productionCategory',
   );
-  /*
-  finalResult.push({
-    key: 'ALL',
-    values: [
-      {
-        key: 'ALL',
-        values: groupDataWithUnderscore(dataWithUnderscore, 'all'),
-      },
-    ],
-  });
-  */
 
   return {
     length: finalResult.length,
