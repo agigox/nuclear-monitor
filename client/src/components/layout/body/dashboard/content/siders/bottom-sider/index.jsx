@@ -13,7 +13,9 @@ function BottomSider() {
         <BottomSiderBody />
       </Col>
       <Col span={24} style={{ textAlign: 'center' }}>
-        <Buttons styling="summary">Total : {currentTotal}</Buttons>
+        <Buttons styling="summary" disabled>
+          Total : {currentTotal}
+        </Buttons>
       </Col>
     </Row>
   );

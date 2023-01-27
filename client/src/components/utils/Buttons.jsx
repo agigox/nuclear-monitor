@@ -37,7 +37,15 @@ const StyledButton = styled(Button)`
     background-color: transparent;
   }
 `;
-function Buttons({ children, styling, active, clickHandler, icon, loading }) {
+function Buttons({
+  children,
+  styling,
+  active,
+  clickHandler,
+  icon,
+  loading,
+  disabled,
+}) {
   return (
     <StyledButton
       className={`${styling} ${active ? 'active' : ''} `}
@@ -45,6 +53,7 @@ function Buttons({ children, styling, active, clickHandler, icon, loading }) {
       onClick={clickHandler}
       icon={icon}
       loading={loading}
+      disabled={disabled}
     >
       {children}
     </StyledButton>

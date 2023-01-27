@@ -11,9 +11,11 @@ import AppLayout from './components/layout/AppLayout';
 moment.tz.setDefault('Europe/Paris');
 
 const Wrapper = styled.div`
-  width: 100%;
-  max-width: 1440px;
+  width: 1440px;
   margin: 0 auto;
+  @media only screen and (min-width: 1441px) {
+    width: 100%;
+  }
 `;
 function App() {
   return (

@@ -22,7 +22,7 @@ function TopSider() {
         <TopSiderBody />
       </Col>
       <Col span={24} style={{ textAlign: 'center' }}>
-        <Buttons styling="summary">
+        <Buttons styling="summary" disabled>
           Part de capacité disponible :{' '}
           {100 -
             Math.round(
