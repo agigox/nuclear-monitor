@@ -4,6 +4,8 @@ import referentielReducer from './referentielReducer';
 import productionCategoriesReducer from './productionCategoriesReducer';
 
 import crossReducer from './crossReducer';
+import productionsReducer from './productionsReducer';
+import pmaxReducer from './pmaxReducer';
 
 /*
 const rootReducer = combineReducers({
@@ -16,5 +18,7 @@ const rootReducer = combineReducers({
 export default {
   referentiel: referentielReducer,
   productionCategories: productionCategoriesReducer,
+  productions: productionsReducer,
+  pmax: pmaxReducer,
   cross: crossReducer,
 };

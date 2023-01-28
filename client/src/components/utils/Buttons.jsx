@@ -8,6 +8,7 @@ const StyledButton = styled(Button)`
     padding: 4px 8px;
     height: 36px;
     color: #004d66;
+    border: 0;
   }
   &.chips {
     line-height: 16px;

@@ -7,7 +7,7 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 
-import { plants, referentiel } from './data';
+import { plants, referentiel, pmax } from './data';
 import unavailabilitiesDump from './data/unavailabilitiesDump';
 import { RTEServiceError } from './rteApi';
 
@@ -71,6 +71,12 @@ const buildApi = (environment) => {
     serviceWrapper(getUnavailabilitiesV3, environment),
   );
   app.get('/productions', serviceWrapper(getProductions, environment));
+  app.get('/pmax', (req, res) => {
+    res.json({
+      length: pmax.length,
+      items: pmax,
+    });
+  });
 
   if (process.env.NODE_ENV !== 'production') {
     app.get('/token', (req, res) => {

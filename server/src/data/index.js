@@ -58,4 +58,12 @@ export const referentiel = readCSV(
   installedCapacity: Number(item.netPower_MW),
   unavailableCapacitySum: 0,
   availableCapacitySum: 0
-})})
+})});
+
+export const pmax = readCSV(
+  fs.readFileSync(path.join(__dirname, './pmax.csv'), 'utf8'),
+).map(({category, installed_capacity}) => {
+  return ({
+  key: category,
+  installedCapacity: Number(installed_capacity),
+})});

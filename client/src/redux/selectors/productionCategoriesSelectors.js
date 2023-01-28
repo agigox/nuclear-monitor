@@ -70,7 +70,7 @@ export const selectCurrentPartiallyDownTotal = createSelector(
     return result.partition.partiallyDown.length;
   },
 );
-export const selectCurrentFullyDownPower = createSelector(
+export const selectCurrentFullyDownCapacity = createSelector(
   selectCurrentProductionType,
   selectCurrentCategory,
   (cpt, cc) => {
@@ -85,7 +85,7 @@ export const selectCurrentFullyDownPower = createSelector(
     );
   },
 );
-export const selectCurrentPartiallyDownPower = createSelector(
+export const selectCurrentPartiallyDownCapacity = createSelector(
   selectCurrentProductionType,
   selectCurrentCategory,
   (cpt, cc) => {
@@ -99,6 +99,12 @@ export const selectCurrentPartiallyDownPower = createSelector(
       0,
     );
   },
+);
+
+export const selectCurrentDownCapacity = createSelector(
+  selectCurrentFullyDownCapacity,
+  selectCurrentPartiallyDownCapacity,
+  (cpt, cc) => cpt + cc,
 );
 
 export const selectFullyDownByPlant = createSelector(

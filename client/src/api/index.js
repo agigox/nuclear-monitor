@@ -27,3 +27,13 @@ export async function getProductionCategories() {
   const data = await res.json();
   return data;
 }
+export async function getProductions() {
+  const res = await doFetch(`${REACT_APP_NUCLEAR_MONITOR_API}/productions`);
+  const data = await res.json();
+  return data;
+}
+export async function getPmax() {
+  const res = await doFetch(`${REACT_APP_NUCLEAR_MONITOR_API}/pmax`);
+  const data = await res.json();
+  return data;
+}
