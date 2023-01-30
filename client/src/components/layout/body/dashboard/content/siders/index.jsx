@@ -1,6 +1,6 @@
 import { Card, Col, Row } from 'antd';
 import React from 'react';
-import BottomSider from './bottom-sider';
+// import BottomSider from './bottom-sider';
 import TopSider from './top-sider';
 
 function Siders() {
@@ -11,11 +11,11 @@ function Siders() {
           <TopSider />
         </Card>
       </Col>
-      <Col span={24}>
+      {/* <Col span={24}>
         <Card title="Moyens de production" bordered={false}>
           <BottomSider />
         </Card>
-      </Col>
+      </Col> */}
     </Row>
   );
 }

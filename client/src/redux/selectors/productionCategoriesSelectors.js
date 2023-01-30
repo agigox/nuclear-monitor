@@ -24,6 +24,15 @@ export const selectUnavailabilityOfCurrentCategoryByEicCode = createSelector(
   (unavailabilities, eicCode) =>
     unavailabilities.find((fd) => fd.eicCode === eicCode),
 );
+export const selectUnavailabilitiesOfCurrentCategoryCapacity = createSelector(
+  [selectUnavailabilitiesOfCurrentCategory],
+  (unavailabilities) =>
+    unavailabilities.reduce(
+      (accumulator, currentValue) =>
+        accumulator + currentValue.unavailability.unavailable_capacity,
+      0,
+    ),
+);
 
 export const selectCurrentFullyDown = createSelector(
   selectUnavailabilitiesOfCurrentCategory,
@@ -68,42 +77,6 @@ export const selectCurrentPartiallyDownTotal = createSelector(
     }
     return result.partition.partiallyDown.length;
   },
-);
-export const selectCurrentFullyDownCapacity = createSelector(
-  selectUnavailabilitiesOfCurrentCategory,
-  selectCurrentCategory,
-  (cpt, cc) => {
-    let result = cpt.find((item) => item.key === cc);
-    if (_.isUndefined(result)) {
-      result = { key: '', values: [] };
-    }
-    return result.partition.fullyDown.reduce(
-      (accumulator, currentValue) =>
-        accumulator + currentValue.unavailableCapacitySum,
-      0,
-    );
-  },
-);
-export const selectCurrentPartiallyDownCapacity = createSelector(
-  selectUnavailabilitiesOfCurrentCategory,
-  selectCurrentCategory,
-  (cpt, cc) => {
-    let result = cpt.find((item) => item.key === cc);
-    if (_.isUndefined(result)) {
-      result = { key: '', values: [] };
-    }
-    return result.partition.partiallyDown.reduce(
-      (accumulator, currentValue) =>
-        accumulator + currentValue.unavailableCapacitySum,
-      0,
-    );
-  },
-);
-
-export const selectCurrentDownCapacity = createSelector(
-  selectCurrentFullyDownCapacity,
-  selectCurrentPartiallyDownCapacity,
-  (cpt, cc) => cpt + cc,
 );
 
 export const selectFullyDownByPlant = createSelector(

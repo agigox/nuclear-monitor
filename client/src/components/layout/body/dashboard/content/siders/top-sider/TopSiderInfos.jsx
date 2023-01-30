@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectCurrentDownCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
+import { selectUnavailabilitiesOfCurrentCategoryCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 import { selectPerProductionTypeItemsOfCurrentCategory } from '../../../../../../../redux/selectors/productionsSelectors';
 import { formatNumberToFr } from '../../../../../../../utils';
 
@@ -24,7 +24,9 @@ const StyledRow = styled(Row)`
   }
 `;
 function TopSiderInfos() {
-  const currentDownCapacity = useSelector(selectCurrentDownCapacity);
+  const currentDownCapacity = useSelector(
+    selectUnavailabilitiesOfCurrentCategoryCapacity,
+  );
   // la puissance maximal de production currentCategory
   // eslint-disable-next-line no-unused-vars
   const currentCategoryLastProduction =

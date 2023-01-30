@@ -1,16 +1,18 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectCurrentCategoryPmax } from '../../../../../../../redux/selectors/pmaxSelectors';
-import { selectCurrentDownCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
+import { selectCurrentCategoryPmaxCapacity } from '../../../../../../../redux/selectors/pmaxSelectors';
+import { selectUnavailabilitiesOfCurrentCategoryCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 // eslint-disable-next-line no-unused-vars
 import { selectPerUnitItemsOfCurrentCategory } from '../../../../../../../redux/selectors/productionsSelectors';
 import Buttons from '../../../../../../utils/Buttons';
 
 function TopSiderButtons() {
-  const currentDownCapacity = useSelector(selectCurrentDownCapacity);
+  const currentDownCapacity = useSelector(
+    selectUnavailabilitiesOfCurrentCategoryCapacity,
+  );
   // la puissance du referentiel
-  const currentPmax = useSelector(selectCurrentCategoryPmax);
+  const currentPmax = useSelector(selectCurrentCategoryPmaxCapacity);
   /*
   const currentCategoryLastProduction =
     useSelector(selectPerUnitItemsOfCurrentCategory).lastProduction || 100;

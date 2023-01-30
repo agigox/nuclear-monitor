@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectCurrentCategoryPmax } from '../../../../../../../redux/selectors/pmaxSelectors';
-import { selectCurrentDownCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
+import { selectCurrentCategoryPmaxCapacity } from '../../../../../../../redux/selectors/pmaxSelectors';
+import { selectUnavailabilitiesOfCurrentCategoryCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 import { selectPerProductionTypeItemsOfCurrentCategory } from '../../../../../../../redux/selectors/productionsSelectors';
 
 /*
@@ -17,28 +17,20 @@ const StyledRow = styled(Row)`
   &.percents {
     flex-direction: column;
     .available-percent {
-      flex-basis: ${(props) =>
-        291 -
-        Math.round((props.currentDownCapacity * 291) / props.currentPmax) -
-        Math.round(
-          (props.currentCategoryLastProduction * 291) / props.currentPmax,
-        )}px;
+      flex-basis: ${(props) => props.currentupcapacity}px;
       background: linear-gradient(180deg, #34c601 0%, #46eb57 100%);
       border-radius: 10px 10px 0px 0px;
       width: 100%;
     }
     .down-percent {
-      flex-basis: ${(props) =>
-        Math.round((props.currentdowncapacity * 291) / props.currentpmax)}px;
+      flex-basis: ${(props) => props.currentdowncapacity}px;
       width: 100%;
       background: #d0574f;
+      background: black;
       border-radius: 0px 0px 10px 10px;
     }
     .productions-percent {
-      flex-basis: ${(props) =>
-        Math.round(
-          (props.currentcategorylastproduction * 291) / props.currentpmax,
-        )}px;
+      flex-basis: ${(props) => props.currentcategorylastproduction}px;
       width: 100%;
       background: linear-gradient(180deg, #0078cf 0%, #009dd1 100%);
     }
@@ -54,18 +46,30 @@ x = Math.round((currentDownCapacity * 291) / currentPmax)
 y = 291 - Math.round((currentDownCapacity * 291) / currentPmax)
 */
 function TopSiderTubes() {
-  const currentDownCapacity = useSelector(selectCurrentDownCapacity);
+  const currentDownCapacity = useSelector(
+    selectUnavailabilitiesOfCurrentCategoryCapacity,
+  );
+  // eslint-disable-next-line no-unused-vars
+  const tmp = useSelector(selectUnavailabilitiesOfCurrentCategoryCapacity);
   // la puissance maximal de production currentCategory
-  const currentPmax = useSelector(selectCurrentCategoryPmax);
+  const currentPmax = useSelector(selectCurrentCategoryPmaxCapacity);
+  // eslint-disable-next-line no-unused-vars
   const currentCategoryLastProduction = useSelector(
     selectPerProductionTypeItemsOfCurrentCategory,
   ).lastProduction;
-
+  const getPercentPixelStyle = (value) =>
+    Math.round((value * 291) / currentPmax);
   return (
     <StyledRow
-      currentpmax={currentPmax}
-      currentdowncapacity={currentDownCapacity}
-      currentcategorylastproduction={currentCategoryLastProduction}
+      currentdowncapacity={getPercentPixelStyle(currentDownCapacity)}
+      currentcategorylastproduction={getPercentPixelStyle(
+        currentCategoryLastProduction,
+      )}
+      currentupcapacity={
+        291 -
+        getPercentPixelStyle(currentDownCapacity) -
+        getPercentPixelStyle(currentCategoryLastProduction)
+      }
       align="middle"
       gutter={13}
       wrap={false}

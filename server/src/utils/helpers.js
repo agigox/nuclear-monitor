@@ -131,8 +131,16 @@ export const getProductionCategory = (productionCategory) => {
   ) {
     return ProductionCategories.HYDRAULICS;
   }
+  if (
+    [ProductionTypes.WIND_OFFSHORE, ProductionTypes.WIND_ONSHORE].includes(
+      productionCategory,
+    )
+  ) {
+    return ProductionCategories.WINDS;
+  }
   return productionCategory;
 };
+
 /*
   if (
     [
@@ -148,11 +156,5 @@ export const getProductionCategory = (productionCategory) => {
     return ProductionCategories.FOSSIL;
   }
   
-  if (
-    [ProductionTypes.WIND_OFFSHORE, ProductionTypes.WIND_ONSHORE].includes(
-      productionCategory,
-    )
-  ) {
-    return ProductionCategories.WIND;
-  }
+  
   */

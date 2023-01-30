@@ -3,11 +3,7 @@
 import moment from 'moment-timezone';
 import _ from 'lodash';
 import { getRessource } from '../rteApi';
-import {
-  fullPartialSplit,
-  groupByKey,
-  getProductionCategory,
-} from '../utils/helpers';
+import { groupByKey, getProductionCategory } from '../utils/helpers';
 import { ProductionCategories } from '../enums/productionTypes';
 
 const UNAVAILABILITIES_RESSOURCE =
@@ -30,14 +26,6 @@ const groupDataWithUnderscore = (dataWithUnderscore, category) => {
       (gs) => gs.name.indexOf('FESSENHEIM') === -1,
     );
     valuesOfDataGroupedByProductionType = [...uniqData];
-    const a = groupByKey(valuesOfDataGroupedByProductionType, 'productionType');
-    const newValues = [...a];
-
-    const valuesGroupedByUnitNamePartitioned = newValues.map((val) => ({
-      ...val,
-      partition: fullPartialSplit(val.values),
-    }));
-    // const a = valuesOfDataGroupedByProductionType.map
     return {
       key: item.key,
       values: uniqData.map((t) => ({
@@ -89,7 +77,7 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
   const finalResult = groupDataWithUnderscore(
     dataWithUnderscore,
     'productionCategory',
-  );
+  ).filter((gs) => gs.key !== ProductionCategories.WINDS);
 
   return {
     length: finalResult.length,
