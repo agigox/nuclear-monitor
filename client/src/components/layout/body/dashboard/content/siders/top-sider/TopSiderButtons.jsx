@@ -3,16 +3,20 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentCategoryPmax } from '../../../../../../../redux/selectors/pmaxSelectors';
 import { selectCurrentDownCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
-import { selectCurrentCategoryLastProduction } from '../../../../../../../redux/selectors/productionsSelectors';
+// eslint-disable-next-line no-unused-vars
+import { selectPerUnitItemsOfCurrentCategory } from '../../../../../../../redux/selectors/productionsSelectors';
 import Buttons from '../../../../../../utils/Buttons';
 
 function TopSiderButtons() {
   const currentDownCapacity = useSelector(selectCurrentDownCapacity);
   // la puissance du referentiel
   const currentPmax = useSelector(selectCurrentCategoryPmax);
-  const currentCategoryLastProduction = useSelector(
-    selectCurrentCategoryLastProduction,
-  );
+  /*
+  const currentCategoryLastProduction =
+    useSelector(selectPerUnitItemsOfCurrentCategory).lastProduction || 100;
+  */
+
+  const currentCategoryLastProduction = 100;
   const toPercent = (number) => Math.round((number * 100) / currentPmax);
   return (
     <Row>

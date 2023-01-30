@@ -4,7 +4,7 @@ import { getReferentiel } from '../../api';
 
 const initialState = {
   referentielPending: true,
-  referentiel: [],
+  items: [],
   error: '',
 };
 export const referentielSlice = createSlice({
@@ -12,7 +12,7 @@ export const referentielSlice = createSlice({
   initialState,
   reducers: {
     loadReferentielSuccess: (state, action) => {
-      state.referentiel = [...action.payload.items];
+      state.items = [...action.payload.items];
       state.referentielPending = false;
     },
     loadReferentielFail: (state, action) => {

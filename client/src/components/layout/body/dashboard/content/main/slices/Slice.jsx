@@ -1,43 +1,13 @@
 import { Col, Row } from 'antd';
-import _ from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {
-  selectFullyDownByPlant,
-  selectPartiallyDownByPlant,
-} from '../../../../../../../redux/selectors/productionCategoriesSelectors';
-import { selectReactorsByPlant } from '../../../../../../../redux/selectors/referentielSelectors';
-import { orderByTwoFields } from '../../../../../../../utils';
-import SliceContent from './SliceContent';
+import { selectGenerationUnitsByProductionUnit } from '../../../../../../../redux/selectors/referentielSelectors';
+import SubSlice from './SubSlice';
 
 function Slice({ name }) {
-  const fullyDownByPlant = useSelector((state) =>
-    selectFullyDownByPlant(state, name),
+  const productionUnitGenerationUnits = useSelector((state) =>
+    selectGenerationUnitsByProductionUnit(state, name),
   );
-  const partiallyDownByPlant = useSelector((state) =>
-    selectPartiallyDownByPlant(state, name),
-  );
-  const reactorsPlant = useSelector((state) =>
-    selectReactorsByPlant(state, name),
-  );
-
-  const mappedItems = [
-    ...fullyDownByPlant,
-    ...partiallyDownByPlant,
-    ...reactorsPlant.values,
-  ].map((item) => ({
-    name: item.name,
-    unavailableCapacitySum: item.unavailableCapacitySum,
-    availableCapacitySum: item.availableCapacitySum,
-    installedCapacity: item.installedCapacity,
-  }));
-  const orderedItems = orderByTwoFields(
-    mappedItems,
-    ['name', 'unavailableCapacitySum'],
-    ['asc', 'desc'],
-  );
-  const uniqItems = _.uniqBy(orderedItems, 'name');
-
   return (
     <Row className="slice">
       <Col className="slice-title" span={24}>
@@ -45,14 +15,16 @@ function Slice({ name }) {
       </Col>
       <Col span={24}>
         <Row className="slice-content-row">
-          {uniqItems.map((item) => (
-            <SliceContent
-              key={item.name}
-              name={item.name}
-              unavailableCapacitySum={item.unavailableCapacitySum}
-              installedCapacity={item.installedCapacity}
-            />
-          ))}
+          {productionUnitGenerationUnits.map(
+            ({ name: unitName, eicCode, installedCapacity }) => (
+              <SubSlice
+                key={eicCode}
+                name={unitName}
+                eicCode={eicCode}
+                installedCapacity={installedCapacity}
+              />
+            ),
+          )}
         </Row>
       </Col>
     </Row>

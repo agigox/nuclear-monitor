@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Row, Col, Card } from 'antd';
 import styled from '@emotion/styled';
@@ -45,9 +46,9 @@ function Content() {
       </Col>
       <Col span={24}>
         <Row wrap={false} style={{ columnGap: '16px' }}>
-          <Col flex="315px">
+          {/* <Col flex="315px">
             <Siders />
-          </Col>
+          </Col> */}
           <Col flex="auto">
             <Card
               bordered={false}

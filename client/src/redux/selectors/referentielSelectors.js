@@ -1,22 +1,19 @@
 import { createSelector } from '@reduxjs/toolkit';
 import _ from 'lodash';
+import { selectCurrentCategory } from './crossSelectors';
 
 // eslint-disable-next-line import/prefer-default-export
 export const selectReferentielPending = (state) =>
   state.referentiel.referentielPending;
-export const selectReferentiel = (state) => state.referentiel.referentiel;
-export const selectCurrentCategory = (state) => state.cross.currentCategory;
+export const selectReferentiel = (state) => state.referentiel.items;
 export const selectCurrentReferentiel = createSelector(
-  [
-    (state) => state.cross.currentCategory,
-    (state) => state.referentiel.referentiel,
-  ],
+  [selectCurrentCategory, selectReferentiel],
   (category, items) => {
-    let result = items.find((item) => item.key === category);
+    const result = items.find((item) => item.key === category);
     if (_.isUndefined(result)) {
-      result = { key: '', values: [] };
+      return [];
     }
-    return result;
+    return result.values;
   },
 );
 export const selectCurrentTotal = createSelector(
@@ -56,14 +53,17 @@ export const selectCurrentPower = createSelector(
   },
 );
 
-export const selectReactorsByPlant = createSelector(
+export const selectGenerationUnitsByProductionUnit = createSelector(
+  [selectCurrentReferentiel, (state, productionUnit) => productionUnit],
+  (currentReferentiel, productionUnit) =>
+    currentReferentiel.find((item) => item.key === productionUnit).values,
+);
+
+export const selectEicCodesByPlant = createSelector(
   [selectCurrentReferentiel, (state, plant) => plant],
   (referentiel, plant) => {
-    let result = referentiel.values.find((item) => item.key === plant);
-    if (_.isUndefined(result)) {
-      result = { key: '', values: [] };
-    }
+    const result = referentiel.values.find((item) => item.key === plant);
 
-    return result;
+    return result.values.map((e) => e.eicCode);
   },
 );

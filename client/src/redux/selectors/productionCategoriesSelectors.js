@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import _ from 'lodash';
-import { selectCurrentCategory } from './referentielSelectors';
+import { selectCurrentCategory } from './crossSelectors';
 
 // eslint-disable-next-line import/prefer-default-export
 export const selectCategoriesPending = (state) =>
@@ -13,21 +13,20 @@ export const selectCategories = (state) =>
 export const selectError = (state) => state.productionCategories.error;
 export const selectLastRefreshDate = (state) =>
   state.productionCategories.lastRefreshDate;
-export const selectCurrentProductionType = createSelector(
-  [
-    (state) => state.cross.currentCategory,
-    (state) => state.productionCategories.categories,
-  ],
-  (category, items) => {
-    let result = items.find((item) => item.key === category);
-    if (_.isUndefined(result)) {
-      result = { key: '', values: [] };
-    }
-    return result.values;
-  },
+
+export const selectUnavailabilitiesOfCurrentCategory = createSelector(
+  [selectCurrentCategory, selectCategories],
+  (category, items) => items.find((item) => item.key === category).values,
 );
+
+export const selectUnavailabilityOfCurrentCategoryByEicCode = createSelector(
+  [selectUnavailabilitiesOfCurrentCategory, (state, eicCode) => eicCode],
+  (unavailabilities, eicCode) =>
+    unavailabilities.find((fd) => fd.eicCode === eicCode),
+);
+
 export const selectCurrentFullyDown = createSelector(
-  selectCurrentProductionType,
+  selectUnavailabilitiesOfCurrentCategory,
   selectCurrentCategory,
   (cpt, cc) => {
     let result = cpt.find((item) => item.key === cc);
@@ -38,7 +37,7 @@ export const selectCurrentFullyDown = createSelector(
   },
 );
 export const selectCurrentPartiallyDown = createSelector(
-  selectCurrentProductionType,
+  selectUnavailabilitiesOfCurrentCategory,
   selectCurrentCategory,
   (cpt, cc) => {
     let result = cpt.find((item) => item.key === cc);
@@ -49,7 +48,7 @@ export const selectCurrentPartiallyDown = createSelector(
   },
 );
 export const selectCurrentFullyDownTotal = createSelector(
-  selectCurrentProductionType,
+  selectUnavailabilitiesOfCurrentCategory,
   selectCurrentCategory,
   (cpt, cc) => {
     let result = cpt.find((item) => item.key === cc);
@@ -60,7 +59,7 @@ export const selectCurrentFullyDownTotal = createSelector(
   },
 );
 export const selectCurrentPartiallyDownTotal = createSelector(
-  selectCurrentProductionType,
+  selectUnavailabilitiesOfCurrentCategory,
   selectCurrentCategory,
   (cpt, cc) => {
     let result = cpt.find((item) => item.key === cc);
@@ -71,7 +70,7 @@ export const selectCurrentPartiallyDownTotal = createSelector(
   },
 );
 export const selectCurrentFullyDownCapacity = createSelector(
-  selectCurrentProductionType,
+  selectUnavailabilitiesOfCurrentCategory,
   selectCurrentCategory,
   (cpt, cc) => {
     let result = cpt.find((item) => item.key === cc);
@@ -86,7 +85,7 @@ export const selectCurrentFullyDownCapacity = createSelector(
   },
 );
 export const selectCurrentPartiallyDownCapacity = createSelector(
-  selectCurrentProductionType,
+  selectUnavailabilitiesOfCurrentCategory,
   selectCurrentCategory,
   (cpt, cc) => {
     let result = cpt.find((item) => item.key === cc);

@@ -2,10 +2,10 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ProductionCategories } from '../../../../../../../enums/ProductionCategories';
-import { selectCurrentCategory } from '../../../../../../../redux/selectors/referentielSelectors';
-import SlicesContent from './SlicesContent';
+import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
+import Slices from './Slices';
 
-function Slices() {
+function SlicesBody() {
   const currentCategory = useSelector(selectCurrentCategory);
 
   return (
@@ -15,10 +15,10 @@ function Slices() {
         className="slices-title-page"
       >{`Filière ${ProductionCategories[currentCategory]}`}</Col>
       <Col span={24}>
-        <SlicesContent />
+        <Slices />
       </Col>
     </Row>
   );
 }
 
-export default Slices;
+export default SlicesBody;

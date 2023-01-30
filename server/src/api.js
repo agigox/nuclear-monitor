@@ -21,7 +21,10 @@ import {
 import { getUnavailabilities, getUnavailabilitiesV2 } from './services';
 import { groupByKey } from './utils/helpers';
 import { getUnavailabilitiesV3 } from './services/unavailabilities';
-import { getProductions } from './services/productions';
+import {
+  getProductionsPerProductionType,
+  getProductionsPerUnit,
+} from './services/productions';
 
 function serviceWrapper(service, environment) {
   return async function wrappedService(req, res, next) {
@@ -70,7 +73,14 @@ const buildApi = (environment) => {
     '/unavailabilitiesv3',
     serviceWrapper(getUnavailabilitiesV3, environment),
   );
-  app.get('/productions', serviceWrapper(getProductions, environment));
+  app.get(
+    '/productions_per_production_type',
+    serviceWrapper(getProductionsPerProductionType, environment),
+  );
+  app.get(
+    '/productions_per_unit',
+    serviceWrapper(getProductionsPerUnit, environment),
+  );
   app.get('/pmax', (req, res) => {
     res.json({
       length: pmax.length,

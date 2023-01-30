@@ -40,7 +40,10 @@ const groupDataWithUnderscore = (dataWithUnderscore, category) => {
     // const a = valuesOfDataGroupedByProductionType.map
     return {
       key: item.key,
-      values: valuesGroupedByUnitNamePartitioned,
+      values: uniqData.map((t) => ({
+        ...t,
+        unavailability: t.values[0] || {},
+      })),
     };
   });
   return finalResult;
@@ -67,9 +70,7 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
   const dataWithUnderscore = data.map(({ production_type, ...item }) => {
     const unit = _.cloneDeep(item.unit);
     const values = _.cloneDeep(item.values);
-    const productionType = getProductionCategory(
-      production_type.split('-').join('_'),
-    );
+    const productionType = production_type.split('-').join('_');
     const productionCategory = getProductionCategory(productionType);
     return {
       creationDate: item.creation_date,

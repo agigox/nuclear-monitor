@@ -9,7 +9,10 @@ import {
   selectError,
 } from '../../../redux/selectors/productionCategoriesSelectors';
 import { loadReferentiel } from '../../../redux/reducers/referentielReducer';
-import { loadProductions } from '../../../redux/reducers/productionsReducer';
+import {
+  loadProductionsPerProductionType,
+  loadProductionsPerUnit,
+} from '../../../redux/reducers/productionsReducer';
 import { loadPmax } from '../../../redux/reducers/pmaxReducer';
 
 function Body() {
@@ -22,7 +25,8 @@ function Body() {
     const loadData = async () => {
       dispatch(loadReferentiel());
       dispatch(loadProductionCategories());
-      dispatch(loadProductions());
+      dispatch(loadProductionsPerUnit());
+      dispatch(loadProductionsPerProductionType());
       dispatch(loadPmax());
     };
 

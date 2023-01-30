@@ -27,8 +27,17 @@ export async function getProductionCategories() {
   const data = await res.json();
   return data;
 }
-export async function getProductions() {
-  const res = await doFetch(`${REACT_APP_NUCLEAR_MONITOR_API}/productions`);
+export async function getProductionsPerProductionType() {
+  const res = await doFetch(
+    `${REACT_APP_NUCLEAR_MONITOR_API}/productions_per_production_type`,
+  );
+  const data = await res.json();
+  return data;
+}
+export async function getProductionsPerUnit() {
+  const res = await doFetch(
+    `${REACT_APP_NUCLEAR_MONITOR_API}/productions_per_unit`,
+  );
   const data = await res.json();
   return data;
 }

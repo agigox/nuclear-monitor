@@ -4,7 +4,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentCategoryPmax } from '../../../../../../../redux/selectors/pmaxSelectors';
 import { selectCurrentDownCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
-import { selectCurrentCategoryLastProduction } from '../../../../../../../redux/selectors/productionsSelectors';
+import { selectPerProductionTypeItemsOfCurrentCategory } from '../../../../../../../redux/selectors/productionsSelectors';
 
 /*
 currentPmax = currentDownCapacity + currentCategoryLastProduction
@@ -29,7 +29,7 @@ const StyledRow = styled(Row)`
     }
     .down-percent {
       flex-basis: ${(props) =>
-        Math.round((props.currentDownCapacity * 291) / props.currentPmax)}px;
+        Math.round((props.currentdowncapacity * 291) / props.currentpmax)}px;
       width: 100%;
       background: #d0574f;
       border-radius: 0px 0px 10px 10px;
@@ -37,7 +37,7 @@ const StyledRow = styled(Row)`
     .productions-percent {
       flex-basis: ${(props) =>
         Math.round(
-          (props.currentCategoryLastProduction * 291) / props.currentPmax,
+          (props.currentcategorylastproduction * 291) / props.currentpmax,
         )}px;
       width: 100%;
       background: linear-gradient(180deg, #0078cf 0%, #009dd1 100%);
@@ -58,14 +58,14 @@ function TopSiderTubes() {
   // la puissance maximal de production currentCategory
   const currentPmax = useSelector(selectCurrentCategoryPmax);
   const currentCategoryLastProduction = useSelector(
-    selectCurrentCategoryLastProduction,
-  );
+    selectPerProductionTypeItemsOfCurrentCategory,
+  ).lastProduction;
 
   return (
     <StyledRow
-      currentPmax={currentPmax}
-      currentDownCapacity={currentDownCapacity}
-      currentCategoryLastProduction={currentCategoryLastProduction}
+      currentpmax={currentPmax}
+      currentdowncapacity={currentDownCapacity}
+      currentcategorylastproduction={currentCategoryLastProduction}
       align="middle"
       gutter={13}
       wrap={false}
