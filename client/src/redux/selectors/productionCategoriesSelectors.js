@@ -33,7 +33,24 @@ export const selectUnavailabilitiesOfCurrentCategoryCapacity = createSelector(
       0,
     ),
 );
-
+export const selectFullyDownUnavailabilityOfCurrentCategoryNumber =
+  createSelector(
+    [selectUnavailabilitiesOfCurrentCategory],
+    (unavailabilities) =>
+      unavailabilities.filter((u) => u.unavailability.available_capacity === 0)
+        .length,
+  );
+export const selectPartiallyDownUnavailabilityOfCurrentCategoryNumber =
+  createSelector(
+    [selectUnavailabilitiesOfCurrentCategory],
+    (unavailabilities) =>
+      unavailabilities.filter(
+        (u) =>
+          u.installedCapacity !== u.unavailability.unavailable_capacity &&
+          u.installedCapacity !== u.unavailability.available_capacity,
+      ).length,
+  );
+/** --------------- */
 export const selectCurrentFullyDown = createSelector(
   selectUnavailabilitiesOfCurrentCategory,
   selectCurrentCategory,
@@ -54,28 +71,6 @@ export const selectCurrentPartiallyDown = createSelector(
       result = { key: '', values: [] };
     }
     return result.partition.partiallyDown;
-  },
-);
-export const selectCurrentFullyDownTotal = createSelector(
-  selectUnavailabilitiesOfCurrentCategory,
-  selectCurrentCategory,
-  (cpt, cc) => {
-    let result = cpt.find((item) => item.key === cc);
-    if (_.isUndefined(result)) {
-      result = { key: '', values: [] };
-    }
-    return result.partition.fullyDown.length;
-  },
-);
-export const selectCurrentPartiallyDownTotal = createSelector(
-  selectUnavailabilitiesOfCurrentCategory,
-  selectCurrentCategory,
-  (cpt, cc) => {
-    let result = cpt.find((item) => item.key === cc);
-    if (_.isUndefined(result)) {
-      result = { key: '', values: [] };
-    }
-    return result.partition.partiallyDown.length;
   },
 );
 

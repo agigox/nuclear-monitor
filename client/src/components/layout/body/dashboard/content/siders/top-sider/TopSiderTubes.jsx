@@ -16,23 +16,28 @@ y = 291 - Math.round((currentDownCapacity * 291) / currentPmax)
 const StyledRow = styled(Row)`
   &.percents {
     flex-direction: column;
-    .available-percent {
-      flex-basis: ${(props) => props.currentupcapacity}px;
-      background: linear-gradient(180deg, #34c601 0%, #46eb57 100%);
+    .productions-percent {
+      flex-basis: ${(props) => props.currentcategorylastproduction}px;
+      width: calc(100% - 4px);
       border-radius: 10px 10px 0px 0px;
-      width: 100%;
+      background: linear-gradient(180deg, #34c601 0%, #46eb57 100%);
+    }
+    .up-percent {
+      flex-basis: ${(props) => props.currentupcapacity}px;
+      background: linear-gradient(180deg, #0078cf 0%, #009dd1 100%);
+      width: calc(100% - 4px);
     }
     .down-percent {
       flex-basis: ${(props) => props.currentdowncapacity}px;
-      width: 100%;
+      width: calc(100% - 4px);
       background: #d0574f;
-      background: black;
       border-radius: 0px 0px 10px 10px;
     }
-    .productions-percent {
-      flex-basis: ${(props) => props.currentcategorylastproduction}px;
+    .separator-percent {
+      flex-basis: 2px;
       width: 100%;
-      background: linear-gradient(180deg, #0078cf 0%, #009dd1 100%);
+      border: 2px solid #000000;
+      border-radius: 2px;
     }
   }
 `;
@@ -49,16 +54,13 @@ function TopSiderTubes() {
   const currentDownCapacity = useSelector(
     selectUnavailabilitiesOfCurrentCategoryCapacity,
   );
-  // eslint-disable-next-line no-unused-vars
-  const tmp = useSelector(selectUnavailabilitiesOfCurrentCategoryCapacity);
   // la puissance maximal de production currentCategory
   const currentPmax = useSelector(selectCurrentCategoryPmaxCapacity);
-  // eslint-disable-next-line no-unused-vars
   const currentCategoryLastProduction = useSelector(
     selectPerProductionTypeItemsOfCurrentCategory,
   ).lastProduction;
   const getPercentPixelStyle = (value) =>
-    Math.round((value * 291) / currentPmax);
+    Math.round((value * 296) / currentPmax);
   return (
     <StyledRow
       currentdowncapacity={getPercentPixelStyle(currentDownCapacity)}
@@ -66,7 +68,7 @@ function TopSiderTubes() {
         currentCategoryLastProduction,
       )}
       currentupcapacity={
-        291 -
+        296 -
         getPercentPixelStyle(currentDownCapacity) -
         getPercentPixelStyle(currentCategoryLastProduction)
       }
@@ -76,8 +78,9 @@ function TopSiderTubes() {
       style={{ margin: 0 }}
       className="percents"
     >
-      <Col className="available-percent" span={24} />
       <Col className="productions-percent" span={24} />
+      <Col className="up-percent" span={24} />
+      <Col className="separator-percent" span={24} />
       <Col className="down-percent" span={24} />
     </StyledRow>
   );

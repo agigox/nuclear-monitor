@@ -1,12 +1,13 @@
+/* eslint-disable no-unused-vars */
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectCurrentTotal } from '../../../../../../../redux/selectors/referentielSelectors';
+import { selectCurrentCategoryGenerationUnitsNumber } from '../../../../../../../redux/selectors/referentielSelectors';
 import Buttons from '../../../../../../utils/Buttons';
 import BottomSiderBody from './BottomSiderBody';
 
 function BottomSider() {
-  const currentTotal = useSelector(selectCurrentTotal);
+  const currentTotal = useSelector(selectCurrentCategoryGenerationUnitsNumber);
   return (
     <Row style={{ rowGap: '32px' }}>
       <Col>

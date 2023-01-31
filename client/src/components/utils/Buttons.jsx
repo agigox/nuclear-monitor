@@ -6,7 +6,7 @@ const StyledButton = styled(Button)`
   &.summary {
     background-color: #a3ddf0;
     padding: 4px 8px;
-    height: 36px;
+    height: auto;
     color: #004d66;
     border: 0;
   }
@@ -20,11 +20,11 @@ const StyledButton = styled(Button)`
       border: 1px solid #009dd1;
       color: #004d66;
     }
-    &.carte {
+    &.tranches {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
     }
-    &.tranches {
+    &.carte {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }

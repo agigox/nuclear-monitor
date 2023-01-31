@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
 import { Col, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
 import { selectUnavailabilityOfCurrentCategoryByEicCode } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
-// import { selectPerUnitItemOfCurrentCategoryByEicCode } from '../../../../../../../redux/selectors/productionsSelectors';
+import { selectProductionOfCurrentCategoryByEicCode } from '../../../../../../../redux/selectors/productionsSelectors';
+import { formatNumberToFr } from '../../../../../../../utils';
 
 const StyledRow = styled(Row)`
   .slice-content-col {
@@ -12,43 +14,57 @@ const StyledRow = styled(Row)`
   }
 `;
 function SubSlice({ name, installedCapacity, eicCode }) {
-  const [unavailableCapacity, setUnavailableCapacity] = useState(0);
+  const [unavailability, setUnavailability] = useState(0);
+  const [production, setProduction] = useState(0);
   const unavailabilityOfCurrentCategoryByEicCode = useSelector((state) =>
     selectUnavailabilityOfCurrentCategoryByEicCode(state, eicCode),
   );
-  /*
+
   const productionOfCurrentCategoryByEicCode = useSelector((state) =>
-    selectPerUnitItemOfCurrentCategoryByEicCode(state, eicCode),
+    selectProductionOfCurrentCategoryByEicCode(state, eicCode),
   );
-  */
+
   useEffect(() => {
     if (!_.isUndefined(unavailabilityOfCurrentCategoryByEicCode)) {
-      setUnavailableCapacity(
+      setUnavailability(
         unavailabilityOfCurrentCategoryByEicCode.unavailability
           .unavailable_capacity,
       );
-    } else {
-      setUnavailableCapacity(0);
+    }
+    if (productionOfCurrentCategoryByEicCode.lastProduction.value >= 0) {
+      setProduction(productionOfCurrentCategoryByEicCode.lastProduction.value);
     }
   });
   const getClassName = () => {
-    if (unavailableCapacity === 0) {
-      return 'up-slice';
-    }
-    if (unavailableCapacity === installedCapacity) {
+    const availability = installedCapacity - unavailability;
+    if (availability === 0) {
       return 'fully-slice';
     }
-    return 'partially-slice';
+    if (production <= 0) {
+      return 'production-down-slice';
+    }
+    if (availability - production <= 20) {
+      // Pas d'indispo
+      return 'up-slice';
+    }
+    return 'hashed-slice';
   };
   return (
     <StyledRow className="slice-content">
       <Col span={24} className="slice-content-pmax">
-        Pmax {installedCapacity}
+        Pmax {formatNumberToFr(installedCapacity)}
+        <br />
+        {production}
       </Col>
       <Col span={24} className={`slice-content-col ${getClassName()}`}>
         <Row>
           <Col span={24} className="slice-content-capacity">
-            <span>{installedCapacity - unavailableCapacity}</span> MW
+            <span>
+              {new Intl.NumberFormat('fr-FR').format(
+                installedCapacity - unavailability,
+              )}
+            </span>{' '}
+            MW
           </Col>
           <Col className="slice-content-city" span={24}>
             {name}

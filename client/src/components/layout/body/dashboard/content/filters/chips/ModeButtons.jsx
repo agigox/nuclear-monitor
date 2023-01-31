@@ -31,20 +31,20 @@ function ModeButtons() {
     <StyledRow align="middle" justify="space-between">
       <Col>
         <Buttons
+          styling="chips tranches"
+          clickHandler={() => handleClick(DisplayModes.SLICES)}
+          active={displayMode === DisplayModes.SLICES}
+        >
+          Unités de production
+        </Buttons>
+      </Col>
+      <Col>
+        <Buttons
           styling="chips carte"
           clickHandler={() => handleClick(DisplayModes.MAP)}
           active={displayMode === DisplayModes.MAP}
         >
           Carte
-        </Buttons>
-      </Col>
-      <Col>
-        <Buttons
-          styling="chips tranches"
-          clickHandler={() => handleClick(DisplayModes.SLICES)}
-          active={displayMode === DisplayModes.SLICES}
-        >
-          Tranches
         </Buttons>
       </Col>
     </StyledRow>

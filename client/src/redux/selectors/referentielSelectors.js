@@ -16,21 +16,13 @@ export const selectCurrentReferentiel = createSelector(
     return result.values;
   },
 );
-export const selectCurrentTotal = createSelector(
-  [
-    (state) => state.cross.currentCategory,
-    (state) => state.referentiel.referentiel,
-  ],
-  (category, items) => {
-    let result = items.find((item) => item.key === category);
-    if (_.isUndefined(result)) {
-      result = { key: '', values: [] };
-    }
-    return result.values.reduce(
+export const selectCurrentCategoryGenerationUnitsNumber = createSelector(
+  [selectCurrentReferentiel],
+  (items) =>
+    items.reduce(
       (accumulator, currentValue) => accumulator + currentValue.values.length,
       0,
-    );
-  },
+    ),
 );
 export const selectCurrentPower = createSelector(
   [

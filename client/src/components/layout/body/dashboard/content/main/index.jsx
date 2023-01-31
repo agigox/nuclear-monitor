@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -11,7 +10,7 @@ function Main() {
   const displayMode = useSelector(selectDisplayMode);
   return (
     <Row className="main">
-      {/* <Col span={24}>{displayMode === DisplayModes.MAP && <Map />}</Col> */}
+      <Col span={24}>{displayMode === DisplayModes.MAP && <Map />}</Col>
       <Col span={24}>
         {displayMode === DisplayModes.SLICES && <SlicesBody />}
       </Col>

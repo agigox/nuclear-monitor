@@ -5,12 +5,12 @@ import TopSiderTubes from './TopSiderTubes';
 import TopSiderInfos from './TopSiderInfos';
 
 const StyledRow = styled(Row)`
-  height: 291px;
+  height: 296px;
 `;
 function TopSiderBody() {
   return (
     <StyledRow className="top-sider-body" wrap={false}>
-      <Col flex="70px">
+      <Col flex="74px">
         <TopSiderTubes />
       </Col>
       <Col flex="auto">

@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import TopSiderBody from './TopSiderBody';
-import TopSiderButtons from './TopSiderButtons';
+import TopSiderButton from './TopSiderButton';
 
 function TopSider() {
   return (
@@ -10,7 +10,7 @@ function TopSider() {
         <TopSiderBody />
       </Col>
       <Col span={24} style={{ textAlign: 'center' }}>
-        <TopSiderButtons />
+        <TopSiderButton />
       </Col>
     </Row>
   );

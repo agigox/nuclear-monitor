@@ -6,6 +6,16 @@ import Slice from './Slice';
 
 function Slices() {
   const currentReferentiel = useSelector(selectCurrentReferentiel);
+  /*
+  const sum = currentReferentiel.reduce((accumulator, currentValue) => {
+    const a = currentValue.values.reduce(
+      (accumulator1, currentValue1) =>
+        accumulator1 + Number(currentValue1.netPower_MW),
+      0,
+    );
+    return accumulator + a;
+  }, 0);
+  */
   return (
     <Row className="slices-content">
       {currentReferentiel.map((ref) => (

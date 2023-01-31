@@ -34,3 +34,8 @@ export const selectPerUnitItemOfCurrentCategoryByEicCode = createSelector(
     return newUnavailabilities.values[0];
   },
 );
+
+export const selectProductionOfCurrentCategoryByEicCode = createSelector(
+  [selectPerUnitItemsOfCurrentCategory, (state, eicCode) => eicCode],
+  (items, eicCode) => items.find((fd) => fd.key === eicCode).values[0],
+);

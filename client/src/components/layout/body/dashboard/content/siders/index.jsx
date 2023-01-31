@@ -1,22 +1,39 @@
+import styled from '@emotion/styled';
 import { Card, Col, Row } from 'antd';
 import React from 'react';
-// import BottomSider from './bottom-sider';
+import BottomSider from './bottom-sider';
 import TopSider from './top-sider';
 
+const StyledRow = styled(Row)`
+  .top-card {
+    .ant-card-body {
+      padding-right: 25px;
+    }
+  }
+  .bottom-card {
+    .ant-card-body {
+      padding-top: 15px;
+    }
+  }
+`;
 function Siders() {
   return (
-    <Row style={{ rowGap: '16px' }}>
+    <StyledRow style={{ rowGap: '16px' }}>
       <Col span={24}>
-        <Card bordered={false}>
+        <Card bordered={false} className="top-card">
           <TopSider />
         </Card>
       </Col>
-      {/* <Col span={24}>
-        <Card title="Moyens de production" bordered={false}>
+      <Col span={24}>
+        <Card
+          title="Centrales Nucléaires"
+          bordered={false}
+          className="bottom-card"
+        >
           <BottomSider />
         </Card>
-      </Col> */}
-    </Row>
+      </Col>
+    </StyledRow>
   );
 }
 

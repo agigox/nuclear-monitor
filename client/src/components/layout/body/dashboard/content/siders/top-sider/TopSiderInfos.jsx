@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { selectCurrentCategoryPmaxCapacity } from '../../../../../../../redux/selectors/pmaxSelectors';
 import { selectUnavailabilitiesOfCurrentCategoryCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 import { selectPerProductionTypeItemsOfCurrentCategory } from '../../../../../../../redux/selectors/productionsSelectors';
 import { formatNumberToFr } from '../../../../../../../utils';
@@ -10,11 +11,12 @@ const StyledRow = styled(Row)`
   &.percents-text {
     flex-direction: column;
     .available-percent-text {
-      flex-basis: 191px;
+      flex-basis: 192px;
       width: 100%;
     }
-    .down-percent-text {
-      flex-basis: 50px;
+    .down-percent-text,
+    .production-percent-text {
+      flex-basis: 52px;
       width: 100%;
       .down-percent-text-row {
         height: 100%;
@@ -24,14 +26,14 @@ const StyledRow = styled(Row)`
   }
 `;
 function TopSiderInfos() {
+  const currentPmax = useSelector(selectCurrentCategoryPmaxCapacity);
   const currentDownCapacity = useSelector(
     selectUnavailabilitiesOfCurrentCategoryCapacity,
   );
   // la puissance maximal de production currentCategory
-  // eslint-disable-next-line no-unused-vars
-  const currentCategoryLastProduction =
-    useSelector(selectPerProductionTypeItemsOfCurrentCategory).lastProduction ||
-    100;
+  const currentCategoryLastProduction = useSelector(
+    selectPerProductionTypeItemsOfCurrentCategory,
+  ).lastProduction;
 
   return (
     <StyledRow
@@ -54,10 +56,16 @@ function TopSiderInfos() {
       <Col className="down-percent-text" span={24}>
         <Row className="down-percent-text-row">
           <Col span={24} className="text-1">
-            Indisponible
+            Disponible restant
           </Col>
           <Col span={24} className="text-2">
-            {formatNumberToFr(currentDownCapacity / 1000)} GW
+            {formatNumberToFr(
+              (currentPmax -
+                currentDownCapacity -
+                currentCategoryLastProduction) /
+                1000,
+            )}{' '}
+            GW
           </Col>
         </Row>
       </Col>

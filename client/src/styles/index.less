@@ -22,7 +22,7 @@ body {
 }
 .ant-card {
   .ant-card-head {
-    padding: 30px 24px 0;
+    padding: 30px 28px 0;
     .ant-card-head-title {
       .format-text(@font-family-nunito-bold, 20px, 28px, @background-page-title);
       font-weight: 700;
@@ -149,7 +149,19 @@ body {
           background: linear-gradient(203.32deg, #E16C00 19.29%, #FF8D4D 81.34%);
         }
         &.fully-slice {
-          background: linear-gradient(203.32deg, #C02924 19.29%, #D0574F 81.34%);;
+          background: linear-gradient(203.32deg, #C02924 19.29%, #D0574F 81.34%);
+        }
+        &.production-down-slice {
+          background: linear-gradient(203.32deg, #0079D1 19.29%, #36B3DF 81.34%);
+        }
+        &.hashed-slice {
+          background: repeating-linear-gradient(
+            45deg,
+            #34c501 0px,
+            #34c501 4px,
+            #0079D1 4px,
+            #0079D1 8px
+          );;
         }
         .slice-content-capacity {
           .format-text(@font-family-nunito-regular, 16px, 22px, @color-white);
@@ -176,26 +188,6 @@ body {
     }
   }
 }
-/*
-.text-1 {
-  font-family: @font-family-inter-regular;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 32px;
-  color: #cdcdcd;
-  text-transform: uppercase;
-}
-.text-2-1 {
-  font-family: @font-family-inter-regular;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-
-  color: #757575;
-}
-*/
 .main {
   .map-container {
     position: relative;
@@ -270,7 +262,7 @@ body {
     font-weight: 800;
   }
   .text-2 {
-    .format-text(@font-family-nunito-regular, 36px, 48px, @background-page-title);
+    .format-text(@font-family-nunito-bold, 36px, 48px, @background-page-title);
     font-weight: 800;
   }
 }
