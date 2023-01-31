@@ -53,18 +53,11 @@ function SubSlice({ name, installedCapacity, eicCode }) {
     <StyledRow className="slice-content">
       <Col span={24} className="slice-content-pmax">
         Pmax {formatNumberToFr(installedCapacity)}
-        <br />
-        {production}
       </Col>
       <Col span={24} className={`slice-content-col ${getClassName()}`}>
         <Row>
           <Col span={24} className="slice-content-capacity">
-            <span>
-              {new Intl.NumberFormat('fr-FR').format(
-                installedCapacity - unavailability,
-              )}
-            </span>{' '}
-            MW
+            <span>{new Intl.NumberFormat('fr-FR').format(production)}</span> MW
           </Col>
           <Col className="slice-content-city" span={24}>
             {name}
