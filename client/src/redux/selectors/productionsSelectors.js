@@ -12,9 +12,6 @@ export const selectPerUnitItemsOfCurrentCategory = createSelector(
   [selectPerUnitItems, selectCurrentCategory],
   (perUnitItems, currentCategory) => {
     const items = perUnitItems.find((item) => item.key === currentCategory);
-    if (_.isUndefined(perUnitItems)) {
-      return [];
-    }
     return items.values;
   },
 );

@@ -18,7 +18,6 @@ function TopSiderButtons() {
   const currentCategoryLastProduction = useSelector(
     selectPerProductionTypeItemsOfCurrentCategory,
   ).lastProduction;
-  console.log(currentCategoryLastProduction);
   const toPercent = (number) => Math.round((number * 100) / currentPmax);
   return (
     <Row>

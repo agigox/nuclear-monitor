@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import SVGMap from '../../../../../../../images/map.svg';
 import { selectCurrentReferentiel } from '../../../../../../../redux/selectors/referentielSelectors';
 import Position from './Position';
-import Location from '../../../../../../../images/location_on.svg';
+import MapBar from './MapBar';
 
 function Map() {
   const currentReferentiel = useSelector(selectCurrentReferentiel);
@@ -21,7 +21,7 @@ function Map() {
               style={{ columnGap: '5px' }}
             >
               <Col style={{ alignSelf: 'center' }}>
-                <img src={Location} alt="indicator" />
+                <MapBar productionUnit={key} />
               </Col>
               <Col>
                 <Position productionUnit={key} availabilities={values.length} />

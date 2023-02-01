@@ -3,8 +3,6 @@ import _ from 'lodash';
 import { selectCurrentCategory } from './crossSelectors';
 
 // eslint-disable-next-line import/prefer-default-export
-export const selectCategoriesPending = (state) =>
-  state.productionCategories.categoriesPending;
 export const selectCategoriesRefreshPending = (state) =>
   state.productionCategories.categoriesRefreshPending;
 export const selectLength = (state) => state.productionCategories.length;

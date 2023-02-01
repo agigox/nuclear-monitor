@@ -4,10 +4,9 @@ import moment from 'moment';
 import { getProductionCategories } from '../../api';
 
 const initialState = {
-  categoriesPending: true,
   length: 0,
   categories: [],
-  error: '',
+  error: {},
   lastRefreshDate: '',
   categoriesRefreshPending: false,
 };
@@ -18,15 +17,10 @@ export const productionCategoriesSlice = createSlice({
   reducers: {
     loadProductionCategoriesSuccess: (state, action) => {
       state.categories = [...action.payload.items];
-      state.categoriesPending = false;
       state.lastRefreshDate = moment().format('DD/MM/YYYY - HH[h]mm');
     },
     loadProductionCategoriesFail: (state, action) => {
-      state = {
-        ...state,
-        categoriesPending: false,
-        error: action.message.message,
-      };
+      state.error = { ...action.error };
     },
     refreshProductionCategoriesRequest: (state) => {
       state.categoriesRefreshPending = true;
@@ -46,10 +40,6 @@ export const {
   refreshProductionCategoriesRequest,
 } = productionCategoriesSlice.actions;
 
-export const loadProductionCategories = () => async (dispatch) => {
-  const response = await getProductionCategories();
-  dispatch(loadProductionCategoriesSuccess(response));
-};
 export const refreshProductionCategories = () => async (dispatch) => {
   dispatch(refreshProductionCategoriesRequest());
   const response = await getProductionCategories();

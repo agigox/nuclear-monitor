@@ -1,11 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { getReferentiel } from '../../api';
 
 const initialState = {
-  referentielPending: true,
   items: [],
-  error: '',
+  error: {},
 };
 export const referentielSlice = createSlice({
   name: 'referentiel',
@@ -13,23 +11,13 @@ export const referentielSlice = createSlice({
   reducers: {
     loadReferentielSuccess: (state, action) => {
       state.items = [...action.payload.items];
-      state.referentielPending = false;
     },
     loadReferentielFail: (state, action) => {
-      state = {
-        ...state,
-        categoriesPending: false,
-        error: action.message.message,
-      };
+      state.error = { ...action.error };
     },
   },
 });
 export const { loadReferentielSuccess, loadReferentielFail } =
   referentielSlice.actions;
-
-export const loadReferentiel = () => async (dispatch) => {
-  const response = await getReferentiel();
-  dispatch(loadReferentielSuccess(response));
-};
 
 export default referentielSlice.reducer;

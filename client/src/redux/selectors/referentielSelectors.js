@@ -3,8 +3,6 @@ import _ from 'lodash';
 import { selectCurrentCategory } from './crossSelectors';
 
 // eslint-disable-next-line import/prefer-default-export
-export const selectReferentielPending = (state) =>
-  state.referentiel.referentielPending;
 export const selectReferentiel = (state) => state.referentiel.items;
 export const selectCurrentReferentiel = createSelector(
   [selectCurrentCategory, selectReferentiel],

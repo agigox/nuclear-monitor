@@ -1,46 +1,77 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react';
+import _ from 'lodash';
 import Loading from './Loading';
 import Dashboard from './dashboard';
 import Error from './Error';
-import { loadProductionCategories } from '../../../redux/reducers/productionCategoriesReducer';
-import {
-  selectCategoriesPending,
-  selectError,
-} from '../../../redux/selectors/productionCategoriesSelectors';
-import { loadReferentiel } from '../../../redux/reducers/referentielReducer';
-import {
-  loadProductionsPerProductionType,
-  loadProductionsPerUnit,
-} from '../../../redux/reducers/productionsReducer';
-import { loadPmax } from '../../../redux/reducers/pmaxReducer';
+import { useGetDataQuery } from '../../../api/pokemon';
 
 function Body() {
-  const pendingCategories = useSelector(selectCategoriesPending);
+  const [loadingUI, setLoadingUI] = useState(true);
+  const [errorUI, setErrorUI] = useState(undefined);
+  const [dataUI, setDataUI] = useState(undefined);
+  const {
+    data: dataReferentiel,
+    error: errorReferentiel,
+    isLoading: isReferentielLoading,
+  } = useGetDataQuery('referentiel');
 
-  const error = useSelector(selectError);
+  const {
+    data: dataProductionCategories,
+    error: errorProductionCategories,
+    isLoading: isProductionCategoriesLoading,
+  } = useGetDataQuery('unavailabilitiesv3');
+  const {
+    data: dataProductionsPerUnit,
+    error: errorProductionsPerUnit,
+    isLoading: isProductionsPerUnitLoading,
+  } = useGetDataQuery('productions_per_unit');
+  const {
+    data: dataProductionsPerProductionType,
+    error: errorProductionsPerProductionType,
+    isLoading: isProductionsPerProductionTypeLoading,
+  } = useGetDataQuery('productions_per_production_type');
+  const {
+    data: dataPmax,
+    error: errorPmax,
+    isLoading: isPmaxLoading,
+  } = useGetDataQuery('pmax');
+  const data =
+    dataReferentiel &&
+    dataProductionCategories &&
+    dataProductionsPerUnit &&
+    dataProductionsPerProductionType &&
+    dataPmax;
+  const error =
+    errorReferentiel &&
+    errorProductionCategories &&
+    errorProductionsPerUnit &&
+    errorProductionsPerProductionType &&
+    errorPmax;
+  const loading =
+    isReferentielLoading &&
+    isProductionCategoriesLoading &&
+    isProductionsPerUnitLoading &&
+    isProductionsPerProductionTypeLoading &&
+    isPmaxLoading;
 
-  const dispatch = useDispatch();
   useEffect(() => {
-    const loadData = async () => {
-      dispatch(loadReferentiel());
-      dispatch(loadProductionCategories());
-      dispatch(loadProductionsPerUnit());
-      dispatch(loadProductionsPerProductionType());
-      dispatch(loadPmax());
-    };
-
-    loadData();
-  }, []);
-
-  if (pendingCategories) {
+    setLoadingUI(loading);
+    setErrorUI(error);
+    setDataUI(data);
+  }, [loading, error, data]);
+  if (!_.isUndefined(errorUI)) {
+    return <Error error="Error" />;
+  }
+  if (loadingUI) {
     return <Loading />;
   }
-  if (error) {
-    return <Error error={error} />;
+  if (!_.isUndefined(dataUI)) {
+    return <Dashboard />;
   }
-
-  return <Dashboard />;
+  return null;
 }
 
 export default Body;

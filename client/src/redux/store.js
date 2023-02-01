@@ -1,14 +1,19 @@
 // import { createStore, applyMiddleware, compose } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 // import createSagaMiddleware from 'redux-saga';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import rootReducer from './reducers';
+import { pokemonApi } from '../api/pokemon';
 
 // import rootSaga from './sagas';
 
 // const sagaMiddleware = createSagaMiddleware();
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export default configureStore({
-  reducer: rootReducer,
+const store = configureStore({
+  reducer: { ...rootReducer, [pokemonApi.reducerPath]: pokemonApi.reducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(pokemonApi.middleware),
 });
-
+setupListeners(store.dispatch);
+export default store;
 // sagaMiddleware.run(rootSaga);
