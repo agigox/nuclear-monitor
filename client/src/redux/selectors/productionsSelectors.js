@@ -6,15 +6,26 @@ import { selectCurrentCategory } from './crossSelectors';
 // eslint-disable-next-line import/prefer-default-export
 export const selectPerProductionTypeItems = (state) =>
   state.productions.perProductionTypeItems;
-export const selectPerUnitItems = (state) => state.productions.perUnitItems;
+export const selectPerUnitItemsByEicCode = (state) =>
+  state.productions.perUnitItems.itemsByEicCode;
+export const selectPerUnitItemsByProductionUnit = (state) =>
+  state.productions.perUnitItems.itemsByProductionUnit;
 
-export const selectPerUnitItemsOfCurrentCategory = createSelector(
-  [selectPerUnitItems, selectCurrentCategory],
+export const selectPerUnitItemsByEicCodeOfCurrentCategory = createSelector(
+  [selectPerUnitItemsByEicCode, selectCurrentCategory],
   (perUnitItems, currentCategory) => {
     const items = perUnitItems.find((item) => item.key === currentCategory);
     return items.values;
   },
 );
+export const selectPerUnitItemsByProductionUnitOfCurrentCategory =
+  createSelector(
+    [selectPerUnitItemsByProductionUnit, selectCurrentCategory],
+    (perUnitItems, currentCategory) => {
+      const items = perUnitItems.find((item) => item.key === currentCategory);
+      return items.values;
+    },
+  );
 export const selectPerProductionTypeItemsOfCurrentCategory = createSelector(
   [selectPerProductionTypeItems, selectCurrentCategory],
   (perProductionTypeItems, currentCategory) =>
@@ -22,7 +33,7 @@ export const selectPerProductionTypeItemsOfCurrentCategory = createSelector(
 );
 
 export const selectPerUnitItemOfCurrentCategoryByEicCode = createSelector(
-  [selectPerUnitItemsOfCurrentCategory, (state, eicCode) => eicCode],
+  [selectPerUnitItemsByEicCodeOfCurrentCategory, (state, eicCode) => eicCode],
   (perUnitItems, eicCode) => {
     const newUnavailabilities = perUnitItems.find((fd) => fd.key === eicCode);
     if (_.isUndefined(newUnavailabilities)) {
@@ -33,6 +44,20 @@ export const selectPerUnitItemOfCurrentCategoryByEicCode = createSelector(
 );
 
 export const selectProductionOfCurrentCategoryByEicCode = createSelector(
-  [selectPerUnitItemsOfCurrentCategory, (state, eicCode) => eicCode],
+  [selectPerUnitItemsByEicCodeOfCurrentCategory, (state, eicCode) => eicCode],
   (items, eicCode) => items.find((fd) => fd.key === eicCode).values[0],
+);
+export const selectProductionByProductionUnit = createSelector(
+  [
+    selectPerUnitItemsByProductionUnitOfCurrentCategory,
+    (state, productionUnit) => productionUnit,
+  ],
+  (items, productionUnit) =>
+    items
+      .find((item) => item.key === productionUnit)
+      .values.reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue.lastProduction.value,
+        0,
+      ),
 );

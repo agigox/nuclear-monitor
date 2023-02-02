@@ -4,7 +4,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   length: 0,
   perProductionTypeItems: [],
-  perUnitItems: [],
+  perUnitItems: {
+    lengthEic: 0,
+    itemsByEicCode: [],
+    lengthProductionUnit: 0,
+    itemsByProductionUnit: [],
+  },
   error: {},
 };
 
@@ -19,7 +24,12 @@ export const productionsSlice = createSlice({
       state.error = { ...action.error };
     },
     loadProductionsPerUnitSuccess: (state, action) => {
-      state.perUnitItems = [...action.payload.items];
+      state.perUnitItems.lengthEic = action.payload.lengthEic;
+      state.perUnitItems.lengthProductionUnit =
+        action.payload.lengthProductionunit;
+      state.perUnitItems.itemsByEicCode = action.payload.itemsByEicCode;
+      state.perUnitItems.itemsByProductionUnit =
+        action.payload.itemsByProductionUnit;
     },
     loadProductionsPerUnitFail: (state, action) => {
       state.error = { ...action.error };

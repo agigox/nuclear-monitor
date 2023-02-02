@@ -49,6 +49,7 @@ function SubSlice({ name, installedCapacity, eicCode }) {
     }
     return 'hashed-slice';
   };
+  console.log(productionOfCurrentCategoryByEicCode.lastProduction.value);
   return (
     <StyledRow className="slice-content">
       <Col span={24} className="slice-content-pmax">

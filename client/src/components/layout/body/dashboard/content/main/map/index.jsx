@@ -3,7 +3,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import SVGMap from '../../../../../../../images/map.svg';
 import { selectCurrentReferentiel } from '../../../../../../../redux/selectors/referentielSelectors';
-import Position from './Position';
 import MapBar from './MapBar';
 
 function Map() {
@@ -13,7 +12,7 @@ function Map() {
       <Col className="map-container" span={24}>
         <img src={SVGMap} alt="map" />
         {currentReferentiel.map((referentielItem) => {
-          const { values, key } = referentielItem;
+          const { key } = referentielItem;
           return (
             <Row
               key={key}
@@ -22,9 +21,6 @@ function Map() {
             >
               <Col style={{ alignSelf: 'center' }}>
                 <MapBar productionUnit={key} />
-              </Col>
-              <Col>
-                <Position productionUnit={key} availabilities={values.length} />
               </Col>
             </Row>
           );

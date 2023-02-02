@@ -140,21 +140,3 @@ export const getProductionCategory = (productionCategory) => {
   }
   return productionCategory;
 };
-
-/*
-  if (
-    [
-      ProductionTypes.FOSSIL_BROWN_COAL_LIGNITE,
-      ProductionTypes.FOSSIL_COAL_DERIVED_GAS,
-      ProductionTypes.FOSSIL_GAS,
-      ProductionTypes.FOSSIL_HARD_COAL,
-      ProductionTypes.FOSSIL_OIL,
-      ProductionTypes.FOSSIL_OIL_SHALE,
-      ProductionTypes.FOSSIL_PEAT,
-    ].includes(productionCategory)
-  ) {
-    return ProductionCategories.FOSSIL;
-  }
-  
-  
-  */

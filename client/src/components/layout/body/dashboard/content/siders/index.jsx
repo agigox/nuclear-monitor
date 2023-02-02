@@ -26,7 +26,7 @@ function Siders() {
       </Col>
       <Col span={24}>
         <Card
-          title="Centrales Nucléaires"
+          title="Moyen de production"
           bordered={false}
           className="bottom-card"
         >

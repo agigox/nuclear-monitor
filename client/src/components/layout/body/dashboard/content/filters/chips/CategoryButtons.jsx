@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ProductionCategories } from '../../../../../../../enums/ProductionCategories';
 import { changeCurrentCategory } from '../../../../../../../redux/reducers/crossReducer';
 import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
-import { selectCategories } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
+import { selectItems } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
 import Buttons from '../../../../../../utils/Buttons';
 
 function CategoryButtons() {
   const dispatch = useDispatch();
-  const categories = useSelector(selectCategories);
+  const categories = useSelector(selectItems);
   const currentCategory = useSelector(selectCurrentCategory);
   const handleClick = (category) => {
     dispatch(changeCurrentCategory(category));

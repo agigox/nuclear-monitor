@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { getRessource } from '../rteApi';
 import { groupByKey, getProductionCategory } from '../utils/helpers';
 import { ProductionCategories } from '../enums/productionTypes';
+import { referentiel } from '../data';
 
 const UNAVAILABILITIES_RESSOURCE =
   'unavailability_additional_information/v4/generation_unavailabilities';
@@ -26,12 +27,14 @@ const groupDataWithUnderscore = (dataWithUnderscore, category) => {
       (gs) => gs.name.indexOf('FESSENHEIM') === -1,
     );
     valuesOfDataGroupedByProductionType = [...uniqData];
+    const newValues = uniqData.map((t) => ({
+      ...t,
+      unavailability: t.values[0] || {},
+    }));
     return {
       key: item.key,
-      values: uniqData.map((t) => ({
-        ...t,
-        unavailability: t.values[0] || {},
-      })),
+      itemsPerUnit: newValues,
+      itemsPerProductionUnit: groupByKey(newValues, 'unitProductionUnit'),
     };
   });
   return finalResult;
@@ -55,25 +58,33 @@ export const getUnavailabilitiesV3 = async (input, { rteToken }) => {
   // replace production_type with - by _
   // for example, we get from the API HYDRO_RUN-OF-RIVER_AND_POUNDAGE instead of HYDRO_RUN_OF_RIVER_AND_POUNDAGE
   // and get only necessary data from api
-  const dataWithUnderscore = data.map(({ production_type, ...item }) => {
-    const unit = _.cloneDeep(item.unit);
-    const values = _.cloneDeep(item.values);
-    const productionType = production_type.split('-').join('_');
-    const productionCategory = getProductionCategory(productionType);
-    return {
-      creationDate: item.creation_date,
-      updatedDate: item.updated_date,
-      startDate: item.start_date,
-      endDate: item.end_date,
-      name: unit.name,
-      eicCode: unit.eic_code,
-      values,
-      reason: item.reason,
-      installedCapacity: unit.installed_capacity,
-      productionType,
-      productionCategory,
-    };
-  });
+  const dataWithUnderscore = data
+    .map(({ production_type, ...item }) => {
+      const unit = _.cloneDeep(item.unit);
+      const values = _.cloneDeep(item.values);
+      const productionType = production_type.split('-').join('_');
+      const productionCategory = getProductionCategory(productionType);
+      let unitProductionUnit = 'NOPLANT';
+      const tmp = referentiel.find((elt) => elt.eicCode === unit.eic_code);
+      if (!_.isUndefined(tmp)) {
+        unitProductionUnit = tmp.plantId;
+      }
+      return {
+        creationDate: item.creation_date,
+        updatedDate: item.updated_date,
+        startDate: item.start_date,
+        endDate: item.end_date,
+        name: unit.name,
+        eicCode: unit.eic_code,
+        unitProductionUnit,
+        values,
+        reason: item.reason,
+        installedCapacity: unit.installed_capacity,
+        productionType,
+        productionCategory,
+      };
+    })
+    .filter((item) => item.unitProductionUnit !== 'NOPLANT');
   const finalResult = groupDataWithUnderscore(
     dataWithUnderscore,
     'productionCategory',

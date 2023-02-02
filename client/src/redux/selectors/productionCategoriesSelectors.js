@@ -6,25 +6,44 @@ import { selectCurrentCategory } from './crossSelectors';
 export const selectCategoriesRefreshPending = (state) =>
   state.productionCategories.categoriesRefreshPending;
 export const selectLength = (state) => state.productionCategories.length;
-export const selectCategories = (state) =>
-  state.productionCategories.categories;
+export const selectItems = (state) =>
+  // eslint-disable-next-line no-debugger
+  // debugger;
+  state.productionCategories.items;
+export const selectItemsPerUnit = (state) =>
+  state.productionCategories.items.itemsPerUnit;
+export const itemsPerProductionUnit = (state) =>
+  state.productionCategories.items.itemsPerProductionUnit;
+
 export const selectError = (state) => state.productionCategories.error;
 export const selectLastRefreshDate = (state) =>
   state.productionCategories.lastRefreshDate;
 
-export const selectUnavailabilitiesOfCurrentCategory = createSelector(
-  [selectCurrentCategory, selectCategories],
-  (category, items) => items.find((item) => item.key === category).values,
+export const selectUnavailabilitiesPerUnitOfCurrentCategory = createSelector(
+  [selectCurrentCategory, selectItems],
+  (category, items) =>
+    // eslint-disable-next-line no-debugger
+    // debugger;
+    items.find((item) => item.key === category).itemsPerUnit,
 );
 
+export const selectUnavailabilitiesPerProductionUnitOfCurrentCategory =
+  createSelector(
+    [selectCurrentCategory, selectItems],
+    (category, items) =>
+      items.find((item) => item.key === category).itemsPerProductionUnit,
+  );
+
 export const selectUnavailabilityOfCurrentCategoryByEicCode = createSelector(
-  [selectUnavailabilitiesOfCurrentCategory, (state, eicCode) => eicCode],
+  [selectUnavailabilitiesPerUnitOfCurrentCategory, (state, eicCode) => eicCode],
   (unavailabilities, eicCode) =>
     unavailabilities.find((fd) => fd.eicCode === eicCode),
 );
 export const selectUnavailabilitiesOfCurrentCategoryCapacity = createSelector(
-  [selectUnavailabilitiesOfCurrentCategory],
+  [selectUnavailabilitiesPerUnitOfCurrentCategory],
   (unavailabilities) =>
+    // eslint-disable-next-line no-debugger
+    // debugger;
     unavailabilities.reduce(
       (accumulator, currentValue) =>
         accumulator + currentValue.unavailability.unavailable_capacity,
@@ -33,14 +52,14 @@ export const selectUnavailabilitiesOfCurrentCategoryCapacity = createSelector(
 );
 export const selectFullyDownUnavailabilityOfCurrentCategoryNumber =
   createSelector(
-    [selectUnavailabilitiesOfCurrentCategory],
+    [selectUnavailabilitiesPerUnitOfCurrentCategory],
     (unavailabilities) =>
       unavailabilities.filter((u) => u.unavailability.available_capacity === 0)
         .length,
   );
 export const selectPartiallyDownUnavailabilityOfCurrentCategoryNumber =
   createSelector(
-    [selectUnavailabilitiesOfCurrentCategory],
+    [selectUnavailabilitiesPerUnitOfCurrentCategory],
     (unavailabilities) =>
       unavailabilities.filter(
         (u) =>
@@ -48,45 +67,24 @@ export const selectPartiallyDownUnavailabilityOfCurrentCategoryNumber =
           u.installedCapacity !== u.unavailability.available_capacity,
       ).length,
   );
+export const selectUnavailabilityByProductionUnit = createSelector(
+  [
+    selectUnavailabilitiesPerProductionUnitOfCurrentCategory,
+    (state, productionUnit) => productionUnit,
+  ],
+  (items, productionUnit) => {
+    // eslint-disable-next-line no-debugger
+    // debugger;
+    let capacity = 0;
+    const result = items.find((item) => item.key === productionUnit);
+    if (!_.isUndefined(result)) {
+      capacity = result.values.reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue.unavailability.unavailable_capacity,
+        0,
+      );
+    }
+    return capacity;
+  },
+);
 /** --------------- */
-export const selectCurrentFullyDown = createSelector(
-  selectUnavailabilitiesOfCurrentCategory,
-  selectCurrentCategory,
-  (cpt, cc) => {
-    let result = cpt.find((item) => item.key === cc);
-    if (_.isUndefined(result)) {
-      result = { key: '', values: [] };
-    }
-    return result.partition.fullyDown;
-  },
-);
-export const selectCurrentPartiallyDown = createSelector(
-  selectUnavailabilitiesOfCurrentCategory,
-  selectCurrentCategory,
-  (cpt, cc) => {
-    let result = cpt.find((item) => item.key === cc);
-    if (_.isUndefined(result)) {
-      result = { key: '', values: [] };
-    }
-    return result.partition.partiallyDown;
-  },
-);
-
-export const selectFullyDownByPlant = createSelector(
-  [selectCurrentFullyDown, (state, plant) => plant],
-  (fullyDowns, plant) => {
-    const newFullyDowns = fullyDowns.filter(
-      (fd) => fd.name.indexOf(plant) >= 0,
-    );
-    return newFullyDowns;
-  },
-);
-export const selectPartiallyDownByPlant = createSelector(
-  [selectCurrentPartiallyDown, (state, plant) => plant],
-  (partiallyDowns, plant) => {
-    const newPartiallyDownsDowns = partiallyDowns.filter(
-      (fd) => fd.name.indexOf(plant) >= 0,
-    );
-    return newPartiallyDownsDowns;
-  },
-);

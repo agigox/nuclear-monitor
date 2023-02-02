@@ -12,7 +12,9 @@ import { pokemonApi } from '../api/pokemon';
 const store = configureStore({
   reducer: { ...rootReducer, [pokemonApi.reducerPath]: pokemonApi.reducer },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(pokemonApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(pokemonApi.middleware),
 });
 setupListeners(store.dispatch);
 export default store;

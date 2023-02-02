@@ -25,16 +25,20 @@ const StyledRow = styled(Row)`
     }
   }
 `;
+// pmaxtotal : 580 + 580 + 595 = 1755 (1816)
+// indispo : 580
+// prod : 0
+// dispo : 1175 = 1755 - 0 + 580
 function TopSiderInfos() {
   const currentPmax = useSelector(selectCurrentCategoryPmaxCapacity);
   const currentDownCapacity = useSelector(
     selectUnavailabilitiesOfCurrentCategoryCapacity,
   );
+  console.log(currentDownCapacity);
   // la puissance maximal de production currentCategory
   const currentCategoryLastProduction = useSelector(
     selectPerProductionTypeItemsOfCurrentCategory,
   ).lastProduction;
-
   return (
     <StyledRow
       align="middle"

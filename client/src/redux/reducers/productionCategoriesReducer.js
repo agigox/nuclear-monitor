@@ -1,11 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import _ from 'lodash';
 import moment from 'moment';
 import { getProductionCategories } from '../../api';
 
 const initialState = {
   length: 0,
-  categories: [],
+  items: [],
   error: {},
   lastRefreshDate: '',
   categoriesRefreshPending: false,
@@ -16,7 +17,9 @@ export const productionCategoriesSlice = createSlice({
   initialState,
   reducers: {
     loadProductionCategoriesSuccess: (state, action) => {
-      state.categories = [...action.payload.items];
+      // eslint-disable-next-line no-debugger
+      // debugger;
+      state.items = _.cloneDeep(action.payload.items);
       state.lastRefreshDate = moment().format('DD/MM/YYYY - HH[h]mm');
     },
     loadProductionCategoriesFail: (state, action) => {

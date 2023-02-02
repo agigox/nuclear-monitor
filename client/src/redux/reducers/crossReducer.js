@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  displayMode: 'SLICES',
+  displayMode: 'MAP',
   currentAvailability: null,
   currentCategory: 'NUCLEAR',
 };
