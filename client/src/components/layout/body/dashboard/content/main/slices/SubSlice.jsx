@@ -52,12 +52,6 @@ function SubSlice({ name, installedCapacity, eicCode }) {
     <StyledRow className="slice-content">
       <Col span={24} className="slice-content-pmax">
         Pmax: {formatNumberToFr(installedCapacity)}
-        <br />
-        Dispo: {installedCapacity - unavailability}
-        <br />
-        Indispo : {unavailability}
-        <br />
-        Prod: {production}
       </Col>
       <Col span={24} className={`slice-content-col ${getClassName()}`}>
         <Row>
