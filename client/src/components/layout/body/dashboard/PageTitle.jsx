@@ -5,7 +5,7 @@ function PageTitle() {
   return (
     <Row className="page-title">
       <Col className="text" span={24}>
-        Disponibilité des moyens de production
+        Puissance et disponibilité des moyens de production
       </Col>
     </Row>
   );

@@ -15,28 +15,28 @@ function Body() {
   const {
     data: dataReferentiel,
     error: errorReferentiel,
-    isLoading: isReferentielLoading,
+    isFetching: isReferentielLoading,
   } = useGetDataQuery('referentiel');
 
   const {
     data: dataProductionCategories,
     error: errorProductionCategories,
-    isLoading: isProductionCategoriesLoading,
+    isFetching: isProductionCategoriesLoading,
   } = useGetDataQuery('unavailabilitiesv3');
   const {
     data: dataProductionsPerUnit,
     error: errorProductionsPerUnit,
-    isLoading: isProductionsPerUnitLoading,
+    isFetching: isProductionsPerUnitLoading,
   } = useGetDataQuery('productions_per_unit');
   const {
     data: dataProductionsPerProductionType,
     error: errorProductionsPerProductionType,
-    isLoading: isProductionsPerProductionTypeLoading,
+    isFetching: isProductionsPerProductionTypeLoading,
   } = useGetDataQuery('productions_per_production_type');
   const {
     data: dataPmax,
     error: errorPmax,
-    isLoading: isPmaxLoading,
+    isFetching: isPmaxLoading,
   } = useGetDataQuery('pmax');
   const data =
     dataReferentiel &&
@@ -61,7 +61,9 @@ function Body() {
     setLoadingUI(loading);
     setErrorUI(error);
     setDataUI(data);
+    console.log(loading, error, data);
   }, [loading, error, data]);
+  /*
   if (!_.isUndefined(errorUI)) {
     return <Error error="Error" />;
   }
@@ -71,7 +73,19 @@ function Body() {
   if (!_.isUndefined(dataUI)) {
     return <Dashboard />;
   }
-  return null;
+  return <Dashboard />;
+  */
+  return (
+    <>
+      {errorUI ? (
+        <Error error="Error" />
+      ) : loadingUI ? (
+        <Loading />
+      ) : dataUI ? (
+        <Dashboard />
+      ) : null}
+    </>
+  );
 }
 
 export default Body;
