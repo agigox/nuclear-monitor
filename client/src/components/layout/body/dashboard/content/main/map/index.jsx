@@ -16,7 +16,12 @@ function Map() {
           return (
             <Row
               key={key}
-              className={`${key.toLowerCase().replace(/ |-/g, '')} mark-city`}
+              className={`${key
+                .toLowerCase()
+                .split(' ')
+                .join('')
+                .split("'")
+                .join('')} mark-city`}
               style={{ columnGap: '5px' }}
             >
               <Col style={{ alignSelf: 'center' }}>

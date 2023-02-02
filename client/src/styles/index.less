@@ -135,7 +135,7 @@ body {
     .slice-content-row {
       row-gap: 5px;
       .slice-content-pmax {
-        .format-text(@font-family-nunito-regular, 10px, 14px, @pmax-color);
+        .format-text(@font-family-nunito-regular, 10px, 14px, @color-grey);
         font-style: italic;
         text-align: right;
   
@@ -164,11 +164,11 @@ body {
           );;
         }
         .slice-content-capacity {
-          .format-text(@font-family-nunito-regular, 16px, 22px, @color-white);
+          .format-text(@font-family-nunito-bold, 16px, 22px, @color-white);
           text-align: right;
           padding: 0 2.2px;
           span {
-            font-weight: 800;
+            .format-text(@font-family-nunito-light, 16px, 22px, @color-white);
           }
         }
         .slice-content-city {
@@ -181,7 +181,7 @@ body {
     
   }
   .slices-content {
-    column-gap: 11px;
+    column-gap: 9px;
     row-gap: 19px;
     .slices-content-col {
       width: 94px;
@@ -264,5 +264,23 @@ body {
   .text-2 {
     .format-text(@font-family-nunito-bold, 36px, 48px, @background-page-title);
     font-weight: 800;
+  }
+}
+.bar-indication {
+  .title {
+    .format-text(@font-family-nunito-regular, 14px, 18px, @color-black);
+    text-transform: uppercase;
+  }
+  .pmax {
+    .format-text(@font-family-nunito-light, 14px, 18px, @pmax-color);
+    font-style: italic;
+  }
+  .percents {
+    .down-percent {
+      .format-text(@font-family-nunito-extra-bold, 16px, 22px, @green-color);
+    }
+    .prod-percent {
+      .format-text(@font-family-nunito-extra-bold, 16px, 22px, @blue-color);
+    }
   }
 }

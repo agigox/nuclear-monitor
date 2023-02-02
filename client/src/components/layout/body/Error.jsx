@@ -6,6 +6,8 @@ const StyledRow = styled(Row)`
   color: red;
   font-size: 32px;
   text-align: center;
+  height: calc(100vh - 158px);
+  background-color: #19252a;
 `;
 function Error({ error }) {
   return (

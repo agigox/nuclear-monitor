@@ -21,6 +21,8 @@ const StyledRow = styled(Row)`
       box-shadow: none;
       padding-top: 0;
       border-radius: 0;
+      padding-left: 14px;
+      padding-right: 0px;
     }
   }
 

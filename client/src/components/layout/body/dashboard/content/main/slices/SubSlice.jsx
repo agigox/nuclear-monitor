@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Col, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
@@ -49,7 +48,6 @@ function SubSlice({ name, installedCapacity, eicCode }) {
     }
     return 'hashed-slice';
   };
-  console.log(productionOfCurrentCategoryByEicCode.lastProduction.value);
   return (
     <StyledRow className="slice-content">
       <Col span={24} className="slice-content-pmax">
@@ -64,7 +62,7 @@ function SubSlice({ name, installedCapacity, eicCode }) {
       <Col span={24} className={`slice-content-col ${getClassName()}`}>
         <Row>
           <Col span={24} className="slice-content-capacity">
-            <span>{new Intl.NumberFormat('fr-FR').format(production)}</span> MW
+            {Math.round(production)} <span>MW</span>
           </Col>
           <Col className="slice-content-city" span={24}>
             {name}

@@ -34,7 +34,6 @@ function TopSiderInfos() {
   const currentDownCapacity = useSelector(
     selectUnavailabilitiesOfCurrentCategoryCapacity,
   );
-  console.log(currentDownCapacity);
   // la puissance maximal de production currentCategory
   const currentCategoryLastProduction = useSelector(
     selectPerProductionTypeItemsOfCurrentCategory,

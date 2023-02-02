@@ -10,9 +10,7 @@ import BarIndication from './BarIndication';
 import MapBarContent from './MapBarContent';
 
 const StyledRow = styled(Row)`
-  border: 1px solid;
-  height: ${HEIGHT_MAP_BAR}px;
-  width: ${(props) => props.pmax}px;
+  column-gap: 4px;
 `;
 function MapBar({ productionUnit }) {
   const productionUnitPmax = useSelector((state) =>
@@ -27,32 +25,35 @@ function MapBar({ productionUnit }) {
     selectProductionByProductionUnit(state, productionUnit),
   );
 
-  const getBarWidth = (pmaxValue) => {
-    if (pmaxValue > 3000) {
-      return 30;
-    }
-    if (pmaxValue > 1500) {
-      return 26;
-    }
-    if (pmaxValue > 500) {
-      return 22;
-    }
-    if (pmaxValue > 300) {
-      return 18;
-    }
-    return 10;
-  };
+  const getBarPercent = (value) =>
+    Math.round((value * HEIGHT_MAP_BAR) / productionUnitPmax);
+  const down = getBarPercent(unavailabilityUnitProduction);
+  const prod = getBarPercent(productionUnitProduction);
+  if (productionUnit === 'SISTERON') {
+    console.log(
+      down,
+      prod,
+      productionUnitPmax,
+      productionUnitPmax - down - prod,
+    );
+  }
+  /*
+  if (down > prod) {
+    down = prod;
+  }
+  */
   return (
-    <StyledRow pmax={getBarWidth(productionUnitPmax)}>
-      <Col span={24}>
-        <MapBarContent
-          productionUnitPmax={productionUnitPmax}
-          unavailabilityUnitProduction={unavailabilityUnitProduction}
-          productionUnitProduction={productionUnitProduction}
-        />
+    <StyledRow wrap={false} align="middle" className="box">
+      <Col>
+        <MapBarContent down={down} prod={prod} pmax={productionUnitPmax} />
       </Col>
-      <Col span={24}>
-        <BarIndication productionUnit={productionUnit} />
+      <Col>
+        <BarIndication
+          productionUnitName={productionUnit}
+          productionUnitPmax={productionUnitPmax}
+          down={down}
+          prod={prod}
+        />
       </Col>
     </StyledRow>
   );

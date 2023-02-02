@@ -52,12 +52,14 @@ export const selectProductionByProductionUnit = createSelector(
     selectPerUnitItemsByProductionUnitOfCurrentCategory,
     (state, productionUnit) => productionUnit,
   ],
-  (items, productionUnit) =>
-    items
+  (items, productionUnit) => {
+    const result = items
       .find((item) => item.key === productionUnit)
       .values.reduce(
         (accumulator, currentValue) =>
           accumulator + currentValue.lastProduction.value,
         0,
-      ),
+      );
+    return result >= 0 ? result : 0;
+  },
 );
