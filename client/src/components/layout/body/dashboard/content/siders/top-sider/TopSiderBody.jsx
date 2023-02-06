@@ -3,9 +3,10 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import TopSiderTubes from './TopSiderTubes';
 import TopSiderInfos from './TopSiderInfos';
+import { HEIGHT_TOP_SIDER_JAUGE } from '../../../../../../../utils/constants';
 
 const StyledRow = styled(Row)`
-  height: 296px;
+  height: ${HEIGHT_TOP_SIDER_JAUGE}px;
 `;
 function TopSiderBody() {
   return (

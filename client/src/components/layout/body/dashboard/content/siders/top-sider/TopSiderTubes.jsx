@@ -18,26 +18,24 @@ const StyledRow = styled(Row)`
     flex-direction: column;
     .productions-percent {
       flex-basis: ${(props) => props.currentcategorylastproduction}px;
-      width: calc(100% - 4px);
+      width: 100%;
       border-radius: 10px 10px 0px 0px;
       background: linear-gradient(180deg, #34c601 0%, #46eb57 100%);
     }
     .up-percent {
       flex-basis: ${(props) => props.currentupcapacity}px;
       background: linear-gradient(180deg, #0078cf 0%, #009dd1 100%);
-      width: calc(100% - 4px);
+      width: 100%;
     }
     .down-percent {
       flex-basis: ${(props) => props.currentdowncapacity}px;
-      width: calc(100% - 4px);
+      width: 100%;
       background: #d0574f;
       border-radius: 0px 0px 10px 10px;
     }
     .separator-percent {
-      flex-basis: 2px;
+      flex-basis: 5px;
       width: 100%;
-      border: 2px solid #000000;
-      border-radius: 2px;
     }
   }
 `;

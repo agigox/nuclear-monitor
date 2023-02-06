@@ -16,6 +16,12 @@ const StyledRow = styled(Row)`
     column-gap: 16px;
     align-items: center;
   }
+  .separator {
+    width: 222px;
+    height: 0px;
+    border: 1px solid #e8e8e8;
+    margin-bottom: 39px;
+  }
 `;
 function BottomSiderBody() {
   const currentFullyDownNumber = useSelector(
@@ -28,6 +34,10 @@ function BottomSiderBody() {
 
   return (
     <StyledRow className="bottom-sider-body">
+      <Col className="total-col" span={24}>
+        Total : {currentTotal}
+      </Col>
+      <Col className="separator" />
       <Col span={24}>
         <Row
           justify="space-between"

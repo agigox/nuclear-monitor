@@ -12,7 +12,7 @@ const StyledRow = styled(Row)`
   }
   .bottom-card {
     .ant-card-body {
-      padding-top: 15px;
+      padding-top: 0;
     }
   }
 `;

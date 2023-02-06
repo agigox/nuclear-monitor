@@ -9,10 +9,13 @@ const StyledRow = styled(Row)`
   height: calc(100vh - 158px);
   background-color: #19252a;
 `;
-function Error({ error }) {
+function Error() {
   return (
     <StyledRow justify="space-around" align="middle">
-      {error}
+      Erreur API Portail Data
+      <br />
+      Veuillez nous excuser pour la gêne occasionnée, veuillez réessayer plus
+      tard.
     </StyledRow>
   );
 }

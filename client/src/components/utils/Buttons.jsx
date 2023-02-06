@@ -4,11 +4,12 @@ import React from 'react';
 
 const StyledButton = styled(Button)`
   &.summary {
-    background-color: #a3ddf0;
+    background-color: white;
     padding: 4px 8px;
     height: auto;
-    color: #004d66;
-    border: 0;
+    color: #009dd1;
+    border: 2px solid #009dd1;
+    border-radius: 8px;
   }
   &.chips {
     line-height: 16px;

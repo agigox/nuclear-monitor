@@ -61,7 +61,6 @@ function Body() {
     setLoadingUI(loading);
     setErrorUI(error);
     setDataUI(data);
-    console.log(loading, error, data);
   }, [loading, error, data]);
   /*
   if (!_.isUndefined(errorUI)) {
@@ -78,7 +77,7 @@ function Body() {
   return (
     <>
       {errorUI ? (
-        <Error error="Error" />
+        <Error />
       ) : loadingUI ? (
         <Loading />
       ) : dataUI ? (
