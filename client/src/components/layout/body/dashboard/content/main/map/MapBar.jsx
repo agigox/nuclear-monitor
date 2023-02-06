@@ -17,7 +17,6 @@ function MapBar({ productionUnit }) {
     selectPmaxByProductionUnit(state, productionUnit),
   );
 
-  // eslint-disable-next-line no-unused-vars
   const unavailabilityUnitProduction = useSelector((state) =>
     selectUnavailabilityByProductionUnit(state, productionUnit),
   );
@@ -29,19 +28,6 @@ function MapBar({ productionUnit }) {
     Math.round((value * HEIGHT_MAP_BAR) / productionUnitPmax);
   const down = getBarPercent(unavailabilityUnitProduction);
   const prod = getBarPercent(productionUnitProduction);
-  if (productionUnit === 'SISTERON') {
-    console.log(
-      down,
-      prod,
-      productionUnitPmax,
-      productionUnitPmax - down - prod,
-    );
-  }
-  /*
-  if (down > prod) {
-    down = prod;
-  }
-  */
   return (
     <StyledRow wrap={false} align="middle" className="box">
       <Col>

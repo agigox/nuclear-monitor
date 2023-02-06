@@ -29,11 +29,12 @@ function BarIndication({ productionUnitName, productionUnitPmax, down, prod }) {
       </Col>
       <Col span={24}>
         <Row wrap={false} className="percents" align="middle">
+          <Col className="prod-percent">{`${prod} %`}</Col>
+
+          <Col className="separator-percent" />
           <Col className="down-percent">{`${
             HEIGHT_MAP_BAR - down - prod
           } %`}</Col>
-          <Col className="separator-percent" />
-          <Col className="prod-percent">{`${prod} %`}</Col>
         </Row>
       </Col>
       <Col span={24} className="pmax">

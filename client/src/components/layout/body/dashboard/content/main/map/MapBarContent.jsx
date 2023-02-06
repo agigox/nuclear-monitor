@@ -11,12 +11,12 @@ const StyledRow = styled(Row)`
   width: ${(props) => props.pmax}px;
   .map-bar-rest {
     height: ${(props) => HEIGHT_MAP_BAR - props.down - props.prod}px;
-    background: linear-gradient(91.66deg, #36c90a 10.18%, #46ea54 91.31%);
+    background: linear-gradient(91.66deg, #0079d1 10.18%, #009dd1 91.31%);
     border-radius: 3px 3px 0 0;
   }
   .map-bar-prod {
     height: ${(props) => props.prod}px;
-    background: linear-gradient(91.66deg, #0079d1 10.18%, #009dd1 91.31%);
+    background: linear-gradient(91.66deg, #36c90a 10.18%, #46ea54 91.31%);
   }
   .map-bar-down {
     height: ${(props) => props.down}px;
