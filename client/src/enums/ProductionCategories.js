@@ -26,5 +26,6 @@ export const ProductionCategories = {
   WIND_OFFSHORE: 'Éolien en mer',
   WINDS: 'Éolien',
   WIND_ONSHORE: 'WIND_ONSHORE',
+  ALL: 'Tous',
   OTHER: 'OTHER',
 };

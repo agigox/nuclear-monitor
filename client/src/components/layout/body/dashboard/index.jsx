@@ -2,11 +2,15 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import PageTitle from './PageTitle';
 import Content from './content';
+import SectorDetails from '../../../modals/sector-details';
 // import GoTop from './GoTop';
 
 function Dashboard() {
   return (
     <Row className="dashboard">
+      <Col span={24}>
+        <SectorDetails />
+      </Col>
       <Col span={24}>
         <PageTitle />
       </Col>

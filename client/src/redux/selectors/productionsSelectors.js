@@ -31,7 +31,11 @@ export const selectPerProductionTypeItemsOfCurrentCategory = createSelector(
   (perProductionTypeItems, currentCategory) =>
     perProductionTypeItems.find((item) => item.key === currentCategory),
 );
-
+export const selectPerProductionTypeItemsByCategory = createSelector(
+  [selectPerProductionTypeItems, (state, category) => category],
+  (perProductionTypeItems, category) =>
+    perProductionTypeItems.find((item) => item.key === category),
+);
 export const selectPerUnitItemOfCurrentCategoryByEicCode = createSelector(
   [selectPerUnitItemsByEicCodeOfCurrentCategory, (state, eicCode) => eicCode],
   (perUnitItems, eicCode) => {

@@ -21,10 +21,7 @@ export const selectLastRefreshDate = (state) =>
 
 export const selectUnavailabilitiesPerUnitOfCurrentCategory = createSelector(
   [selectCurrentCategory, selectItems],
-  (category, items) =>
-    // eslint-disable-next-line no-debugger
-    // debugger;
-    items.find((item) => item.key === category).itemsPerUnit,
+  (category, items) => items.find((item) => item.key === category).itemsPerUnit,
 );
 
 export const selectUnavailabilitiesPerProductionUnitOfCurrentCategory =
@@ -42,13 +39,24 @@ export const selectUnavailabilityOfCurrentCategoryByEicCode = createSelector(
 export const selectUnavailabilitiesOfCurrentCategoryCapacity = createSelector(
   [selectUnavailabilitiesPerUnitOfCurrentCategory],
   (unavailabilities) =>
-    // eslint-disable-next-line no-debugger
-    // debugger;
     unavailabilities.reduce(
       (accumulator, currentValue) =>
         accumulator + currentValue.unavailability.unavailable_capacity,
       0,
     ),
+);
+export const selectUnavailabilitiesByCategoryCapacity = createSelector(
+  [selectItems, (state, category) => category],
+  (items, category) => {
+    const unavailabilities = items.find(
+      (item) => item.key === category,
+    ).itemsPerUnit;
+    return unavailabilities.reduce(
+      (accumulator, currentValue) =>
+        accumulator + currentValue.unavailability.unavailable_capacity,
+      0,
+    );
+  },
 );
 export const selectFullyDownUnavailabilityOfCurrentCategoryNumber =
   createSelector(

@@ -9,3 +9,9 @@ export const selectCurrentCategoryPmaxCapacity = createSelector(
   (pmaxItems, currentCategory) =>
     pmaxItems.find((item) => item.key === currentCategory).installedCapacity,
 );
+export const selectPmaxCapacityByCategory = createSelector(
+  [selectPmaxItems, (state, category) => category],
+  (pmaxItems, category) =>
+    // debugger;
+    pmaxItems.find((item) => item.key === category).installedCapacity,
+);

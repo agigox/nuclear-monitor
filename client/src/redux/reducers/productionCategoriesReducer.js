@@ -17,7 +17,6 @@ export const productionCategoriesSlice = createSlice({
   initialState,
   reducers: {
     loadProductionCategoriesSuccess: (state, action) => {
-      // eslint-disable-next-line no-debugger
       // debugger;
       state.items = _.cloneDeep(action.payload.items);
       state.lastRefreshDate = moment().format('DD/MM/YYYY - HH[h]mm');

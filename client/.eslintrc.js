@@ -17,6 +17,8 @@ module.exports = {
   rules: {
     'prettier/prettier': ['error', prettierOptions],
     'react/prop-types': 'off',
+    'import/prefer-default-export': 'off',
+    'no-debugger': 'off',
   },
   env: {
     jest: true,
