@@ -1,11 +1,7 @@
 import styled from '@emotion/styled';
 import { Col, Row } from 'antd';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectCurrentCategoryPmaxCapacity } from '../../../../../../../redux/selectors/pmaxSelectors';
-import { selectUnavailabilitiesOfCurrentCategoryCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
-import { selectPerProductionTypeItemsOfCurrentCategory } from '../../../../../../../redux/selectors/productionsSelectors';
-import { formatNumberToFr } from '../../../../../../../utils';
+import { toPercent, formatNumberToFr } from '../../../../../../../utils';
 
 const StyledRow = styled(Row)`
   &.percents-text {
@@ -39,20 +35,7 @@ const StyledRow = styled(Row)`
     }
   }
 `;
-// pmaxtotal : 580 + 580 + 595 = 1755 (1816)
-// indispo : 580
-// prod : 0
-// dispo : 1175 = 1755 - 0 + 580
-function TopSiderInfos() {
-  const currentPmax = useSelector(selectCurrentCategoryPmaxCapacity);
-  const currentDownCapacity = useSelector(
-    selectUnavailabilitiesOfCurrentCategoryCapacity,
-  );
-  // la puissance maximal de production currentCategory
-  const currentCategoryLastProduction = useSelector(
-    selectPerProductionTypeItemsOfCurrentCategory,
-  ).lastProduction;
-  const toPercent = (number) => Math.round((number * 100) / currentPmax);
+function TopSiderInfos({ unavailable, pmax, production }) {
   return (
     <StyledRow
       align="middle"
@@ -69,11 +52,11 @@ function TopSiderInfos() {
           <Col span={24}>
             <Row className="prod-text">
               <Col className="text-2">
-                {formatNumberToFr(currentCategoryLastProduction / 1000)}
+                {formatNumberToFr(production / 1000)}
               </Col>
               <Col className="text-unit">GW</Col>
               <Col span={24} className="text-unit-percent">
-                {`${toPercent(currentCategoryLastProduction)}%`}
+                {`${toPercent(production, pmax)}%`}
               </Col>
             </Row>
           </Col>
@@ -87,19 +70,13 @@ function TopSiderInfos() {
           <Col span={24} className="text-2">
             <Row className="percents-row">
               <Col className="text-1-1">
-                {formatNumberToFr(
-                  (currentPmax -
-                    currentDownCapacity -
-                    currentCategoryLastProduction) /
-                    1000,
-                )}
+                {formatNumberToFr((pmax - unavailable - production) / 1000)}
               </Col>
               <Col className="text-1-2">GW</Col>
               <Col className="separator-percent-text" />
               <Col className="text-1-3">{`${toPercent(
-                currentPmax -
-                  currentDownCapacity -
-                  currentCategoryLastProduction,
+                pmax - unavailable - production,
+                pmax,
               )}%`}</Col>
             </Row>
           </Col>
@@ -113,12 +90,13 @@ function TopSiderInfos() {
           <Col span={24} className="text-2">
             <Row className="percents-row">
               <Col className="text-1-1">
-                {formatNumberToFr(currentDownCapacity / 1000)}
+                {formatNumberToFr(unavailable / 1000)}
               </Col>
               <Col className="text-1-2">GW</Col>
               <Col className="separator-percent-text" />
               <Col className="text-1-3">{`${toPercent(
-                currentDownCapacity,
+                unavailable,
+                pmax,
               )}%`}</Col>
             </Row>
           </Col>

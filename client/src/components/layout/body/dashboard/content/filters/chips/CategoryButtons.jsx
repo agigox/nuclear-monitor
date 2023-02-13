@@ -5,19 +5,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ProductionCategories } from '../../../../../../../enums/ProductionCategories';
 import { changeCurrentCategory } from '../../../../../../../redux/reducers/crossReducer';
 import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
-import { selectItems } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
+// eslint-disable-next-line import/named
+import { selectGroupedRefByProductionType } from '../../../../../../../redux/selectors/referentielSelectors';
 import Buttons from '../../../../../../utils/Buttons';
 
 function CategoryButtons() {
   const dispatch = useDispatch();
-  const categories = useSelector(selectItems);
+  const productionTypes = useSelector(selectGroupedRefByProductionType);
   const currentCategory = useSelector(selectCurrentCategory);
   const handleClick = (category) => {
     dispatch(changeCurrentCategory(category));
   };
   return (
     <Row gutter={[13, 0]}>
-      {categories.map((category) => (
+      {productionTypes.map((category) => (
         <Col key={category.key}>
           <Buttons
             styling="chips"

@@ -3,10 +3,10 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
-  selectFullyDownUnavailabilityOfCurrentCategoryNumber,
-  selectPartiallyDownUnavailabilityOfCurrentCategoryNumber,
-} from '../../../../../../../redux/selectors/productionCategoriesSelectors';
-import { selectCurrentCategoryGenerationUnitsNumber } from '../../../../../../../redux/selectors/referentielSelectors';
+  selectCatgoryFullyDownUnavailabilityNumber,
+  selectCatgoryPartiallyDownUnavailabilityNumber,
+} from '../../../../../../../redux/selectors/dataSelectors';
+import { selectCategoryTotalUnits } from '../../../../../../../redux/selectors/referentielSelectors';
 
 const StyledRow = styled(Row)`
   flex-direction: row;
@@ -25,12 +25,12 @@ const StyledRow = styled(Row)`
 `;
 function BottomSiderBody() {
   const currentFullyDownNumber = useSelector(
-    selectFullyDownUnavailabilityOfCurrentCategoryNumber,
+    selectCatgoryFullyDownUnavailabilityNumber,
   );
   const currentPartiallyDownNumber = useSelector(
-    selectPartiallyDownUnavailabilityOfCurrentCategoryNumber,
+    selectCatgoryPartiallyDownUnavailabilityNumber,
   );
-  const currentTotal = useSelector(selectCurrentCategoryGenerationUnitsNumber);
+  const currentTotal = useSelector(selectCategoryTotalUnits);
 
   return (
     <StyledRow className="bottom-sider-body">

@@ -16,7 +16,7 @@ function Body() {
     data: dataReferentiel,
     error: errorReferentiel,
     isFetching: isReferentielLoading,
-  } = useGetDataQuery('referentiel');
+  } = useGetDataQuery('referentielv1');
 
   const {
     data: dataProductionCategories,
@@ -29,6 +29,11 @@ function Body() {
     isFetching: isProductionsPerUnitLoading,
   } = useGetDataQuery('productions_per_unit');
   const {
+    data: dataProductions1,
+    error: errorProductions1,
+    isFetching: isProductions1Loading,
+  } = useGetDataQuery('productions');
+  const {
     data: dataProductionsPerProductionType,
     error: errorProductionsPerProductionType,
     isFetching: isProductionsPerProductionTypeLoading,
@@ -39,18 +44,21 @@ function Body() {
     isFetching: isPmaxLoading,
   } = useGetDataQuery('pmax');
   const data =
+    dataProductions1 &&
     dataReferentiel &&
     dataProductionCategories &&
     dataProductionsPerUnit &&
     dataProductionsPerProductionType &&
     dataPmax;
   const error =
+    errorProductions1 &&
     errorReferentiel &&
     errorProductionCategories &&
     errorProductionsPerUnit &&
     errorProductionsPerProductionType &&
     errorPmax;
   const loading =
+    isProductions1Loading &&
     isReferentielLoading &&
     isProductionCategoriesLoading &&
     isProductionsPerUnitLoading &&

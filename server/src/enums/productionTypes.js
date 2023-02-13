@@ -24,7 +24,8 @@ export const ProductionCategories = {
   WASTE: 'WASTE',
   WIND_OFFSHORE: 'WIND_OFFSHORE',
   WIND_ONSHORE: 'WIND_ONSHORE',
-  WINDS: 'WINDS',
+  OFFSHORE: 'OFFSHORE',
+  TIDAL: 'TIDAL',
   OTHER: 'OTHER',
   ALL: 'ALL',
 };

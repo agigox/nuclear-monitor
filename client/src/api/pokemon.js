@@ -4,6 +4,7 @@ import {
   loadProductionCategoriesFail,
   loadProductionCategoriesSuccess,
 } from '../redux/reducers/productionCategoriesReducer';
+import { loadDataFail, loadDataSuccess } from '../redux/reducers/dataReducer';
 import {
   loadProductionsPerProductionTypeFail,
   loadProductionsPerProductionTypeSuccess,
@@ -31,7 +32,7 @@ export const pokemonApi = createApi({
         try {
           const { data } = await queryFulfilled;
           // `onSuccess` side-effect
-          if (url === 'referentiel') {
+          if (url === 'referentielv1') {
             dispatch(loadReferentielSuccess(data));
           } else if (url === 'unavailabilitiesv3') {
             dispatch(loadProductionCategoriesSuccess(data));
@@ -39,12 +40,14 @@ export const pokemonApi = createApi({
             dispatch(loadProductionsPerUnitSuccess(data));
           } else if (url === 'productions_per_production_type') {
             dispatch(loadProductionsPerProductionTypeSuccess(data));
+          } else if (url === 'productions') {
+            dispatch(loadDataSuccess(data));
           } else if (url === 'pmax') {
             dispatch(loadPmaxSuccess(data));
           }
         } catch (err) {
           // `onError` side-effect
-          if (url === 'referentiel') {
+          if (url === 'referentielv1') {
             dispatch(loadReferentielFail(err));
           } else if (url === 'unavailabilitiesv3') {
             dispatch(loadProductionCategoriesFail(err));
@@ -52,6 +55,8 @@ export const pokemonApi = createApi({
             dispatch(loadProductionsPerUnitFail(err));
           } else if (url === 'productions_per_production_type') {
             dispatch(loadProductionsPerProductionTypeFail(err));
+          } else if (url === 'productions') {
+            dispatch(loadDataFail(err));
           } else if (url === 'pmax') {
             dispatch(loadPmaxFail(err));
           }

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { readCSV } from '../utils/helpers';
+import { getProductionCategory, readCSV } from '../utils/helpers';
 import {fileURLToPath} from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -51,13 +51,21 @@ export const plantsUp = readCSV(
 });
 
 export const referentiel = readCSV(
-  fs.readFileSync(path.join(__dirname, './referentielv4.csv'), 'utf8'),
+  fs.readFileSync(path.join(__dirname, './referentielv5.csv'), 'utf8'),
 ).map((item) => {
   return ({
   ...item,
-  installedCapacity: Number(item.netPower_MW),
-  unavailableCapacitySum: 0,
-  availableCapacitySum: 0
+  central: item.plantId,
+  eicProd: item.EIC_API_Prod,
+  eicIndispoCentral: item.EIC_API_Indispo_Centrale,
+  eicIndispoGroup: item.EIC_API_Indispo_Groupe,
+  pmax: Number(item.netPower_MW),
+  availableCapacity: 0,
+  unavailableCapacity: 0,
+  productionCapacity: 0,
+  productionType: item.stage,
+  category: getProductionCategory(item.stage),
+  reactorIndex: item.reactorIndex
 })});
 
 export const pmax = readCSV(
@@ -66,4 +74,5 @@ export const pmax = readCSV(
   return ({
   key: category,
   installedCapacity: Number(installed_capacity),
+  pmax: Number(installed_capacity),
 })});

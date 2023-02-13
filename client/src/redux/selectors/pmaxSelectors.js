@@ -2,16 +2,34 @@ import { createSelector } from '@reduxjs/toolkit';
 import { selectCurrentCategory } from './crossSelectors';
 
 // eslint-disable-next-line import/prefer-default-export
-export const selectPmaxPending = (state) => state.pmax.pmaxPending;
-export const selectPmaxItems = (state) => state.pmax.items;
+export const selectPmaxPending = (state) => {
+  return state.pmax.pmaxPending;
+};
+export const selectPmaxItems = (state) => {
+  return state.pmax.items;
+};
 export const selectCurrentCategoryPmaxCapacity = createSelector(
   [selectPmaxItems, selectCurrentCategory],
   (pmaxItems, currentCategory) =>
-    pmaxItems.find((item) => item.key === currentCategory).installedCapacity,
+    // debugger;
+    {
+      return pmaxItems.find((item) => {
+        return item.key === currentCategory;
+      }).installedCapacity;
+    },
 );
 export const selectPmaxCapacityByCategory = createSelector(
-  [selectPmaxItems, (state, category) => category],
+  [
+    selectPmaxItems,
+    (state, category) => {
+      return category;
+    },
+  ],
   (pmaxItems, category) =>
     // debugger;
-    pmaxItems.find((item) => item.key === category).installedCapacity,
+    {
+      return pmaxItems.find((item) => {
+        return item.key === category;
+      }).installedCapacity;
+    },
 );

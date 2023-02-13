@@ -19,6 +19,7 @@ module.exports = {
     'react/prop-types': 'off',
     'import/prefer-default-export': 'off',
     'no-debugger': 'off',
+    'arrow-body-style': ['error', 'always'],
   },
   env: {
     jest: true,

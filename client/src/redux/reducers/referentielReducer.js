@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  length: 0,
   items: [],
   error: {},
 };
@@ -10,6 +11,7 @@ export const referentielSlice = createSlice({
   initialState,
   reducers: {
     loadReferentielSuccess: (state, action) => {
+      state.length = action.payload.items.length;
       state.items = [...action.payload.items];
     },
     loadReferentielFail: (state, action) => {

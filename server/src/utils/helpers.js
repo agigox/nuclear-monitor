@@ -136,7 +136,7 @@ export const getProductionCategory = (productionCategory) => {
       productionCategory,
     )
   ) {
-    return ProductionCategories.WINDS;
+    return ProductionCategories.OFFSHORE;
   }
   return productionCategory;
 };

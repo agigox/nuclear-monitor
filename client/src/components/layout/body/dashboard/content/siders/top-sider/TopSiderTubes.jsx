@@ -1,34 +1,31 @@
 import styled from '@emotion/styled';
 import { Col, Row } from 'antd';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectCurrentCategoryPmaxCapacity } from '../../../../../../../redux/selectors/pmaxSelectors';
-import { selectUnavailabilitiesOfCurrentCategoryCapacity } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
-import { selectPerProductionTypeItemsOfCurrentCategory } from '../../../../../../../redux/selectors/productionsSelectors';
+import { getPercentPixelStyle } from '../../../../../../../utils';
+import { HEIGHT_TOP_SIDER_JAUGE } from '../../../../../../../utils/constants';
 
-/*
-currentPmax = currentDownCapacity + currentCategoryLastProduction
-291px --> currentPmax
-x --> currentDownCapacity
-x = Math.round((currentDownCapacity * 291) / currentPmax)
-y = 291 - Math.round((currentDownCapacity * 291) / currentPmax)
-*/
 const StyledRow = styled(Row)`
   &.percents {
     flex-direction: column;
     .productions-percent {
-      flex-basis: ${(props) => props.currentcategorylastproduction}px;
+      flex-basis: ${(props) => {
+        return props.production;
+      }}px;
       width: 100%;
       border-radius: 10px 10px 0px 0px;
       background: linear-gradient(180deg, #34c601 0%, #46eb57 100%);
     }
     .up-percent {
-      flex-basis: ${(props) => props.currentupcapacity}px;
+      flex-basis: ${(props) => {
+        return props.rest;
+      }}px;
       background: linear-gradient(180deg, #0078cf 0%, #009dd1 100%);
       width: 100%;
     }
     .down-percent {
-      flex-basis: ${(props) => props.currentdowncapacity}px;
+      flex-basis: ${(props) => {
+        return props.unavailable;
+      }}px;
       width: 100%;
       background: #d0574f;
       border-radius: 0px 0px 10px 10px;
@@ -39,36 +36,15 @@ const StyledRow = styled(Row)`
     }
   }
 `;
-/*
-currentDownCapacity = currentFullyDownCapacity + currentPartiallyDownCapacity
-currentPmax --> 100%
-currentDownCapacity --> x
-x = 100 - Math.round(((currentFullyDownCapacity + currentPartiallyDownCapacity) * 100) / currentPmax)
-x --> currentDownCapacity
-x = Math.round((currentDownCapacity * 291) / currentPmax)
-y = 291 - Math.round((currentDownCapacity * 291) / currentPmax)
-*/
-function TopSiderTubes() {
-  const currentDownCapacity = useSelector(
-    selectUnavailabilitiesOfCurrentCategoryCapacity,
-  );
-  // la puissance maximal de production currentCategory
-  const currentPmax = useSelector(selectCurrentCategoryPmaxCapacity);
-  const currentCategoryLastProduction = useSelector(
-    selectPerProductionTypeItemsOfCurrentCategory,
-  ).lastProduction;
-  const getPercentPixelStyle = (value) =>
-    Math.round((value * 296) / currentPmax);
+function TopSiderTubes({ unavailable, pmax, production }) {
   return (
     <StyledRow
-      currentdowncapacity={getPercentPixelStyle(currentDownCapacity)}
-      currentcategorylastproduction={getPercentPixelStyle(
-        currentCategoryLastProduction,
-      )}
-      currentupcapacity={
-        296 -
-        getPercentPixelStyle(currentDownCapacity) -
-        getPercentPixelStyle(currentCategoryLastProduction)
+      unavailable={getPercentPixelStyle(unavailable, pmax)}
+      production={getPercentPixelStyle(production, pmax)}
+      rest={
+        HEIGHT_TOP_SIDER_JAUGE -
+        getPercentPixelStyle(unavailable, pmax) -
+        getPercentPixelStyle(production, pmax)
       }
       align="middle"
       gutter={13}

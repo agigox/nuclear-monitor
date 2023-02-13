@@ -24,8 +24,9 @@ export const ProductionCategories = {
   SOLAR: 'SOLAR',
   WASTE: 'WASTE',
   WIND_OFFSHORE: 'Éolien en mer',
-  WINDS: 'Éolien',
+  OFFSHORE: 'Éolien',
   WIND_ONSHORE: 'WIND_ONSHORE',
   ALL: 'Tous',
+  RIDAL: 'RIDAL',
   OTHER: 'OTHER',
 };

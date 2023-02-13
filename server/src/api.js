@@ -25,6 +25,7 @@ import {
   getProductionsPerProductionType,
   getProductionsPerUnit,
 } from './services/productions';
+import { getProductions } from './services/productions1';
 
 function serviceWrapper(service, environment) {
   return async function wrappedService(req, res, next) {
@@ -77,6 +78,7 @@ const buildApi = (environment) => {
     '/productions_per_production_type',
     serviceWrapper(getProductionsPerProductionType, environment),
   );
+  app.get('/productions', serviceWrapper(getProductions, environment));
   app.get(
     '/productions_per_unit',
     serviceWrapper(getProductionsPerUnit, environment),
@@ -111,6 +113,12 @@ const buildApi = (environment) => {
     res.json({
       length: dataGroupedByCategory.length,
       items: dataGroupedByCategoryAndPlantId,
+    });
+  });
+  app.get('/referentielv1', (req, res) => {
+    res.json({
+      length: referentiel.length,
+      items: referentiel,
     });
   });
 

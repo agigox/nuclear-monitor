@@ -42,10 +42,12 @@ export const {
   refreshProductionCategoriesRequest,
 } = productionCategoriesSlice.actions;
 
-export const refreshProductionCategories = () => async (dispatch) => {
-  dispatch(refreshProductionCategoriesRequest());
-  const response = await getProductionCategories();
-  dispatch(refreshProductionCategoriesSuccess(response));
+export const refreshProductionCategories = () => {
+  return async (dispatch) => {
+    dispatch(refreshProductionCategoriesRequest());
+    const response = await getProductionCategories();
+    dispatch(refreshProductionCategoriesSuccess(response));
+  };
 };
 
 export default productionCategoriesSlice.reducer;
