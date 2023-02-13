@@ -1,30 +1,26 @@
 import { Col, Row } from 'antd';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectGenerationUnitsByProductionUnit } from '../../../../../../../redux/selectors/referentielSelectors';
 import SubSlice from './SubSlice';
 
-function Slice({ name }) {
-  const productionUnitGenerationUnits = useSelector((state) =>
-    selectGenerationUnitsByProductionUnit(state, name),
-  );
+function Slice({ data }) {
   return (
     <Row className="slice">
       <Col className="slice-title" span={24}>
-        {name}
+        {data.key}
       </Col>
       <Col span={24}>
         <Row className="slice-content-row">
-          {productionUnitGenerationUnits.map(
-            ({ name: unitName, eicCode, installedCapacity }) => (
+          {data.values.map((value) => {
+            return (
               <SubSlice
-                key={eicCode}
-                name={unitName}
-                eicCode={eicCode}
-                installedCapacity={installedCapacity}
+                key={value.eicIndispoGroup}
+                name={value.name}
+                pmax={value.pmax}
+                production={value.productionCapacity}
+                available={value.availableCapacity}
               />
-            ),
-          )}
+            );
+          })}
         </Row>
       </Col>
     </Row>

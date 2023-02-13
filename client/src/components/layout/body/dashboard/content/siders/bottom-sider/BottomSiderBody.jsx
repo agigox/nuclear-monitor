@@ -37,7 +37,9 @@ function BottomSiderBody() {
       <Col className="total-col" span={24}>
         Total : {currentTotal}
       </Col>
+
       <Col className="separator" />
+
       <Col span={24}>
         <Row
           justify="space-between"

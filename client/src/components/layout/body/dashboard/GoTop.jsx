@@ -1,6 +1,10 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-unused-vars */
 import styled from '@emotion/styled';
-import { Col, Row } from 'antd';
+import { Button, Col, Row } from 'antd';
 import React, { useState } from 'react';
 import ArrowUp from '../../../../images/arrow_upward.svg';
 
@@ -8,6 +12,13 @@ const StyledRow = styled(Row)`
   height: 86px;
   width: 1440px;
   background: #22323a;
+  padding-right: 95px;
+  align-content: center;
+  text-align: right;
+  flex-direction: row-reverse;
+  img {
+    cursor: pointer;
+  }
 `;
 function GoTop() {
   const [visible, setVisible] = useState(false);
@@ -33,16 +44,24 @@ function GoTop() {
   window.addEventListener('scroll', toggleVisible);
   return (
     <StyledRow className="go-to-top">
-      <Col flex="31">
-        <img src={ArrowUp} alt="" />
+      <Col flex="31px">
+        <img
+          src={ArrowUp}
+          alt=""
+          onClick={() => {
+            return scrollToTop();
+          }}
+        />
       </Col>
       <Col className="go-top-text" flex="auto">
-        Retour en haut de page
+        <a
+          onClick={() => {
+            return scrollToTop();
+          }}
+        >
+          Retour en haut de page
+        </a>
       </Col>
-      {/* <Button>
-     <FaArrowCircleUp onClick={scrollToTop} 
-     style={{display: visible ? 'inline' : 'none'}} />
-    </Button> */}
     </StyledRow>
   );
 }

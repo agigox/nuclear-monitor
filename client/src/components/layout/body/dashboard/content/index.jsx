@@ -58,7 +58,7 @@ function Content() {
                 displayMode === DisplayModes.SLICES ? 'card-slices' : ''
               }`}
             >
-              {/* <Main /> */}
+              <Main />
             </Card>
           </Col>
         </Row>

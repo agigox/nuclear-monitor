@@ -45,19 +45,6 @@ export const selectUnavailabilitiesPerProductionUnitOfCurrentCategory =
     }).itemsPerProductionUnit;
   });
 
-export const selectUnavailabilityOfCurrentCategoryByEicCode = createSelector(
-  [
-    selectUnavailabilitiesPerUnitOfCurrentCategory,
-    (state, eicCode) => {
-      return eicCode;
-    },
-  ],
-  (unavailabilities, eicCode) => {
-    return unavailabilities.find((fd) => {
-      return fd.eicCode === eicCode;
-    });
-  },
-);
 export const selectUnavailabilitiesByCategoryCapacity = createSelector(
   [
     selectItems,

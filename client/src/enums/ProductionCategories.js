@@ -27,6 +27,6 @@ export const ProductionCategories = {
   OFFSHORE: 'Éolien',
   WIND_ONSHORE: 'WIND_ONSHORE',
   ALL: 'Tous',
-  RIDAL: 'RIDAL',
+  TIDAL: 'TIDAL',
   OTHER: 'OTHER',
 };

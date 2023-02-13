@@ -64,19 +64,6 @@ export const selectPerUnitItemOfCurrentCategoryByEicCode = createSelector(
   },
 );
 
-export const selectProductionOfCurrentCategoryByEicCode = createSelector(
-  [
-    selectPerUnitItemsByEicCodeOfCurrentCategory,
-    (state, eicCode) => {
-      return eicCode;
-    },
-  ],
-  (items, eicCode) => {
-    return items.find((fd) => {
-      return fd.key === eicCode;
-    }).values[0];
-  },
-);
 export const selectProductionByProductionUnit = createSelector(
   [
     selectPerUnitItemsByProductionUnitOfCurrentCategory,

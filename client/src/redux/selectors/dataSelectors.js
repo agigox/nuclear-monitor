@@ -18,12 +18,28 @@ export const selectGroupedUnavailabilitiesByProductionType = createSelector(
   [selectDataItems],
   (items) => {
     const groupByCategory = groupByKey(items, 'category');
-    console.log(groupByCategory);
     groupByCategory.unshift({ key: 'ALL', values: items });
 
     return groupByCategory;
   },
 );
+
+export const selectDataByCategoryAndProductionUnit = createSelector(
+  [
+    selectGroupedUnavailabilitiesByProductionType,
+    (state, category) => {
+      return category;
+    },
+  ],
+  (items, category) => {
+    const { key, values } = items.find((item) => {
+      return item.key === category;
+    });
+    return { key, values: groupByKey(values, 'central') };
+  },
+);
+
+/*----------*/
 
 export const selectCategoryUnavailabilities = createSelector(
   [selectGroupedUnavailabilitiesByProductionType, selectCurrentCategory],
