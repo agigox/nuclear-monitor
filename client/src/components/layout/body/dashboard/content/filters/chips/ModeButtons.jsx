@@ -32,7 +32,9 @@ function ModeButtons() {
       <Col>
         <Buttons
           styling="chips tranches"
-          clickHandler={() => handleClick(DisplayModes.SLICES)}
+          clickHandler={() => {
+            return handleClick(DisplayModes.SLICES);
+          }}
           active={displayMode === DisplayModes.SLICES}
         >
           Unités de production
@@ -41,7 +43,9 @@ function ModeButtons() {
       <Col>
         <Buttons
           styling="chips carte"
-          clickHandler={() => handleClick(DisplayModes.MAP)}
+          clickHandler={() => {
+            return handleClick(DisplayModes.MAP);
+          }}
           active={displayMode === DisplayModes.MAP}
         >
           Carte

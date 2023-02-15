@@ -69,13 +69,21 @@ export function orderByTwoFields(data, fields, direction) {
 export function formatNumberToFr(number) {
   return parseFloat(number.toFixed(1)).toLocaleString('fr-FR');
 }
-export const toPercent = (number, max) => Math.round((number * 100) / max);
-export const getPercentPixelStyle = (value, max) =>
-  Math.round((value * HEIGHT_TOP_SIDER_JAUGE) / max);
-export const groupByKey = (array, key) =>
-  _.chain(array)
-    // Group the elements of Array based on `key` property
-    .groupBy(key)
-    // `key` is group's name (color), `value` is the array of objects
-    .map((value, mapKey) => ({ key: mapKey, values: value }))
-    .value();
+export const toPercent = (number, max) => {
+  return Math.round((number * 100) / max);
+};
+export const getPercentPixelStyle = (value, max) => {
+  return Math.round((value * HEIGHT_TOP_SIDER_JAUGE) / max);
+};
+export const groupByKey = (array, key) => {
+  return (
+    _.chain(array)
+      // Group the elements of Array based on `key` property
+      .groupBy(key)
+      // `key` is group's name (color), `value` is the array of objects
+      .map((value, mapKey) => {
+        return { key: mapKey, values: value };
+      })
+      .value()
+  );
+};

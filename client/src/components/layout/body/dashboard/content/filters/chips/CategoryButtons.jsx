@@ -6,31 +6,35 @@ import { ProductionCategories } from '../../../../../../../enums/ProductionCateg
 import { changeCurrentCategory } from '../../../../../../../redux/reducers/crossReducer';
 import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
 // eslint-disable-next-line import/named
-import { selectGroupedRefByProductionType } from '../../../../../../../redux/selectors/referentielSelectors';
+import { selectReferentielByProductionCategory } from '../../../../../../../redux/selectors/referentielSelectors';
 import Buttons from '../../../../../../utils/Buttons';
 
 function CategoryButtons() {
   const dispatch = useDispatch();
-  const productionTypes = useSelector(selectGroupedRefByProductionType);
+  const productionTypes = useSelector(selectReferentielByProductionCategory);
   const currentCategory = useSelector(selectCurrentCategory);
   const handleClick = (category) => {
     dispatch(changeCurrentCategory(category));
   };
   return (
     <Row gutter={[13, 0]}>
-      {productionTypes.map((category) => (
-        <Col key={category.key}>
-          <Buttons
-            styling="chips"
-            clickHandler={() => handleClick(category.key)}
-            active={currentCategory === category.key}
-          >
-            {ProductionCategories.hasOwnProperty(category.key)
-              ? ProductionCategories[category.key]
-              : category.key}
-          </Buttons>
-        </Col>
-      ))}
+      {productionTypes.map((category) => {
+        return (
+          <Col key={category.key}>
+            <Buttons
+              styling="chips"
+              clickHandler={() => {
+                return handleClick(category.key);
+              }}
+              active={currentCategory === category.key}
+            >
+              {ProductionCategories.hasOwnProperty(category.key)
+                ? ProductionCategories[category.key]
+                : category.key}
+            </Buttons>
+          </Col>
+        );
+      })}
     </Row>
   );
 }

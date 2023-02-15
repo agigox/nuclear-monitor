@@ -76,49 +76,6 @@ export const assertInput = (schema, inputValue) => {
   }
   return value;
 };
-export const groupByKey = (array, key) =>
-  _.chain(array)
-    // Group the elements of Array based on `key` property
-    .groupBy(key)
-    // `key` is group's name (color), `value` is the array of objects
-    .map((value, mapKey) => ({ key: mapKey, values: value }))
-    .value();
-
-export function partitionArray(array, isValid) {
-  // eslint-disable-next-line no-shadow
-  const result = array.reduce(
-    ([fullyDown, partiallyDown], elem) =>
-      isValid(elem)
-        ? [[...fullyDown, elem], partiallyDown]
-        : [fullyDown, [...partiallyDown, elem]],
-    [[], []],
-  );
-  // result.push(['Amine TABOU']);
-  return result;
-}
-
-export const fullPartialSplit = (array) => {
-  const valuesSumed = array.map((item) => {
-    const unavailableCapacitySum = item.values.reduce(
-      (a, b) => a + b.unavailable_capacity,
-      0,
-    );
-    const availableCapacitySum = item.values.reduce(
-      (a, b) => a + b.available_capacity,
-      0,
-    );
-    return { ...item, availableCapacitySum, unavailableCapacitySum };
-  });
-  const [fullyDown, partiallyDown, name] = partitionArray(
-    valuesSumed,
-    (e) => e.availableCapacitySum === 0,
-  );
-  return {
-    partiallyDown,
-    fullyDown,
-    name,
-  };
-};
 
 // eslint-disable-next-line consistent-return
 export const getProductionCategory = (productionCategory) => {

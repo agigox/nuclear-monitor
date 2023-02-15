@@ -1,10 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import moment from 'moment';
 
 const initialState = {
   length: 0,
   items: [],
   error: {},
+  lastRefreshHour: moment().format('DD/MM/YYYY - HH[h]mm'),
 };
 
 export const dataSlice = createSlice({

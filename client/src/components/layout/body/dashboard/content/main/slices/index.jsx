@@ -3,14 +3,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { ProductionCategories } from '../../../../../../../enums/ProductionCategories';
 import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
-import { selectGroupedUnavailabilitiesByProductionType } from '../../../../../../../redux/selectors/dataSelectors';
+import { selectDataByProductionCategory } from '../../../../../../../redux/selectors/dataSelectors';
 import Slices from './Slices';
 
 function SlicesBody() {
   const currentCategory = useSelector(selectCurrentCategory);
-  const unavailabilities = useSelector(
-    selectGroupedUnavailabilitiesByProductionType,
-  );
+  const unavailabilities = useSelector(selectDataByProductionCategory);
   return (
     <Row className="slices" style={{ rowGap: '17px' }}>
       {currentCategory === 'ALL' ? (
@@ -23,7 +21,7 @@ function SlicesBody() {
 
             return (
               <Col key={key} span={24}>
-                <Row>
+                <Row className="slices-category-row">
                   <Col
                     span={24}
                     className="slices-title-page"
@@ -37,7 +35,7 @@ function SlicesBody() {
           })
       ) : (
         <Col span={24}>
-          <Row>
+          <Row className="slices-category-row">
             <Col
               span={24}
               className="slices-title-page"

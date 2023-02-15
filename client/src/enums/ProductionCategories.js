@@ -30,3 +30,7 @@ export const ProductionCategories = {
   TIDAL: 'TIDAL',
   OTHER: 'OTHER',
 };
+export const ProductionCategoriesKeys = {
+  HYDRAULICS: 'HYDRAULICS',
+  ALL: 'ALL',
+};

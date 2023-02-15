@@ -1,3 +1,7 @@
 // eslint-disable-next-line import/prefer-default-export
-export const selectDisplayMode = (state) => state.cross.displayMode;
-export const selectCurrentCategory = (state) => state.cross.currentCategory;
+export const selectDisplayMode = (state) => {
+  return state.cross.displayMode;
+};
+export const selectCurrentCategory = (state) => {
+  return state.cross.currentCategory;
+};

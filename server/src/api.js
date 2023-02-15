@@ -7,8 +7,7 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 
-import { plants, referentiel, pmax } from './data';
-import unavailabilitiesDump from './data/unavailabilitiesDump';
+import { referentiel, pmax } from './data';
 import { RTEServiceError } from './rteApi';
 
 import {
@@ -18,14 +17,7 @@ import {
   notFoundMiddleware,
 } from './utils/middlewares';
 
-import { getUnavailabilities, getUnavailabilitiesV2 } from './services';
-import { groupByKey } from './utils/helpers';
-import { getUnavailabilitiesV3 } from './services/unavailabilities';
-import {
-  getProductionsPerProductionType,
-  getProductionsPerUnit,
-} from './services/productions';
-import { getProductions } from './services/productions1';
+import { getData } from './services';
 
 function serviceWrapper(service, environment) {
   return async function wrappedService(req, res, next) {
@@ -56,33 +48,7 @@ const buildApi = (environment) => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  app.get('/plants', (req, res) => {
-    res.json(plants);
-  });
-  app.get(
-    '/unavailabilities',
-    serviceWrapper(getUnavailabilities, environment),
-  );
-  app.get('/unavailabilitiesDump', (req, res) =>
-    res.json(unavailabilitiesDump),
-  );
-  app.get(
-    '/unavailabilitiesv2',
-    serviceWrapper(getUnavailabilitiesV2, environment),
-  );
-  app.get(
-    '/unavailabilitiesv3',
-    serviceWrapper(getUnavailabilitiesV3, environment),
-  );
-  app.get(
-    '/productions_per_production_type',
-    serviceWrapper(getProductionsPerProductionType, environment),
-  );
-  app.get('/productions', serviceWrapper(getProductions, environment));
-  app.get(
-    '/productions_per_unit',
-    serviceWrapper(getProductionsPerUnit, environment),
-  );
+  app.get('/data', serviceWrapper(getData, environment));
   app.get('/pmax', (req, res) => {
     res.json({
       length: pmax.length,
@@ -100,22 +66,6 @@ const buildApi = (environment) => {
     res.json({ status: 'OK' });
   });
   app.get('/referentiel', (req, res) => {
-    const dataGroupedByCategory = groupByKey(referentiel, 'category');
-    const dataGroupedByCategoryAndPlantId = dataGroupedByCategory.map(
-      (item) => {
-        const dataGroupedByPlantId = groupByKey(item.values, 'plantId');
-        return {
-          key: item.key,
-          values: dataGroupedByPlantId,
-        };
-      },
-    );
-    res.json({
-      length: dataGroupedByCategory.length,
-      items: dataGroupedByCategoryAndPlantId,
-    });
-  });
-  app.get('/referentielv1', (req, res) => {
     res.json({
       length: referentiel.length,
       items: referentiel,

@@ -11,10 +11,11 @@ import { pokemonApi } from '../api/pokemon';
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = configureStore({
   reducer: { ...rootReducer, [pokemonApi.reducerPath]: pokemonApi.reducer },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(pokemonApi.middleware),
+    }).concat(pokemonApi.middleware);
+  },
 });
 setupListeners(store.dispatch);
 export default store;

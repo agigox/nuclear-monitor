@@ -1,34 +1,34 @@
-/* eslint-disable no-unused-vars */
 import { Col, Row } from 'antd';
 import React from 'react';
 import styled from '@emotion/styled';
-import _ from 'lodash';
-import { formatNumberToFr } from '../../../../../../../utils';
+import SubSliceTitle from './SubSliceTitle';
 
 const StyledRow = styled(Row)`
+  width: 86px;
   .slice-content-col {
     color: white;
   }
 `;
 
-function SubSlice({ name, pmax, production, available }) {
+function SubSlice({ unitName, pmax, production, available }) {
   const getClassName = () => {
+    const limit = (1 / 10) * (production + available);
     if (available === 0) {
-      return 'fully-slice';
+      return 'fully-slice-red';
     }
-    if (production <= 0) {
-      return 'production-down-slice';
+    if (production <= 0 || production <= limit) {
+      return 'prod-sub-slice-blue';
     }
-    if (available - production <= 20) {
+    if (available - production <= 20 || available < limit) {
       // Pas d'indispo
-      return 'up-slice';
+      return 'up-slice-green';
     }
     return 'hashed-slice';
   };
   return (
     <StyledRow className="slice-content">
-      <Col span={24} className="slice-content-pmax">
-        Pmax: {formatNumberToFr(pmax)}
+      <Col span={24}>
+        <SubSliceTitle pmax={pmax} isIconVisible={pmax !== available} />
       </Col>
       <Col span={24} className={`slice-content-col ${getClassName()}`}>
         <Row>
@@ -36,7 +36,7 @@ function SubSlice({ name, pmax, production, available }) {
             {Math.round(production)} <span>MW</span>
           </Col>
           <Col className="slice-content-city" span={24}>
-            {name}
+            {unitName}
           </Col>
         </Row>
       </Col>

@@ -15,7 +15,7 @@ export const selectCurrentCategoryPmaxCapacity = createSelector(
     {
       return pmaxItems.find((item) => {
         return item.key === currentCategory;
-      }).installedCapacity;
+      }).pmax;
     },
 );
 export const selectPmaxCapacityByCategory = createSelector(
@@ -30,6 +30,6 @@ export const selectPmaxCapacityByCategory = createSelector(
     {
       return pmaxItems.find((item) => {
         return item.key === category;
-      }).installedCapacity;
+      }).pmax;
     },
 );

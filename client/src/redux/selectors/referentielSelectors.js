@@ -8,16 +8,16 @@ import { selectCurrentCategory } from './crossSelectors';
 export const selectRefItems = (state) => {
   return state.referentiel.items;
 };
-export const selectGroupedRefByProductionType = createSelector(
+export const selectReferentielByProductionCategory = createSelector(
   [selectRefItems],
   (referentiel) => {
-    const groupByCategory = groupByKey(referentiel, 'category');
+    const groupByCategory = groupByKey(referentiel, 'productionCategory');
     groupByCategory.unshift({ key: 'ALL', values: referentiel });
     return groupByCategory;
   },
 );
 export const selectCategoryTotalUnits = createSelector(
-  [selectGroupedRefByProductionType, selectCurrentCategory],
+  [selectReferentielByProductionCategory, selectCurrentCategory],
   (items, category) => {
     const result = items.find((item) => {
       return item.key === category;
@@ -26,51 +26,5 @@ export const selectCategoryTotalUnits = createSelector(
       return [];
     }
     return result.values.length;
-  },
-);
-
-/*-----*/
-export const selectCurrentReferentiel = createSelector(
-  [selectCurrentCategory, selectRefItems],
-  (category, items) => {
-    const result = items.find((item) => {
-      return item.key === category;
-    });
-    if (_.isUndefined(result)) {
-      return [];
-    }
-    return result.values;
-  },
-);
-
-export const selectGenerationUnitsByProductionUnit = createSelector(
-  [
-    selectCurrentReferentiel,
-    (state, productionUnit) => {
-      return productionUnit;
-    },
-  ],
-  (currentReferentiel, productionUnit) => {
-    return currentReferentiel.find((item) => {
-      return item.key === productionUnit;
-    }).values;
-  },
-);
-
-export const selectPmaxByProductionUnit = createSelector(
-  [
-    selectCurrentReferentiel,
-    (state, productionUnit) => {
-      return productionUnit;
-    },
-  ],
-  (currentReferentiel, productionUnit) => {
-    return currentReferentiel
-      .find((item) => {
-        return item.key === productionUnit;
-      })
-      .values.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.installedCapacity;
-      }, 0);
   },
 );

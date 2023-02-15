@@ -16,72 +16,27 @@ function Body() {
     data: dataReferentiel,
     error: errorReferentiel,
     isFetching: isReferentielLoading,
-  } = useGetDataQuery('referentielv1');
+  } = useGetDataQuery('referentiel');
 
   const {
-    data: dataProductionCategories,
-    error: errorProductionCategories,
-    isFetching: isProductionCategoriesLoading,
-  } = useGetDataQuery('unavailabilitiesv3');
-  const {
-    data: dataProductionsPerUnit,
-    error: errorProductionsPerUnit,
-    isFetching: isProductionsPerUnitLoading,
-  } = useGetDataQuery('productions_per_unit');
-  const {
-    data: dataProductions1,
-    error: errorProductions1,
-    isFetching: isProductions1Loading,
-  } = useGetDataQuery('productions');
-  const {
-    data: dataProductionsPerProductionType,
-    error: errorProductionsPerProductionType,
-    isFetching: isProductionsPerProductionTypeLoading,
-  } = useGetDataQuery('productions_per_production_type');
+    data: dataItems,
+    error: errorItems,
+    isFetching: isItemsLaoding,
+  } = useGetDataQuery('data');
   const {
     data: dataPmax,
     error: errorPmax,
     isFetching: isPmaxLoading,
   } = useGetDataQuery('pmax');
-  const data =
-    dataProductions1 &&
-    dataReferentiel &&
-    dataProductionCategories &&
-    dataProductionsPerUnit &&
-    dataProductionsPerProductionType &&
-    dataPmax;
-  const error =
-    errorProductions1 &&
-    errorReferentiel &&
-    errorProductionCategories &&
-    errorProductionsPerUnit &&
-    errorProductionsPerProductionType &&
-    errorPmax;
-  const loading =
-    isProductions1Loading &&
-    isReferentielLoading &&
-    isProductionCategoriesLoading &&
-    isProductionsPerUnitLoading &&
-    isProductionsPerProductionTypeLoading &&
-    isPmaxLoading;
+  const data = dataItems && dataReferentiel && dataPmax;
+  const error = errorItems && errorReferentiel && errorPmax;
+  const loading = isItemsLaoding && isReferentielLoading && isPmaxLoading;
 
   useEffect(() => {
     setLoadingUI(loading);
     setErrorUI(error);
     setDataUI(data);
   }, [loading, error, data]);
-  /*
-  if (!_.isUndefined(errorUI)) {
-    return <Error error="Error" />;
-  }
-  if (loadingUI) {
-    return <Loading />;
-  }
-  if (!_.isUndefined(dataUI)) {
-    return <Dashboard />;
-  }
-  return <Dashboard />;
-  */
   return (
     <>
       {errorUI ? (

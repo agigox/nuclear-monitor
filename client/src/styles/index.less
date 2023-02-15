@@ -118,6 +118,9 @@ body {
     .format-text(@font-family-nunito-regular, 20px, 28px, @color-white);
     font-weight: 700;
   }
+  .slices-category-row {
+    row-gap: 5px;
+  }
   .slice {
     background-color: @slice-background-color;
     padding: 9px 4px 12px;
@@ -134,24 +137,22 @@ body {
     }
     .slice-content-row {
       row-gap: 5px;
+      column-gap: 5px;
       .slice-content-pmax {
-        .format-text(@font-family-nunito-regular, 10px, 14px, @color-grey);
+        .format-text(@font-family-nunito-regular, 9.5px, 14px, @color-grey);
         font-style: italic;
         text-align: right;
   
       }
       .slice-content-col {
         height: 54px;
-        &.up-slice{
+        &.up-slice-green{
           background: linear-gradient(203.32deg, #34c501 19.29%, #41e03e 81.34%);
         }
-        &.partially-slice {
-          background: linear-gradient(203.32deg, #E16C00 19.29%, #FF8D4D 81.34%);
-        }
-        &.fully-slice {
+        &.fully-slice-red {
           background: linear-gradient(203.32deg, #C02924 19.29%, #D0574F 81.34%);
         }
-        &.production-down-slice {
+        &.prod-sub-slice-blue {
           background: linear-gradient(203.32deg, #0079D1 19.29%, #36B3DF 81.34%);
         }
         &.hashed-slice {

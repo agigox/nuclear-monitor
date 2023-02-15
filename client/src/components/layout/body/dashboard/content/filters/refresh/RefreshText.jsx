@@ -1,10 +1,10 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectLastRefreshDate } from '../../../../../../../redux/selectors/productionCategoriesSelectors';
+import { selectLastRefreshHour } from '../../../../../../../redux/selectors/dataSelectors';
 
 function RefreshText() {
-  const lastRefreshDate = useSelector(selectLastRefreshDate);
+  const lastRefreshDate = useSelector(selectLastRefreshHour);
   return (
     <Row className="refresh-text">
       <Col className="text-1" span={24}>

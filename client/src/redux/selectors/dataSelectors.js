@@ -1,4 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
+import _ from 'lodash';
 import { groupByKey } from '../../utils';
 import { selectCurrentCategory } from './crossSelectors';
 
@@ -13,20 +14,32 @@ export const selectDataItems = (state) => {
 export const selectDataError = (state) => {
   return state.data.error;
 };
+export const selectLastRefreshHour = (state) => {
+  return state.data.lastRefreshHour;
+};
 
-export const selectGroupedUnavailabilitiesByProductionType = createSelector(
+export const selectDataByProductionCategory = createSelector(
   [selectDataItems],
   (items) => {
-    const groupByCategory = groupByKey(items, 'category');
-    groupByCategory.unshift({ key: 'ALL', values: items });
+    const dataByCategory = groupByKey(items, 'productionCategory');
+    dataByCategory.unshift({ key: 'ALL', values: items });
 
-    return groupByCategory;
+    return dataByCategory;
+  },
+);
+export const selectDataByProductionUnit = createSelector(
+  [selectDataItems],
+  (items) => {
+    const dataByUnit = groupByKey(items, 'productionUnit');
+    dataByUnit.unshift({ key: 'ALL', values: items });
+
+    return dataByUnit;
   },
 );
 
-export const selectDataByCategoryAndProductionUnit = createSelector(
+export const selectDataByProductionCategoryAndProductionUnit = createSelector(
   [
-    selectGroupedUnavailabilitiesByProductionType,
+    selectDataByProductionCategory,
     (state, category) => {
       return category;
     },
@@ -35,14 +48,50 @@ export const selectDataByCategoryAndProductionUnit = createSelector(
     const { key, values } = items.find((item) => {
       return item.key === category;
     });
-    return { key, values: groupByKey(values, 'central') };
+
+    return {
+      key,
+      values: groupByKey(
+        _.orderBy(values, 'productionUnit', 'asc'),
+        'productionUnit',
+      ),
+    };
   },
 );
+export const selectDataByProductionCategoryAndRegroupementHydro =
+  createSelector(
+    [
+      selectDataByProductionCategory,
+      (state, category) => {
+        return category;
+      },
+    ],
+    (items, category) => {
+      const { key, values } = items.find((item) => {
+        return item.key === category;
+      });
+      const a = _.orderBy(
+        groupByKey(values, 'regroupementHydro'),
+        'key',
+        'asc',
+      );
+      const b = a.map((item) => {
+        return {
+          key: item.key,
+          values: groupByKey(item.values, 'productionUnit'),
+        };
+      });
+      return {
+        key,
+        values: b,
+      };
+    },
+  );
 
 /*----------*/
 
 export const selectCategoryUnavailabilities = createSelector(
-  [selectGroupedUnavailabilitiesByProductionType, selectCurrentCategory],
+  [selectDataByProductionCategory, selectCurrentCategory],
   (items, category) => {
     return items.find((item) => {
       return item.key === category;
@@ -68,7 +117,7 @@ export const selectCatgoryPartiallyDownUnavailabilityNumber = createSelector(
 );
 
 export const selectCurrentCapacity = createSelector(
-  [selectGroupedUnavailabilitiesByProductionType, selectCurrentCategory],
+  [selectDataByProductionCategory, selectCurrentCategory],
   (groupedReferentiel, currentCategory) => {
     const currentRef = groupedReferentiel.find((item) => {
       return item.key === currentCategory;
@@ -83,6 +132,23 @@ export const selectCurrentCapacity = createSelector(
       0,
     );
     const available = currentRef.values.reduce((accumulator, currentValue) => {
+      /*
+      if (
+        currentValue.pmax -
+          currentValue.productionCapacity -
+          currentValue.unavailableCapacity <
+        0
+      ) {
+        console.log(
+          `${currentValue.unitName} --> ${
+            currentValue.pmax -
+            currentValue.productionCapacity -
+            currentValue.unavailableCapacity
+          }`,
+        );
+      }
+      */
+
       return accumulator + currentValue.availableCapacity;
     }, 0);
     return { production, unavailable, available };

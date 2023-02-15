@@ -17,7 +17,7 @@ const StyledRow = styled(Row)`
     }
     .up-percent {
       flex-basis: ${(props) => {
-        return props.rest;
+        return props.rest >= 0 ? props.rest : 0;
       }}px;
       background: linear-gradient(180deg, #0078cf 0%, #009dd1 100%);
       width: 100%;
