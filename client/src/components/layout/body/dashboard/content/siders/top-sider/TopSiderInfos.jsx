@@ -71,14 +71,12 @@ function TopSiderInfos({ unavailable, pmax, production }) {
           <Col span={24} className="text-2">
             <Row className="percents-row">
               <Col className="text-1-1">
-                {formatNumberToFr(rest / 1000) >= 0
-                  ? formatNumberToFr(rest / 1000)
-                  : 0}
+                {rest < 0 ? 0 : formatNumberToFr(rest / 1000)}
               </Col>
               <Col className="text-1-2">GW</Col>
               <Col className="separator-percent-text" />
               <Col className="text-1-3">{`${
-                rest >= 0 ? toPercent(rest, pmax) : 0
+                rest < 0 ? 0 : toPercent(rest, pmax)
               }%`}</Col>
             </Row>
           </Col>

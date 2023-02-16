@@ -18,48 +18,53 @@ function Map() {
     <Row>
       <Col className="map-container" span={24}>
         <img src={SVGMap} alt="map" />
-        {dataByCategory.values.map((referentielItem) => {
-          const productionUnitPmax = referentielItem.values.reduce(
-            (accumulator, currentValue) => {
-              return accumulator + currentValue.pmax;
-            },
-            0,
-          );
-          const unavailabilityUnitProduction = referentielItem.values.reduce(
-            (accumulator, currentValue) => {
-              return accumulator + currentValue.unavailableCapacity;
-            },
-            0,
-          );
-          const productionUnitProduction = referentielItem.values.reduce(
-            (accumulator, currentValue) => {
-              return accumulator + currentValue.productionCapacity;
-            },
-            0,
-          );
-          const { key } = referentielItem;
-          return (
-            <Row
-              key={key}
-              className={`${key
-                .toLowerCase()
-                .split(' ')
-                .join('')
-                .split("'")
-                .join('')} mark-city`}
-              style={{ columnGap: '5px' }}
-            >
-              <Col style={{ alignSelf: 'center' }}>
-                <MapBar
-                  productionUnitName={key}
-                  productionUnitPmax={productionUnitPmax}
-                  unavailabilityUnitProduction={unavailabilityUnitProduction}
-                  productionUnitProduction={productionUnitProduction}
-                />
-              </Col>
-            </Row>
-          );
-        })}
+        {dataByCategory.values
+          .filter((item) => {
+            return item.key !== 'REVIN';
+          })
+          .map((referentielItem) => {
+            const productionUnitPmax = referentielItem.values.reduce(
+              (accumulator, currentValue) => {
+                return accumulator + currentValue.pmax;
+              },
+              0,
+            );
+            const unavailabilityUnitProduction = referentielItem.values.reduce(
+              (accumulator, currentValue) => {
+                return accumulator + currentValue.unavailableCapacity;
+              },
+              0,
+            );
+            const productionUnitProduction = referentielItem.values.reduce(
+              (accumulator, currentValue) => {
+                return accumulator + currentValue.productionCapacity;
+              },
+              0,
+            );
+            const { key } = referentielItem;
+            console.log(referentielItem);
+            return (
+              <Row
+                key={key}
+                className={`${key
+                  .toLowerCase()
+                  .split(' ')
+                  .join('')
+                  .split("'")
+                  .join('')} mark-city`}
+                style={{ columnGap: '5px' }}
+              >
+                <Col style={{ alignSelf: 'center' }}>
+                  <MapBar
+                    productionUnitName={key}
+                    productionUnitPmax={productionUnitPmax}
+                    unavailabilityUnitProduction={unavailabilityUnitProduction}
+                    productionUnitProduction={productionUnitProduction}
+                  />
+                </Col>
+              </Row>
+            );
+          })}
       </Col>
     </Row>
   );

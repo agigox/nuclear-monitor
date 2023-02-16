@@ -1,22 +1,26 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import General from '../General';
 
+import { Row } from 'antd';
+import styled from 'styled-components';
 import { SectorItem } from './SectorItem';
-import { selectItems } from '../../../redux/selectors/productionCategoriesSelectors';
+import { selectDataByProductionCategory } from '../../../redux/selectors/dataSelectors';
 
+const CustomRow = styled(Row)`
+  row-gap: 12px;
+`;
 function SectorDetails() {
-  const categories = useSelector(selectItems);
+  const categories = useSelector(selectDataByProductionCategory);
   return (
-    <General title="Région x" className="secteur-details">
+    <CustomRow className="secteur-details">
       {categories
-        .filter((category) => category.key !== 'ALL')
-        .map((category) => (
-          // eslint-disable-next-line no-debugger
-          // debugger;
-          <SectorItem key={category.key} sector={category.key} />
-        ))}
-    </General>
+        .filter((category) => {
+          return category.key !== 'ALL';
+        })
+        .map((category) => {
+          return <SectorItem key={category.key} sector={category.key} />;
+        })}
+    </CustomRow>
   );
 }
 

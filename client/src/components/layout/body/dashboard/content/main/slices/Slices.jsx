@@ -15,7 +15,6 @@ function Slices({ category }) {
   const dataByRegroupementHydro = useSelector((state) => {
     return selectDataByProductionCategoryAndRegroupementHydro(state, category);
   });
-  console.log(dataByRegroupementHydro);
   const isHydroCurrent = category === ProductionCategoriesKeys.HYDRAULICS;
 
   return (

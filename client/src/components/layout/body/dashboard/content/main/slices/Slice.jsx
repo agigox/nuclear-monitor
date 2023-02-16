@@ -9,10 +9,6 @@ const CustomRow = styled(Row)`
   }
 `;
 function Slice({ data, isHydroCurrent }) {
-  if (isHydroCurrent) {
-    // console.log(data);
-    // debugger;
-  }
   return (
     <CustomRow className="slice">
       <Col className="slice-title" span={24}>
@@ -24,7 +20,7 @@ function Slice({ data, isHydroCurrent }) {
             return (
               <SubSlice
                 key={`${value.key}-${index}`}
-                unitName={value.key}
+                unitName={isHydroCurrent ? value.key : value.unitName}
                 pmax={
                   isHydroCurrent
                     ? value.values.reduce((accumulator, currentValue) => {

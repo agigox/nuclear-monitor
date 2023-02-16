@@ -3,11 +3,13 @@ import { Provider } from 'react-redux';
 import moment from 'moment';
 import 'moment/locale/fr';
 import 'moment-timezone';
-import { ConfigProvider, theme } from 'antd';
 import styled from '@emotion/styled';
+import { ThemeProvider } from 'styled-components';
 import store from './redux/store';
 import AppLayout from './components/layout/AppLayout';
-// moment.locale('fr');
+import { GlobalStyle } from './GlobalStyle';
+import theme from './styles/theme';
+
 moment.tz.setDefault('Europe/Paris');
 
 const Wrapper = styled.div`
@@ -16,17 +18,14 @@ const Wrapper = styled.div`
 `;
 function App() {
   return (
-    <ConfigProvider
-      theme={{
-        algorithm: theme.lightAlgorithm,
-      }}
-    >
-      <Wrapper>
-        <Provider store={store}>
+    <Wrapper>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
           <AppLayout />
-        </Provider>
-      </Wrapper>
-    </ConfigProvider>
+        </ThemeProvider>
+      </Provider>
+    </Wrapper>
   );
 }
 
