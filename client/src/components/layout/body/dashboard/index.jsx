@@ -4,13 +4,14 @@ import PageTitle from './PageTitle';
 import Content from './content';
 // import SectorDetails from '../../../modals/sector-details';
 import GoTop from './GoTop';
+// import PieChartItem from './content/main/map/PieChartItem';
 
 function Dashboard() {
   return (
     <Row className="dashboard">
       {/* <Col span={24}>
-        <SectorDetails />
-  </Col> */}
+        <PieChartItem />
+      </Col> */}
       <Col span={24}>
         <PageTitle />
       </Col>

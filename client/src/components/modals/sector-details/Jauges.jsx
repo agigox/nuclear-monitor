@@ -5,6 +5,7 @@ import { WIDTH_JAUGE_SECTOR_MODAL } from '../../../utils/constants';
 
 const StyledRow = styled(Row)`
   &.jauge-modal {
+    border-radius: 24px 0 0 24px;
     width: ${WIDTH_JAUGE_SECTOR_MODAL}px;
     height: 25px;
     .production {
@@ -12,22 +13,12 @@ const StyledRow = styled(Row)`
       width: ${(props) => {
         return props.categorylastproduction;
       }}px;
-      border-radius: 24px 0 0 24px;
     }
     .rest {
       background: linear-gradient(91.66deg, #0079d1 10.18%, #009dd1 91.31%);
       width: ${(props) => {
         return props.upcapacity < 0 ? 0 : props.upcapacity;
       }}px;
-      border-radius: ${({ categorylastproduction, unavailablecapacity }) => {
-        if (categorylastproduction === 0 && unavailablecapacity === 0) {
-          return '24px 24px 24px 24px';
-        }
-        if (categorylastproduction === 0) {
-          return '0 24px 24px 0';
-        }
-        return 0;
-      }};
     }
     .unavailable {
       background: #d0574f;
@@ -41,7 +32,6 @@ const StyledRow = styled(Row)`
         }
         return unavailablecapacity;
       }}px;
-      border-radius: 0 24px 24px 0;
     }
   }
 `;

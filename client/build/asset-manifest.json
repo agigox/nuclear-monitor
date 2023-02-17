@@ -1,21 +1,37 @@
 {
   "files": {
-    "main.css": "/static/css/main.b7dec286.css",
-    "main.js": "/static/js/main.15cfd283.js",
-    "static/media/map.svg": "/static/media/map.5f32c9f2963a581ba1c934c903dbe14d.svg",
-    "static/media/planned_down.svg": "/static/media/planned_down.e2d18c878ff4efef258e1e56b08909f7.svg",
-    "static/media/location_on.svg": "/static/media/location_on.ee08c23dd36099ade45af96e64c354dc.svg",
+    "main.css": "/static/css/main.b2d545de.css",
+    "main.js": "/static/js/main.af82cda6.js",
+    "static/media/Inter-Thin.ttf": "/static/media/Inter-Thin.f341ca512063c66296d1.ttf",
+    "static/media/Inter-Light.ttf": "/static/media/Inter-Light.eec8664621fec98efb37.ttf",
+    "static/media/Inter-Regular.ttf": "/static/media/Inter-Regular.e89cb19905e7db5591b0.ttf",
+    "static/media/NunitoSans-LightItalic.ttf": "/static/media/NunitoSans-LightItalic.f5a382d492211f4353be.ttf",
+    "static/media/NunitoSans-Light.ttf": "/static/media/NunitoSans-Light.8fde328cad4b7fd03bcd.ttf",
+    "static/media/NunitoSans-ExtraBold.ttf": "/static/media/NunitoSans-ExtraBold.7f6fb187a1b4fe5f9f42.ttf",
+    "static/media/NunitoSans-Bold.ttf": "/static/media/NunitoSans-Bold.022586a78ea7c9bee9da.ttf",
+    "static/media/NunitoSans-SemiBold.ttf": "/static/media/NunitoSans-SemiBold.97020b1bfe8c41a3bd4e.ttf",
+    "static/media/NunitoSans-Regular.ttf": "/static/media/NunitoSans-Regular.a427ddbe4dc20889d6e0.ttf",
+    "static/media/logo.svg": "/static/media/logo.61f1d97e13d66babe5a37785567e2140.svg",
+    "static/media/Manrope-Regular.ttf": "/static/media/Manrope-Regular.25323263b2aac026e777.ttf",
+    "static/media/map.svg": "/static/media/map.5243ce97acbefcac531425f95afd1c5a.svg",
+    "static/media/winds.svg": "/static/media/winds.9d8ccfe6093c59c066209f90c67d9fb6.svg",
+    "static/media/fossil_oil.svg": "/static/media/fossil_oil.78cfbe6de6be41b96d2eaeabe04a6683.svg",
+    "static/media/fully_down.svg": "/static/media/fully_down.b07918cc68ea889624ce4b73476939af.svg",
+    "static/media/fossil_gas.svg": "/static/media/fossil_gas.c2f0cc7b3c42531461d82e1b4266f233.svg",
+    "static/media/nuclear.svg": "/static/media/nuclear.a6376995f86716958172e6f04cd99096.svg",
+    "static/media/solar.svg": "/static/media/solar.f37a2465e7d1ec096dcddd1fbc80b4e9.svg",
+    "static/media/construction.svg": "/static/media/construction.c72059f57b9e4cde8a35d6688d658b80.svg",
+    "static/media/biomass.svg": "/static/media/biomass.74ab085119af10ec1171a7e035b6b61f.svg",
+    "static/media/tidal.svg": "/static/media/tidal.74ab085119af10ec1171a7e035b6b61f.svg",
     "index.html": "/index.html",
-    "static/media/forced_down.svg": "/static/media/forced_down.66a1f6bab2de93a41e8006f2ef0d2b02.svg",
-    "static/media/Rectangle1.svg": "/static/media/Rectangle1.d71bdf261bd465121dd432ec79701bc0.svg",
-    "static/media/Rectangle3.svg": "/static/media/Rectangle3.859a2a5a384c89bd2a4f152bbd1cd6d4.svg",
-    "static/media/Rectangle2.svg": "/static/media/Rectangle2.25fa9e3aa52bdeedad0c5ad189a02d8b.svg",
-    "static/media/up.svg": "/static/media/up.a150dee0b214b64923f4891a41f02b94.svg",
-    "main.b7dec286.css.map": "/static/css/main.b7dec286.css.map",
-    "main.15cfd283.js.map": "/static/js/main.15cfd283.js.map"
+    "static/media/hydraulics.svg": "/static/media/hydraulics.4123785a8afc97f77bbe6dd513a87516.svg",
+    "static/media/fossil_hard_coal.svg": "/static/media/fossil_hard_coal.caedbb9986b6e5a356268187c9e9396c.svg",
+    "static/media/arrow_upward.svg": "/static/media/arrow_upward.ea57a3c5e1cea833e437936f7df35ae1.svg",
+    "main.b2d545de.css.map": "/static/css/main.b2d545de.css.map",
+    "main.af82cda6.js.map": "/static/js/main.af82cda6.js.map"
   },
   "entrypoints": [
-    "static/css/main.b7dec286.css",
-    "static/js/main.15cfd283.js"
+    "static/css/main.b2d545de.css",
+    "static/js/main.af82cda6.js"
   ]
 }
