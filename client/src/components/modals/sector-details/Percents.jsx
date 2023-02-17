@@ -3,22 +3,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledRow = styled(Row)`
-  ${({ theme }) => {
-    return `
   width: 100px;
   .percent-1 {
-    color: ${theme.colors.greenColor};
+    color: #37cb0f;
     width: 39px;
   }
   .separatorPoint {
     margin-right: 7px;
   }
   .percent-2 {
-    color: ${theme.colors.blueColor}
+    color: #0080d1;
   }
-    
-  `;
-  }}
 `;
 function Percents({
   categoryLastProduction,

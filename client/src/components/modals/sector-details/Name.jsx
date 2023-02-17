@@ -5,15 +5,9 @@ import React from 'react';
 import { ProductionCategories } from '../../../enums/ProductionCategories';
 
 const StyledRow = styled(Row)`
-  ${({ theme }) => {
-    return `
-  
   .capacity {
-    color: ${theme.colors.lightGray}
+    color: #767676;
   }
-    
-  `;
-  }}
 `;
 export function Name({ sector, categoryCapacity }) {
   return (
