@@ -1,70 +1,98 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
+// import SVGMapHydro from '../../../../../../../images/Frame.svg';
 import SVGMap from '../../../../../../../images/map.svg';
 import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
-import { selectDataByProductionCategoryAndProductionUnit } from '../../../../../../../redux/selectors/dataSelectors';
-import MapBar from './MapBar';
+import { selectDataByFieldAndProductionUnit } from '../../../../../../../redux/selectors/dataSelectors';
+
+// import MapBar from './MapBar';
+import PieChartItem from './PieChartItem';
 
 function Map() {
   const currentCategory = useSelector(selectCurrentCategory);
-  const dataByCategory = useSelector((state) => {
-    return selectDataByProductionCategoryAndProductionUnit(
-      state,
-      currentCategory,
-    );
+  const dataGroupedByField = useSelector((state) => {
+    return selectDataByFieldAndProductionUnit(state, currentCategory);
   });
+  // console.log(dataGroupedByField);
   return (
     <Row>
       <Col className="map-container" span={24}>
-        <img src={SVGMap} alt="map" />
-        {dataByCategory.values
-          .filter((item) => {
-            return item.key !== 'REVIN';
-          })
-          .map((referentielItem) => {
-            const productionUnitPmax = referentielItem.values.reduce(
-              (accumulator, currentValue) => {
-                return accumulator + currentValue.pmax;
-              },
-              0,
-            );
-            const unavailabilityUnitProduction = referentielItem.values.reduce(
-              (accumulator, currentValue) => {
-                return accumulator + currentValue.unavailableCapacity;
-              },
-              0,
-            );
-            const productionUnitProduction = referentielItem.values.reduce(
-              (accumulator, currentValue) => {
-                return accumulator + currentValue.productionCapacity;
-              },
-              0,
-            );
-            const { key } = referentielItem;
-            console.log(referentielItem);
-            return (
-              <Row
-                key={key}
-                className={`${key
-                  .toLowerCase()
-                  .split(' ')
-                  .join('')
-                  .split("'")
-                  .join('')} mark-city`}
-                style={{ columnGap: '5px' }}
-              >
-                <Col style={{ alignSelf: 'center' }}>
-                  <MapBar
-                    productionUnitName={key}
-                    productionUnitPmax={productionUnitPmax}
-                    unavailabilityUnitProduction={unavailabilityUnitProduction}
-                    productionUnitProduction={productionUnitProduction}
-                  />
-                </Col>
-              </Row>
-            );
-          })}
+        <img
+          src={
+            ['HYDRAULICS', 'ALL'].includes(currentCategory) ? SVGMap : SVGMap
+          }
+          alt="map"
+          className="map"
+        />
+        {dataGroupedByField.values.map((referentielItem) => {
+          const { key, values } = referentielItem;
+          const productionUnitPmax = values.reduce(
+            (accumulator, currentValue) => {
+              return accumulator + currentValue.pmax;
+            },
+            0,
+          );
+          const unavailabilityUnitProduction = values.reduce(
+            (accumulator, currentValue) => {
+              return accumulator + currentValue.unavailableCapacity;
+            },
+            0,
+          );
+          const productionUnitProduction = values.reduce(
+            (accumulator, currentValue) => {
+              return accumulator + currentValue.productionCapacity;
+            },
+            0,
+          );
+
+          const data = [
+            {
+              name: 'Available',
+              value:
+                productionUnitPmax -
+                unavailabilityUnitProduction -
+                productionUnitProduction,
+              color: '#0079D1',
+            },
+            {
+              name: 'Unavailable',
+              value: unavailabilityUnitProduction,
+              color: '#D0574F',
+            },
+            {
+              name: 'Prod',
+              value: productionUnitProduction,
+              color: '#41e03e',
+            },
+            // { name: 'Pmax', value: productionUnitPmax },
+          ];
+          const itemClass = key
+            .toLowerCase()
+            .split(' ')
+            .join('')
+            .split("'")
+            .join('')
+            .split('ô')
+            .join('o')
+            .split(/é|è/)
+            .join('e');
+          return (
+            <Row
+              key={key}
+              className={`${itemClass} mark-city ${values[0].productionCategory.toLowerCase()}`}
+            >
+              <Col style={{ alignSelf: 'center' }}>
+                <PieChartItem
+                  data={data}
+                  productionUnitName={key}
+                  category={values[0].productionCategory}
+                  itemClass={itemClass}
+                />
+              </Col>
+            </Row>
+          );
+        })}
       </Col>
     </Row>
   );

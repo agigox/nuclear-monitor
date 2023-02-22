@@ -17,6 +17,9 @@ function Slice({ data, isHydroCurrent }) {
       <Col span={24}>
         <Row className="slice-content-row">
           {data.values.map((value, index) => {
+            console.log(
+              `${value.unitName} ---> ${value.unavailableCapacity}MW`,
+            );
             return (
               <SubSlice
                 key={`${value.key}-${index}`}

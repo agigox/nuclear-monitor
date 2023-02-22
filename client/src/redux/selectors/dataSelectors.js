@@ -58,6 +58,29 @@ export const selectDataByProductionCategoryAndProductionUnit = createSelector(
     };
   },
 );
+export const selectDataByFieldAndProductionUnit = createSelector(
+  [
+    selectDataByProductionCategory,
+    (state, category) => {
+      return category;
+    },
+  ],
+  (items, category) => {
+    const { key, values } = items.find((item) => {
+      return item.key === category;
+    });
+    console.log(
+      groupByKey(_.orderBy(values, 'productionUnit', 'asc'), 'groupedByField'),
+    );
+    return {
+      key,
+      values: groupByKey(
+        _.orderBy(values, 'productionUnit', 'asc'),
+        'groupedByField',
+      ),
+    };
+  },
+);
 export const selectDataByProductionCategoryAndRegroupementHydro =
   createSelector(
     [
@@ -87,7 +110,6 @@ export const selectDataByProductionCategoryAndRegroupementHydro =
       };
     },
   );
-
 /*----------*/
 
 export const selectCategoryUnavailabilities = createSelector(
@@ -152,5 +174,35 @@ export const selectCurrentCapacity = createSelector(
       return accumulator + currentValue.availableCapacity;
     }, 0);
     return { production, unavailable, available };
+  },
+);
+
+export const selectCurrentPmax = createSelector(
+  [selectDataByProductionCategory, selectCurrentCategory],
+  (groupedReferentiel, currentCategory) => {
+    const currentRef = groupedReferentiel.find((item) => {
+      return item.key === currentCategory;
+    });
+    const pmax = currentRef.values.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.pmax;
+    }, 0);
+    return pmax;
+  },
+);
+export const selectPmaxByCategory = createSelector(
+  [
+    selectDataByProductionCategory,
+    (state, category) => {
+      return category;
+    },
+  ],
+  (groupedReferentiel, category) => {
+    const currentRef = groupedReferentiel.find((item) => {
+      return item.key === category;
+    });
+    const pmax = currentRef.values.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.pmax;
+    }, 0);
+    return pmax;
   },
 );

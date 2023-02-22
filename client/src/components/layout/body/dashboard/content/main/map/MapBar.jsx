@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-vars */
 import styled from '@emotion/styled';
 import { Col, Row } from 'antd';
 import React from 'react';
 import { HEIGHT_MAP_BAR } from '../../../../../../../utils/constants';
-import BarIndication from './BarIndication';
-import MapBarContent from './MapBarContent';
+import PieChartItem from './PieChartItem';
 
 const StyledRow = styled(Row)`
   column-gap: 4px;
@@ -13,27 +13,32 @@ function MapBar({
   productionUnitPmax,
   unavailabilityUnitProduction,
   productionUnitProduction,
+  currentCategory,
 }) {
   const getBarPercent = (value) => {
     return Math.round((value * HEIGHT_MAP_BAR) / productionUnitPmax);
   };
-  const down = getBarPercent(unavailabilityUnitProduction);
+  const unavailable = getBarPercent(unavailabilityUnitProduction);
   const prod = getBarPercent(productionUnitProduction);
-  return (
-    <StyledRow wrap={false} align="middle" className="box">
-      <Col>
-        <MapBarContent down={down} prod={prod} pmax={productionUnitPmax} />
-      </Col>
-      <Col>
-        <BarIndication
-          productionUnitName={productionUnitName}
-          productionUnitPmax={productionUnitPmax}
-          down={down}
-          prod={prod}
-        />
-      </Col>
-    </StyledRow>
-  );
+  const available = productionUnitPmax - prod - unavailable;
+  const data = [
+    {
+      name: 'Available',
+      value:
+        productionUnitPmax -
+        unavailabilityUnitProduction -
+        productionUnitProduction,
+      color: '#0079D1',
+    },
+    {
+      name: 'Unavailable',
+      value: unavailabilityUnitProduction,
+      color: '#D0574F',
+    },
+    { name: 'Prod', value: productionUnitProduction, color: '#41e03e' },
+    // { name: 'Pmax', value: productionUnitPmax },
+  ];
+  return <PieChartItem data={data} productionUnitName={productionUnitName} />;
 }
 
 export default MapBar;

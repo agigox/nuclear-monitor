@@ -25,6 +25,11 @@ const StyledRow = styled(Row)`
       padding-right: 0px;
     }
   }
+  .card-map {
+    .ant-card-body {
+      padding: 0;
+    }
+  }
 
   @media only screen and (max-width: 767px) {
     flex-wrap: wrap;
@@ -55,7 +60,7 @@ function Content() {
             <Card
               bordered={false}
               className={`${
-                displayMode === DisplayModes.SLICES ? 'card-slices' : ''
+                displayMode === DisplayModes.SLICES ? 'card-slices' : 'card-map'
               }`}
             >
               <Main />

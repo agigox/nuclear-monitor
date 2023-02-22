@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -6,15 +7,23 @@ import { selectDisplayMode } from '../../../../../../redux/selectors/crossSelect
 import Map from './map';
 import SlicesBody from './slices';
 
+const StyledRow = styled(Row)`
+  .map-box {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+`;
 function Main() {
   const displayMode = useSelector(selectDisplayMode);
   return (
-    <Row className="main">
-      <Col span={24}>{displayMode === DisplayModes.MAP && <Map />}</Col>
+    <StyledRow className="main">
+      <Col className="map-box" span={24}>
+        {displayMode === DisplayModes.MAP && <Map />}
+      </Col>
       <Col span={24}>
         {displayMode === DisplayModes.SLICES && <SlicesBody />}
       </Col>
-    </Row>
+    </StyledRow>
   );
 }
 

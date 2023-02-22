@@ -6,15 +6,17 @@ import { useSelector } from 'react-redux';
 import TopSiderTubes from './TopSiderTubes';
 import TopSiderInfos from './TopSiderInfos';
 import { HEIGHT_TOP_SIDER_JAUGE } from '../../../../../../../utils/constants';
-import { selectCurrentCapacity } from '../../../../../../../redux/selectors/dataSelectors';
-import { selectCurrentCategoryPmaxCapacity } from '../../../../../../../redux/selectors/pmaxSelectors';
+import {
+  selectCurrentCapacity,
+  selectCurrentPmax,
+} from '../../../../../../../redux/selectors/dataSelectors';
 
 const StyledRow = styled(Row)`
   height: ${HEIGHT_TOP_SIDER_JAUGE}px;
 `;
 function TopSiderBody() {
   const { production, unavailable } = useSelector(selectCurrentCapacity);
-  const pmax = useSelector(selectCurrentCategoryPmaxCapacity);
+  const pmax = useSelector(selectCurrentPmax);
   return (
     <StyledRow className="top-sider-body" wrap={false}>
       <Col flex="74px">

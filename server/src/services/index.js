@@ -68,6 +68,10 @@ export const getData = async (input, { rteToken }) => {
       0,
     );
     newItem.availableCapacity = item.pmax - newItem.unavailableCapacity;
+    newItem.pmax =
+      item.pmax > newItem.productionCapacity
+        ? item.pmax
+        : newItem.productionCapacity;
     return {
       ...newItem,
       production: newProduction,

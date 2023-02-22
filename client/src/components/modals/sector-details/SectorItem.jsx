@@ -8,8 +8,10 @@ import { WIDTH_JAUGE_SECTOR_MODAL } from '../../../utils/constants';
 import { Name } from './Name';
 import Percents from './Percents';
 import { Jauges } from './Jauges';
-import { selectPmaxCapacityByCategory } from '../../../redux/selectors/pmaxSelectors';
-import { selectDataByProductionCategory } from '../../../redux/selectors/dataSelectors';
+import {
+  selectDataByProductionCategory,
+  selectPmaxByCategory,
+} from '../../../redux/selectors/dataSelectors';
 
 const StyledRow = styled(Row)`
   column-gap: 25px;
@@ -23,7 +25,7 @@ export function SectorItem({ sector }) {
     return item.key === sector;
   }).values;
   const categoryCapacity = useSelector((state) => {
-    return selectPmaxCapacityByCategory(state, sector);
+    return selectPmaxByCategory(state, sector);
   });
   const categoryLastProduction = data.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.productionCapacity;

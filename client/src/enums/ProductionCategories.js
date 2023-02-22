@@ -27,10 +27,15 @@ export const ProductionCategories = {
   OFFSHORE: 'Éolien',
   WIND_ONSHORE: 'WIND_ONSHORE',
   ALL: 'Tous',
-  TIDAL: 'TIDAL',
+  TIDAL: 'Marine',
   OTHER: 'OTHER',
 };
 export const ProductionCategoriesKeys = {
   HYDRAULICS: 'HYDRAULICS',
+  NUCLEAR: 'NUCLEAR',
+  FOSSIL_HARD_COAL: 'FOSSIL_HARD_COAL',
+  FOSSIL_GAS: 'FOSSIL_GAS',
+  TIDAL: 'TIDAL',
+  FOSSIL_OIL: 'FOSSIL_OIL',
   ALL: 'ALL',
 };

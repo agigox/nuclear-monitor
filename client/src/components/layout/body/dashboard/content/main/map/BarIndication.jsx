@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styled from '@emotion/styled';
 import { Col, Row } from 'antd';
 import React from 'react';
@@ -21,7 +22,10 @@ const StyledRow = styled(Row)`
     }
   }
 `;
-function BarIndication({ productionUnitName, productionUnitPmax, down, prod }) {
+function BarIndication({ productionUnitName, active, payload, label }) {
+  const productionUnitPmax = 1;
+  const down = 1;
+  const prod = 2;
   return (
     <StyledRow className="bar-indication">
       <Col span={24} className="city">

@@ -22,7 +22,8 @@ export const referentiel = readCSV(
   pmax: Number(item.netPower_MW),
   productionType: item.stage,
   productionCategory: getProductionCategory(item.stage),
-  reactorIndex: item.reactorIndex
+  reactorIndex: item.reactorIndex,
+  groupedByField: item.groupedByField
 })});
 
 export const pmax = readCSV(

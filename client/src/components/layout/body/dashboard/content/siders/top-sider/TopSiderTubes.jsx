@@ -34,6 +34,23 @@ const StyledRow = styled(Row)`
       flex-basis: 5px;
       width: 100%;
     }
+    @keyframes progres {
+      0% {
+        height: 0%;
+      }
+      25% {
+        height: 50%;
+      }
+      50% {
+        height: 75%;
+      }
+      75% {
+        height: 85%;
+      }
+      100% {
+        height: 100%;
+      }
+    }
   }
 `;
 function TopSiderTubes({ unavailable, pmax, production }) {
