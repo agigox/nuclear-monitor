@@ -6,56 +6,24 @@
   position: relative;
   top: 20px;
 }
-.rivers {
-  position: absolute;
-}
-.groups {
-  position: absolute;
-  &.rhin-river {
-    left: 806.15px;
-    top: 347.05px;
-  }
-  &.massifcentral-river {
-    left: 409.13px;
-    top: 427.8px;
-  }
-  &.rhonenord-river {
-    left: 636.38px;
-    top: 408px;
-  }
-}
 
-.river-1 {
-  left: 623.03px;
-  top: 102.08px;
-}
-.river-2 {
-  left: 283.16px;
-  top: 455.63px;
-}
-.river-3 {
-  left: 794.28px;
-  top: 179.99px;
-}
-.river-4 {
-  left: 315.47px;
-  top: 475.68px;
-}
-.river-5 {
-  left: 232.33px;
-  top: 291.93px;
-}
-.river-6 {
-  left: 365.85px;
-  top: 153.44px;
-}
-.river-7 {
-  left: 614.31px;
-  top: 410.42px;
-}
 .nuclear {
-  width: 66px;
-  height: 66px;
+  &.circle-54 {
+    width: 66px;
+    height: 66px;
+  }
+  &.circle-40 {
+    width: 52px;
+    height: 52px;
+  }
+  &.circle-34 {
+    width: 46px;
+    height: 46px;
+  }
+  &.circle-20 {
+    width: 32px;
+    height: 32px;
+  }
   border: 6px solid rgba(255, 225, 142, 0.6);
   border-radius: 50%;
   /*START NUCLEAR*/
@@ -134,8 +102,22 @@
   /*END NUCLEAR*/
 }/*START CHARBON*/
 .fossil_hard_coal {
-  width: 46px;
-  height: 46px;
+  &.circle-54 {
+    width: 66px;
+    height: 66px;
+  }
+  &.circle-40 {
+    width: 52px;
+    height: 52px;
+  }
+  &.circle-34 {
+    width: 46px;
+    height: 46px;
+  }
+  &.circle-20 {
+    width: 32px;
+    height: 32px;
+  }
   border: 6px solid rgba(140, 122, 73, 0.6);
   border-radius: 50%;
   &.saint-avold {
@@ -148,8 +130,22 @@
   }
 }
 .fossil_gas {
-  width: 48px;
-  height: 48px;
+  &.circle-54 {
+    width: 62px;
+    height: 62px;
+  }
+  &.circle-40 {
+    width: 48px;
+    height: 48px;
+  }
+  &.circle-34 {
+    width: 42px;
+    height: 42px;
+  }
+  &.circle-20 {
+    width: 28px;
+    height: 28px;
+  }
   border: 4px solid rgba(241, 136, 136, 0.6);
   border-radius: 50%;
   /*START GAZ*/
@@ -216,13 +212,27 @@
   /*END GAZ*/
 }
 .hydraulics {
-  width: 46px;
-  height: 46px;
+  &.circle-54 {
+    width: 66px;
+    height: 66px;
+  }
+  &.circle-40 {
+    width: 52px;
+    height: 52px;
+  }
+  &.circle-34 {
+    width: 46px;
+    height: 46px;
+  }
+  &.circle-20 {
+    width: 32px;
+    height: 32px;
+  }
   border: 6px solid rgba(117, 199, 245, 0.6);
   border-radius: 50%;
   &.rhonesud {
-    left: 657px;
-    top: 610px;
+    left: 607px;
+    top: 624px;
   }
   &.rhonenord {
     left: 637px;
@@ -247,8 +257,8 @@
   }
   
   &.jura-vosges {
-    left: 715px;
-    top: 359px;
+    left: 670px;
+    top: 368px;
   }
   &.alpessud {
     left: 724px;
@@ -260,9 +270,23 @@
   }
 }
 .tidal {
-  width: 28px;
-  height: 28px;
-  border: 4px solid rgba(117, 199, 245, 0.6);
+  &.circle-54 {
+    width: 62px;
+    height: 62px;
+  }
+  &.circle-40 {
+    width: 48px;
+    height: 48px;
+  }
+  &.circle-34 {
+    width: 42px;
+    height: 42px;
+  }
+  &.circle-20 {
+    width: 28px;
+    height: 28px;
+  }
+  border: 4px solid rgba(117, 199, 245, 1);
   border-radius: 50%;
   /*START TIDAL*/
   &.rance {
@@ -273,8 +297,22 @@
 }
 .fossil_oil {
   /*START FIOUL*/
-  width: 46px;
-  height: 46px;
+  &.circle-54 {
+    width: 66px;
+    height: 66px;
+  }
+  &.circle-40 {
+    width: 52px;
+    height: 52px;
+  }
+  &.circle-34 {
+    width: 46px;
+    height: 46px;
+  }
+  &.circle-20 {
+    width: 32px;
+    height: 32px;
+  }
   border: 6px solid rgba(213, 170, 255, 0.6);
   border-radius: 50%;
   &.arrighi {
@@ -339,6 +377,30 @@
   left: 101px;
   .box {
     flex-direction: row-reverse;
+  }
+}
+.offshore {
+  &.circle-54 {
+    width: 66px;
+    height: 66px;
+  }
+  &.circle-40 {
+    width: 52px;
+    height: 52px;
+  }
+  &.circle-34 {
+    width: 46px;
+    height: 46px;
+  }
+  &.circle-20 {
+    width: 32px;
+    height: 32px;
+  }
+  border: 6px solid rgba(57, 181, 147, 0.6);
+  border-radius: 50%;
+  &.saint-nazaire {
+    left: 178px;
+    top: 345px;
   }
 }
 .grandmaison {
@@ -548,10 +610,8 @@
 /*END FIOUL*/
 
 /*START Eolien*/
-.saint-nazaire {
-  top: 366px;
-  left: 216px;
-}
+
+
 /*End Eolien*/
 /*START BIOMASS*/
 .provence {

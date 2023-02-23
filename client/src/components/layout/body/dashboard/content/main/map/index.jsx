@@ -1,8 +1,8 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-// import SVGMapHydro from '../../../../../../../images/Frame.svg';
-import SVGMap from '../../../../../../../images/map.svg';
+import SVGMapHydro from '../../../../../../../images/Frame.png';
+import SVGMap from '../../../../../../../images/map.png';
 import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
 import { selectDataByFieldAndProductionUnit } from '../../../../../../../redux/selectors/dataSelectors';
 
@@ -20,7 +20,9 @@ function Map() {
       <Col className="map-container" span={24}>
         <img
           src={
-            ['HYDRAULICS', 'ALL'].includes(currentCategory) ? SVGMap : SVGMap
+            ['HYDRAULICS', 'ALL'].includes(currentCategory)
+              ? SVGMapHydro
+              : SVGMap
           }
           alt="map"
           className="map"
@@ -77,17 +79,28 @@ function Map() {
             .join('o')
             .split(/é|è/)
             .join('e');
+          const getSize = () => {
+            if (productionUnitPmax > 3000) {
+              return 54;
+            }
+            if (productionUnitPmax > 1500) {
+              return 40;
+            }
+            if (productionUnitPmax > 500) {
+              return 34;
+            }
+            return 20;
+          };
           return (
             <Row
               key={key}
-              className={`${itemClass} mark-city ${values[0].productionCategory.toLowerCase()}`}
+              className={`${itemClass} mark-city ${values[0].productionCategory.toLowerCase()} circle-${getSize()}`}
             >
               <Col style={{ alignSelf: 'center' }}>
                 <PieChartItem
                   data={data}
                   productionUnitName={key}
-                  category={values[0].productionCategory}
-                  itemClass={itemClass}
+                  pmax={productionUnitPmax}
                 />
               </Col>
             </Row>

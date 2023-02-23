@@ -22,10 +22,10 @@ const StyledRow = styled(Row)`
     }
   }
 `;
-function BarIndication({ productionUnitName, active, payload, label }) {
-  const productionUnitPmax = 1;
-  const down = 1;
-  const prod = 2;
+export const getPercentPixelStyle = (value, max) => {
+  return Math.round((value * HEIGHT_MAP_BAR) / max);
+};
+function BarIndication({ productionUnitName, productionUnitPmax, down, prod }) {
   return (
     <StyledRow className="bar-indication">
       <Col span={24} className="city">
@@ -33,16 +33,21 @@ function BarIndication({ productionUnitName, active, payload, label }) {
       </Col>
       <Col span={24}>
         <Row wrap={false} className="percents" align="middle">
-          <Col className="prod-percent">{`${prod} %`}</Col>
+          <Col className="prod-percent">{`${getPercentPixelStyle(
+            prod,
+            productionUnitPmax,
+          )} %`}</Col>
 
           <Col className="separator-percent" />
           <Col className="down-percent">{`${
-            HEIGHT_MAP_BAR - down - prod
+            HEIGHT_MAP_BAR -
+            getPercentPixelStyle(down, productionUnitPmax) -
+            getPercentPixelStyle(prod, productionUnitPmax)
           } %`}</Col>
         </Row>
       </Col>
       <Col span={24} className="pmax">
-        {`Capacité ${productionUnitPmax}MW`}
+        {`Capacité ${Math.round(productionUnitPmax)}MW`}
       </Col>
     </StyledRow>
   );
