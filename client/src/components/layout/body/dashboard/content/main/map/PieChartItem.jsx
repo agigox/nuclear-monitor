@@ -37,7 +37,9 @@ function PieChartItem({ data, productionUnitName, pmax }) {
           dataKey="value"
         >
           {[...data].map((entry, index) => {
-            return <Cell key={`cell-${index}`} fill={entry.color} />;
+            return (
+              <Cell key={`cell-${index}`} fill={entry.color} strokeWidth={0} />
+            );
           })}
         </Pie>
         <Tooltip
