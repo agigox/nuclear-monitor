@@ -39,6 +39,11 @@ body {
 .recharts-tooltip-wrapper {
   z-index:99;
 }
+.ant-modal {
+  .ant-modal-content {
+    padding: 50px 50px;
+  }
+}
 /*My code*/
 
 .iconIndispo {
@@ -158,13 +163,16 @@ body {
           background: linear-gradient(203.32deg, #0079D1 19.29%, #36B3DF 81.34%);
         }
         &.hashed-slice {
+          /*
           background: repeating-linear-gradient(
             45deg,
             #34c501 0px,
             #34c501 4px,
             #0079D1 4px,
             #0079D1 8px
-          );;
+          );
+          */
+          background: linear-gradient(203.32deg, #0079D1 19.29%, #41E03E 81.34%);
         }
         .slice-content-capacity {
           .format-text(@font-family-nunito-bold, 16px, 22px, @color-white);
@@ -305,7 +313,11 @@ body {
     }
   }
 }
-
+.pie-chart {
+  .hydraulics-number {
+    .format-text(@font-family-nunito-extra-bold, 16px, 22px, @global-color);
+  }
+}
 .header {
   .text-1 {
     .format-text(@font-family-nunito-semi-bold, 14px, 18px, @color-white);

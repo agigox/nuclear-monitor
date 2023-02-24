@@ -69,9 +69,6 @@ export const selectDataByFieldAndProductionUnit = createSelector(
     const { key, values } = items.find((item) => {
       return item.key === category;
     });
-    console.log(
-      groupByKey(_.orderBy(values, 'productionUnit', 'asc'), 'groupedByField'),
-    );
     return {
       key,
       values: groupByKey(

@@ -1,25 +1,17 @@
 /* eslint-disable react/no-array-index-key */
-import styled from '@emotion/styled';
 import { Col, Row } from 'antd';
 import React from 'react';
 import SubSlice from './SubSlice';
 
-const CustomRow = styled(Row)`
-  .slice-content-row {
-  }
-`;
 function Slice({ data, isHydroCurrent }) {
   return (
-    <CustomRow className="slice">
+    <Row className="slice">
       <Col className="slice-title" span={24}>
         {data.key}
       </Col>
       <Col span={24}>
         <Row className="slice-content-row">
           {data.values.map((value, index) => {
-            console.log(
-              `${value.unitName} ---> ${value.unavailableCapacity}MW`,
-            );
             return (
               <SubSlice
                 key={`${value.key}-${index}`}
@@ -50,7 +42,7 @@ function Slice({ data, isHydroCurrent }) {
           })}
         </Row>
       </Col>
-    </CustomRow>
+    </Row>
   );
 }
 

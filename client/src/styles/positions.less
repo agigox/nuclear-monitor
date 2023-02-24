@@ -6,8 +6,7 @@
   position: relative;
   top: 20px;
 }
-
-.nuclear {
+.nuclear, .fossil_hard_coal, .fossil_gas, .hydraulics, .tidal, .fossil_oil, .offshore, .biomass {
   &.circle-54 {
     width: 66px;
     height: 66px;
@@ -24,7 +23,9 @@
     width: 32px;
     height: 32px;
   }
-  border: 6px solid rgba(255, 225, 142, 0.6);
+}
+.nuclear {
+  border: 6px solid #FFE18E;
   border-radius: 50%;
   /*START NUCLEAR*/
   &.flamanville {
@@ -102,23 +103,7 @@
   /*END NUCLEAR*/
 }/*START CHARBON*/
 .fossil_hard_coal {
-  &.circle-54 {
-    width: 66px;
-    height: 66px;
-  }
-  &.circle-40 {
-    width: 52px;
-    height: 52px;
-  }
-  &.circle-34 {
-    width: 46px;
-    height: 46px;
-  }
-  &.circle-20 {
-    width: 32px;
-    height: 32px;
-  }
-  border: 6px solid rgba(140, 122, 73, 0.6);
+  border: 6px solid #BFB17D;
   border-radius: 50%;
   &.saint-avold {
     left: 792px;
@@ -130,23 +115,7 @@
   }
 }
 .fossil_gas {
-  &.circle-54 {
-    width: 62px;
-    height: 62px;
-  }
-  &.circle-40 {
-    width: 48px;
-    height: 48px;
-  }
-  &.circle-34 {
-    width: 42px;
-    height: 42px;
-  }
-  &.circle-20 {
-    width: 28px;
-    height: 28px;
-  }
-  border: 4px solid rgba(241, 136, 136, 0.6);
+  border: 6px solid #FFA19B;
   border-radius: 50%;
   /*START GAZ*/
   &.amfard {
@@ -212,23 +181,7 @@
   /*END GAZ*/
 }
 .hydraulics {
-  &.circle-54 {
-    width: 66px;
-    height: 66px;
-  }
-  &.circle-40 {
-    width: 52px;
-    height: 52px;
-  }
-  &.circle-34 {
-    width: 46px;
-    height: 46px;
-  }
-  &.circle-20 {
-    width: 32px;
-    height: 32px;
-  }
-  border: 6px solid rgba(117, 199, 245, 0.6);
+  border: 6px solid #75C7F5;
   border-radius: 50%;
   &.rhonesud {
     left: 607px;
@@ -270,23 +223,7 @@
   }
 }
 .tidal {
-  &.circle-54 {
-    width: 62px;
-    height: 62px;
-  }
-  &.circle-40 {
-    width: 48px;
-    height: 48px;
-  }
-  &.circle-34 {
-    width: 42px;
-    height: 42px;
-  }
-  &.circle-20 {
-    width: 28px;
-    height: 28px;
-  }
-  border: 4px solid rgba(117, 199, 245, 1);
+  border: 6px solid #A3A5B3;
   border-radius: 50%;
   /*START TIDAL*/
   &.rance {
@@ -297,23 +234,7 @@
 }
 .fossil_oil {
   /*START FIOUL*/
-  &.circle-54 {
-    width: 66px;
-    height: 66px;
-  }
-  &.circle-40 {
-    width: 52px;
-    height: 52px;
-  }
-  &.circle-34 {
-    width: 46px;
-    height: 46px;
-  }
-  &.circle-20 {
-    width: 32px;
-    height: 32px;
-  }
-  border: 6px solid rgba(213, 170, 255, 0.6);
+  border: 6px solid #D5AAFF;
   border-radius: 50%;
   &.arrighi {
     left: 465px;
@@ -334,6 +255,22 @@
   &.vaires {
     left: 547px;
     top: 198px;
+  }
+}
+.offshore {
+  border: 6px solid #7AF2D2;
+  border-radius: 50%;
+  &.saint-nazaire {
+    left: 178px;
+    top: 345px;
+  }
+}
+.biomass {
+  border: 6px solid #63CF68;
+  border-radius: 50%;
+  &.provence {
+    bottom: 60px;
+    right: 233px;
   }
 }
 /*END CHARBON*/
@@ -379,30 +316,7 @@
     flex-direction: row-reverse;
   }
 }
-.offshore {
-  &.circle-54 {
-    width: 66px;
-    height: 66px;
-  }
-  &.circle-40 {
-    width: 52px;
-    height: 52px;
-  }
-  &.circle-34 {
-    width: 46px;
-    height: 46px;
-  }
-  &.circle-20 {
-    width: 32px;
-    height: 32px;
-  }
-  border: 6px solid rgba(57, 181, 147, 0.6);
-  border-radius: 50%;
-  &.saint-nazaire {
-    left: 178px;
-    top: 345px;
-  }
-}
+
 .grandmaison {
   top: 450px;
   left: 300px;
@@ -603,19 +517,3 @@
   top: 35px;
   left: 9px;
 }
-/*END HYDRO*/
-
-
-
-/*END FIOUL*/
-
-/*START Eolien*/
-
-
-/*End Eolien*/
-/*START BIOMASS*/
-.provence {
-  bottom: 60px;
-  right: 233px;
-}
-/*END BIOMASS*/

@@ -6,7 +6,6 @@ import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 import BarIndication from './BarIndication';
 
 function PieChartItem({ data, productionUnitName, pmax }) {
-  console.log(data);
   const handleClick = () => {
     // console.log('A click');
     return 33;
@@ -35,6 +34,8 @@ function PieChartItem({ data, productionUnitName, pmax }) {
           outerRadius={size / 2}
           fill="#8884d8"
           dataKey="value"
+          animationBegin={100}
+          animationDuration={1000}
         >
           {[...data].map((entry, index) => {
             return (

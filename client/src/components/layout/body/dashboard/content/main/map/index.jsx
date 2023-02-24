@@ -1,20 +1,27 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import SVGMapHydro from '../../../../../../../images/Frame.png';
 import SVGMap from '../../../../../../../images/map.png';
 import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
 import { selectDataByFieldAndProductionUnit } from '../../../../../../../redux/selectors/dataSelectors';
+// import { groupByKey } from '../../../../../../../utils';
 
 // import MapBar from './MapBar';
 import PieChartItem from './PieChartItem';
 
+const StyledRow = styled(Row)`
+  .pie-chart {
+    flex-direction: column;
+    row-gap: 5px;
+  }
+`;
 function Map() {
   const currentCategory = useSelector(selectCurrentCategory);
   const dataGroupedByField = useSelector((state) => {
     return selectDataByFieldAndProductionUnit(state, currentCategory);
   });
-  // console.log(dataGroupedByField);
   return (
     <Row>
       <Col className="map-container" span={24}>
@@ -92,18 +99,27 @@ function Map() {
             return 20;
           };
           return (
-            <Row
+            <StyledRow
               key={key}
               className={`${itemClass} mark-city ${values[0].productionCategory.toLowerCase()} circle-${getSize()}`}
             >
               <Col style={{ alignSelf: 'center' }}>
-                <PieChartItem
-                  data={data}
-                  productionUnitName={key}
-                  pmax={productionUnitPmax}
-                />
+                <Row className="pie-chart">
+                  <Col>
+                    <PieChartItem
+                      data={data}
+                      productionUnitName={key}
+                      pmax={productionUnitPmax}
+                    />
+                  </Col>
+                  {/* values[0].productionCategory.toLowerCase() ===
+                    'hydraulics' &&
+                    <Col className="hydraulics-number">
+                      x{groupByKey(values, 'productionUnit').length}
+                    </Col> */}
+                </Row>
               </Col>
-            </Row>
+            </StyledRow>
           );
         })}
       </Col>
