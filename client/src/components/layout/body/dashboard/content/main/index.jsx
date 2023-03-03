@@ -9,8 +9,10 @@ import SlicesBody from './slices';
 
 const StyledRow = styled(Row)`
   .map-box {
-    padding-top: 20px;
-    padding-bottom: 40px;
+    /*
+    padding-top: 38px;
+    padding-bottom: 34.12px;
+    */
   }
 `;
 function Main() {

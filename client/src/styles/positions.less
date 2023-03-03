@@ -1,12 +1,14 @@
 
-.mark-city {
+.mark-city, .rives, .map {
   position: absolute;
 }
 .map {
-  position: relative;
-  top: 20px;
+  left: 71px;
+  top: 38px;
+  transform: rotate(0.5deg);
 }
 .nuclear, .fossil_hard_coal, .fossil_gas, .hydraulics, .tidal, .fossil_oil, .offshore, .biomass {
+  border-radius: 50%;
   &.circle-54 {
     width: 66px;
     height: 66px;
@@ -24,189 +26,193 @@
     height: 32px;
   }
 }
+.chips-nuclear {
+  color: #FFE18E;
+}
 .nuclear {
   border: 6px solid #FFE18E;
-  border-radius: 50%;
-  /*START NUCLEAR*/
   &.flamanville {
-    left: 266px;
-    top: 131.3px;
+    left: 201px;
+    top: 152.3px;
   }  
   &.civaux {
-    left: 433.68px;
-    top: 383.51px;
+    left: 338px;
+    top: 441px;
   }
   &.penly {
-    left: 424.3px;
-    top: 89.49px;
+    left: 390.3px;
+    top: 120.49px;
   }
   &.dampierre {
-    left: 491.33px;
-    top: 271.54px;
+    left: 459px;
+    top: 326px;
   }
   &.golfech {
-    left: 379.13px;
-    top: 618.24px;
+    left: 339px;
+    top: 645px;
   }
   &.blayais {
-    left: 292.28px;
-    top: 516.58px;
+    left: 250px;
+    top: 541px;
   }
   &.cattenom {
-    left: 734.06px;
-    top: 153.53px;
+    left: 688px;
+    top: 186px;
   }
   &.gravelines {
-    left: 475.06px;
-    top: -2px;
+    left: 441.06px;
+    top: 25px;
   }
   &.chooz {
-    left: 636.3px;
-    top: 110.49px;
+    left: 592px;
+    top: 118px;
   }
   &.cruas {
-    left: 586.3px;
-    top: 530.49px;
+    left: 580px;
+    top: 608px;
   }
   &.stalban {
-    left: 628.84px;
-    top: 494.43px;
+    left: 584px;
+    top: 543px;
   }
   &.belleville {
-    left: 497.81px;
-    top: 327.68px;
+    left: 476px;
+    top: 354px;
   }
   &.nogent {
-    left: 579.3px;
-    top: 236.49px;
+    left: 520px;
+    top: 263px;
   }
   &.paluel {
-    left: 374.3px;
-    top: 120.74px;
+    left: 349.3px;
+    top: 131.74px;
   }
   &.stlaurent {
-    left: 425.66px;
-    top: 290.16px;
+    left: 401px;
+    top: 330px;
   }
   &.tricastin {
-    left: 620.65px;
-    top: 575.89px;
+    left: 580px;
+    top: 636px;
   }
   &.chinon {
-    left: 364.09px;
-    top: 328.98px;
+    left: 311px;
+    top: 369px;
   }
   &.bugey {
-    left: 667.45px;
-    top: 446.39px;
+    left: 617px;
+    top: 507px;
   }
-  /*END NUCLEAR*/
-}/*START CHARBON*/
+}
+.chips-fossil_hard_coal {
+  color: #BFB17D;
+}
 .fossil_hard_coal {
   border: 6px solid #BFB17D;
-  border-radius: 50%;
   &.saint-avold {
-    left: 792px;
-    top: 245px;
+    left: 763px;
+    top: 326px;
   }
   &.cordemais {
-    left: 217.68px;
-    top: 323.6px;
+    left: 232px;
+    top: 376.6px;
   }
+}
+.chips-fossil_gas {
+  color: #FFA19B;
 }
 .fossil_gas {
   border: 6px solid #FFA19B;
-  border-radius: 50%;
-  /*START GAZ*/
   &.amfard {
-    top: 310px;
-    left: 598px;
+    left: 351px;
+    top: 171px;
   }
   &.blenod {
-    left: 746.05px;
-    top: 258.91px;
+    left: 703.05px;
+    top: 242.91px;
   }
   &.bouchain {
-    left: 533.56px;
-    top: 53.01px;
+    left: 490.56px;
+    top: 82.01px;
   }
   &.combigolfeccg {
-    left: 554px;
-    top: 666px;
+    left: 633px;
+    top: 703px;
   }
   &.croixdemetz {
-    left: 710px;
-    top: 280px;
+    left: 693px;
+    top: 259px;
   }
   &.cycofos {
-    left: 574px;
-    top: 630px;
+    left: 626px;
+    top: 707px;
   }
   &.dk6 {
-    left: 433px;
-    top: 16px;
+    left: 483px;
+    top: 31px;
   }
   &.gamorant {
-    top: 0;
-    left: 493px;
+    left: 521.78px;
+    top: 470.97px;
   }
   &.gennevilliers {
-    left: 431px;
-    top: 169.4px;
+    left: 490px;
+    top: 225px;
   }
   &.martiguesponteau {
-    left: 594.83px;
-    top: 665.85px;
+    left: 641px;
+    top: 707px;
   }
   &.pontsursambre{
-    left: 585.32px;
-    top: 74.48px;
+    left: 542.32px;
+    top: 103.48px;
   } 
   &.saintavold, &.saint-avold { // EMILE HUCHET
-    left: 782px;
-    top: 207px;
+    left: 783px;
+    top: 316px;
   }
   &.spem {
-    left: 179.6px;
-    top: 303.43px;
+    left: 190px;
+    top: 358px;
   }
   &.saint-ouen {
-    left: 466px;
-    top: 187px;
+    left: 483px;
+    top: 232px;
   }
   &.landivisiau {
-    top: 274px;
-    left: 215px;
+    left: 110px;
+    top: 235px;
   }
-  /*END GAZ*/
+}
+.chips-hydraulics {
+  color: #75C7F5;
 }
 .hydraulics {
   border: 6px solid #75C7F5;
-  border-radius: 50%;
   &.rhonesud {
     left: 607px;
     top: 624px;
   }
   &.rhonenord {
-    left: 637px;
-    top: 407px;
+    left: 647px;
+    top: 458px;
   }
   &.rhin {
-    left: 800px;
-    top: 294px;
+    left: 776px;
+    top: 251px;
   }
   
   &.pyrenees {
-    left: 428px;
-    top: 736px;
+    left: 420px;
+    top: 745px;
   }
   &.meuse {
-    left: 614px;
-    top: 117px;
+    left: 619px;
+    top: 167px;
   }
   &.massifcentral {
-    left: 482px;
-    top: 526px;
+    left: 474px;
+    top: 559px;
   }
   
   &.jura-vosges {
@@ -214,306 +220,93 @@
     top: 368px;
   }
   &.alpessud {
-    left: 724px;
-    top: 616px;
+    left: 716px;
+    top: 649px;
   }
   &.alpesnord {
-    left: 728px;
-    top: 495px;
+    left: 720px;
+    top: 516px;
   }
+}
+.chips-tidal {
+  color: #A3A5B3;
 }
 .tidal {
   border: 6px solid #A3A5B3;
-  border-radius: 50%;
-  /*START TIDAL*/
   &.rance {
-    left: 231.34px;
-    top: 209.37px;
+    left: 224px;
+    top: 257px;
   }
-  /*END TIDAL*/
+}
+.chips-fossil_oil {
+  color: #D5AAFF;
 }
 .fossil_oil {
-  /*START FIOUL*/
   border: 6px solid #D5AAFF;
-  border-radius: 50%;
   &.arrighi {
-    left: 465px;
-    top: 227px;
+    left: 532px;
+    top: 289px;
   }
   &.brennilis {
-    left: 129.13px;
-    top: 235.13px;
+    left: 114.13px;
+    top: 274.13px;
   }
   &.dirinon {
     left: 103px;
-    top: 211.29px;
+    top: 258px;
   }
   &.montereau {
-    left: 505px;
-    top: 237px;
+    left: 520px;
+    top: 289px;
   }
   &.vaires {
-    left: 547px;
-    top: 198px;
+    left: 514px;
+    top: 245px;
   }
+}
+.chips-offshore {
+  color: #39B593;
 }
 .offshore {
   border: 6px solid #7AF2D2;
-  border-radius: 50%;
   &.saint-nazaire {
     left: 178px;
     top: 345px;
   }
 }
+.chips-biomass {
+  color: #63CF68;
+}
 .biomass {
   border: 6px solid #63CF68;
-  border-radius: 50%;
   &.provence {
-    bottom: 60px;
-    right: 233px;
+    left: 672px;
+    top: 703px;
   }
 }
-/*END CHARBON*/
-/*START HYDRO*/
-.aigle {
-  top: 200px;
-  left: 255px;
+.rive-1 {
+  left: 758px;
+  top: 207px;
+  transform: rotate(-164.8deg);
 }
-.bathie {
-  top: 83px;
-  left: 229px;
+.rive-2 {
+  left: 633.25px;
+  top: 428px;
 }
-.bort {
-  top: 300px;
-  left: 429px;
+.rive-3 {
+  left: 684.25px;
+  top: 471px;
 }
-.brommat {
-  top: 300px;
-  left: 629px;
+.rive-4 {
+  left: 403px;
+  top: 469.8px;
 }
-.chastang {
-  top: 250px;
-  left: 25px;
-  .box {
-    flex-direction: row-reverse;
-  }
+.rive-5 {
+  left: 629.95px;
+  top: 618.81px;
 }
-.cheylas {
-  top: 300px;
-  left: 220px;
-  .box {
-    flex-direction: row-reverse;
-  }
-}
-.coche {
-  top: 400px;
-  left: 521px;
-}
-.combedavrieux {
-  top: 400px;
-  left: 101px;
-  .box {
-    flex-direction: row-reverse;
-  }
-}
-
-.grandmaison {
-  top: 450px;
-  left: 300px;
-}
-.montezic {
-  top: 500px;
-  left: 550px;
-}
-.pouget {
-  top: 600px;
-  left: 420px;
-}
-.revin {
-  top: 650px;
-  left: 155px;
-}
-.sisteron {
-  top: 100px;
-  left: 500px;
-}
-.superbissorte {
-  top: 596px;
-  left: 642px;
-}
-.villarodin {
-  top: 134px;
-  left: 27px;
-}
-.mareges {
-  top: 500px;
-  left: 54px;
-}
-.bregnier-cordon {
-  bottom: 233px;
-  left: 234px;
-}
-.seyssel {
-  right: 1px;
-  bottom: 1px;
-}
-.sault-brenaz {
-  top: 1px;
-  left: 48px;
-}
-.sauveterre {
-  top: 2px;
-  left: 456px;
-}
-.vaugris {
-  top: 35px;
-  left: 9px;
-}
-.pierre-benite {
-  top: 35px;
-  left: 9px;
-}
-.chautagne {
-  top: 35px;
-  left: 9px;
-}
-.brens {
-  top: 35px;
-  left: 9px;
-}
-.saintpierrecognet {
-  top: 35px;
-  left: 9px;
-}
-.aston {
-  top: 35px;
-  left: 9px;
-}
-.pieddeborne {
-  top: 35px;
-  left: 9px;
-}
-.saintguillerme {
-  top: 35px;
-  left: 9px;
-}
-.hermillon {
-  top: 35px;
-  left: 9px;
-}
-.couesque {
-  top: 35px;
-  left: 9px;
-}
-.gervans {
-  top: 35px;
-  left: 9px;
-}
-.fr_saint-pierre {
-  top: 35px;
-  left: 9px;
-}
-.randens {
-  top: 35px;
-  left: 9px;
-}
-.avignon {
-  top: 35px;
-  left: 9px;
-}
-.bourg-les-valence {
-  top: 35px;
-  left: 9px;
-}
-.logis-neuf {
-  top: 35px;
-  left: 9px;
-}
-.fessenheim {
-  top: 35px;
-  left: 9px;
-}
-.kembs {
-  top: 35px;
-  left: 9px;
-}
-.sablons {
-  top: 35px;
-  left: 9px;
-}
-.saintchamas {
-  top: 35px;
-  left: 9px;
-}
-.marckolsheim {
-  top: 35px;
-  left: 9px;
-}
-.caderousse {
-  top: 35px;
-  left: 9px;
-}
-.rhinau {
-  top: 35px;
-  left: 9px;
-}
-.saussaz {
-  top: 35px;
-  left: 9px;
-}
-.saintesteve {
-  top: 35px;
-  left: 9px;
-}
-.vogelgrun {
-  top: 35px;
-  left: 9px;
-}
-.gerstheim {
-  top: 35px;
-  left: 9px;
-}
-.curbans {
-  top: 35px;
-  left: 9px;
-}
-.saintecroix {
-  top: 35px;
-  left: 9px;
-}
-.montpezat {
-  top: 35px;
-  left: 9px;
-}
-.stetiennecantales {
-  top: 35px;
-  left: 9px;
-}
-.sarrans, .oraison, .pragneres, .beauchastel, .beaucaire, .chateauneuf-du-rhone, .vouglans {
-  top: 35px;
-  left: 9px;
-}
-.genissiat {
-  top: 35px;
-  left: 9px;
-}
-.serre-poncon {
-  top: 35px;
-  left: 9px;
-}
-.monteynard {
-  top: 35px;
-  left: 9px;
-}
-.bollene {
-  top: 35px;
-  left: 9px;
-}
-.malgovert {
-  top: 35px;
-  left: 9px;
-}
-.vouglans {
-  top: 35px;
-  left: 9px;
+.rive-6 {
+  left: 346.66px;
+  top: 719.56px;
+  transform: rotate(12.84deg);
 }

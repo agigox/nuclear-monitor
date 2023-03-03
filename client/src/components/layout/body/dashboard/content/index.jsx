@@ -27,6 +27,9 @@ const StyledRow = styled(Row)`
   }
   .card-map {
     .ant-card-body {
+      background: #19252a;
+      box-shadow: none;
+      border-radius: 0;
       padding: 0;
     }
   }

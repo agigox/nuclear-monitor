@@ -36,6 +36,8 @@ function PieChartItem({ data, productionUnitName, pmax }) {
           dataKey="value"
           animationBegin={100}
           animationDuration={1000}
+          startAngle={90}
+          endAngle={450}
         >
           {[...data].map((entry, index) => {
             return (
@@ -43,6 +45,7 @@ function PieChartItem({ data, productionUnitName, pmax }) {
             );
           })}
         </Pie>
+
         <Tooltip
           content={
             <BarIndication

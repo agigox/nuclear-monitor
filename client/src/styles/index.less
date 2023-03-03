@@ -14,7 +14,9 @@ body {
   font-family: @font-family-nunito-regular;
 }
 .ant-btn {
-  .format-text(@font-family-nunito-bold, 13px, 28px);
+  font-family: 'NunitoSansBold';
+  font-size: 13px;
+  line-height: 28px;
   border-radius: 4px;
 }
 .ant-btn-primary:not(:disabled):hover {
@@ -144,7 +146,7 @@ body {
     }
     .slice-content-row {
       row-gap: 5px;
-      column-gap: 5px;
+      column-gap: 16px;
       .slice-content-pmax {
         .format-text(@font-family-nunito-regular, 9.5px, 14px, @color-grey);
         font-style: italic;
@@ -201,8 +203,8 @@ body {
 }
 .main {
   .map-container {
-    position: relative;
-    text-align: center;
+    width: 935px;
+    height: 866px;
     .position {
       .format-text(@font-family-nunito-regular, 14px, 18px, @global-color);
       background-color: @color-white;
@@ -337,6 +339,16 @@ body {
   .title {
     .format-text(@font-family-nunito-semi-bold, 24px, 32px, @color-black);
     text-transform: uppercase;
+  }
+}
+.secteur-details {
+  .sector-title {
+    .format-text(@font-family-nunito-regular, 24px, 32px, @color-black);
+    text-transform: uppercase;
+  }
+  .marks-text {
+    .format-text(@font-family-nunito-regular, 14px, 18px, @color-black);
+    width: 100px;
   }
 }
 h1 {

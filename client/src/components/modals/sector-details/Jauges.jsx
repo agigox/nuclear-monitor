@@ -6,7 +6,10 @@ import { WIDTH_JAUGE_SECTOR_MODAL } from '../../../utils/constants';
 const StyledRow = styled(Row)`
   &.jauge-modal {
     border-radius: 24px 0 0 24px;
-    width: ${WIDTH_JAUGE_SECTOR_MODAL}px;
+    width: ${(props) => {
+      console.log(props.size);
+      return props.size;
+    }}px;
     height: 25px;
     .production {
       background: linear-gradient(91.66deg, #36c90a 10.18%, #46ea54 91.31%);
@@ -22,11 +25,8 @@ const StyledRow = styled(Row)`
     }
     .unavailable {
       background: #d0574f;
-      width: ${({ unavailablecapacity, categorylastproduction }) => {
-        const tmp =
-          WIDTH_JAUGE_SECTOR_MODAL -
-          unavailablecapacity -
-          categorylastproduction;
+      width: ${({ unavailablecapacity, categorylastproduction, size }) => {
+        const tmp = size - unavailablecapacity - categorylastproduction;
         if (tmp < 0) {
           return unavailablecapacity + tmp;
         }
@@ -35,17 +35,42 @@ const StyledRow = styled(Row)`
     }
   }
 `;
+
+const getBarWidth = (pmaxValue) => {
+  if (pmaxValue > 3000) {
+    return WIDTH_JAUGE_SECTOR_MODAL;
+  }
+  if (pmaxValue > 1500) {
+    return WIDTH_JAUGE_SECTOR_MODAL - 40;
+  }
+  if (pmaxValue > 500) {
+    return WIDTH_JAUGE_SECTOR_MODAL - 80;
+  }
+  if (pmaxValue > 300) {
+    return WIDTH_JAUGE_SECTOR_MODAL - 120;
+  }
+  return WIDTH_JAUGE_SECTOR_MODAL - 160;
+};
 export function Jauges({
   unavailablecapacity,
   categorylastproduction,
-  upcapacity,
+  categoryCapacity,
 }) {
+  const c = getBarWidth(categoryCapacity);
+  const a = Math.round(
+    (unavailablecapacity * WIDTH_JAUGE_SECTOR_MODAL) / categoryCapacity,
+  );
+  const b = Math.round(
+    (categorylastproduction * WIDTH_JAUGE_SECTOR_MODAL) / categoryCapacity,
+  );
+
   return (
     <StyledRow
       className="jauge-modal"
-      unavailablecapacity={unavailablecapacity}
-      categorylastproduction={categorylastproduction}
-      upcapacity={upcapacity}
+      unavailablecapacity={a}
+      categorylastproduction={b}
+      upcapacity={c - a - b}
+      size={c}
     >
       <Col className="production" />
       <Col className="rest" />

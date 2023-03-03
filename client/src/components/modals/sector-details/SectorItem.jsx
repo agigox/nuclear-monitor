@@ -4,7 +4,6 @@ import { Col, Row } from 'antd';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { Image } from './Image';
-import { WIDTH_JAUGE_SECTOR_MODAL } from '../../../utils/constants';
 import { Name } from './Name';
 import Percents from './Percents';
 import { Jauges } from './Jauges';
@@ -16,8 +15,11 @@ import {
 const StyledRow = styled(Row)`
   column-gap: 25px;
   .image-row {
-    width: 186px;
-    column-gap: 12px;
+    width: 170px;
+    column-gap: 5px;
+  }
+  .capacity {
+    color: #767676;
   }
 `;
 export function SectorItem({ sector }) {
@@ -34,12 +36,9 @@ export function SectorItem({ sector }) {
   const unavailableCapacity = data.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.unavailableCapacity;
   }, 0);
-  const getPercentPixelStyle = (value) => {
-    return Math.round((value * WIDTH_JAUGE_SECTOR_MODAL) / categoryCapacity);
-  };
   return (
-    <StyledRow>
-      <Col>
+    <StyledRow style={{ marginBottom: '15px' }} wrap={false}>
+      <Col flex="170px">
         <Row className="image-row" wrap={false}>
           <Col>
             <Image sector={sector} />
@@ -49,8 +48,18 @@ export function SectorItem({ sector }) {
           </Col>
         </Row>
       </Col>
-      <Col>
+      <Col flex="68px">
         <Row>
+          <Col className="boldBody" span={24}>
+            {`${(categoryLastProduction / 1000).toFixed(1)}GW`}
+          </Col>
+          <Col className="supportText capacity" span={24}>
+            Production
+          </Col>
+        </Row>
+      </Col>
+      <Col>
+        <Row wrap={false}>
           <Col>
             <Percents
               categoryLastProduction={categoryLastProduction}
@@ -60,15 +69,9 @@ export function SectorItem({ sector }) {
           </Col>
           <Col>
             <Jauges
-              unavailablecapacity={getPercentPixelStyle(unavailableCapacity)}
-              categorylastproduction={getPercentPixelStyle(
-                categoryLastProduction,
-              )}
-              upcapacity={
-                WIDTH_JAUGE_SECTOR_MODAL -
-                getPercentPixelStyle(unavailableCapacity) -
-                getPercentPixelStyle(categoryLastProduction)
-              }
+              unavailablecapacity={unavailableCapacity}
+              categorylastproduction={categoryLastProduction}
+              categoryCapacity={categoryCapacity}
             />
           </Col>
         </Row>

@@ -2,8 +2,13 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import SVGMapHydro from '../../../../../../../images/Frame.png';
-import SVGMap from '../../../../../../../images/map.png';
+import SVGMap from '../../../../../../../images/map.svg';
+import Rive1 from '../../../../../../../images/rive-1.svg';
+import Rive2 from '../../../../../../../images/rive-2.svg';
+import Rive3 from '../../../../../../../images/rive-3.svg';
+import Rive4 from '../../../../../../../images/rive-4.svg';
+import Rive5 from '../../../../../../../images/rive-5.svg';
+import Rive6 from '../../../../../../../images/rive-6.svg';
 import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
 import { selectDataByFieldAndProductionUnit } from '../../../../../../../redux/selectors/dataSelectors';
 // import { groupByKey } from '../../../../../../../utils';
@@ -16,6 +21,11 @@ const StyledRow = styled(Row)`
     flex-direction: column;
     row-gap: 5px;
   }
+  .map {
+    position: absolute;
+    left: 77.86px;
+    top: 38px;
+  }
 `;
 function Map() {
   const currentCategory = useSelector(selectCurrentCategory);
@@ -25,15 +35,17 @@ function Map() {
   return (
     <Row>
       <Col className="map-container" span={24}>
-        <img
-          src={
-            ['HYDRAULICS', 'ALL'].includes(currentCategory)
-              ? SVGMapHydro
-              : SVGMap
-          }
-          alt="map"
-          className="map"
-        />
+        <img src={SVGMap} alt="map" className="map" />
+        {['HYDRAULICS', 'ALL'].includes(currentCategory) && (
+          <>
+            <img src={Rive1} alt="rive-1" className="rive-1 rives" />
+            <img src={Rive2} alt="rive-2" className="rive-2 rives" />
+            <img src={Rive3} alt="rive-3" className="rive-3 rives" />
+            <img src={Rive4} alt="rive-4" className="rive-4 rives" />
+            <img src={Rive5} alt="rive-5" className="rive-5 rives" />
+            <img src={Rive6} alt="rive-6" className="rive-6 rives" />
+          </>
+        )}
         {dataGroupedByField.values.map((referentielItem) => {
           const { key, values } = referentielItem;
           const productionUnitPmax = values.reduce(

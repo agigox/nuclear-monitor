@@ -5,17 +5,21 @@ import React from 'react';
 const StyledButton = styled(Button)`
   &.summary {
     background-color: white;
-    padding: 4px 8px;
+    padding: 4px 5px;
     height: auto;
     color: #009dd1;
     border: 2px solid #009dd1;
     border-radius: 8px;
   }
   &.chips {
+    svg {
+      margin-right: 3px;
+    }
     line-height: 16px;
-    padding: 8px;
+    padding: 3px 5px;
     background-color: transparent;
     border: 1px solid #ffffff;
+    height: 35px;
     &.active {
       background: #e9f7fc;
       border: 1px solid #009dd1;
