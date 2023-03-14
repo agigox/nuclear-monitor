@@ -2,8 +2,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  displayMode: 'SLICES',
-  currentCategory: 'NUCLEAR',
+  displayMode: 'MAP',
+  currentCategory: 'ALL',
 };
 
 export const crossSlice = createSlice({

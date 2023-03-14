@@ -32,6 +32,7 @@ function Map() {
   const dataGroupedByField = useSelector((state) => {
     return selectDataByFieldAndProductionUnit(state, currentCategory);
   });
+  console.log(dataGroupedByField);
   return (
     <Row>
       <Col className="map-container" span={24}>

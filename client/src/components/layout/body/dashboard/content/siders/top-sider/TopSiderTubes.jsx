@@ -24,7 +24,9 @@ const StyledRow = styled(Row)`
     }
     .down-percent {
       flex-basis: ${(props) => {
-        return props.unavailable;
+        return props.rest >= 0
+          ? props.unavailable
+          : HEIGHT_TOP_SIDER_JAUGE - props.production;
       }}px;
       width: 100%;
       background: #d0574f;

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { assocPath } from 'ramda';
 import {
   ProductionTypes,
@@ -94,6 +93,9 @@ export const getProductionCategory = (productionCategory) => {
     )
   ) {
     return ProductionCategories.OFFSHORE;
+  }
+  if ([ProductionTypes.MARINE].includes(productionCategory)) {
+    return ProductionCategories.TIDAL;
   }
   return productionCategory;
 };

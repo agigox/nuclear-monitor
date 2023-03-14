@@ -9,8 +9,9 @@ import Percents from './Percents';
 import { Jauges } from './Jauges';
 import {
   selectDataByProductionCategory,
-  selectPmaxByCategory,
+  selectProductionByCategory,
 } from '../../../redux/selectors/dataSelectors';
+import { selectPmaxCapacityByCategory } from '../../../redux/selectors/pmaxSelectors';
 
 const StyledRow = styled(Row)`
   column-gap: 25px;
@@ -27,12 +28,11 @@ export function SectorItem({ sector }) {
     return item.key === sector;
   }).values;
   const categoryCapacity = useSelector((state) => {
-    return selectPmaxByCategory(state, sector);
+    return selectPmaxCapacityByCategory(state, sector);
   });
-  const categoryLastProduction = data.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue.productionCapacity;
-  }, 0);
-
+  const categoryProduction = useSelector((state) => {
+    return selectProductionByCategory(state, sector);
+  });
   const unavailableCapacity = data.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.unavailableCapacity;
   }, 0);
@@ -51,7 +51,7 @@ export function SectorItem({ sector }) {
       <Col flex="68px">
         <Row>
           <Col className="boldBody" span={24}>
-            {`${(categoryLastProduction / 1000).toFixed(1)}GW`}
+            {`${(categoryProduction / 1000).toFixed(1)}GW`}
           </Col>
           <Col className="supportText capacity" span={24}>
             Production
@@ -62,7 +62,7 @@ export function SectorItem({ sector }) {
         <Row wrap={false}>
           <Col>
             <Percents
-              categoryLastProduction={categoryLastProduction}
+              categoryLastProduction={categoryProduction}
               categoryCapacity={categoryCapacity}
               unavailableCapacity={unavailableCapacity}
             />
@@ -70,7 +70,7 @@ export function SectorItem({ sector }) {
           <Col>
             <Jauges
               unavailablecapacity={unavailableCapacity}
-              categorylastproduction={categoryLastProduction}
+              categorylastproduction={categoryProduction}
               categoryCapacity={categoryCapacity}
             />
           </Col>

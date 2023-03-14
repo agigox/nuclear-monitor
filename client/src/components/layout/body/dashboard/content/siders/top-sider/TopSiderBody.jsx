@@ -7,16 +7,21 @@ import TopSiderTubes from './TopSiderTubes';
 import TopSiderInfos from './TopSiderInfos';
 import { HEIGHT_TOP_SIDER_JAUGE } from '../../../../../../../utils/constants';
 import {
-  selectCurrentCapacity,
-  selectCurrentPmax,
+  selectCurrentProduction,
+  selectCurrentUnavailable,
 } from '../../../../../../../redux/selectors/dataSelectors';
+import { selectPmaxCapacityCurrentCategory } from '../../../../../../../redux/selectors/pmaxSelectors';
 
 const StyledRow = styled(Row)`
   height: ${HEIGHT_TOP_SIDER_JAUGE}px;
 `;
 function TopSiderBody() {
-  const { production, unavailable } = useSelector(selectCurrentCapacity);
-  const pmax = useSelector(selectCurrentPmax);
+  const { unavailable } = useSelector(selectCurrentUnavailable);
+  const production = useSelector(selectCurrentProduction);
+  const pmax = useSelector(selectPmaxCapacityCurrentCategory);
+  console.log(
+    `unavailable: ${unavailable} -- production: ${production} -- pmax: ${pmax}`,
+  );
   return (
     <StyledRow className="top-sider-body" wrap={false}>
       <Col flex="74px">

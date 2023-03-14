@@ -11,6 +11,10 @@ export const selectDataItems = (state) => {
   // debugger;
   return state.data.items;
 };
+export const selectDataItemsPerProductionType = (state) => {
+  // debugger;
+  return state.data.itemsPerProductionType;
+};
 export const selectDataError = (state) => {
   return state.data.error;
 };
@@ -20,6 +24,15 @@ export const selectLastRefreshHour = (state) => {
 
 export const selectDataByProductionCategory = createSelector(
   [selectDataItems],
+  (items) => {
+    const dataByCategory = groupByKey(items, 'productionCategory');
+    dataByCategory.unshift({ key: 'ALL', values: items });
+
+    return dataByCategory;
+  },
+);
+export const selectItemsByProductionCategory = createSelector(
+  [selectDataItemsPerProductionType],
   (items) => {
     const dataByCategory = groupByKey(items, 'productionCategory');
     dataByCategory.unshift({ key: 'ALL', values: items });
@@ -135,15 +148,12 @@ export const selectCatgoryPartiallyDownUnavailabilityNumber = createSelector(
   },
 );
 
-export const selectCurrentCapacity = createSelector(
+export const selectCurrentUnavailable = createSelector(
   [selectDataByProductionCategory, selectCurrentCategory],
   (groupedReferentiel, currentCategory) => {
     const currentRef = groupedReferentiel.find((item) => {
       return item.key === currentCategory;
     });
-    const production = currentRef.values.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue.productionCapacity;
-    }, 0);
     const unavailable = currentRef.values.reduce(
       (accumulator, currentValue) => {
         return accumulator + currentValue.unavailableCapacity;
@@ -151,26 +161,31 @@ export const selectCurrentCapacity = createSelector(
       0,
     );
     const available = currentRef.values.reduce((accumulator, currentValue) => {
-      /*
-      if (
-        currentValue.pmax -
-          currentValue.productionCapacity -
-          currentValue.unavailableCapacity <
-        0
-      ) {
-        console.log(
-          `${currentValue.unitName} --> ${
-            currentValue.pmax -
-            currentValue.productionCapacity -
-            currentValue.unavailableCapacity
-          }`,
-        );
-      }
-      */
-
       return accumulator + currentValue.availableCapacity;
     }, 0);
-    return { production, unavailable, available };
+    return { unavailable, available };
+  },
+);
+export const selectCurrentProduction = createSelector(
+  [selectItemsByProductionCategory, selectCurrentCategory],
+  (items, currentCategory) => {
+    const currentProd = items.find((item) => {
+      return item.key === currentCategory;
+    });
+    if (_.isUndefined(currentProd)) {
+      return 0;
+    }
+    const production = currentProd.values.reduce(
+      (accumulator, currentValue) => {
+        const prodValue =
+          currentValue.production.value >= 0
+            ? currentValue.production.value
+            : 0;
+        return accumulator + prodValue;
+      },
+      0,
+    );
+    return production;
   },
 );
 
@@ -184,6 +199,34 @@ export const selectCurrentPmax = createSelector(
       return accumulator + currentValue.pmax;
     }, 0);
     return pmax;
+  },
+);
+export const selectProductionByCategory = createSelector(
+  [
+    selectItemsByProductionCategory,
+    (state, category) => {
+      return category;
+    },
+  ],
+  (items, category) => {
+    console.log(category);
+    const currentProd = items.find((item) => {
+      return item.key === category;
+    });
+    if (_.isUndefined(currentProd)) {
+      return 0;
+    }
+    const production = currentProd.values.reduce(
+      (accumulator, currentValue) => {
+        const prodValue =
+          currentValue.production.value >= 0
+            ? currentValue.production.value
+            : 0;
+        return accumulator + prodValue;
+      },
+      0,
+    );
+    return production;
   },
 );
 export const selectPmaxByCategory = createSelector(

@@ -29,7 +29,7 @@ function BarIndication({ productionUnitName, productionUnitPmax, down, prod }) {
   return (
     <StyledRow className="bar-indication">
       <Col span={24} className="city">
-        {productionUnitName}
+        {productionUnitName.replace('SAINT-AVOLD-1', 'SAINT-AVOLD')}
       </Col>
       <Col span={24}>
         <Row wrap={false} className="percents" align="middle">

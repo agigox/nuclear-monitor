@@ -7,7 +7,6 @@ const StyledRow = styled(Row)`
   &.jauge-modal {
     border-radius: 24px 0 0 24px;
     width: ${(props) => {
-      console.log(props.size);
       return props.size;
     }}px;
     height: 25px;

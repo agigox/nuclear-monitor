@@ -5,6 +5,7 @@ import moment from 'moment';
 const initialState = {
   length: 0,
   items: [],
+  itemsPerProductionType: [],
   error: {},
   lastRefreshHour: moment().format('DD/MM/YYYY - HH[h]mm'),
 };
@@ -15,6 +16,7 @@ export const dataSlice = createSlice({
   reducers: {
     loadDataSuccess: (state, action) => {
       state.items = [...action.payload.items];
+      state.itemsPerProductionType = [...action.payload.itemsPerProductionType];
     },
     loadDataFail: (state, action) => {
       state.error = { ...action.error };

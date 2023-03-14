@@ -90,14 +90,17 @@ function TopSiderInfos({ unavailable, pmax, production }) {
           <Col span={24} className="text-2">
             <Row className="percents-row">
               <Col className="text-1-1">
-                {formatNumberToFr(unavailable / 1000)}
+                {rest >= 0
+                  ? formatNumberToFr(unavailable / 1000)
+                  : formatNumberToFr((pmax - production) / 1000)}
               </Col>
               <Col className="text-1-2">GW</Col>
               <Col className="separator-percent-text" />
-              <Col className="text-1-3">{`${toPercent(
-                unavailable,
-                pmax,
-              )}%`}</Col>
+              <Col className="text-1-3">{`${
+                rest >= 0
+                  ? toPercent(unavailable, pmax)
+                  : toPercent(pmax - production, pmax)
+              }%`}</Col>
             </Row>
           </Col>
         </Row>
