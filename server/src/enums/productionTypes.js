@@ -53,5 +53,6 @@ export const ProductionTypes = {
   WASTE: 'WASTE',
   WIND_OFFSHORE: 'WIND_OFFSHORE',
   WIND_ONSHORE: 'WIND_ONSHORE',
+  TOTAL: 'TOTAL',
   OTHER: 'OTHER',
 };

@@ -97,5 +97,8 @@ export const getProductionCategory = (productionCategory) => {
   if ([ProductionTypes.MARINE].includes(productionCategory)) {
     return ProductionCategories.TIDAL;
   }
+  if ([ProductionTypes.TOTAL].includes(productionCategory)) {
+    return ProductionCategories.ALL;
+  }
   return productionCategory;
 };

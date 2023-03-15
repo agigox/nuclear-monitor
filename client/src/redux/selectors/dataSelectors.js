@@ -35,7 +35,6 @@ export const selectItemsByProductionCategory = createSelector(
   [selectDataItemsPerProductionType],
   (items) => {
     const dataByCategory = groupByKey(items, 'productionCategory');
-    dataByCategory.unshift({ key: 'ALL', values: items });
 
     return dataByCategory;
   },
