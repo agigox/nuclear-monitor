@@ -6,12 +6,12 @@ import {
   loadReferentielSuccess,
 } from '../redux/reducers/referentielReducer';
 
-const { REACT_APP_NUCLEAR_MONITOR_API } = process.env;
+const { REACT_APP_NUKE_API } = process.env;
 
 // Define a service using a base URL and expected endpoints
 export const pokemonApi = createApi({
   reducerPath: 'pokemonApi',
-  baseQuery: fetchBaseQuery({ baseUrl: REACT_APP_NUCLEAR_MONITOR_API }),
+  baseQuery: fetchBaseQuery({ baseUrl: REACT_APP_NUKE_API }),
   endpoints: (builder) => {
     return {
       getPokemonByName: builder.query({
