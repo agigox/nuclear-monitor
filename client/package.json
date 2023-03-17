@@ -13,6 +13,7 @@
     "antd": "^5.1.5",
     "babel-plugin-import": "^1.13.5",
     "customize-cra": "^1.0.0",
+    "env-cmd": "^10.1.0",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.29.4",
@@ -39,9 +40,9 @@
   "scripts": {
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
-    "start": "react-app-rewired start",
-    "build": "./scripts/build.sh",
-    "doBuild": "react-app-rewired build",
+    "start:development": "env-cmd -f ./config/.env.development react-app-rewired start",
+    "build": "react-app-rewired build",
+    "build:production": "env-cmd -f ./config/.env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

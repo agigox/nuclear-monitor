@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 function App() {
+  console.log(process.env.REACT_APP_SOME_KEY);
   return (
     <Wrapper>
       <Provider store={store}>
