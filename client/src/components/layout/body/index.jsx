@@ -6,7 +6,7 @@ import _ from 'lodash';
 import Loading from './Loading';
 import Dashboard from './dashboard';
 import Error from './Error';
-import { useGetDataQuery } from '../../../api/pokemon';
+import { useGetDataQuery } from '../../../api';
 
 function Body() {
   const [loadingUI, setLoadingUI] = useState(true);

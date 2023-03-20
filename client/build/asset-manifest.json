@@ -1,10 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.dd1ea7b7.css",
-    "main.js": "/static/js/main.b9767b29.js",
+    "main.css": "/static/css/main.cd39ad6b.css",
+    "main.js": "/static/js/main.e096e70a.js",
+    "static/media/Inter-Thin.ttf": "/static/media/Inter-Thin.f341ca512063c66296d1.ttf",
+    "static/media/Inter-Light.ttf": "/static/media/Inter-Light.eec8664621fec98efb37.ttf",
+    "static/media/Inter-Regular.ttf": "/static/media/Inter-Regular.e89cb19905e7db5591b0.ttf",
+    "static/media/NunitoSans-LightItalic.ttf": "/static/media/NunitoSans-LightItalic.f5a382d492211f4353be.ttf",
+    "static/media/NunitoSans-Light.ttf": "/static/media/NunitoSans-Light.8fde328cad4b7fd03bcd.ttf",
+    "static/media/NunitoSans-ExtraBold.ttf": "/static/media/NunitoSans-ExtraBold.7f6fb187a1b4fe5f9f42.ttf",
+    "static/media/NunitoSans-Bold.ttf": "/static/media/NunitoSans-Bold.022586a78ea7c9bee9da.ttf",
+    "static/media/NunitoSans-SemiBold.ttf": "/static/media/NunitoSans-SemiBold.97020b1bfe8c41a3bd4e.ttf",
+    "static/media/NunitoSans-Regular.ttf": "/static/media/NunitoSans-Regular.a427ddbe4dc20889d6e0.ttf",
     "static/media/logo.svg": "/static/media/logo.61f1d97e13d66babe5a37785567e2140.svg",
+    "static/media/Manrope-Regular.ttf": "/static/media/Manrope-Regular.25323263b2aac026e777.ttf",
     "static/media/map.svg": "/static/media/map.a41b266716f584928ffdd34c90d71ceb.svg",
-    "static/media/index.less": "/static/media/index.0f09229c78e8dd1182d3.less",
     "static/media/winds.svg": "/static/media/winds.9d8ccfe6093c59c066209f90c67d9fb6.svg",
     "static/media/tidal.svg": "/static/media/tidal.0f92ec679cdf7e81d3837b4b2d13e37f.svg",
     "static/media/fossil_oil.svg": "/static/media/fossil_oil.78cfbe6de6be41b96d2eaeabe04a6683.svg",
@@ -24,11 +33,11 @@
     "static/media/rive-4.svg": "/static/media/rive-4.29a3a0a329d804255ce3b7f7f684f6bc.svg",
     "static/media/fossil_hard_coal.svg": "/static/media/fossil_hard_coal.caedbb9986b6e5a356268187c9e9396c.svg",
     "static/media/arrow_upward.svg": "/static/media/arrow_upward.ea57a3c5e1cea833e437936f7df35ae1.svg",
-    "main.dd1ea7b7.css.map": "/static/css/main.dd1ea7b7.css.map",
-    "main.b9767b29.js.map": "/static/js/main.b9767b29.js.map"
+    "main.cd39ad6b.css.map": "/static/css/main.cd39ad6b.css.map",
+    "main.e096e70a.js.map": "/static/js/main.e096e70a.js.map"
   },
   "entrypoints": [
-    "static/css/main.dd1ea7b7.css",
-    "static/js/main.b9767b29.js"
+    "static/css/main.cd39ad6b.css",
+    "static/js/main.e096e70a.js"
   ]
 }

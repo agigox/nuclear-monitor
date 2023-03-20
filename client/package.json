@@ -42,7 +42,7 @@
     "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
     "start:development": "env-cmd -f ./config/.env.development react-app-rewired start",
     "build": "react-app-rewired build",
-    "build:production": "./node_modules/.bin/env-cmd -f ./config/.env.production react-scripts build",
+    "build:production": "./node_modules/.bin/env-cmd -f ./config/.env.production react-app-rewired build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
