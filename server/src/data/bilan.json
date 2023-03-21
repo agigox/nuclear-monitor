@@ -1,0 +1,218 @@
+[
+    {
+        "generationDate": "2023-03-17T00:00:00+01:00",
+        "dataDate": "2023-03-17T00:00:00+01:00",
+        "bilanId": "17W100P100P0324J",
+        "bilanName": "Bilan 1",
+        "RegroupementHydro": "Rhône Sud",
+        "pmax": 1200,
+        "productionCapacity": 132
+    },
+    {
+        "generationDate": "2023-03-17T00:00:00+01:00",
+        "dataDate": "2023-03-17T00:00:00+01:00",
+        "bilanId": "17W100P100P0323L",
+        "bilanName": "Bilan 1",
+        "RegroupementHydro": "Rhône Sud",
+        "pmax": 1200,
+        "productionCapacity": 132
+    },
+    {
+        "generationDate": "2023-03-17T00:00:00+01:00",
+        "dataDate": "2023-03-17T00:00:00+01:00",
+        "bilanId": "17W100P100P0327D",
+        "bilanName": "Bilan 1",
+        "RegroupementHydro": "Rhône Sud",
+        "pmax": 1200,
+        "productionCapacity": 132
+    },
+    {
+        "generationDate": "2023-03-17T00:00:00+01:00",
+        "dataDate": "2023-03-17T00:00:00+01:00",
+        "bilanId": "17W100P100P0322N",
+        "bilanName": "Bilan 1",
+        "RegroupementHydro": "Rhône Sud",
+        "pmax": 1200,
+        "productionCapacity": 132
+    },
+    {
+        "generationDate": "2023-03-17T00:00:00+01:00",
+        "dataDate": "2023-03-17T00:00:00+01:00",
+        "bilanId": "17W000001017799C",
+        "bilanName": "Bilan 1",
+        "RegroupementHydro": "Rhône Sud",
+        "pmax": 1200,
+        "productionCapacity": 132
+    },
+    {
+        "generationDate": "2023-03-17T00:00:00+01:00",
+        "dataDate": "2023-03-17T00:00:00+01:00",
+        "bilanId": "17W100P100P0296Z",
+        "bilanName": "Bilan 1",
+        "RegroupementHydro": "Rhône Sud",
+        "pmax": 1200,
+        "productionCapacity": 132
+    },
+    {
+        "generationDate": "2023-03-17T00:00:00+01:00",
+        "dataDate": "2023-03-17T00:00:00+01:00",
+        "bilanId": "17W100P100P0325H",
+        "bilanName": "Bilan 1",
+        "RegroupementHydro": "Rhône Sud",
+        "pmax": 1200,
+        "productionCapacity": 132
+    },
+    {
+        "generationDate": "2023-03-17T00:00:00+01:00",
+        "dataDate": "2023-03-17T00:00:00+01:00",
+        "bilanId": "17W100P100P0298V",
+        "bilanName": "Bilan 1",
+        "RegroupementHydro": "Rhône Sud",
+        "pmax": 1200,
+        "productionCapacity": 132
+    },
+    {
+        "generationDate": "2023-03-17T00:00:00+01:00",
+        "dataDate": "2023-03-17T00:00:00+01:00",
+        "bilanId": "17W100P100P0326F",
+        "bilanName": "Bilan 1",
+        "RegroupementHydro": "Rhône Sud",
+        "pmax": 1200,
+        "productionCapacity": 132
+    },
+    {
+        "generationDate": "2023-03-17T00:00:00+01:00",
+        "dataDate": "2023-03-17T00:00:00+01:00",
+        "bilanId": "17W000001017800G",
+        "bilanName": "Bilan 1",
+        "RegroupementHydro": "Rhône Sud",
+        "pmax": 1200,
+        "productionCapacity": 132
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W100P100P0319C",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W100P100P0321P",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W100P100P0320R",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017795K",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017796I",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017797G",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017798E",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017790U",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017789F",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017793O",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017794M",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017792Q",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017788H",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    },
+    {
+        "generationDate": "2023-03-18T00:00:00+01:00",
+        "dataDate": "2023-03-18T00:00:00+01:00",
+        "bilanId": "17W000001017791S",
+        "bilanName": "Bilan 2",
+        "RegroupementHydro": "Rhône Nord",
+        "pmax": 1400,
+        "productionCapacity": 232
+    }
+]

@@ -19,9 +19,6 @@ function TopSiderBody() {
   const { unavailable } = useSelector(selectCurrentUnavailable);
   const production = useSelector(selectCurrentProduction);
   const pmax = useSelector(selectPmaxCapacityCurrentCategory);
-  console.log(
-    `unavailable: ${unavailable} -- production: ${production} -- pmax: ${pmax}`,
-  );
   return (
     <StyledRow className="top-sider-body" wrap={false}>
       <Col flex="74px">

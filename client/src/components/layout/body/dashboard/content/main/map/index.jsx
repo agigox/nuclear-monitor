@@ -2,18 +2,16 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import SVGMap from '../../../../../../../images/map.svg';
-import Rive1 from '../../../../../../../images/rive-1.svg';
-import Rive2 from '../../../../../../../images/rive-2.svg';
-import Rive3 from '../../../../../../../images/rive-3.svg';
-import Rive4 from '../../../../../../../images/rive-4.svg';
-import Rive5 from '../../../../../../../images/rive-5.svg';
-import Rive6 from '../../../../../../../images/rive-6.svg';
-import { selectCurrentCategory } from '../../../../../../../redux/selectors/crossSelectors';
-import { selectDataByFieldAndProductionUnit } from '../../../../../../../redux/selectors/dataSelectors';
-// import { groupByKey } from '../../../../../../../utils';
-
-// import MapBar from './MapBar';
+import SVGMap from 'images/map.svg';
+import Rive1 from 'images/rive-1.svg';
+import Rive2 from 'images/rive-2.svg';
+import Rive3 from 'images/rive-3.svg';
+import Rive4 from 'images/rive-4.svg';
+import Rive5 from 'images/rive-5.svg';
+import Rive6 from 'images/rive-6.svg';
+import { selectCurrentCategory } from 'redux/selectors/crossSelectors';
+import { selectDataByFieldAndProductionUnit } from 'redux/selectors/dataSelectors';
+import _ from 'lodash';
 import PieChartItem from './PieChartItem';
 
 const StyledRow = styled(Row)`
@@ -32,7 +30,6 @@ function Map() {
   const dataGroupedByField = useSelector((state) => {
     return selectDataByFieldAndProductionUnit(state, currentCategory);
   });
-  console.log(dataGroupedByField);
   return (
     <Row>
       <Col className="map-container" span={24}>
@@ -47,11 +44,26 @@ function Map() {
             <img src={Rive6} alt="rive-6" className="rive-6 rives" />
           </>
         )}
-        {dataGroupedByField.values.map((referentielItem) => {
+        {[
+          ...dataGroupedByField.valuesField,
+          ...dataGroupedByField.valuesBilan,
+        ].map((referentielItem) => {
           const { key, values } = referentielItem;
           const productionUnitPmax = values.reduce(
             (accumulator, currentValue) => {
-              return accumulator + currentValue.pmax;
+              if (_.isEmpty(currentValue.bilan)) {
+                return accumulator + currentValue.pmax;
+              }
+              return accumulator + currentValue.bilan.pmax;
+            },
+            0,
+          );
+          const productionUnitProduction = values.reduce(
+            (accumulator, currentValue) => {
+              if (_.isEmpty(currentValue.bilan)) {
+                return accumulator + currentValue.productionCapacity;
+              }
+              return accumulator + currentValue.bilan.productionCapacity;
             },
             0,
           );
@@ -61,13 +73,6 @@ function Map() {
             },
             0,
           );
-          const productionUnitProduction = values.reduce(
-            (accumulator, currentValue) => {
-              return accumulator + currentValue.productionCapacity;
-            },
-            0,
-          );
-
           const data = [
             {
               name: 'Available',
@@ -87,7 +92,6 @@ function Map() {
               value: productionUnitProduction,
               color: '#41e03e',
             },
-            // { name: 'Pmax', value: productionUnitPmax },
           ];
           const itemClass = key
             .toLowerCase()
@@ -125,11 +129,6 @@ function Map() {
                       pmax={productionUnitPmax}
                     />
                   </Col>
-                  {/* values[0].productionCategory.toLowerCase() ===
-                    'hydraulics' &&
-                    <Col className="hydraulics-number">
-                      x{groupByKey(values, 'productionUnit').length}
-                    </Col> */}
                 </Row>
               </Col>
             </StyledRow>

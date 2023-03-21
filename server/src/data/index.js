@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { getProductionCategory, readCSV } from '../utils/helpers';
 import {fileURLToPath} from 'url';
+import { readFile } from 'fs/promises';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -23,7 +24,8 @@ export const referentiel = readCSV(
   productionType: item.stage,
   productionCategory: getProductionCategory(item.stage),
   reactorIndex: item.reactorIndex,
-  groupedByField: item.groupedByField
+  groupedByField: item.groupedByField,
+  bilanId: item.bilanId
 })});
 
 export const pmax = readCSV(
@@ -33,3 +35,9 @@ export const pmax = readCSV(
   key: productionCategory,
   pmax: Number(pmax),
 })});
+
+export const bilan = JSON.parse(
+  await readFile(
+    new URL('./bilan.json', import.meta.url)
+  )
+);

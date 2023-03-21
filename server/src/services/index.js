@@ -3,7 +3,7 @@
 /* eslint-disable import/prefer-default-export */
 import _ from 'lodash';
 import moment from 'moment-timezone';
-import { referentiel } from '../data';
+import { referentiel, bilan } from '../data';
 import { getRessource } from '../rteApi';
 import { getProductionCategory } from '../utils/helpers';
 
@@ -39,9 +39,6 @@ export const getData = async (input, { rteToken }) => {
   const itemsPerProductionType =
     responseProdPerProductionType.actual_generations_per_production_type.map(
       (item) => ({
-        startDate: item.start_date,
-        endDate: item.end_date,
-        productionType: item.production_type,
         productionCategory: getProductionCategory(item.production_type),
         production: item.values.sort(
           (a, b) =>
@@ -49,13 +46,20 @@ export const getData = async (input, { rteToken }) => {
         )[0],
       }),
     );
-  const data = referentiel.map((item) => {
-    const newItem = { ...item, productionCapacity: 0, unavailableCapacity: 0 };
-    let newProduction = {};
-    let unavailability = {};
+  const itemsPerProductionUnit = referentiel.map((item) => {
+    const newItem = {
+      ...item,
+      productionCapacity: 0,
+      unavailableCapacity: 0,
+      bilan: {},
+    };
     const production = responseProdPerUnit.actual_generations_per_unit.find(
       (elt) => elt.unit.eic_code === newItem.eicProd,
     );
+    const bilanProd = bilan.find((elt) => elt.bilanId === newItem.eicProd);
+    if (!_.isUndefined(bilanProd)) {
+      newItem.bilan = { ...bilanProd };
+    }
 
     let unavailabilities = responseDispo.generation_unavailabilities.filter(
       (elt) =>
@@ -70,11 +74,7 @@ export const getData = async (input, { rteToken }) => {
           new Date(b.end_date).getTime() - new Date(a.end_date).getTime(),
       )[0].value;
       newItem.productionCapacity = capacity < 0 ? 0 : capacity;
-      newProduction = { ...production };
     }
-    // si dans un même réacteur, on a deux indisponibilité ou plus
-    // on prend une seule en considération est dont updated_date
-    // est plus recente
 
     if (unavailabilities.length >= 2) {
       const sorted = unavailabilities.sort(
@@ -82,7 +82,6 @@ export const getData = async (input, { rteToken }) => {
       );
       unavailabilities = _.uniqBy(sorted, 'unit.name');
     }
-    unavailability = { ...unavailabilities[0] };
     newItem.unavailableCapacity = unavailabilities.reduce(
       (accumulator, currentValue) =>
         accumulator + currentValue.values[0].unavailable_capacity,
@@ -93,17 +92,26 @@ export const getData = async (input, { rteToken }) => {
       item.pmax > newItem.productionCapacity
         ? item.pmax
         : newItem.productionCapacity;
+    const {
+      eicProd,
+      eicIndispoCentral,
+      eicIndispoGroup,
+      productionType,
+      reactorIndex,
+      ...rest
+    } = newItem;
     return {
-      ...newItem,
-      production: newProduction,
-      unavailability,
+      ...rest,
     };
   });
   return {
-    length: data.length,
-    items: data,
-    responseProdPerProductionType:
-      responseProdPerProductionType.actual_generations_per_production_type,
-    itemsPerProductionType,
+    itemsPerProductionUnit: {
+      length: itemsPerProductionUnit.length,
+      items: itemsPerProductionUnit,
+    },
+    itemsPerProductionType: {
+      length: itemsPerProductionType.length,
+      items: itemsPerProductionType,
+    },
   };
 };

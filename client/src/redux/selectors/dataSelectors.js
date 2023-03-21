@@ -4,14 +4,11 @@ import { groupByKey } from '../../utils';
 import { selectCurrentCategory } from './crossSelectors';
 
 // eslint-disable-next-line import/prefer-default-export
-export const selectDataLength = (state) => {
-  return state.data.length;
-};
-export const selectDataItems = (state) => {
+export const selectItemsPerProductionUnit = (state) => {
   // debugger;
-  return state.data.items;
+  return state.data.itemsPerProductionUnit;
 };
-export const selectDataItemsPerProductionType = (state) => {
+export const selectItemsPerProductionType = (state) => {
   // debugger;
   return state.data.itemsPerProductionType;
 };
@@ -23,7 +20,7 @@ export const selectLastRefreshHour = (state) => {
 };
 
 export const selectDataByProductionCategory = createSelector(
-  [selectDataItems],
+  [selectItemsPerProductionUnit],
   (items) => {
     const dataByCategory = groupByKey(items, 'productionCategory');
     dataByCategory.unshift({ key: 'ALL', values: items });
@@ -32,7 +29,7 @@ export const selectDataByProductionCategory = createSelector(
   },
 );
 export const selectItemsByProductionCategory = createSelector(
-  [selectDataItemsPerProductionType],
+  [selectItemsPerProductionType],
   (items) => {
     const dataByCategory = groupByKey(items, 'productionCategory');
 
@@ -40,7 +37,7 @@ export const selectItemsByProductionCategory = createSelector(
   },
 );
 export const selectDataByProductionUnit = createSelector(
-  [selectDataItems],
+  [selectItemsPerProductionUnit],
   (items) => {
     const dataByUnit = groupByKey(items, 'productionUnit');
     dataByUnit.unshift({ key: 'ALL', values: items });
@@ -81,11 +78,24 @@ export const selectDataByFieldAndProductionUnit = createSelector(
     const { key, values } = items.find((item) => {
       return item.key === category;
     });
+    const valuesField = [];
+    const valuesBilan = [];
+    values.forEach((item) => {
+      if (_.isEmpty(item.bilan)) {
+        valuesField.push(item);
+      } else {
+        valuesBilan.push(item);
+      }
+    });
     return {
       key,
-      values: groupByKey(
-        _.orderBy(values, 'productionUnit', 'asc'),
+      valuesField: groupByKey(
+        _.orderBy(valuesField, 'productionUnit', 'asc'),
         'groupedByField',
+      ),
+      valuesBilan: groupByKey(
+        _.orderBy(valuesBilan, 'productionUnit', 'asc'),
+        'bilan.bilanName',
       ),
     };
   },
@@ -208,7 +218,6 @@ export const selectProductionByCategory = createSelector(
     },
   ],
   (items, category) => {
-    console.log(category);
     const currentProd = items.find((item) => {
       return item.key === category;
     });

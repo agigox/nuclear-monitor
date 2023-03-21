@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Col, Row } from 'antd';
 import React from 'react';
-import Logo from '../../../images/logo.svg';
+import Logo from 'images/logo.svg';
 
 const StyledRow = styled(Row)`
   .container {

@@ -20,6 +20,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-debugger': 'off',
     'arrow-body-style': ['error', 'always'],
+    'import/no-unresolved': 'off',
   },
   env: {
     jest: true,

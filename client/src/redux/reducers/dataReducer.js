@@ -3,8 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 
 const initialState = {
-  length: 0,
-  items: [],
+  itemsPerProductionUnit: [],
   itemsPerProductionType: [],
   error: {},
   lastRefreshHour: moment().format('DD/MM/YYYY - HH[h]mm'),
@@ -15,8 +14,12 @@ export const dataSlice = createSlice({
   initialState,
   reducers: {
     loadDataSuccess: (state, action) => {
-      state.items = [...action.payload.items];
-      state.itemsPerProductionType = [...action.payload.itemsPerProductionType];
+      state.itemsPerProductionUnit = [
+        ...action.payload.itemsPerProductionUnit.items,
+      ];
+      state.itemsPerProductionType = [
+        ...action.payload.itemsPerProductionType.items,
+      ];
     },
     loadDataFail: (state, action) => {
       state.error = { ...action.error };
